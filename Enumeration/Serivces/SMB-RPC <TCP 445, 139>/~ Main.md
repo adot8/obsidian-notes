@@ -36,6 +36,18 @@ impacket-samrdump $ip
 for i in $(seq 500 1100);do rpcclient -N -U "" $ip -c "queryuser 0x$(printf '%x\n' $i)" | grep "User Name\|user_rid\|group_rid" && echo "";done
 ```
 
+```bash
+netexec smb <IP> -u '' -p '' --shares
+netexec smb <IP> -u '' -p '' --users
+netxec ldap <IP> -u '' -p '' --password-not-required --admin-count --users --groups
+netexec smb <IP> -u '' -p '' --rid-brute
+netexec smb <IP> -u '' -p '' -M spider_plus
+netexec smb <IP> -u '' -p '' -M printnightmare
+netexec smb <IP> -u '' -p '' -M gpp_password
+netexec smb <IP> -u '' -p '' -M spooler
+netexec smb <IP> -u '' -p '' -M nopac
+netexec smb <IP> -u '' -p '' -M zerologon
+```
 
 `Server Message Block` (`SMB`) is a client-server protocol that regulates access to files and entire directories and other network resources.
 
