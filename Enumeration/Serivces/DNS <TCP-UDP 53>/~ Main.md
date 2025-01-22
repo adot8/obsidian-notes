@@ -1,4 +1,9 @@
 ```bash
+nmap -p53 -Pn -sV -sC $ip
+```
+
+**PERFORM ZONE TRANSFERS ON ALL SUBDOMAINS FOUND**
+```bash
 dig any $domain @$ip
 dig ns $domain @$ip
 dig CH TXT version.bind $ip
@@ -16,6 +21,15 @@ for sub in $(cat ~/opt/wordlists/subdomains_custom.txt);do dig $sub.$domain @$ip
 dnsenum --dnsserver $ip --enum -p 0 -s 0 -o subdomains.txt -f ~/opt/wordlists/subdomains_custom.txt $domain
 ```
 
+Real Life
+```bash
+subfinder -d adot8.com
+assetfinder adot8.com
+amass enum -d adot8.com
+
+cat adot8-subdomains.txt | httprobe -s -p https:443
+gowitness file -f ./adot8-sub.txt -P pics --no-http 
+```
 
 > [!NOTE] Useful Wordlists
 > - `/usr/share/seclists/Discovery/DNS/fierce-hostlist.txt`

@@ -8,13 +8,33 @@ EXPN root
 
 smtp-user-enum -U users.lower -m 10 -t $ip
 smtp-user-enum -U users.lower -w 10 -t $ip
+ smtp-user-enum -M RCPT -U userlist.txt -D inlanefreight.htb -t 10.129.203.7
 
 msfconsole
 use auxiliary/scanner/smtp/smtp_enum
 ```
+
+Real Life
+```bash
+host -t MX adot8.com
+dig mx adot8.com | grep "MX" | grep -v ";"
+
+host -t A mail1.adot8.com.
+```
+
 The `Simple Mail Transfer Protocol` (`SMTP`) is a protocol for sending emails in an IP network. It can be used between an email client and an outgoing mail server or between two SMTP servers. SMTP is often combined with the IMAP or POP3 protocols, which can fetch emails and send emails.
 
 The 587 port on newer SMTP servers is used to receive mail from authenticated users/servers, usually using the STARTTLS command to switch the existing plaintext connection to an encrypted connection.
+
+|**Port**|**Service**|
+|---|---|
+|`TCP/25`|SMTP Unencrypted|
+|`TCP/143`|IMAP4 Unencrypted|
+|`TCP/110`|POP3 Unencrypted|
+|`TCP/465`|SMTP Encrypted|
+|`TCP/587`|SMTP Encrypted/[STARTTLS](https://en.wikipedia.org/wiki/Opportunistic_TLS)|
+|`TCP/993`|IMAP4 Encrypted|
+|`TCP/995`|POP3 Encrypted|
 
 Sending mail looks like the following:
 
@@ -111,6 +131,13 @@ VRFY root
 
 252 2.0.0 root
 ```
+
+
+> [!NOTE] Note
+> This would be anonymous access as a finding if we're able to verify users
+> Email services use authentication to allow users to send emails and receive emails. A misconfiguration can happen when the SMTP service allows anonymous authentication or support protocols that can be used to enumerate valid usernames.
+> 
+
 
 ##### Sending an Email
 ```bash
