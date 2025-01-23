@@ -14,6 +14,8 @@ ftp-ssl -z secure -z verify=0 -p $ip
 ftp-ssl -z secure -z verify=0 $ip -z cipher="$(openssl ciphers -tls1)" -p $ip
 
 openssl s_client -connect 10.129.14.136:21 -starttls ftp
+
+hydra -l admin -P ~/opt/wordlists/2023-200_most_used_passwords.txt ftp://192.168.1.100
 ```
 
 

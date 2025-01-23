@@ -2,6 +2,10 @@
 > [!NOTE] NOTE
 > `Medusa` works the exact same way command wise
 
+### Useful Wordlists
+- /usr/share/seclists/Passwords/darkweb2017-top10000.txt
+- ~/rockyou.txt
+- 
 ### Common Services
 FTP
 ```shell
