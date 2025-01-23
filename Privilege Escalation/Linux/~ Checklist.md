@@ -27,6 +27,10 @@ cat /etc/exports
 
 sudo -u#-1 /bin/bash
 
+ip a
+ifconfig
+netstat -r
+ip route
 ss -anp
 routel
 cat /etc/iptables/rules.v4
