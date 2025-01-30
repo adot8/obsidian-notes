@@ -1,0 +1,3 @@
+If we come across these older hosts during an assessment, we should be careful before attacking them (or even check with our client) as they may be fragile and running a critical application or service. We can advise our client to segment these hosts off from the rest of the network as much as possible if they cannot remove them yet, but should also recommend that they start putting together a plan to decommission and replace them.
+
+We may write up a high-risk finding for Legacy Operating Systems or a best practice recommendation for cleaning up old records in AD.
