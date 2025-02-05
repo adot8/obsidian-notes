@@ -1,0 +1,13 @@
+
+Web Discovery
+```bash
+nmap -p 80,443,8000,8080,8180,8888,10000 --open -oA web_discovery -iL scope_list
+```
+Using the XML output we can take screenshots of each web page with `Eyewitness`
+```shell
+eyewitness --web -x web_discovery.xml -d inlanefreight_eyewitness
+```
+We can do the same with `aquatone` 
+```shell
+cat web_discovery.xml | ./aquatone -nmap
+```
