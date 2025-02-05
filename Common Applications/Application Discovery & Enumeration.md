@@ -9,5 +9,5 @@ eyewitness --web -x web_discovery.xml -d inlanefreight_eyewitness
 ```
 We can do the same with `aquatone` 
 ```shell
-cat web_discovery.xml | ./aquatone -nmap
+cat web_discovery.xml | aquatone -nmap
 ```
