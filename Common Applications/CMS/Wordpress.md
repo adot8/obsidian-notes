@@ -20,23 +20,26 @@ Disallow: /wp-content/uploads/wpforms/
 
 Sitemap: https://blog.inlanefreight.local/wp-sitemap.xml
 ```
-
+##### Themes + Plugins
 WordPress stores its plugins in the `wp-content/plugins` directory. This folder is helpful to enumerate vulnerable plugins. Themes are stored in the `wp-content/themes` directory. These files should be carefully enumerated as they may lead to RCE.
 
-Discover installed/used themes and plugins
 ```bash
 curl -s http://blog.inlanefreight.local/ | grep themes
 curl -s http://blog.inlanefreight.local/ | grep plugins
 ```
 Visiting `/wp-content/plugins/realplugin` can uncover `readme`'s with the version
 
-We can discover users by attempting to login via `/wp-admin` and the error messages they produce
+##### User enumeration
+We can discover users by attempting to login via `/wp-admin` and the error messages they produce. [Good resource](https://gosecure.ai/blog/2021/03/16/6-ways-to-enumerate-wordpress-users/)
+```bash
+curl http://blog.inlanefreight.local/?rest_route=/wp/v2/users
+```
 
 ### Exploitation
 #### **Login bruteforcing**
 Two methods, `xmlrpc`(faster api) and the wp-login.
 ```bash
-wpscan --password-attack xmlrpc -t 20 -U john -P /usr/share/wordlists/rockyou.txt --url http://blog.inlanefreight.local
+wpscan --password-attack xmlrpc -t 20 -U john -P ~/rockyou.txt --url http://blog.inlanefreight.local
 ```
 
 #### RCE

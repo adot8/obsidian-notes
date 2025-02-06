@@ -11,3 +11,7 @@ We can do the same with `aquatone`
 ```shell
 cat web_discovery.xml | aquatone -nmap
 ```
+Whats running?
+```bash
+curl -s http://dev.inlanefreight.local/ | grep -E "Joomla|WordPress|Drupal"
+```
