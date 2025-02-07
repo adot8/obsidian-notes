@@ -1,7 +1,7 @@
 
 Web Discovery
 ```bash
-nmap -p 80,443,8000,8080,8180,8888,10000 --open -oA web_discovery -iL scope_list
+nmap -p 80,443,8000,8080,8180,8888,10000,4443 --open -oA web_discovery -iL scope_list
 ```
 Using the XML output we can take screenshots of each web page with `Eyewitness`
 ```shell
