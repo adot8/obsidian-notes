@@ -2,6 +2,12 @@
 ```bash
 curl -s http://app-dev.inlanefreight.local:8080/docs/ | grep Tomcat 
 ```
+
+```bash
+gobuster dir -u http://adot8.com -w ~/opt/wordlists/directory-list-2.3-medium.txt
+ -x txt,html -t 100
+```
+
 Tomcat webapps folder structure
 ```bash
 webapps/customapp
