@@ -47,6 +47,7 @@ gci C:\Users\Public
 
 where.exe /R C:\Windows bash.exe
 where.exe /R C:\Windows wsl.exe
+where.exe /R C:\ MultimasterAPI.dll
 ```
 1.  Snoop on processes
 ```powershell
