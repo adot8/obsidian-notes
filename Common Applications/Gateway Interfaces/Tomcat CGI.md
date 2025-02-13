@@ -7,9 +7,11 @@
 ```
 ##### Fuzzing for CGI Scripts
 ```bash
-ffuf -w /usr/share/dirb/wordlists/common.txt -u http://10.129.204.227:8080/cgi/FUZZ.cmd
+ffuf -w /usr/share/dirb/wordlists/common.txt -u http://10.129.201.89:8080/
 
-ffuf -w /usr/share/dirb/wordlists/common.txt -u http://10.129.205.30:8080/cgi/FUZZ.bat
+ffuf -w /usr/share/dirb/wordlists/common.txt -u http://10.129.201.89:8080/cgi/FUZZ.cmd
+
+ffuf -w /usr/share/dirb/wordlists/common.txt -u http://10.129.201.89:8080/cgi/FUZZ.bat
 ```
 
 ```bash
@@ -17,6 +19,7 @@ curl http://10.129.204.227:8080/cgi/welcome.bat
 ```
 
 ### Exploitation
+![[Pasted image 20250213065042.png]]
 `CVE-2019-0232` is a critical security issue that could result in remote code execution. This vulnerability affects Windows systems that have the `enableCmdLineArguments` feature enabled. Versions `9.0.0.M1` to `9.0.17`, `8.5.0` to `8.5.39`, and `7.0.0` to `7.0.93` of Tomcat are affected.
 
 We can exploit `CVE-2019-0232` by appending our own commands through the use of the batch command separator `&`.
