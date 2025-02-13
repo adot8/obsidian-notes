@@ -52,7 +52,7 @@ ls /home
 
 All hidden files + folders for in home folder
 ```bash
-cat /etc/fstab | grep -v "#" | column -t
+find / -type f -name ".*" -exec ls -l {} \; 2>/dev/null | grep htb-student
 find / -type d -name ".*" -ls 2>/dev/null
 ```
 
