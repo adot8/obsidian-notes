@@ -1,4 +1,6 @@
 ```shell
+grep "*sh$" /etc/passwd
+
 id
 
 find / -group <groups> 2>/dev/null
@@ -24,6 +26,7 @@ getcap -r / 2>/dev/null
 /usr/sbin/getcap -r / 2>/dev/null
 
 cat /etc/exports
+cat /etc/fstab
 
 sudo -u#-1 /bin/bash
 
@@ -42,6 +45,8 @@ ps -aux | grep cron        <-- search for "root   /usr/sbin/cron -f"
 
 realm list
 ps -ef | grep -i "winbind\|sssd"
+
+ls -l /tmp /var/tmp /dev/shm /opt
 
 dpkg -l
 ```
