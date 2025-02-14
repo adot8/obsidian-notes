@@ -22,6 +22,7 @@ ls -la /etc/passwd /etc/shadow /etc/security/opasswd
 cat /etc/crontab
 crontab -l
 
+find /usr/bin /usr/sbin /usr/local/bin /usr/local/sbin -type f -exec getcap {} \;
 getcap -r / 2>/dev/null
 /usr/sbin/getcap -r / 2>/dev/null
 
