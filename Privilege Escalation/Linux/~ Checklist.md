@@ -1,5 +1,5 @@
 ```shell
-grep "*sh$" /etc/passwd
+grep *sh$ /etc/passwd
 
 id
 
