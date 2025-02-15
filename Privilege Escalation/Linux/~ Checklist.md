@@ -1,4 +1,6 @@
 ```shell
+python3 -c 'import pty; pty.spawn("/bin/bash")'
+
 grep *sh$ /etc/passwd
 
 id
@@ -52,6 +54,8 @@ ps -ef | grep -i "winbind\|sssd"
 ls -l /tmp /var/tmp /dev/shm /opt
 
 logrotate -v
+
+ps aux | grep tmux
 
 dpkg -l
 ```
