@@ -51,6 +51,8 @@ ps -ef | grep -i "winbind\|sssd"
 
 ls -l /tmp /var/tmp /dev/shm /opt
 
+logrotate -v
+
 dpkg -l
 ```
 1. Snoop on processes using pspy - some cron jobs may be running in the background
