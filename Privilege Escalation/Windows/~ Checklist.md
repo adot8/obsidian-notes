@@ -26,6 +26,7 @@ ls C:\Users\bob\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\
 
 ipconfig /all
 netstat -ano
+tasklist /svc | findstr <PID>
 route print
 
 dir C:\
@@ -50,6 +51,9 @@ gci -Path C:\xampp -Include *.txt,*.ini,*.yml -File -Recurse -ErrorAction Silent
 gci -Path C:\Users\ -Include *.exe,*.txt,*.rdp,*.pdf,*.xls,*.xlsx,*.xml,*.doc,*.docx,*.ps1,*.bat,*.ini,*.yml -File -Recurse -ErrorAction SilentlyContinue
 gci -h -Path C:\Users\ -Include *.exe,*.txt,*.rdp,*.pdf,*.xls,*.xlsx,*.xml,*.doc,*.docx,*.ps1,*.bat,*.ini,*.yml -File -Recurse -ErrorAction SilentlyContinue
 gci C:\Users\Public
+
+gci \\.\pipe\
+accesschk.exe -accepteula -w \pipe\WindscribeService -v
 
 where.exe /R C:\Windows bash.exe
 where.exe /R C:\Windows wsl.exe
