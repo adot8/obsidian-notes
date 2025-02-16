@@ -4,6 +4,10 @@
 ```powershell
 whoami /all
 
+set 
+
+tasklist /svc
+
 cmdkey /list
 
 systeminfo
@@ -11,6 +15,8 @@ systeminfo
 net user
 net user <current user>
 net localgroup
+query user
+net accounts
 
 Get-History
 
@@ -26,8 +32,8 @@ dir C:\
 dir "C:\Program Files"
 dir "C:\Program Files (x86)"
 
+Get-WmiObject -Class Win32_Product |  select Name, Version
 Get-ItemProperty "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\*" | select displayname
-
 Get-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\*" | select displayname
 
 reg query HKLM\Software\Policies\Microsoft\Windows\Installer
