@@ -20,10 +20,11 @@ query user
 net accounts
 
 Get-History
-
 (Get-PSReadlineOption).HistorySavePath
-type <previous command output>
+gc(Get-PSReadlineOption).HistorySavePath
 ls C:\Users\bob\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\
+foreach($user in ((ls C:\users).fullname)){cat "$user\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadline\ConsoleHost_history.txt" -ErrorAction SilentlyContinue}
+
 
 ipconfig /all
 netstat -ano
@@ -52,6 +53,8 @@ gci -Path C:\xampp -Include *.txt,*.ini,*.yml -File -Recurse -ErrorAction Silent
 gci -Path C:\Users\ -Include *.exe,*.txt,*.rdp,*.pdf,*.xls,*.xlsx,*.xml,*.doc,*.docx,*.ps1,*.bat,*.ini,*.yml -File -Recurse -ErrorAction SilentlyContinue
 gci -h -Path C:\Users\ -Include *.exe,*.txt,*.rdp,*.pdf,*.xls,*.xlsx,*.xml,*.doc,*.docx,*.ps1,*.bat,*.ini,*.yml -File -Recurse -ErrorAction SilentlyContinue
 gci C:\Users\Public
+gc 'C:\Users\htb-student\AppData\Local\Google\Chrome\User Data\Default\Custom Dictionary.txt' | Select-String password
+
 
 gci \\.\pipe\
 accesschk.exe -accepteula -w \pipe\WindscribeService -v
@@ -59,6 +62,7 @@ accesschk.exe -accepteula -w \pipe\WindscribeService -v
 where.exe /R C:\Windows bash.exe
 where.exe /R C:\Windows wsl.exe
 where.exe /R C:\ MultimasterAPI.dll
+where.exe /R C:\ unattend.xml
 ```
 1.  Snoop on processes
 ```powershell
