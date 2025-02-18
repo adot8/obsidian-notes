@@ -10,7 +10,7 @@ lazagne.exe all
 ```powershell
 findstr /SIM /C:"password" *.txt *.ini *.cfg *.config *.xml
 findstr /spin "password" *.*
-select-string -Path C:\Users\htb-student\Documents\*.txt -Pattern password
+select-string -Path C:\*.txt -Pattern password
 
 dir /S /B *pass*.txt == *pass*.xml == *pass*.ini == *cred* == *vnc* == *.config*
 where /R C:\ *.config

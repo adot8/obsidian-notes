@@ -12,6 +12,7 @@ tasklist /svc
 cmdkey /list
 
 systeminfo
+wmic qfe list brief
 
 net user
 net user <current user>
@@ -21,9 +22,9 @@ net accounts
 
 Get-History
 (Get-PSReadlineOption).HistorySavePath
-gc(Get-PSReadlineOption).HistorySavePath
+gc (Get-PSReadlineOption).HistorySavePath
 ls C:\Users\bob\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\
-foreach($user in ((ls C:\users).fullname)){cat "$user\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadline\ConsoleHost_history.txt" -ErrorAction SilentlyContinue}
+foreach($user in ((ls C:\users).fullname)){gc "$user\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadline\ConsoleHost_history.txt" -ErrorAction SilentlyContinue}
 
 
 ipconfig /all

