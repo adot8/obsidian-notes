@@ -169,7 +169,7 @@ We first need to create and initialize the location where our backup will be sav
 
 Pillaging
 
-```powershell-session
+```powershell
 PS C:\htb> mkdir E:\restic2; restic.exe -r E:\restic2 init
 
     Directory: E:\
@@ -190,7 +190,6 @@ Then we can create our first backup.
 
 #### restic - Back up a Directory
 
-Pillaging
 
 ```powershell
 PS C:\htb> $env:RESTIC_PASSWORD = 'Password'
