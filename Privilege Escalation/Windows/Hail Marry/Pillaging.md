@@ -192,7 +192,7 @@ Then we can create our first backup.
 
 Pillaging
 
-```powershell-session
+```powershell
 PS C:\htb> $env:RESTIC_PASSWORD = 'Password'
 PS C:\htb> restic.exe -r E:\restic2\ backup C:\SampleFolder
 
@@ -212,9 +212,7 @@ If we want to back up a directory such as `C:\Windows`, which has some files act
 
 #### restic - Back up a Directory with VSS
 
-Pillaging
-
-```powershell-session
+```powershell
 PS C:\htb> restic.exe -r E:\restic2\ backup C:\Windows\System32\config --use-fs-snapshot
 
 repository fdb2e6dd opened successfully, password is correct
