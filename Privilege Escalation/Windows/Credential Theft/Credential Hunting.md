@@ -8,7 +8,7 @@ lazagne.exe all
 ```
 ##### Files
 ```powershell
-findstr /SIM /C:"password" *.txt *.ini *.cfg *.config *.xml
+findstr /sin /i "administrator" * > test.txt
 findstr /spin "password" *.*
 select-string -Path C:\*.txt -Pattern password
 

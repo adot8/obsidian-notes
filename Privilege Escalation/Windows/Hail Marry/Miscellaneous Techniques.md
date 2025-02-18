@@ -41,14 +41,14 @@ This setting can be set via Local Group Policy by setting `Always install with e
 ![image](https://academy.hackthebox.com/storage/modules/67/alwaysinstall.png)
 
 #### Enumerating Always Install Elevated Settings
-```powershell-session
+```powershell
 PS C:\htb> reg query HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\Installer
 
 HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\Installer
     AlwaysInstallElevated    REG_DWORD    0x1
 ```
 
-```powershell-session
+```powershell
 PS C:\htb> reg query HKLM\SOFTWARE\Policies\Microsoft\Windows\Installer
 
 HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Installer
@@ -57,6 +57,10 @@ HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Installer
 
 Our enumeration shows us that the `AlwaysInstallElevated` key exists, so the policy is indeed enabled on the target system.
 
+## AUTOAMTE WITH METASPLOIT
+```bash
+exploit/windows/local/always_install_elevated
+```
 #### Generating MSI Package
 We can exploit this by generating a malicious `MSI` package and execute it via the command line to obtain a reverse shell with SYSTEM privileges.
 
