@@ -6,6 +6,16 @@ Basic Methodology for break-out:
 2. Exploit the Dialog Box to achieve `command execution`.
 3. `Escalate privileges` to gain higher levels of access.
 
+Visit `http://humongousretail.com/remote/` using the RDP session of the spawned target and login with the provided credentials below. After login, click on the `Default Desktop` to obtain the Citrix `launch.ica` file in order to connect to the restricted environment.
+
+Code: citrixcredentials
+
+```citrixcredentials
+Username: pmorgan
+Password: Summer1Summer!
+  Domain: htb.local
+```
+
 In certain environments, where minimal hardening measures are implemented, there might even be a standard shortcut to `cmd.exe` in the Start Menu, potentially aiding in unauthorized access. However, in a highly restrictive `lock-down` environment, any attempts to locate "cmd.exe" or "powershell.exe" in the start menu will yield no results. Similarly, accessing `C:\Windows\system32` through File Explorer will trigger an error, preventing direct access to critical system utilities. Acquiring access to the "CMD/Command Prompt" in such a restricted environment represents a notable achievement, as it provides extensive control over the Operating System. This level of control empowers an attacker to gather valuable information, facilitating the further escalation of privileges.
 
 There are many techniques which can be used for breaking out of a Citrix environment. This section will not cover every possible scenario, but we will walk through the most common ways to perform a Citrix breakout.
