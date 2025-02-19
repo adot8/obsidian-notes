@@ -50,5 +50,5 @@ We can the above with these logs as well
 - `/var/log/sshd.log`
 - `/var/log/mail`
 - `/var/log/vsftpd.log`
-- 
+
 We should first attempt reading these logs through LFI, and if we do have access to them, we can try to poison them as we did above. For example, if the `ssh` or `ftp` services are exposed to us, and we can read their logs through LFI, then we can try logging into them and set the username to PHP code, and upon including their logs, the PHP code would execute. The same applies the `mail` services, as we can send an email containing PHP code, and upon its log inclusion, the PHP code would execute. We can generalize this technique to any logs that log a parameter we control and that we can read through the LFI vulnerability
