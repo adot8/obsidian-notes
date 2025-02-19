@@ -4,6 +4,7 @@ One of the most basic filters against LFI is a search and replace filter, where 
 Put double of that mf
 ```bash
 ....//....//....//....//....//etc/passwd
+..../..../..../..../..../etc/passwd
 ```
 
 #### URL Encoding

