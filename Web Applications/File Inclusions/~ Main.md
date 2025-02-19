@@ -47,7 +47,7 @@ known_hosts
 /var/log/access_log
 /var/log/nginx/access.log 
 /var/log/nginx/access_log 
-/etc/httpd/logs/acces_log 
+/etc/httpd/logs/access_log 
 /etc/httpd/logs/error_log 
 /var/www/logs/access_log 
 /var/www/logs/access.log 
