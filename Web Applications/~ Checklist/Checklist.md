@@ -28,10 +28,14 @@ Test parameters for the following
 1. IDOR
 2. File Inclusion
 3. SQLi
+4. XSS
+5. Command Injection
 ### Search for input fields and test for the following
 1. Command injection
 2. SQL Injection
 3. XXE
+4. LDAP injecion
+5. XSS
 
 **TEST INJECTION PAYLOADS IN CONJUNCTION WITH [HTTP VERB TAMPERING](obsidian://open?vault=Penetration%20Testing&file=Root%2FWeb%20Applications%2FHTTP%20Verb%20Tampering%2FBypassing%20Security%20Filters)**
 
