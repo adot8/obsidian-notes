@@ -6,7 +6,7 @@ ffuf -H 'Host: FUZZ.adot8.com' -w ~/opt/wordlists/subdomains-top1million-5000.tx
 Directory Fuzzing
 ```shell
 ffuf  -w ~/opt/web-extensions.txt -u http://adot8.com/indexFUZZ
-ffuf -w ~/opt/directory-list-2.3-medium.txt -u http://adot8.com/FUZZ -e .php,.phps
+ffuf -w ~/opt/wordlists/directory-list-2.3-medium.txt -u http://adot8.com/FUZZ -e .php,.phps
 ```
 While waiting for results perform on all pages:
 1. Read source code manually + automated
