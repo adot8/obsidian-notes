@@ -5,9 +5,9 @@ ffuf -H 'Host: FUZZ.adot8.com' -w ~/opt/wordlists/subdomains-top1million-5000.tx
 ```
 ### Directory Fuzzing
 ```shell
-ffuf  -w ~/opt/wordlists/web-extensions.txt -u http://adot8.com/indexFUZZ
+ffuf  -w ~/opt/wordlists/web-extensions.txt -u http://94.237.54.116:49558/indexFUZZ
 
-ffuf -w ~/opt/wordlists/directory-list-2.3-medium.txt -u http://adot8.com/FUZZ -e .php,.phps
+ffuf -w ~/opt/wordlists/directory-list-2.3-medium.txt -u http://94.237.54.116:49558/FUZZ -e .php,.phps
 ```
 
 While waiting for results perform on all pages:
@@ -19,7 +19,7 @@ While waiting for results perform on all pages:
 
 ### Parameter Fuzzing (PHP)
 ```shell
-ffuf -w opt/burp-parameter-names.txt -u http://academy.htb:46804/admin.php FUZZ=1 -fs x
+ffuf -w ~/opt/wordlists/burp-parameter-names.txt -u http://94.237.54.116:49558/api.php?FUZZ=1 -fs x
 
 ffuf -w opt/burp-parameter-names.txt -u http://academy.htb:46804/admin.php -X POST -d 'FUZZ=1' -H 'Content-Type: application/x-www-form-urlencoded' -fs x
 ```
