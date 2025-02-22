@@ -1,2 +1,2 @@
-1. Footprinting
+1. OSINT
 2. 
