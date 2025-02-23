@@ -4,7 +4,7 @@
 | ---------- | ------ |
 | Forest     | Y      |
 | Union      | Y      |
-| Soccer     |        |
+| Soccer     | Y      |
 | Active     |        |
 | Delivery   |        |
 | Remote     |        |
