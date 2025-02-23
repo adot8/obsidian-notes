@@ -12,6 +12,7 @@ ffuf -w ~/opt/wordlists/sqli.txt -u URL -fs ...
 ")-- -
 ```
 
+**ALWAYS TEST AGAINST INPUTS THAT RETURN DATA**
 
 > [!NOTE]  Note
 > We may have to use the URL encoded version of the payload. An example of this is when we put our payload directly in the URL 'i.e. HTTP GET request'
