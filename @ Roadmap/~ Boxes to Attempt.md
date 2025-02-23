@@ -2,8 +2,8 @@
 
 | Box        | Pwned? |
 | ---------- | ------ |
-| Forest     | Yes    |
-| Union      |        |
+| Forest     | Y      |
+| Union      | Y      |
 | Soccer     |        |
 | Active     |        |
 | Delivery   |        |

