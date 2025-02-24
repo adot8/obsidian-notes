@@ -7,7 +7,7 @@
 | Soccer     | Y      |
 | Active     |        |
 | Delivery   | Y      |
-| Remote     |        |
+| Remote     | Y      |
 | Access     |        |
 | Metatwo    |        |
 | Driver     |        |
