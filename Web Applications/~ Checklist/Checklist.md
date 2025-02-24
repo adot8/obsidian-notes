@@ -1,15 +1,15 @@
 ### Fuzz for subdomains & vhosts
 ```shell
 ffuf -w ~/opt/wordlists/subdomains-top1million-110000.txt -u https://FUZZ.adot8.com
-ffuf -H 'Host: FUZZ.delivery.htb' -w ~/opt/wordlists/subdomains-top1million-5000.txt:FUZZ -u http://delivery.htb/
+ffuf -H 'Host: FUZZ.delivery.htb' -w ~/opt/wordlists/subdomains_custom.txt:FUZZ -u http://delivery.htb/
 ```
 ### Directory Fuzzing
 ```shell
-ffuf  -w ~/opt/wordlists/web-extensions.txt -u http://soc-player.soccer.htb/indexFUZZ
+ffuf  -w ~/opt/wordlists/web-extensions.txt -u http://delivery.htb/indexFUZZ
 
-ffuf -w ~/opt/wordlists/directory-list-2.3-medium.txt -u http://soccer.htb/FUZZ -e .html
+ffuf -w ~/opt/wordlists/directory-list-2.3-medium.txt -u http://delivery.htb/FUZZ -e .html
 
-ffuf -w ~/opt/wordlists/raft-medium-directories.txt -u http://soccer.htb/FUZZ -e .html
+ffuf -w ~/opt/wordlists/raft-medium-directories.txt -u http://delivery.htb/FUZZ -e .html
 ```
 
 While waiting for results perform on all pages:

@@ -1,7 +1,7 @@
 ```shell
 python3 -c 'import pty; pty.spawn("/bin/bash")'
 
-grep *sh$ /etc/passwd
+grep bash /etc/passwd
 
 id
 
