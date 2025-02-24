@@ -4,7 +4,7 @@ nmap -p 111,2049 --script nfs* -sV $ip
 showmount -e $ip
 
 mkdir target-NFS
-sudo mount -t nfs 10.129.14.128:/ ./target-NFS/ -o nolock
+sudo mount -t nfs 10.10.10.180:/site_backups ./target-NFS/ -o nolock
 cd target-NFS
 ls -la
 ls -n

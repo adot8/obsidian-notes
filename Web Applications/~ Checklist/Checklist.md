@@ -5,11 +5,11 @@ ffuf -H 'Host: FUZZ.delivery.htb' -w ~/opt/wordlists/subdomains_custom.txt:FUZZ 
 ```
 ### Directory Fuzzing
 ```shell
-ffuf  -w ~/opt/wordlists/web-extensions.txt -u http://delivery.htb/indexFUZZ
+ffuf  -w ~/opt/wordlists/web-extensions.txt -u http://10.10.10.180/indexFUZZ
 
-ffuf -w ~/opt/wordlists/directory-list-2.3-medium.txt -u http://delivery.htb/FUZZ -e .html
+ffuf -w ~/opt/wordlists/directory-list-2.3-medium.txt -u http://10.10.10.180/FUZZ -e .html
 
-ffuf -w ~/opt/wordlists/raft-medium-directories.txt -u http://delivery.htb/FUZZ -e .html
+ffuf -w ~/opt/wordlists/raft-medium-directories.txt -u http://10.10.10.180/FUZZ -e .html
 ```
 
 While waiting for results perform on all pages:
