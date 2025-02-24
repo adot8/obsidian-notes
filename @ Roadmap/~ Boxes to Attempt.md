@@ -6,7 +6,7 @@
 | Union      | Y      |
 | Soccer     | Y      |
 | Active     |        |
-| Delivery   |        |
+| Delivery   | Y      |
 | Remote     |        |
 | Access     |        |
 | Metatwo    |        |
