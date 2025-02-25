@@ -9,7 +9,7 @@
 | Delivery   | Y      |
 | Remote     | Y      |
 | Access     |        |
-| Metatwo    |        |
+| Metatwo    | Y      |
 | Driver     |        |
 | Trick      |        |
 | Shoppy     |        |
