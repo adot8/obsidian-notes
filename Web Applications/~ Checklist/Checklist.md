@@ -1,15 +1,15 @@
 ### Fuzz for subdomains & vhosts
 ```shell
 ffuf -w ~/opt/wordlists/subdomains-top1million-110000.txt -u https://FUZZ.adot8.com
-ffuf -H 'Host: FUZZ.driver.htb' -w ~/opt/wordlists/subdomains_custom.txt:FUZZ -u http://driver.htb
+ffuf -H 'Host: FUZZ.preprod-payroll.trick.htb' -w ~/opt/wordlists/subdomains_custom.txt:FUZZ -u http://preprod-payroll.trick.htb
 ```
 ### Directory Fuzzing
 ```shell
-ffuf  -w ~/opt/wordlists/web-extensions.txt -u http://driver.htb/indexFUZZ
+ffuf  -w ~/opt/wordlists/web-extensions.txt -u http://preprod-payroll.trick.htb/indexFUZZ
 
-ffuf -w ~/opt/wordlists/directory-list-2.3-medium.txt -u  http://driver.htb/FUZZ -e .php
+ffuf -w ~/opt/wordlists/directory-list-2.3-medium.txt -u  http://preprod-payroll.trick.htb/FUZZ -e .php
 
-ffuf -w ~/opt/wordlists/raft-medium-directories.txt -u http://driver.htb/FUZZ -e .php
+ffuf -w ~/opt/wordlists/raft-medium-directories.txt -u http://preprod-payroll.trick.htb/FUZZ -e .php
 ```
 
 While waiting for results perform on all pages:
@@ -21,9 +21,9 @@ While waiting for results perform on all pages:
 
 ### Parameter Fuzzing (PHP)
 ```shell
-ffuf -w ~/opt/wordlists/burp-parameter-names.txt -u http://driver.htb/fw_up.php?FUZZ=1 -fs x
+ffuf -w ~/opt/wordlists/burp-parameter-names.txt -u http://preprod-payroll.trick.htb/ajax.php?FUZZ=1 -fs x
 
-ffuf -w ~/opt/wordlists/burp-parameter-names.txt -u http://driver.htb/fw_up.php -X POST -d 'FUZZ=1' -H 'Content-Type: application/x-www-form-urlencoded' -fs x
+ffuf -w ~/opt/wordlists/burp-parameter-names.txt -u http://preprod-payroll.trick.htb/login.php -X POST -d 'FUZZ=1' -H 'Content-Type: application/x-www-form-urlencoded' -fs x
 ```
 
 Test parameters for the following
