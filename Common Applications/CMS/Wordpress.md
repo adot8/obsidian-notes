@@ -4,6 +4,7 @@ wpscan --url $url
 wpscan --url $url -e vp     <- Vulnerable plugins
 wpscan --url $url -e cb     <- Config backups
 wpscan --url $url -e p --plugins-detection aggressive
+curl -s http://metapress.htb/ | grep plugins
 ```
 
 ```bash
@@ -25,7 +26,7 @@ WordPress stores its plugins in the `wp-content/plugins` directory. This folder 
 
 ```bash
 curl -s http://blog.inlanefreight.local/ | grep themes
-curl -s http://blog.inlanefreight.local/ | grep plugins
+curl -s http://metapress.htb/ | grep plugins
 ```
 Visiting `/wp-content/plugins/realplugin` can uncover `readme`'s with the version
 

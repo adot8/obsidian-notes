@@ -5,9 +5,9 @@ ffuf -H 'Host: FUZZ.metapress.htb' -w ~/opt/wordlists/subdomains_custom.txt:FUZZ
 ```
 ### Directory Fuzzing
 ```shell
-ffuf  -w ~/opt/wordlists/web-extensions.txt -u http://metapress.htbFUZZ
+ffuf  -w ~/opt/wordlists/web-extensions.txt -u http://metapress.htb/indexFUZZ
 
-ffuf -w ~/opt/wordlists/directory-list-2.3-medium.txt -u http://metapress.htb/FUZZ -e .html
+ffuf -w ~/opt/wordlists/directory-list-2.3-medium.txt -u http://metapress.htb/FUZZ -e php
 
 ffuf -w ~/opt/wordlists/raft-medium-directories.txt -u http://metapress.htb/FUZZ -e .html
 ```
