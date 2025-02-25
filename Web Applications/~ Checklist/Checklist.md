@@ -1,15 +1,15 @@
 ### Fuzz for subdomains & vhosts
 ```shell
 ffuf -w ~/opt/wordlists/subdomains-top1million-110000.txt -u https://FUZZ.adot8.com
-ffuf -H 'Host: FUZZ.metapress.htb' -w ~/opt/wordlists/subdomains_custom.txt:FUZZ -u http://metapress.htb
+ffuf -H 'Host: FUZZ.driver.htb' -w ~/opt/wordlists/subdomains_custom.txt:FUZZ -u http://driver.htb
 ```
 ### Directory Fuzzing
 ```shell
-ffuf  -w ~/opt/wordlists/web-extensions.txt -u http://metapress.htb/indexFUZZ
+ffuf  -w ~/opt/wordlists/web-extensions.txt -u http://driver.htb/indexFUZZ
 
-ffuf -w ~/opt/wordlists/directory-list-2.3-medium.txt -u http://metapress.htb/FUZZ -e php
+ffuf -w ~/opt/wordlists/directory-list-2.3-medium.txt -u  http://driver.htb/FUZZ -e .php
 
-ffuf -w ~/opt/wordlists/raft-medium-directories.txt -u http://metapress.htb/FUZZ -e .html
+ffuf -w ~/opt/wordlists/raft-medium-directories.txt -u http://driver.htb/FUZZ -e .php
 ```
 
 While waiting for results perform on all pages:
@@ -21,9 +21,9 @@ While waiting for results perform on all pages:
 
 ### Parameter Fuzzing (PHP)
 ```shell
-ffuf -w ~/opt/wordlists/burp-parameter-names.txt -u http://10.10.11.128/firewall.php?FUZZ=1 -fs x
+ffuf -w ~/opt/wordlists/burp-parameter-names.txt -u http://driver.htb/fw_up.php?FUZZ=1 -fs x
 
-ffuf -w opt/burp-parameter-names.txt -u http://academy.htb:46804/admin.php -X POST -d 'FUZZ=1' -H 'Content-Type: application/x-www-form-urlencoded' -fs x
+ffuf -w ~/opt/wordlists/burp-parameter-names.txt -u http://driver.htb/fw_up.php -X POST -d 'FUZZ=1' -H 'Content-Type: application/x-www-form-urlencoded' -fs x
 ```
 
 Test parameters for the following
@@ -42,6 +42,7 @@ Test parameters for the following
 **TEST INJECTION PAYLOADS IN CONJUNCTION WITH [HTTP VERB TAMPERING](obsidian://open?vault=Penetration%20Testing&file=Root%2FWeb%20Applications%2FHTTP%20Verb%20Tampering%2FBypassing%20Security%20Filters)**
 
 ### Search for [File Upload](obsidian://open?vault=Penetration%20Testing&file=Root%2FWeb%20Applications%2FFile%20Upload%2F~%20Checklist) features
+- Upload malicious SCF file (@hi.scf) and capture hash
 
 ### Search for Login Portals
 1. Spray

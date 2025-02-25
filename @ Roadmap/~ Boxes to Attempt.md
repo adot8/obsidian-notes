@@ -10,7 +10,7 @@
 | Remote     | Y      |
 | Access     |        |
 | Metatwo    | Y      |
-| Driver     |        |
+| Driver     | Y      |
 | Trick      |        |
 | Shoppy     |        |
 | Manager    |        |
