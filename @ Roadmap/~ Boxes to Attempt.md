@@ -11,7 +11,7 @@
 | Access     |        |
 | Metatwo    | Y      |
 | Driver     | Y      |
-| Trick      |        |
+| Trick      | Y      |
 | Shoppy     |        |
 | Manager    |        |
 | Outdated   |        |
