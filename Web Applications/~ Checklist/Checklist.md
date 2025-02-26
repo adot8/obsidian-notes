@@ -1,13 +1,13 @@
 ### Fuzz for subdomains & vhosts
 ```shell
 ffuf -w ~/opt/wordlists/subdomains-top1million-110000.txt -u https://FUZZ.adot8.com
-ffuf -H 'Host: FUZZ.preprod-payroll.trick.htb' -w ~/opt/wordlists/subdomains_custom.txt:FUZZ -u http://preprod-payroll.trick.htb
+ffuf -H 'Host: FUZZ.shoppy.htb' -w ~/opt/wordlists/subdomains_custom.txt:FUZZ -u http://shoppy.htb
 ```
 ### Directory Fuzzing
 ```shell
-ffuf  -w ~/opt/wordlists/web-extensions.txt -u http://preprod-payroll.trick.htb/indexFUZZ
+ffuf  -w ~/opt/wordlists/web-extensions.txt -u http://shoppy.htb/indexFUZZ
 
-ffuf -w ~/opt/wordlists/directory-list-2.3-medium.txt -u  http://preprod-payroll.trick.htb/FUZZ -e .php
+ffuf -w ~/opt/wordlists/directory-list-2.3-medium.txt -u http://shoppy.htb/FUZZ 
 
 ffuf -w ~/opt/wordlists/raft-medium-directories.txt -u http://preprod-payroll.trick.htb/FUZZ -e .php
 ```
