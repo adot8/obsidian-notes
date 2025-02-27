@@ -5,11 +5,11 @@ ffuf -H 'Host: FUZZ.shoppy.htb' -w ~/opt/wordlists/subdomains_custom.txt:FUZZ -u
 ```
 ### Directory Fuzzing
 ```shell
-ffuf  -w ~/opt/wordlists/web-extensions.txt -u http://shoppy.htb/indexFUZZ
+ffuf  -w ~/opt/wordlists/web-extensions.txt -u http://mattermost.shoppy.htb/indexFUZZ
 
-ffuf -w ~/opt/wordlists/directory-list-2.3-medium.txt -u http://shoppy.htb/FUZZ 
+ffuf -w ~/opt/wordlists/directory-list-2.3-medium.txt -u http://mattermost.shoppy.htb/FUZZ 
 
-ffuf -w ~/opt/wordlists/raft-medium-directories.txt -u http://preprod-payroll.trick.htb/FUZZ -e .php
+ffuf -w ~/opt/wordlists/raft-medium-directories.txt -u http://mattermost.shoppy.htb//FUZZ -e .php
 ```
 
 While waiting for results perform on all pages:
@@ -21,11 +21,14 @@ While waiting for results perform on all pages:
 
 ### Parameter Fuzzing (PHP)
 ```shell
-ffuf -w ~/opt/wordlists/burp-parameter-names.txt -u http://preprod-payroll.trick.htb/ajax.php?FUZZ=1 -fs x
+ffuf -w ~/opt/wordlists/burp-parameter-names.txt -u http://shoppy.htb/login.php?FUZZ=1 -fs x
 
-ffuf -w ~/opt/wordlists/burp-parameter-names.txt -u http://preprod-payroll.trick.htb/login.php -X POST -d 'FUZZ=1' -H 'Content-Type: application/x-www-form-urlencoded' -fs x
+ffuf -w ~/opt/wordlists/burp-parameter-names.txt -u http://shoppy.htb/login.php -X POST -d 'FUZZ=1' -H 'Content-Type: application/x-www-form-urlencoded' -fs x
 ```
 
+```bash
+ffuf -w ~/opt/wordlists/sqli.txt -u http://shoppy.htb/login.php -X POST -d 'username=FUZZ&password=1' -H 'Content-Type: application/x-www-form-urlencoded' -fs x
+```
 Test parameters for the following
 1. IDOR
 2. File Inclusion
