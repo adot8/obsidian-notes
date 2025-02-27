@@ -12,7 +12,7 @@
 | Metatwo    | Y      |
 | Driver     | Y      |
 | Trick      | Y      |
-| Shoppy     |        |
+| Shoppy     | Y      |
 | Manager    |        |
 | Outdated   |        |
 | Agile      |        |
