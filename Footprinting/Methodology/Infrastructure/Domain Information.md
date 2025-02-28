@@ -32,9 +32,9 @@ dig adot8.com ANY
 
 whois adot8.com
 
-dnsenum --enum adot8.com -r -f ~/opt/subdomains-top1million-110000.txt
+dnsenum --enum octopitech.com -r -f ~/opt/wordlists/subdomains_custom.txt
 
-gobuster vhost -u http://adot8.com -w ~/opt/subdomains-top1million-110000.txt --append-domain
+gobuster vhost -u http://adot8.com -w ~/opt/wordlists/subdomains_custom.txt --append-domain
 gobuster dir -u http://adot8.com -w ~/opt/raft-medium-directories.txt -x txt,html -t 100
 ```
 
