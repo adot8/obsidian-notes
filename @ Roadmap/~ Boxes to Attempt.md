@@ -14,7 +14,7 @@
 | Trick      | Y      |
 | Shoppy     | Y      |
 | Manager    |        |
-| Outdated   |        |
+| Outdated   | Y      |
 | Agile      |        |
 | Pressed    |        |
 | LogForge   |        |
