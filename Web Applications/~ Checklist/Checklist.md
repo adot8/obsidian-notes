@@ -1,3 +1,4 @@
+
 ### Fuzz for subdomains & vhosts
 ```shell
 ffuf -w ~/opt/wordlists/subdomains-top1million-110000.txt -u https://FUZZ.adot8.com
