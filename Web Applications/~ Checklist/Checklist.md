@@ -6,11 +6,11 @@ ffuf -H 'Host: FUZZ.shoppy.htb' -w ~/opt/wordlists/subdomains_custom.txt:FUZZ -u
 ```
 ### Directory Fuzzing
 ```shell
-ffuf  -w ~/opt/wordlists/web-extensions.txt -u http://mattermost.shoppy.htb/indexFUZZ
+ffuf  -w ~/opt/wordlists/web-extensions.txt -u https://cdt.vercel.app/indexFUZZ
 
-ffuf -w ~/opt/wordlists/directory-list-2.3-medium.txt -u http://mattermost.shoppy.htb/FUZZ 
+ffuf -w ~/opt/wordlists/directory-list-2.3-medium.txt -u https://cdt.vercel.app/FUZZ 
 
-ffuf -w ~/opt/wordlists/raft-medium-directories.txt -u http://mattermost.shoppy.htb//FUZZ -e .php
+ffuf -w ~/opt/wordlists/raft-medium-directories.txt -u https://cdt.vercel.app/FUZZ 
 ```
 
 While waiting for results perform on all pages:
