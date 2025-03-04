@@ -1,5 +1,5 @@
 ```bash
-nmap -p 111,2049 --script nfs* -sV $ip
+nmap -p 111,2049 --script nfs* -sV 10.129.149.161
 
 showmount -e $ip
 
