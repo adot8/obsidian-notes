@@ -33,7 +33,7 @@ Intercept the `reset` request, and this time use a `HEAD` request to see how the
 
 
 > [!NOTE] PLEASE
-> Try using all HTTP verbs. `GET` `POST` `PUT` `HEAD` `PATCH` `OPTIONS` `DELETE`
+> Try using all HTTP verbs. `GET` `POST` `PUT` `HEAD` `PATCH` `OPTIONS` `DELETE` `TRACK`
 
 Once we change the request to`HEAD` and forward the request, we will see that we no longer get a login prompt or a `401 Unauthorized` page and get an empty output instead, as expected with a `HEAD` request.
 

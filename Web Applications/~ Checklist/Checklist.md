@@ -41,7 +41,7 @@ Test parameters for the following
 2. SQL Injection
 3. XXE
 4. LDAP injecion
-5. XSS
+5. XSS (Session Hijacking)
 
 **TEST INJECTION PAYLOADS IN CONJUNCTION WITH [HTTP VERB TAMPERING](obsidian://open?vault=Penetration%20Testing&file=Root%2FWeb%20Applications%2FHTTP%20Verb%20Tampering%2FBypassing%20Security%20Filters)**
 

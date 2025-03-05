@@ -1,6 +1,6 @@
 ### Footprinting + Enumeration
 ```bash
-droopescan scan drupal -u http://drupal.inlanefreight.local
+droopescan scan drupal -u http://blog.inlanefreight.local
 ```
 
 ```bash

@@ -15,3 +15,9 @@ Whats running?
 ```bash
 curl -s http://dev.inlanefreight.local/ | grep -E "Joomla|WordPress|Drupal"
 ```
+
+```bash
+admin:admin
+admin:Welcome1
+root:toor
+```

