@@ -6,11 +6,11 @@ ffuf -H 'Host: FUZZ.inlanefreight.local' -w ~/opt/wordlists/subdomains_custom.tx
 ```
 ### Directory Fuzzing
 ```shell
-ffuf  -w ~/opt/wordlists/web-extensions.txt -u http://inlanefreight.local/indexFUZZ
+ffuf  -w ~/opt/wordlists/web-extensions.txt -u http://careers.inlanefreight.local/indexFUZZ
 
-ffuf -w ~/opt/wordlists/directory-list-2.3-medium.txt -u http://inlanefreight.local/FUZZ -e
+ffuf -w ~/opt/wordlists/directory-list-2.3-medium.txt -u http://careers.inlanefreight.local/FUZZ -e
 
-ffuf -w ~/opt/wordlists/raft-medium-directories.txt -u http://inlanefreight.local/FUZZ -e 
+ffuf -w ~/opt/wordlists/raft-medium-directories.txt -u http://careers.inlanefreight.local/FUZZ -e 
 ```
 
 While waiting for results perform on all pages:
