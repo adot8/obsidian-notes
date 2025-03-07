@@ -52,10 +52,11 @@ Test parameters for the following
 1. Spray
 ```bash
 admin:admin
+admin:Password123
+admin Welcome1
 root:admin
 root:toor
 administrator:admin
-admin:Password123
 ```
 2. Bypass with [HTTP Verb Tampering](obsidian://open?vault=Penetration%20Testing&file=Root%2FWeb%20Applications%2FHTTP%20Verb%20Tampering%2FBypassing%20Basic%20Authentication)
 3. [Bruteforce](obsidian://open?vault=Penetration%20Testing&file=Root%2FPassword%20Attacks%2FLogin%20Brute%20Forcing%2FHydra%2FLogin%20Forms)
