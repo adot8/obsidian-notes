@@ -6,6 +6,7 @@ nmap -v -A -iL hosts.txt -oA host_enum.out
 
 ```bash
 sudo responder -I wlan0 -dwv
+hashcat -m 5600 adm.ntlmv2 ~/rockyou.txt
 ```
 
 ```bash

