@@ -2,7 +2,7 @@
 ### Fuzz for subdomains & vhosts
 ```shell
 ffuf -w ~/opt/wordlists/subdomains-top1million-110000.txt -u https://FUZZ.adot8.com
-ffuf -H 'Host: FUZZ.inlanefreight.local' -w ~/opt/wordlists/subdomains_custom.txt:FUZZ -u http://inlanefreight.local
+ffuf -H 'Host: FUZZ.trilocor.local' -w ~/opt/wordlists/subdomains_custom.txt:FUZZ -u http://trilocor.local
 ```
 ### Directory Fuzzing
 ```shell
