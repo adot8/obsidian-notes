@@ -12,7 +12,7 @@ wpscan --url $url --password-attack xmlrpc -t 500 -U ilfreightwp -P ~/rockyou.tx
 ```
 
 ```bash
-curl -s http://blog.inlanefreight.local | grep WordPress
+curl -s http://trilocor.local | grep WordPress
 ```
 
 ```bash
