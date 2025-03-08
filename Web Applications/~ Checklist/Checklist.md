@@ -6,11 +6,11 @@ ffuf -H 'Host: FUZZ.trilocor.local' -w ~/opt/wordlists/subdomains_custom.txt:FUZ
 ```
 ### Directory Fuzzing
 ```shell
-ffuf  -w ~/opt/wordlists/web-extensions.txt -u http://trilocor.local/indexFUZZ
+ffuf  -w ~/opt/wordlists/web-extensions.txt -u http://careers.trilocor.local/indexFUZZ
 
-ffuf -w ~/opt/wordlists/directory-list-2.3-medium.txt -u http://trilocor.local/FUZZ -e .php,.phps
+ffuf -w ~/opt/wordlists/directory-list-2.3-medium.txt -u http://careers.trilocor.local/FUZZ -e .php -t 200
 
-ffuf -w ~/opt/wordlists/raft-medium-directories.txt -u http://dev.inlanefreight.local/FUZZ -e .php,.phps
+ffuf -w ~/opt/wordlists/raft-medium-directories.txt -u http://careers.trilocor.local/FUZZ -e .php,.phps
 ```
 
 While waiting for results perform on all pages:
@@ -22,9 +22,9 @@ While waiting for results perform on all pages:
 
 ### Parameter Fuzzing (PHP)
 ```shell
-ffuf -w ~/opt/wordlists/burp-parameter-names.txt -u http://shoppy.htb/login.php?FUZZ=1 -fs x
+ffuf -w ~/opt/wordlists/burp-parameter-names.txt -u http://securetransfer-dev.trilocor.local/file.php?FUZZ=1 -fs x
 
-ffuf -w ~/opt/wordlists/burp-parameter-names.txt -u http://shoppy.htb/login.php -X POST -d 'FUZZ=1' -H 'Content-Type: application/x-www-form-urlencoded' -fs x
+ffuf -w ~/opt/wordlists/burp-parameter-names.txt -u http://portal.trilocor.local/index.php -X POST -d 'FUZZ=1' -H 'Content-Type: application/x-www-form-urlencoded' -fs x
 ```
 
 ```bash
