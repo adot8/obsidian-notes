@@ -1,6 +1,6 @@
 ```bash
-nmap -p25 -sV --script smtp-open-relay -v 10.129.154.242
-nmap -p25 -sV --script smtp-enum-users -v 10.129.149.161
+nmap -p25 -sV --script smtp-open-relay 10.129.154.242
+nmap -p25 -sV --script smtp-enum-users 10.129.154.242
 
 telnet $ip 25
 VRFY root
