@@ -1,7 +1,7 @@
 ```bash
-nmap -p 111,2049 --script nfs* -sV 10.129.149.161
+nmap -p 111,2049 --script nfs* -sV 10.129.154.242
 
-showmount -e $ip
+showmount -e 10.129.154.242
 
 mkdir target-NFS
 sudo mount -t nfs 10.10.10.180:/site_backups ./target-NFS/ -o nolock

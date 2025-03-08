@@ -6,8 +6,8 @@ telnet $ip 25
 VRFY root
 EXPN root
 
-smtp-user-enum -U users.lower -m 10 -t $ip
-smtp-user-enum -U users.lower -w 10 -t $ip
+smtp-user-enum -U users.lower -m 10 -t 10.129.154.242
+smtp-user-enum -U users.lower -w 10 -t 10.129.154.242
 smtp-user-enum -M RCPT -U userlist.txt -D inlanefreight.htb -t $ip
 
 msfconsole
