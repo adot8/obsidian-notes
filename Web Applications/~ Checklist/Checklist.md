@@ -22,13 +22,13 @@ While waiting for results perform on all pages:
 
 ### Parameter Fuzzing (PHP)
 ```shell
-ffuf -w ~/opt/wordlists/burp-parameter-names.txt -u http://securetransfer-dev.trilocor.local/file.php?FUZZ=1 -fs x
+ffuf -w ~/opt/wordlists/burp-parameter-names.txt -u http://store.trilocor.local/Router.php?FUZZ=1 -fs x
 
-ffuf -w ~/opt/wordlists/burp-parameter-names.txt -u http://portal.trilocor.local/index.php -X POST -d 'FUZZ=1' -H 'Content-Type: application/x-www-form-urlencoded' -fs x
+ffuf -w ~/opt/wordlists/burp-parameter-names.txt -u http://store.trilocor.local/Router.php -X POST -d 'FUZZ=1' -H 'Content-Type: application/x-www-form-urlencoded' -fs 0
 ```
 
 ```bash
-ffuf -w ~/opt/wordlists/sqli.txt -u http://shoppy.htb/login.php -X POST -d 'username=FUZZ&password=1' -H 'Content-Type: application/x-www-form-urlencoded' -fs x
+ffuf -w ~/opt/wordlists/sqli.txt -u http://store.trilocor.local/Router.php -X POST -d 'username=FUZZ&password=1' -H 'Content-Type: application/x-www-form-urlencoded' -fs x
 ```
 Test parameters for the following
 1. IDOR

