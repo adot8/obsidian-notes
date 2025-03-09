@@ -81,7 +81,7 @@ Many applications and processes work with credentials needed for authentication 
 In order to retrieve this type of information from Linux distributions, there is a tool called [mimipenguin](https://github.com/huntergregal/mimipenguin) that makes the whole process easier. However, this tool requires administrator/root permissions.
 ```bash
 sudo python3 mimipenguin.py
-sudo python3 mimipenguin.sh'
+sudo python3 mimipenguin.sh
 ```
 #### Lazagne
 ```bash
