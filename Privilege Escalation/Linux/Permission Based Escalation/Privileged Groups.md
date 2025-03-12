@@ -32,7 +32,7 @@ lxc start r00t
 ### Docker
 ```bash
 docker ps
-docker run -v /:/mnt --rm -it bash chroot /mnt sh
+docker run -v /:/mnt --rm -it securetransferprod chroot /mnt sh
 docker-inspect {{.Config}} <id>
 ```
 

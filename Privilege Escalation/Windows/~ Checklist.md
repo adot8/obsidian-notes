@@ -55,9 +55,9 @@ gci -Path C:\ -Include *.kdbx,*.git -File -Recurse -ErrorAction SilentlyContinue
 gci -Path C:\xampp -Include *.txt,*.ini,*.yml,*.config -File -Recurse -ErrorAction SilentlyContinue
 gci -Path C:\inetpub\wwwroot -Include *.txt,*.ini,*.yml,*.config -File -Recurse -ErrorAction SilentlyContinue
 gci -Path C:\Users\ -Include *.exe,*.txt,*.rdp,*.pdf,*.xls,*.xlsx,*.xml,*.doc,*.docx,*.ps1,*.bat,*.ini,*.yml*,.config,*.sqlite -File -Recurse -ErrorAction SilentlyContinue
-gci -h -Path C:\Users\ -Include *.exe,*.txt,*.rdp,*.pdf,*.xls,*.xlsx,*.xml,*.doc,*.docx,*.ps1,*.bat,*.ini,*.yml,*.config,*.sqlite -File -Recurse -ErrorAction SilentlyContinue
+gci -h -Path C:\Users\ -Include *.exe,*.txt,*.rdp,*.pdf,*.xls,*.xlsx,*.xml,*.doc,*.docx,*.ps1,*.bat,*.yml,*.config,*.sqlite -File -Recurse -ErrorAction SilentlyContinue
 gci C:\Users\Public
-gc 'C:\Users\svc-alfresco\AppData\Local\Google\Chrome\User Data\Default\Custom Dictionary.txt' | Select-String password
+gc 'C:\Users\svc_glassfish\AppData\Local\Google\Chrome\User Data\Default\Custom Dictionary.txt' | Select-String password
 
 findstr /SIM /C:"password" *.txt *.ini *.cfg *.config *.xml
 findstr /spin "password" *.*
