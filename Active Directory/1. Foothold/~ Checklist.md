@@ -1,5 +1,5 @@
 ```bash
-fping -asgq 192.168.2.0/23 | tee /dev/tty | grep -oP '\d+\.\d+\.\d+\.\d+' > $hosts.txt
+fping -asgq 192.168.2.0/23 | tee /dev/tty | grep -oP '\d+\.\d+\.\d+\.\d+' > hosts.txt
 
 nmap -v -A -iL hosts.txt -oA host_enum.out
 ```
