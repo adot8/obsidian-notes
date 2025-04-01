@@ -6,6 +6,8 @@ nmap -sV -sC $ip -p3389 --script rdp*
 ```bash
 xfreerdp3 /v:$ip /u:htb-rdp /p:'HTBRocks!' /dynamic-resolution /drive:OP,/home/adot/opt
 
+xfreerdp /u:Adot /v:WinDot /dynamic-resolution /drive:OP,/home/adot/opt /multimon
+
 xfreerdp /u:user /p:"P455w0rd!" /v:$ip
 rdesktop $ip
 ```
