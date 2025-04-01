@@ -1,6 +1,6 @@
 Check for vulnerability
 ```bash
-rpcdump.py @192.168.1.129 | egrep 'MS-RPRN|MS-PAR'
+rpcdump.py @192.168.1.29 | egrep 'MS-RPRN|MS-PAR'
 netexec smb 192.168.170.175 -u adot -p eight -M printnightmare
 ```
 Generate malicious DLL
