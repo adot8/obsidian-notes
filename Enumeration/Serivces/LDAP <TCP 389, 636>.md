@@ -10,7 +10,7 @@ Null Authentication
 ```
 Netexec usage
 ```bash
-netxec ldap <IP> -u '' -p '' --password-not-required --admin-count --users --groups
+netexec ldap <IP> -u '' -p '' --password-not-required --admin-count --users --groups
 ```
 Viewing the certificate with openssl can hint towards the domain controller being a CA.
 ```bash
