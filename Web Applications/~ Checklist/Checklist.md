@@ -8,7 +8,7 @@ ffuf -H 'Host: FUZZ.trilocor.local' -w ~/opt/wordlists/subdomains_custom.txt:FUZ
 ```shell
 ffuf  -w ~/opt/wordlists/web-extensions.txt -u http://trilocor.local:7777/indexFUZZ
 
-ffuf -w ~/opt/wordlists/directory-list-2.3-medium.txt -u http://trilocor.local:7777/FUZZ -e .php -t 200
+ffuf -w ~/opt/wordlists/directory-list-2.3-medium.txt -u http://192.168.1.188/FUZZ -e .html -t 200
 
 ffuf -w ~/opt/wordlists/raft-medium-directories.txt -u http://careers.trilocor.local/FUZZ -e .php,.phps
 ```

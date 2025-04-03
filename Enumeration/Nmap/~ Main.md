@@ -16,6 +16,10 @@ nmap -sU -F -v $ip
 nmap -p $open_ports --script=vuln -Pn $ip
 ```
 
+```bash
+xsltproc <nmap-output.xml> -o <nmap-output.html>
+```
+
 Evaison
 ```bash
 nmap $ip -p $open_ports -sC -sV -v -n -Pn -disable-arp-ping -D RND:5
