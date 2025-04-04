@@ -1,9 +1,9 @@
 #### Pre-made Hashcat Rules
 ```bash
-/usr/share/hashcat/rules/custom.rule
 /usr/share/hashcat/rules/best64.rule
-/usr/share/hashcat/rules/rockyou-30000.rule
 /usr/share/hashcat/rules/InsidePro-PasswordsPro.rule
+/usr/share/hashcat/rules/rockyou-30000.rule
+/usr/share/hashcat/rules/dive.rule
 ```
 #### Hashcat Rule Syntax
 | **Function** | **Description**                                   |
