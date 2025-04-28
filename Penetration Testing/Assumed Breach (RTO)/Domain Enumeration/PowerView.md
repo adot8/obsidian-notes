@@ -46,6 +46,7 @@ Get-DomainUser -LDAPFilter "Description=*built*" | Select name,Description
 
 ### Computer Enum
 > [!NOTE] **Note**
+> Domain users can add up to 10 computer objects
 > Computer objects and Computers are different things
 > Check the logon count to find out
 > ```powershell
@@ -69,7 +70,7 @@ Get-DomainGroup -Domain <targetdomain>
 ```
 
 > [!NOTE] **IMPORTANT**
-> Need to specify the domain for Enterprise Admins and others to show
+> **Need to specify the domain/forest root for Enterprise Admins and others to show**
 > ```powershell
 > Get-DomainGroup -Name *admin* -Domain [domain] -properties name
 > ```
@@ -99,6 +100,9 @@ Get-DomainGroup -UserName "student1"
 Get-DomainGroup -UserName "student1" | select name
 ```
 
+The difference between` Domain Admins `and `Enterprise Admins` is that `Enterprise Admins` have **direct access** to the other domain controllers in the network/forest because they sit at the forest level. However, `Domain Admins` sit at the domain level so there is not any **direct access** to the other domain controllers, compromise of them can be quick but the **direct access** isn't there.
+
+**Regardless, if a single domain is compromised, the entire forest is compromised**
 ### Local Group Membership
 > [!NOTE] **NOTE**
 > You can view local groups on Domain Controllers but need local Admin on other remote computers to list them
