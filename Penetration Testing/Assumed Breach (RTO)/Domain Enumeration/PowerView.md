@@ -89,6 +89,8 @@ Get-DomainGroup -Name *admin* | select cn
 > 
 > **ALSO** having a target user in multiple groups helps with privileges to other objects down the road
 
+**STAY AWAY FROM DOMAIN ADMINS, THEY ARE THE MOST MONITORED. FOCUS ON THE OBJECTIVES. NOT RUSHING TO GET DOMAIN ADMIN IS THE DIFFERENCE BETWEEN OPSEC AND CTFS**
+
 ```powershell
 Get-DomainGroupMember -Identity "Domain Admins" -Recurse
 Get-DomainGroupMember -Identity "Domain Admins" -Recurse | select MemberName
