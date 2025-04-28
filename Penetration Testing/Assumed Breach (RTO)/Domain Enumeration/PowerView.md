@@ -15,9 +15,13 @@ Get-DomainController -Domain moneycorp.local
 ```
 
 > [!NOTE] **Note**
-> Policy data will be important for password policies and Kerberos ticket information (**needed for forging tickets, must match for OPSEC**)
+> Policy data will be important for password policies and Kerberos ticket information
+> > The Ticket must be compatible with the Kerberos Policy 
+> **(needed for forging tickets, must match for OPSEC)**
 
 ### Users Enum
+**ONLY TARGET ACTIVE USERS**
+
 ```powershell
 Get-DomainUser | select samaccountname
 Get-DomainUser -Identity student1
@@ -28,7 +32,7 @@ Get-DomainUser -Identity student1
 > 
 > 	- Less than 5-10 logon counts
 > 	- Last logon time
-> 	-  Bad password time (should be wrong at least once)
+> 	- Bad password time (should be wrong at least once)
 
 ```powershell
 Get-DomainUser -Identity student1 -Properties *
