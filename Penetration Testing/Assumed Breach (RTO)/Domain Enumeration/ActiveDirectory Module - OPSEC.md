@@ -13,7 +13,9 @@ Get-ADDomain -Identity moneycorp.local
 ```
 
 > [!NOTE] **NOTE**
-> Policy data will be important for password policies and Kerberos ticket information (needed for forging tickets, must match for OPSEC)
+> Policy data will be important for password policies and Kerberos ticket information
+> The Ticket must be compatible with the Kerberos Policy 
+> (needed for forging tickets, must match for OPSEC)
 
 ```powershell
 (Get-DomainPolicyData).systemaccess
