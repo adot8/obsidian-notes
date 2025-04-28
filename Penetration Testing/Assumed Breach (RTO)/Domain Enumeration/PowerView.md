@@ -115,6 +115,16 @@ Get-NetLocalGroupMember -ComputerName dcorp-dc -GroupName Administrators
 ```
 
 ### Shares, Sensitive files and FileServers
+Use [PowerHuntShares](https://github.com/NetSPI/PowerHuntShares) It can discover shares, sensitive files, ACLs for shares, networks,
+computers, identities etc. and generates a nice HTML report.
+
+```powershell
+Invoke-HuntSMBShares -NoPing -OutputDirectory
+C:\AD\Tools -HostList C:\AD\Tools\servers.txt
+```
+
+The `servers.txt` in the above command does not include the domain controller for better **OPSEC**
+
 ```powershell
 Invoke-ShareFinder -Verbose
 Invoke-FileFinder -Verbose
