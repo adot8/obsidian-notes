@@ -123,7 +123,7 @@ Invoke-HuntSMBShares -NoPing -OutputDirectory
 C:\AD\Tools -HostList C:\AD\Tools\servers.txt
 ```
 
-The `servers.txt` in the above command does not include the domain controller for better **OPSEC**
+The `servers.txt` in the above command does not include the **domain controller** for better **OPSEC**. DO NOT SCAN MORE THAN 15 MACHINES AT A TIME.
 
 ```powershell
 Invoke-ShareFinder -Verbose
