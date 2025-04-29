@@ -58,11 +58,6 @@ Get-DomainComputer | select cn
 Get-DomainComputer | select -ExpandProperty dnshostname
 ```
 
-```powershell
-Get-DomainComputer | select cn
-Get-DomainComputer | select -ExpandProperty dnshostname
-```
-
 ### Group enum
 ```powershell
 Get-DomainGroup | select Name
