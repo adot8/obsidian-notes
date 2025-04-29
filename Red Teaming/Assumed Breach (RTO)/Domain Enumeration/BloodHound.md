@@ -25,4 +25,4 @@ ets,CertServices --excludedcs
 ```
 
 > [!NOTE] **Note**
-> Remember to remove the 'CertServices' collection method when using BloodHound legacy collector.
+> Remember to remove the `CertServices` collection method when using BloodHound legacy collector.
