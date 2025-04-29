@@ -16,10 +16,7 @@ args --collectionmethods All
 - Use the `-ExcludeDCsto` avoid detection by MDI:
 
 ```powershell
-C:\AD\Tools\Loader.exe -Path C:\AD\Tools\SharpHound\SharpHound.exe -
-args --collectionmethods
-Group,GPOLocalGroup,Session,Trusts,ACL,Container,ObjectProps,SPNTarg
-ets,CertServices --excludedcs
+C:\AD\Tools\Loader.exe -Path C:\AD\Tools\SharpHound\SharpHound.exe -args --collectionmethods Group,GPOLocalGroup,Session,Trusts,ACL,Container,ObjectProps,SPNTargets,CertServices --excludedcs
 ```
 
 > [!NOTE] **Note**

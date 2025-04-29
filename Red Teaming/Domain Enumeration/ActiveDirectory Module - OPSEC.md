@@ -2,8 +2,8 @@
 [Windows ADModule](https://learn.microsoft.com/en-us/powershell/module/activedirectory/?view=windowsserver2022-ps)
 ### Domain Enum
 ```powershell
-Import-Module ADModule-master\Microsoft.ActiveDirectory.Management.dll
-Import-Module ADModule-master\ActiveDirectory\ActiveDirectory.psd1
+Import-Module .\ADModule-master\Microsoft.ActiveDirectory.Management.dll
+Import-Module .\ADModule-master\ActiveDirectory\ActiveDirectory.psd1
 ```
 
 ```powershell
