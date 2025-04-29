@@ -33,6 +33,7 @@ Get-ADDomainController -DomainName moneycorp.local -Discover
 ```powershell
 Get-ADUser -Filter * -Properties *
 Get-ADUser -Identity student1 -Properties *
+ Get-ADUser -Filter * -Properties * | select CN
 ```
 
 > [!NOTE] **IMPORTANT**
@@ -43,18 +44,14 @@ Get-ADUser -Identity student1 -Properties *
 > 	-  Bad password time (should be wrong at least once)
 
 ```powershell
-Get-ADUser -Filter * -Properties * | select -First 1 | Get-Member -MemberType 
-*Property | select Name
+Get-ADUser -Filter * -Properties * | select -First 1 | Get-Member -MemberType *Property | select Name
 
-Get-ADUser -Filter * -Properties * | select
-name,logoncount,@{expression={[datetime]::fromFileTime($_.pwdlastset
-)}}
+Get-ADUser -Filter * -Properties * | select name,logoncount,@{expression={[datetime]::fromFileTime($_.pwdlastset)}}
 ```
 
 Grep out a specific string
 ```powershell
-Get-ADUser -Filter 'Description -like "*built*"' -
-Properties Description | select name,Description
+Get-ADUser -Filter 'Description -like "*built*"' -Properties Description | select name,Description
 ```
 
 ### Computer Enum
