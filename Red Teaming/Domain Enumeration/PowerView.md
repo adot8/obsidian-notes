@@ -36,7 +36,7 @@ Get-DomainUser -Identity student1
 
 ```powershell
 Get-DomainUser -Identity student1 -Properties *
-Get-DomainUser -Properties samaccountname,logonCount,Description
+Get-DomainUser | select samaccountname,logonCount,Description
 ```
 
 Grep out a specific string
