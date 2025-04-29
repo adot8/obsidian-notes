@@ -72,7 +72,7 @@ Get-DomainGroup -Domain <targetdomain>
 
 ```powershell
 Get-DomainGroup *admin*
-Get-DomainGroup -Name *admin* | select cn
+Get-DomainGroup -Name *admin* -Domain moneycorp.local| select name, objectsid, description
 ```
 
 ### Domain Group Membership
