@@ -20,3 +20,12 @@ Get-DomainGPOComputerLocalGroupMapping -ComputerIdentity dcorp-student1
 ```
 
 ### Organizational Units
+```bash
+Get-DomainOU
+Get-DomainOU -properties name
+```
+
+This is the GPO that applies to the OU [gplink]
+![[Pasted image 20250430061201.png]]
+
+Get GPO applied on an OU. Read GPOname from gplink attribute from Get-NetOU
