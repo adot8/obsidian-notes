@@ -4,19 +4,19 @@ In terms of **OPSEC**, avoid BloodHound lights up SIEMS like a Christmas tree be
 ```powershell
 C:\AD\Tools\Loader.exe -Path C:\AD\Tools\BloodHound-
 master\BloodHound-master\Collectors\SharpHound.exe -args --
-collectionmethods All
+collectionmethods All --zipfilename shout
 ```
 #### CE
 ```powershell
 C:\AD\Tools\Loader.exe -Path C:\AD\Tools\Sharphound\SharpHound.exe -
-args --collectionmethods All
+args --collectionmethods All --zipfilename shout
 ```
 #### BloodHound OPSEC
 -  To make BloodHound collection stealthy, remove noisy collection methods like RDP, DCOM, PSRemote and LocalAdmin.
 - Use the `-ExcludeDCsto` avoid detection by MDI:
 
 ```powershell
-C:\AD\Tools\Loader.exe -Path C:\AD\Tools\SharpHound\SharpHound.exe -args --collectionmethods Group,GPOLocalGroup,Session,Trusts,ACL,Container,ObjectProps,SPNTargets,CertServices --excludedcs
+C:\AD\Tools\Loader.exe -Path C:\AD\Tools\SharpHound\SharpHound.exe -args --collectionmethods Group,GPOLocalGroup,Session,Trusts,ACL,Container,ObjectProps,SPNTargets,CertServices --excludedcs --zipfilename shout
 ```
 
 > [!NOTE] **Note**
