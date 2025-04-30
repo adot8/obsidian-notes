@@ -44,5 +44,5 @@ Get-DomainGPO -Identity "{7478F170-6A0C-490C-B355-9E4618BC785D}"
 
 #### Find all computers in an OU
 ```powershell
-(Get-DomainOU -identity <OU>).distinguishedname | %{Get-DomainComputer -SearchBase $_} | select name
+(Get-DomainOU -identity DevOps).distinguishedname | %{Get-DomainComputer -SearchBase $_} | select name
 ```
