@@ -19,3 +19,30 @@
     - ![[Pasted image 20250430064036.png]]
 - Non-transitive
     - Cannot be extended to other domains in the forest. Can be two-way or one-way.
+
+### Types of Trusts
+- Default/Automatic Trusts
+    - Parent -> Child Trusts
+        - **adot8.com** can access resources from **pwned.adot8.com**
+- Tree-root trust (Tree -> Tree)
+    - It is created automatically whenever a new domain tree is added to a forest root.
+    - **ALWAYS** two way transitive
+    - Compromise Z, you can hop to Y then A then B and C
+
+> [!NOTE] **IMPORTANT**
+> **YOU ONLY NEED ONE DOMAIN ADMIN TO COMPROMISE THE WHOLE FOREST**
+> **IF THE ENTERPRISES FOREST IS HUGE, SPLIT IT INTO MULTIPLE FORESTS**
+
+![[Pasted image 20250430064251.png]]
+- External Trusts (Forest root -> External Child)
+    - Between two domains in different forests when forests do not have a trust relationship
+    - Can be one-way or two-way and is non-transitive
+
+Non transitive makes it so if you compromise Z you can compromise Y **BUT** you can only access **EXPLICITLY** allowed resources in B and C
+![[Pasted image 20250430064318.png]]
+
+- Forest Trusts
+    - Between forest root domains
+    - Cannot be extended to a third forest (no implicit trust)
+    - One-way or two-way transitive... Need explicit permission for resources
+![[Pasted image 20250430064337.png]]
