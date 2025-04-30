@@ -2,6 +2,9 @@ View ACLs associated with an object
 ```powershell
 Get-DomainObjectAcl -SamAccountName student1 -ResolveGUIDs
 Get-DomainObjectAcl -Identity "Domain Admins" -ResolveGUIDs
+
+$sid = Convert-NameToSid student548
+Get-DomainObjectACL -ResolveGUIDs -Identity * | ? {$_.SecurityIdentifier -eq $sid}
 ```
 
 View ACLs associated with the specified prefix to be used for search
@@ -19,7 +22,7 @@ The way to read the output would be:
 Search for Write, Modify and GenericAll ACEs
 ```powershell
 Find-InterestingDomainAcl -ResolveGUIDs
-Find-InterestingDomainAcl -ResolveGUIDs | ?{$_.IdentityReferenceName -match "student2"}
+Find-InterestingDomainAcl -ResolveGUIDs | ?{$_.IdentityReferenceName -match "student548"}
 Find-InterestingDomainAcl -ResolveGUIDs | ?{$_.IdentityReferenceName -match "RDPUsers"}
 ```
 
