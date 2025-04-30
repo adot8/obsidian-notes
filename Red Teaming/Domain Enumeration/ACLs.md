@@ -15,7 +15,7 @@ Get-DomainObjectAcl -SearchBase "LDAP://CN=RDP Users,CN=Users,DC=dollarcorp,DC=m
 The way to read the output would be:
 
 - On `ObjectDN`: Domain Admins
-- The `SecurityIdentifier` (SID / object)
+- The `SecurityIdentifier` (SID / object) - SYSTEM in this case
 - Has `ActiveDirectoryRights`: GenricAll (All rights)
 ![[Pasted image 20250429064219.png]]
 
