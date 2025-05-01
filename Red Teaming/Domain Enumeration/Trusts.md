@@ -13,9 +13,9 @@ Get-Forest -Forest eurocorp.local
 ```
 
 
-> [!NOTE] FILTER_SIDS = External Trusts
+> [!NOTE] FILTER_SIDS = Get External Trusts
 > ```powershell
-> Get-ForestDomain | %{Get-DomainTrust -Domain $_.Name} ?{$_.TrustAttributes -eq "FILTER_SIDS"}
+> Get-DomainTrust | ?{$_.TrustAttributes -eq "FILTER_SIDS"}
 > ```
 
 All domains in current Forest
