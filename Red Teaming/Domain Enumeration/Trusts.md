@@ -1,3 +1,46 @@
+### PowerView
+```powershell
+Get-DomainTrust
+Get-DomainTrust -Domain us.dollarcorp.moneycorp.local
+```
+
+Forest mapping
+
+Details about current Forest **AND** external Forests
+```powershell
+Get-Forest
+Get-Forest -Forest eurocorp.local
+```
+
+
+> [!NOTE] FILTER_SIDS = External Trusts
+> ```powershell
+> Get-ForestDomain | %{Get-DomainTrust -Domain $_.Name} ?{$_.TrustAttributes -eq "FILTER_SIDS"}
+> ```
+
+All domains in current Forest
+```powershell
+Get-ForestDomain
+Get-ForestDomain -Forest eurocorp.local
+```
+
+All global catalogs for the current forest
+```powerhshell
+Get-ForestGlobalCatalog
+Get-ForestGlobalCatalog -Forest eurocorp.local
+```
+
+Enumerate trusts for a trusting / external forest
+```powershell
+Get-ForestDomain -Forest eurocorp.local | %{Get-DomainTrust -Domain $_.Name}
+```
+
+Map trusts of a forest
+```powershell
+Get-ForestTrust
+Get-ForestTrust -Forest eurocorp.local
+```
+
 ### Theory
 
 > [!NOTE] **NOTE**
