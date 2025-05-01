@@ -1,4 +1,5 @@
 ### Find local admin access on machines for current user
+![[Pasted image 20250501061333.png]]
 ```powershell
 Find-LocalAdminAccess -Verbose
 ```
