@@ -18,10 +18,12 @@ Get-Forest -Forest eurocorp.local
 > Get-DomainTrust | ?{$_.TrustAttributes -eq "FILTER_SIDS"}
 > ```
 
-All domains in current Forest
+
+All domain trusts in current Forest - **THIS ALSO WORKS FOR EXTERNAL FORESTS**
 ```powershell
 Get-ForestDomain
 Get-ForestDomain -Forest eurocorp.local
+Get-ForestDomain -Forest eurocorp.local | %{Get-DomainTrust -Domain $_.Name}
 ```
 
 All global catalogs for the current forest
@@ -30,7 +32,7 @@ Get-ForestGlobalCatalog
 Get-ForestGlobalCatalog -Forest eurocorp.local
 ```
 
-Enumerate trusts for a trusting / external forest
+Enumerate trusts for a trusting / external forest. **If you get an error for enumerating a trust that an external forest has that means its `non transitive` and you need eurocorp credentials for it**
 ```powershell
 Get-ForestDomain -Forest eurocorp.local | %{Get-DomainTrust -Domain $_.Name}
 ```
@@ -39,6 +41,30 @@ Map trusts of a forest
 ```powershell
 Get-ForestTrust
 Get-ForestTrust -Forest eurocorp.local
+```
+
+### ActiveDirectory Module - OPSEC
+```powershell
+Get-ADTrust
+Get-ADTrust -Identity us.dollarcorp.moneycorp.local
+```
+
+```powershell
+Get-ADForest
+Get-ADForest -Identity eurocorp.local
+```
+
+```powershell
+(Get-ADForest).Domains
+```
+
+```powershell
+Get-ADForest | select -ExpandProperty GlobalCatalogs
+```
+
+```powershell
+Get-ADTrust -Filter 'msDS-TrustForestTrustInfo -ne
+"$null"'
 ```
 
 ### Theory
