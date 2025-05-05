@@ -13,6 +13,10 @@ Get-ModifiableService -Verbose
 
 ### Privesc
 ```powershell
+Import-Module .\PrivEscCheck.ps1
+```
+
+```powershell
 Invoke-PrivEscCheck
 ```
 
