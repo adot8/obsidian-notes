@@ -15,8 +15,6 @@ If you you see a user like `builduser` in the user list try the following creden
     builduser:builduser
     builduser:resudilub
     builduser:resudilub!
-
-
 ```
 
 With Jenkins Admin creds you can go to `/script` and run the following
