@@ -18,6 +18,7 @@ You must have administrator access to list sessions - netexec equivalent
 Find-DomainUserLocation
 
 winrs -r:dcorp-mgmt cmd /c "set computername && set username"
+$null | winrs -r:dcorp-mgmt "powershell /c Get-Process -IncludeUserName"
 echo F | xcopy C:\Users\Public\Loader.exe \\dcorp-mgmt\C$\Users\Public\Loader.exe
 ```
 
