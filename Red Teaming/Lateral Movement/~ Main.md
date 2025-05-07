@@ -42,7 +42,7 @@ C:\AD\Tools\Loader.exe -path C:\AD\Tools\Rubeus.exe -args asktgt /user:svcadmin 
 
 This will create a logon type 9 so the new credentials will only be used when accessing domain resources
 
-### Lateral 2
+### Lateral 2 
 ```powershell
 
 ```
