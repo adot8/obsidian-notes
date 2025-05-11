@@ -74,6 +74,9 @@ where.exe /R C:\ *.config
 ```
 1.  Snoop on processes
 ```powershell
+Get-Process -IncludeUserName 
+Get-Process | ? {$_.SI -eq (Get-Process -PID $PID).SessionId}
+
 Import-Module .\Watch-Command.ps1
 Get-Process | watch-command -diff -cont -verbose -property "Image Name"
 ```
