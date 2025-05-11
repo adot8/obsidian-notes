@@ -1,3 +1,7 @@
+
+> [!NOTE] **OPSEC NOTICE**
+> In golden ticket, there is no corresponding TGT request for TGS/Service ticket requests as the TGT is forged. This can easily be caught by a SIEM or blue teamers
+
 A golden ticket is signed and encrypted by the hash of krbtgt account
 which makes it a valid TGT ticket. The krbtgt user hash could be used to impersonate any user with any privileges from even a non-domain machine.
 
