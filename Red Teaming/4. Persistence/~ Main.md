@@ -18,6 +18,8 @@ Set-Item WSMan:\localhost\Client\TrustedHosts 172.16.2.1
 Enter-PSSession -ComputerName 172.16.2.1 -Authentication NegotiateWithImplicitCredential
 ```
 
+Now run a DCSync attack on the DC itself because MDI dont care lol
+
 ```
 a102ad5753f4c441e3af31c97fad86fd
 ```
