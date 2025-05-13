@@ -19,7 +19,18 @@ ACLs can be modified to allow non-admin users access to securable objects. Using
 ```powershell
 . .\RACE-master\Race.ps1
 ```
+##### WinRM
+On a local machine
+```powershell
+Set-RemotePSRemoting -SamAccountName student1 -Verbose
+```
 
+On a remote machine for user `student548` **without** explicit credentials
+```powershell
+Set-RemotePSRemoting -SamAccountName student1 -ComputerName dcorp-dc -Verbose
+```
+
+##### WMI
 On a local machine
 ```powershell
 Set-RemoteWMI -SamAccountName student1 -Verbose
