@@ -49,16 +49,16 @@ Protocol Transition is used when a user authenticates to a web service without u
 > Essentially goes like this:
 > **Joe**: *Logs into web server with regular login page (Not kerberos compatible)*
 > 
-> **Web server**: Hey DC, I got this user signed in can I get a TGT for Joe? I only got his username lol
+> **Web server (websvc)**: Hey DC, I got this user signed in can I get a TGT for Joe? I only got his username lol
 > 
 > **KDC**: I see you got the `TRUSTED_TO_AUTHENTICATE_FOR_DELEGATION` attribute type shit and Joe not blocked for delegation or nothin... Heres a forwardable ticket (`S4U2Self`) for Joes account type shit
 > 
-> **Web server:** Aight bet bet, lemme through this forwardable TGT back at you and get a mf TGS for `CIFS/dcorp-mssql.dollarcorp.moneycorp.local`
+> **Web server (websvc):** Aight bet bet, lemme through this forwardable TGT back at you and get a mf TGS for `CIFS/dcorp-mssql.dollarcorp.moneycorp.local`
 > 
-> **KDC:** Shiiiii... lemme check if dat service (`CIFS/dcorp-mssql.dollarcorp.moneycorp.local`) be in yo `msDS-AllowedToDelegateTo` list.... YOU GOOD KING YOU GOOD
+> **KDC:** Shiiiii... lemme check if dat service (`CIFS/dcorp-mssql.dollarcorp.moneycorp.local`) be in yo `msDS-AllowedToDelegateTo` list websvc.... YOU GOOD KING YOU GOOD
 > **KDC**: *Returns a TGS to the webserver for `dcorp-mssql`*
 > 
-> **Web server:** *Authenticates to `dcorp-mssql` as Joe using the supplied TGS *
+> **Web server (websvc):** *Authenticates to `dcorp-mssql` as Joe using the supplied TGS *
 > 
 
 
