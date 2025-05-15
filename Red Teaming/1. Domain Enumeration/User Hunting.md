@@ -13,7 +13,9 @@ We can also use the scripts `Find-PSRemotingLocalAdminAccess.ps1` and `Find-WMIL
 
 ```powershell
 . .\Find-PSRemotingLocalAdminAccess.ps1
+
 Find-PSRemotingLocalAdminAccess
+Find-PSRemotingLocalAdminAccess -domain dollarcorp.moneycorp.local
 ```
 
 ### Find domain admin sessions ([SessionHunter](https://github.com/Leo4j/Invoke-SessionHunter))
