@@ -23,5 +23,9 @@ dir \\dcorp-mssql.dollarcorp.moneycorp.local\c$
 
  
 > [!NOTE] **NOTE**
-> You can cr
+> You can edit what services the machine/user account can access if you have `GenericAll/Write` rights to the first hop
+> 
+> **THE SPN VALUE IN THE TGS IS CLEAR-TEXT WHICH MEANS THAT WE CAN CHANGE THE ALLOWED `CIFS/dcorp-mssql.dollarcorp.moneycorp.local` TO `HTTP/dcorp-mssql.dollarcorp.moneycorp.local` IF WE WANTED TO** 
+
+
 

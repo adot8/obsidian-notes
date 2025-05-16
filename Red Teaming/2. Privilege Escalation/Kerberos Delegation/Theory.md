@@ -65,3 +65,5 @@ Protocol Transition is used when a user authenticates to a web service without u
 ![[Pasted image 20250515062107.png]]
 
 To abuse constrained delegation in above scenario, we need to have access to the websvc account. If we have access to that account, it is possible to access the services listed in `msDS-AllowedToDelegateTo` of the websvc account as **ANY user**
+
+**THE SPN VALUE IN THE TGS IS CLEAR-TEXT WHICH MEANS THAT WE CAN CHANGE THE ALLOWED `CIFS/dcorp-mssql.dollarcorp.moneycorp.local` TO `HTTP/dcorp-mssql.dollarcorp.moneycorp.local` IF WE WANTED TO** 
