@@ -1,1 +1,3 @@
-### 
+This moves delegation authority **from the Domain Admins** to the **resource/service administrator**.
+
+Instead of SPNs on `msDs-AllowedToDelegatTo` on the **FIRST HOP**  front-end service like web service, access in this case is controlled by security descriptor of `msDS-AllowedToActOnBehalfOfOtherIdentity` (visible as `PrincipalsAllowedToDelegateToAccount`) on the **SECOND HOP** - resource/service like SQL Server service
