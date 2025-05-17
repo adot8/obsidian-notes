@@ -17,3 +17,5 @@ Find-PSRemotingLocalAdminAccess
 ```powershell
 .\Loader.exe -Path SharpHound.exe -args --collectionmethods Group,GPOLocalGroup,Session,Trusts,ACL,Container,ObjectProps,SPNTargets,CertServices --excludedcs --zipfilename shout
 ```
+
+**REVIEW WHAT PRIVILEGES A USER HAS AFTER COMPROMISE**

