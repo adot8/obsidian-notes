@@ -16,6 +16,6 @@
 
 1. Obtain **Trust Key** (rc4 is used by default)
 2. Forge inter-realm TGT to say that the users `sIDHistory` is set to `509` (Enterprise Admins group) - This gives us Enterprise Admin privileges
-3. The parent/trusted DC only validates if it's encrypted with the **Trust Key**
+3. The parent/trusted DC only validates if it's encrypted with the **Trust Key** and not the contents
 
 ![[Pasted image 20250517111125.png]]
