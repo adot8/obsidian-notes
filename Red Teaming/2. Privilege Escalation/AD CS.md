@@ -12,3 +12,5 @@ Active Directory Certificate Services (AD CS) enables use of Public Key Infrastr
 | CSR                  | Certificate Signing Request made by a client to the CA to request a certificate.                                                               |
 | Certificate Template | Defines settings for a certificate. Contains information like enrollment permissions, EKUs, expiry, etc.                                       |
 | EKU OIDs             | Extended Key Usages Object Identifiers. These dictate the use of a certificate template (Client authentication, Smart Card Logon, SubCA, etc.) |
+#### In a nutshell
+![[Pasted image 20250520192006.png]]
