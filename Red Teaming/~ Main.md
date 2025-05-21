@@ -1,2 +1,0 @@
-
-Hunt for exception directories
