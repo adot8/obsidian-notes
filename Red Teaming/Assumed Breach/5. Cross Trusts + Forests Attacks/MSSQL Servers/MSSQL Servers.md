@@ -20,6 +20,8 @@ Get-SQLInstanceDomain | Get-SQLConnectionTestThreaded -Verbose
 ```powershell
 Get-SQLInstanceDomain | Get-SQLServerInfo -Verbose
 ```
+
+>**Note:** Review `ServiceName`, `AuthenticationMode`, `IsSysadmin` and `ActiveSessions`
 #### Database Links
 A database link allows a SQL Server to access external data sources like other SQL Servers and OLE DB data sources. In case of database links between SQL servers, that is, linked SQL servers it is possible to execute stored procedures
 
