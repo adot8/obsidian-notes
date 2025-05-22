@@ -85,3 +85,36 @@ or MDE
 C:\AD\Tools\DefenderCheck> .\DefenderCheck.exe C:\AD\Tools\FindLSASSPID.exe
 [+] No threat found in submitted file!
 ```
+
+#### Tools Transfer
+Downloading tools over HTTP(S) can be risky as it increases the risk score and chances of detection by the EDR.
+
+However, if binaries that are intended for downloads—such as Edge (`msedge.exe`)—are available on the target, we can perform HTTP(S) downloads without any detections.
+
+Another **OPSEC-friendly** method is to share files over SMB. Execution can be performed directly from a readable share and is less risky than standard download-and-execute actions.
+
+#### Breaking Detection Chains
+ Most EDRs correlate activity within a specific time interval, after which it is reset. This interval varies between different EDRs.
+
+- To bypass these correlation-based detections, we can:
+  - Wait for a short time interval (~10 minutes) before performing the next query.
+  - Append non-suspicious queries between subsequent suspicious ones to break detection chains.
+
+#### ASR Rules Bypass
+ASR rules are easy to understand.  
+For example, the `GetMonitoredLocations` function displays processes that are monitored, and remote execution using them will result in a detection.  
+*[Check the slide notes]*
+
+OS trusted methods like WMI and Psremoting or administrative tools like PSExec are detected by MDE.
+
+To avoid detections based on a specific ASR rule such as "Block process creations originating from PSExec and WMI commands":
+
+- We can use alternatives such as WinRM access (`winrs`) instead of PSExec/WMI execution  
+  *(This is undetected by MDE but detected by MDI)*.
+- Use the `GetCommandLineExclusions` function which displays a list of command line exclusions  
+  *(e.g., `".:\\windows\\\\ccm\\\\systemtemp\\\\.+"`)* — if included in the command line, it will bypass this rule and detection.
+
+Example:
+```bash
+C:\AD\Tools\WSManWinRM.exe eu-sql.eu.eurocorp.local "cmd /c notepad.exe C:\Windows\ccm\systemtemp\"
+```
