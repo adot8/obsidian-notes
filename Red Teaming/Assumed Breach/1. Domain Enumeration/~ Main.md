@@ -1,5 +1,5 @@
-```bash
-xfreerdp3 /u:student548 /p:cAyF6wTLSydnL2M7 /v:172.16.100.48 /dynamic-resolution /drive:Tools,/home/adot/certifications/crtp/lab
+```powershell
+xfreerdp3 /u:student548 /p:cAyF6wTLSydnL2M7 /v:172.16.100.48 /dynamic-resolution /drive:AD,/home/adot/certifications/crtp/lab
 ```
 
 ```powershell
@@ -17,15 +17,11 @@ copy A:\tools\* .
 ```
 
 ```powershell
-Import-Module A:\tools\PowerView.ps1, A:\tools\PowerHuntShares.psm1, A:\tools\Find-PSRemotingLocalAdminAccess.ps1, A:\tools\Invoke-SessionHunter.ps1, A:\tools\PowerUp.ps1
+Import-Module .\PowerView.ps1, .\PowerHuntShares.psm1, .\Find-PSRemotingLocalAdminAccess.ps1, .\PowerUp.ps1
 ```
 
 ```powershell
 Find-PSRemotingLocalAdminAccess
-```
-
-```powershell
-A:\tools\Loader.exe -Path A:\tools\SharpHound.exe -args --collectionmethods Group,GPOLocalGroup,Session,Trusts,ACL,Container,ObjectProps,SPNTargets,CertServices --excludedcs --zipfilename shout
 ```
 
 **REVIEW WHAT PRIVILEGES A USER HAS AFTER COMPROMISE**
