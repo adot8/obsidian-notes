@@ -1,4 +1,3 @@
-
 ### Unconstrained Delegation Coercion
 Coarse/Force machine accounts to connect to a machine and capture their TGT
 

