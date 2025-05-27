@@ -114,7 +114,7 @@ Use [PowerHuntShares](https://github.com/NetSPI/PowerHuntShares) It can discover
 computers, identities etc. and generates a nice HTML report.
 
 ```powershell
-Invoke-HuntSMBShares -NoPing -OutputDirectory C:\AD\Tools -HostList C:\AD\Tools\servers.txt
+Invoke-HuntSMBShares -NoPing -OutputDirectory C:\Users\Public -HostList C:\Users\Public\servers.txt
 ```
 
 The `servers.txt` in the above command does not include the **domain controller** for better **OPSEC**. DO NOT SCAN MORE THAN 15 MACHINES AT A TIME.

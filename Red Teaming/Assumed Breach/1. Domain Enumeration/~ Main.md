@@ -24,4 +24,19 @@ Import-Module .\PowerView.ps1, .\PowerHuntShares.psm1, .\Find-PSRemotingLocalAdm
 Find-PSRemotingLocalAdminAccess
 ```
 
+Create a servers.txt file
+```powershell
+Get-DomainComputer | select cn,logoncount
+```
+
+Find DA sessions
+```powershell
+
+```
+
+Find shares
+```powershell
+Invoke-HuntSMBShares -NoPing -OutputDirectory C:\Users\Public -HostList C:\Users\Public\servers.txt
+```
+
 **REVIEW WHAT PRIVILEGES A USER HAS AFTER COMPROMISE**
