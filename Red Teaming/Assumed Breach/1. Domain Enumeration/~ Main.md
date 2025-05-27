@@ -17,7 +17,7 @@ copy A:\tools\* .
 ```
 
 ```powershell
-Import-Module .\PowerView.ps1, .\PowerHuntShares.psm1, .\Find-PSRemotingLocalAdminAccess.ps1, .\PowerUp.ps1
+Import-Module .\PowerView.ps1, .\PowerHuntShares.psm1, .\Find-PSRemotingLocalAdminAccess.ps1, .\PowerUp.ps1, .\Invoke-SessionHunter.ps1
 ```
 
 ```powershell
@@ -27,11 +27,13 @@ Find-PSRemotingLocalAdminAccess
 Create a servers.txt file
 ```powershell
 Get-DomainComputer | select cn,logoncount
+
+Get-DomainComputer | select cn,logoncount
 ```
 
 Find DA sessions
 ```powershell
-Invoke-SessionHunter -NoPortScan -Targets C:\AD\Tools\servers.txt
+.\Invoke-SessionHunter -NoPortScan -Targets C:\Users\Public\servers.txt
 ```
 
 Find shares

