@@ -31,7 +31,7 @@ Get-DomainComputer | select cn,logoncount
 
 Find DA sessions
 ```powershell
-
+Invoke-SessionHunter -NoPortScan -Targets C:\AD\Tools\servers.txt
 ```
 
 Find shares
