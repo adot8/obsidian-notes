@@ -26,7 +26,6 @@ Forge an inter-realm TGT
 | silver              | Name of the module                                            |
 | /rc4                | NTLM hash of the trust key                                    |
 | /sid                | SID of the current domain                                     |
-| /sids               | SID of the **enterprise admins** group of the external Forest |
 | /ldap               | Retrieve PAC information from the current domain DC           |
 | /user:Administrator | Username for which the TGT is generated                       |
 | /nowrap             | No newlines in the output                                     |
