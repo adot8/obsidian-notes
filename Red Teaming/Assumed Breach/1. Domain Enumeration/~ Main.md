@@ -26,9 +26,7 @@ Find-PSRemotingLocalAdminAccess
 
 Create a servers.txt file
 ```powershell
-Get-DomainComputer | select cn,logoncount
-
-Get-DomainComputer | select cn,
+Get-DomainComputer | select cn
 ```
 
 Find DA sessions
