@@ -39,3 +39,7 @@ Access Parent Domain DC
 ```powershell
 winrs -r:mcorp-dc.MONEYCORP.LOCAL cmd
 ```
+
+```powershell
+
+```
