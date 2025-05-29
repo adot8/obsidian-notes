@@ -68,5 +68,7 @@ Get-DomainGPO  -Identity "DevOps Policy"
 
 Wait for Group Policy to refresh and test new privileges
 ```powershell
+gpupdate /force
+
 winrs -r:dcorp-ci cmd /c "set computername && set username"
 ```
