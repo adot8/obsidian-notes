@@ -4,6 +4,10 @@
 > 
 > ```powershell
 >  Find-InterestingDomainACL | ?{$_.identityreferencename -match 'ciadmin'}
+>  ```
+>  
+>  **Also search for Unconstrained and Constrained delegation abuse**
+
 
 ```powershell
 ls env

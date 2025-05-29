@@ -88,5 +88,9 @@ Unconstrained delegation?
 Get-DomainComputer -UnConstrained
 ```
 
-
+Constrained delegation?
+```powershell
+Get-DomainUser -TrustedToAuth
+Get-DomainComputer -TrustedToAuth
+```
 **REVIEW WHAT PRIVILEGES A USER HAS AFTER COMPROMISE**

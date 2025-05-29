@@ -35,3 +35,9 @@ Unconstrained delegation?
 ```powershell
 Get-DomainComputer -UnConstrained
 ```
+
+Constrained delegation?
+```powershell
+Get-DomainUser -TrustedToAuth
+Get-DomainComputer -TrustedToAuth
+```
