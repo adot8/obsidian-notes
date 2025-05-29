@@ -17,7 +17,7 @@ copy A:\tools\* .
 ```
 
 ```powershell
-Import-Module .\PowerView.ps1, .\PowerHuntShares.psm1, .\Find-PSRemotingLocalAdminAccess.ps1, .\PowerUp.ps1, .\Invoke-SessionHunter.ps1
+Import-Module .\PowerView.ps1, .\PowerHuntShares\PowerHuntShares.psm1, .\Find-PSRemotingLocalAdminAccess.ps1, .\PowerUp.ps1, .\Invoke-SessionHunter.ps1
 ```
 
 Basic enumeration
