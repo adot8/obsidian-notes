@@ -83,4 +83,5 @@ Invoke-HuntSMBShares -NoPing -OutputDirectory C:\Users\Public -HostList C:\Users
 Invoke-ShareFinder -Verbose
 ```
 
+
 **REVIEW WHAT PRIVILEGES A USER HAS AFTER COMPROMISE**
