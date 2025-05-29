@@ -20,6 +20,36 @@ copy A:\tools\* .
 Import-Module .\PowerView.ps1, .\PowerHuntShares.psm1, .\Find-PSRemotingLocalAdminAccess.ps1, .\PowerUp.ps1, .\Invoke-SessionHunter.ps1
 ```
 
+Basic enumeration
+```powershell
+Get-DomainUser | select cn
+
+Get-DomainComputer | select dnshostname
+
+Get-DomainGroupMember -Identity "Domain Admins" -recurse | select membername
+Get-DomainGroupMember -Identity "Enterprise Admins" -recurse -domain moneycorp.local | select membername
+```
+
+ACLs - Perform on current user + groups user is in
+```powershell
+Get-DomainObjectAcl -SamAccountName student1 -ResolveGUIDs
+
+Find-InterestingDomainAcl -ResolveGUIDs | ?{$_.IdentityReferenceName -match "student548"}
+Find-InterestingDomainAcl -ResolveGUIDs | ?{$_.IdentityReferenceName -match "RDP Users"}
+
+Get-DomainObjectAcl -SearchBase "LDAP://CN=RDP Users,CN=Users,DC=dollarcorp,DC=moneycorp,DC=local" -ResolveGUIDs -Verbose
+```
+
+OUs and GPOs
+```powershell
+Get-DomainOU -properties name
+(Get-DomainOU -identity Applocked).distinguishedname | %{Get-DomainComputer -SearchBase $_} | select name
+
+Get-DomainGPO | select displayname
+Get-DomainGPO -ComputerIdentity dcorp-std548
+```
+
+Local Admin access?
 ```powershell
 Find-PSRemotingLocalAdminAccess
 ```
@@ -31,12 +61,14 @@ Get-DomainComputer | select cn
 
 Find DA sessions
 ```powershell
-.\Invoke-SessionHunter -NoPortScan -Targets C:\Users\Public\servers.txt
+Invoke-SessionHunter -NoPortScan -Targets C:\Users\Public\servers.txt
 ```
 
 Find shares
 ```powershell
 Invoke-HuntSMBShares -NoPing -OutputDirectory C:\Users\Public -HostList C:\Users\Public\servers.txt
+
+Invoke-ShareFinder -Verbose
 ```
 
 **REVIEW WHAT PRIVILEGES A USER HAS AFTER COMPROMISE**
