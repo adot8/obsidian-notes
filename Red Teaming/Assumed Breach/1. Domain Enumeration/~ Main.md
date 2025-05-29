@@ -49,6 +49,12 @@ Get-DomainGPO | select displayname
 Get-DomainGPO -ComputerIdentity dcorp-std548
 ```
 
+Domain and Forest trusts
+```powershell
+Get-DomainTrust
+Get-ForestDomain -Forest <forest>
+```
+
 Local Admin access?
 ```powershell
 Find-PSRemotingLocalAdminAccess
