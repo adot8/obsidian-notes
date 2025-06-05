@@ -37,9 +37,9 @@ Get-DomainGroupMember -Identity "Enterprise Admins" -recurse -domain finance.cor
 
 ACLs - Perform on current user + groups user is in
 ```powershell
-Get-DomainObjectAcl -SamAccountName student1 -ResolveGUIDs
+Get-DomainObjectAcl -SamAccountName studentuser -ResolveGUIDs
 
-Find-InterestingDomainAcl -ResolveGUIDs | ?{$_.IdentityReferenceName -match "student548"}
+Find-InterestingDomainAcl -ResolveGUIDs | ?{$_.IdentityReferenceName -match "studentuser"}
 Find-InterestingDomainAcl -ResolveGUIDs | ?{$_.IdentityReferenceName -match "RDP Users"}
 
 Get-DomainObjectAcl -SearchBase "LDAP://CN=RDP Users,CN=Users,DC=dollarcorp,DC=moneycorp,DC=local" -ResolveGUIDs -Verbose
@@ -51,7 +51,7 @@ Get-DomainOU -properties name
 (Get-DomainOU -identity Applocked).distinguishedname | %{Get-DomainComputer -SearchBase $_} | select name
 
 Get-DomainGPO | select displayname
-Get-DomainGPO -ComputerIdentity dcorp-std548
+Get-DomainGPO -ComputerIdentity STUDVM
 ```
 
 Domain and Forest trusts
