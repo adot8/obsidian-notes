@@ -39,7 +39,7 @@ ACLs - Perform on current user + groups user is in
 ```powershell
 Get-DomainObjectAcl -SamAccountName studentuser -ResolveGUIDs
 
-Find-InterestingDomainAcl -ResolveGUIDs | ?{$_.IdentityReferenceName -match "studentuser"}
+Find-InterestingDomainAcl -ResolveGUIDs | ?{$_.IdentityReferenceName -match "TECHSERVICE"}
 Find-InterestingDomainAcl -ResolveGUIDs | ?{$_.IdentityReferenceName -match "RDP Users"}
 
 Get-DomainObjectAcl -SearchBase "LDAP://CN=RDP Users,CN=Users,DC=dollarcorp,DC=moneycorp,DC=local" -ResolveGUIDs -Verbose

