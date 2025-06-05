@@ -33,7 +33,7 @@ A database link allows a SQL Server to access external data sources like other S
 [^1]![[Pasted image 20250521200749.png]]
 ###### Search for Database Links
 ```powershell
-Get-SQLServerLink -Instance dcorp-mssql -Verbose
+Get-SQLServerLink -Instance dbserver31.tech.finance.corp -Verbose
 ```
 
 ![[Pasted image 20250521201158.png]]
