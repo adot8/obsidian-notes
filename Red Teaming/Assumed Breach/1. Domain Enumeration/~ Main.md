@@ -1,9 +1,9 @@
 ```powershell
-xfreerdp3 /u:student548 /p:cAyF6wTLSydnL2M7 /v:172.16.100.48 /dynamic-resolution /drive:AD,/home/adot/certifications/crtp/lab
+xfreerdp3 /u:studentuser /p:7X9Ymp2gheTEi4b0wUWRk /v:172.16.100.1 /dynamic-resolution /drive:AD,/home/adot/certifications/crtp/exam
 ```
 
 ```powershell
-net use A: \\TSCLIENT\Tools
+net use A: \\TSCLIENT\AD
 
 A:\tools\InviShell\RunWithRegistryNonAdmin.bat
 
@@ -24,6 +24,9 @@ Import-Module .\PowerView.ps1, .\Find-PSRemotingLocalAdminAccess.ps1, .\PowerUp.
 
 Basic enumeration
 ```powershell
+([System.DirectoryServices.ActiveDirectory.Domain]::GetCurrentDomain()).Name
+$env:userdomain
+
 Get-DomainUser | select cn
 
 Get-DomainComputer | select dnshostname
