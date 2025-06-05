@@ -32,7 +32,7 @@ Get-DomainUser | select cn
 Get-DomainComputer | select dnshostname
 
 Get-DomainGroupMember -Identity "Domain Admins" -recurse | select membername
-Get-DomainGroupMember -Identity "Enterprise Admins" -recurse -domain moneycorp.local | select membername
+Get-DomainGroupMember -Identity "Enterprise Admins" -recurse -domain finance.corp | select membername
 ```
 
 ACLs - Perform on current user + groups user is in
