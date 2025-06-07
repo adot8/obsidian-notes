@@ -7,9 +7,9 @@ ffuf -H 'Host: FUZZ.planning.htb' -w ~/opt/wordlists/subdomains_custom.txt:FUZZ 
 ```
 ### Directory Fuzzing
 ```shell
-ffuf  -w ~/opt/wordlists/web-extensions.txt -u http://planning.htb/indexFUZZ
+ffuf  -w ~/opt/wordlists/web-extensions.txt -u http://10.10.11.58/indexFUZZ
 
-ffuf -w ~/opt/wordlists/directory-list-2.3-medium.txt -u http://planning.htb/FUZZ -e .php -t 200
+ffuf -w ~/opt/wordlists/directory-list-2.3-medium.txt -u http://10.10.11.58/FUZZ -e .php, .phps -t 200
 
 ffuf -w ~/opt/wordlists/raft-medium-directories.txt -u http://planning.htb/FUZZ -e .php,.phps
 ```
