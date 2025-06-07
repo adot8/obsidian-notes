@@ -5,6 +5,8 @@ grep bash /etc/passwd
 
 id
 
+env                            <--- CHECK FOR A WONKY SHELL
+
 find / -group <groups> 2>/dev/null
 
 history
