@@ -55,5 +55,16 @@
 		- Once the bucket hits a certain **size** or reaches a certain **timed** life span, it will then be turned/moved into a `Cold Bucket`
 	- **Cold Bucket** (Cold Path)
 		- This is the final destination for the data and can only be stored for certain amount of time that is based off of how much storage you have
+		- After the time period, the data can either be deleted or **archived** and placed into a `Frozen Bucket`
+	- **Frozen and Thawed Buckets** (Thawed Path)
+		- These are where logs are archived or "frozen"
+		- When the data needs to be accessed it gets moved to a `Thawed Bucket` in the `Thawed Path`
 
 > **Note:** Data can only be written into the `Hot Bucket` but data can be searched from all three (Hot, Warm, Cold) of the buckets
+
+##### Index Cluster
+- `Index clusters` are used in the case that one of the `indexers` fails or dies
+- This groups indexers together and replicates the data across all of the indexers to provide fault tolerance
+
+> **Note**: The `index cluster` can be managed using the **Cluster Manager**. This coordinates the replication activities and manages the cluster
+
