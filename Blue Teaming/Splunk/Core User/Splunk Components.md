@@ -69,10 +69,12 @@
 - The `index cluster` can be managed using the **Cluster Manager**. This coordinates the replication activities and manages the cluster
 
 > [!NOTE] Practice Questions
-> **Which of the following Splunk components typically resides on machines where data originates?**
-> `Forwarder`
-> **Which of the following Splunk components can perform log filtering/parsing?**
-> `Heavy Forwarder`
+> **Which Splunk component transforms raw data into events and distributes the results to an index?**
+> `Indexer`
+> **Which Splunk component is primarily responsible for saving data?**
+> `Indexer`
 
 
 ![[Pasted image 20250616102407.png]]
+
+### Search Heads
