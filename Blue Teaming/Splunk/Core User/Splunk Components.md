@@ -78,3 +78,4 @@
 ![[Pasted image 20250616102407.png]]
 
 ### Search Heads
+- This is the component that users connect to to actually **search** for the data saved into Splunk
