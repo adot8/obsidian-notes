@@ -66,7 +66,7 @@
 - `Index clusters` are used in the case that one of the `indexers` fails or dies
 - This groups indexers together and replicates the data across all of the indexers to provide fault tolerance
 
-- The `index cluster` can be managed using the **Cluster Manager**. This coordinates the replication activities and manages the cluster
+- The `index cluster` can be managed using the **Cluster Manager** (which is a separate Splunk component). This coordinates the replication activities and manages the cluster
 
 > [!NOTE] Practice Questions
 > **Which Splunk component transforms raw data into events and distributes the results to an index?**
@@ -80,4 +80,23 @@
 ### Search Heads
 - This is the component that users connect to to actually **search** for the data saved into Splunk
 - The `Search Head` sends the the search requests to the `indexers` and gives the results back to the user
-- `Search Heads` can distribute search requests to multiple `indexers` and merge the results back to the user
+- `Search Heads` can distribute search requests to multiple `indexers` (in a cluster or not) and merge the results back to the user
+
+##### Search Head Cluster
+- Just like `Index clusters`, `Search Head Clusters` are used provide fault tolerance if one of the `Search Heads` goes down.
+- All `Search Heads` in the cluster will have identical configurations
+- The search requests from users are balanced across the group
+##### Cluster Captain
+- This is managed by a `Cluster Captain` which is just one of the `Search Heads` that has been designated to be the "Captain"
+	- It coordinated job scheduling among SH members
+	- It coordinates replication activities
+##### Search Head Cluster Deployer
+- Allows for the installation of apps and other configurations to SH cluster members
+
+> [!NOTE] Practice Questions
+> **Which component of Splunk lets us write SPL queries and find required data?**
+> `Search Heads`
+
+![[Pasted image 20250616104649.png]]
+### Deployment Server
+
