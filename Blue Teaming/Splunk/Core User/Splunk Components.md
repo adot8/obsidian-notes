@@ -79,3 +79,5 @@
 
 ### Search Heads
 - This is the component that users connect to to actually **search** for the data saved into Splunk
+- The `Search Head` sends the the search requests to the `indexers` and gives the results back to the user
+- `Search Heads` can distribute search requests to multiple `indexers` and merge the results back to the user
