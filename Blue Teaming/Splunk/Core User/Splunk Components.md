@@ -45,11 +45,15 @@
 
 ##### Buckets
 - These `indexes` are stored into repositories called `Buckets`which holds the files with the indexed data 
-- These `Buckets` are found in the Home Path
-- There are two types of buckets:
-	- **Hot Bucket**
+- There are three types of buckets:
+	- **Hot Bucket** (Home Path)
 		- Used as the bucket you are **ACTIVELY** writing data into as it's being indexed
 		-  There are time and size constraints that need to be configured on it
 		- Once the bucket hits a certain **size** or reaches a certain **timed** life span, it will then be turned/moved into a `Warm Bucket`
-	- **Warm Bucket**
-		- 
+	- **Warm Bucket** (Home Path)
+		- This also has time and size constraints that need to be configured on it
+		- Once the bucket hits a certain **size** or reaches a certain **timed** life span, it will then be turned/moved into a `Cold Bucket`
+	- **Cold Bucket** (Cold Path)
+		- This is the final destination for the data and can only be stored for certain amount of time that is based off of how much storage you have
+
+> **Note:** Data can only be written into the `Hot Bucket` but data can be searched from all three (Hot, Warm, Cold) of the buckets
