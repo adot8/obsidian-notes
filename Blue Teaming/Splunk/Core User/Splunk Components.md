@@ -41,4 +41,4 @@
 	- `main`
 	- `_internal` (these are meant for Splunks own internal logs)
 	- Custom indexes
-- These `indexes` are stored into repositories called `Buckets` which holds the files with the indexed data 
+- These `indexes` are stored into repositories called `Buckets`which holds the files with the indexed data 
