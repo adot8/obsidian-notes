@@ -105,3 +105,5 @@
 
 ##### Forwarder Management
 - This is used to manage the `Deployment Server`
+- It is the `Deployment Server`'s GUI which is accessible within Splunks Web interface
+- It provides a way to configure the deployment server and moinitor updates
