@@ -36,9 +36,18 @@
 	- For example it can scrub the `sourcetype` of the data to distinguish what kind of data it is
 	- It can also assign timestamps to the logs as well
 
+##### Indexes
 - After the `Indexer` processes the data it then writes it to **disk** into small repositories called `indexes`
 - Some examples of `indexes` on Disk include:
 	- `main`
 	- `_internal` (these are meant for Splunks own internal logs)
 	- Custom indexes
+
+##### Buckets
 - These `indexes` are stored into repositories called `Buckets`which holds the files with the indexed data 
+- These `Buckets` are found in the Home Path
+- There are two types of buckets
+
+| Hot Bucket                                                                      | Warm Bucket |
+| ------------------------------------------------------------------------------- | ----------- |
+| Used as the bucket you are **ACTIVELY** writing data into as it's being indexed |             |
