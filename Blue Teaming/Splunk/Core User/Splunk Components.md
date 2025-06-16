@@ -107,3 +107,15 @@
 - This is used to manage the `Deployment Server`
 - It is the `Deployment Server`'s GUI which is accessible within Splunks Web interface
 - It provides a way to configure the deployment server and moinitor updates
+
+![[Pasted image 20250616110613.png]]
+### License Manager
+
+Splunk Licensening provides the following:
+
+| License Type                         | Description                                              |
+| ------------------------------------ | -------------------------------------------------------- |
+| Volume Based License                 | Allowed to ingest/index a certain amount of data per day |
+| Infrastructure Based Licensed        | Resource (vCPU) usage across your deployments            |
+| Access to Splunk Enterprise featires |                                                          |
+|                                      |                                                          |
