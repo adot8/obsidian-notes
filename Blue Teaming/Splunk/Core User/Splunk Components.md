@@ -46,8 +46,8 @@
 ##### Buckets
 - These `indexes` are stored into repositories called `Buckets`which holds the files with the indexed data 
 - These `Buckets` are found in the Home Path
-- There are two types of buckets
-
-| Hot Bucket                                                                      | Warm Bucket |
-| ------------------------------------------------------------------------------- | ----------- |
-| Used as the bucket you are **ACTIVELY** writing data into as it's being indexed |             |
+- There are two types of buckets:
+	- **Hot Bucket**
+		- Used as the bucket you are **ACTIVELY** writing data into as it's being indexed
+		-  There are time and size constraints that need to be configured on it
+	- **Warm Bucket**
