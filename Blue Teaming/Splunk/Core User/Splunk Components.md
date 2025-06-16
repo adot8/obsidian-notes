@@ -50,4 +50,6 @@
 	- **Hot Bucket**
 		- Used as the bucket you are **ACTIVELY** writing data into as it's being indexed
 		-  There are time and size constraints that need to be configured on it
+		- Once the bucket hits a certain **size** or reaches a certain **timed** life span, it will then be turned/moved into a `Warm Bucket`
 	- **Warm Bucket**
+		- 
