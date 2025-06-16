@@ -99,4 +99,6 @@
 
 ![[Pasted image 20250616104649.png]]
 ### Deployment Server
-- Deployment Servers are used to distribute/install content, configuration, apps, etc. to other groups of Splunk instances (deployment clients)
+- Deployment Servers are used to distribute/install content, configuration, apps, etc. to other groups of Splunk instances (`deployment clients`)
+- The content distributed is known as `deployment apps`
+- This is mostly used to distribute apps to `Splunk Forwarder`
