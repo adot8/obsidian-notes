@@ -66,5 +66,13 @@
 - `Index clusters` are used in the case that one of the `indexers` fails or dies
 - This groups indexers together and replicates the data across all of the indexers to provide fault tolerance
 
-> **Note**: The `index cluster` can be managed using the **Cluster Manager**. This coordinates the replication activities and manages the cluster
+- The `index cluster` can be managed using the **Cluster Manager**. This coordinates the replication activities and manages the cluster
 
+> [!NOTE] Practice Questions
+> **Which of the following Splunk components typically resides on machines where data originates?**
+> `Forwarder`
+> **Which of the following Splunk components can perform log filtering/parsing?**
+> `Heavy Forwarder`
+
+
+![[Pasted image 20250616102407.png]]
