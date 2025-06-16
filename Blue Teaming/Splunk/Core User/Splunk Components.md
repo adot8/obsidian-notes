@@ -30,14 +30,15 @@
 > `Heavy Forwarder`
 
 ![[Pasted image 20250616094205.png]]
-### Indexer
+### Indexers
 - The component that receives the data from the `forwarders` and host machines is called an `Indexer`
 - The `Indexer` can parse data and scrub metadata from the data/logs. 
 	- For example it can scrub the `sourcetype` of the data to distinguish what kind of data it is
 	- It can also assign timestamps to the logs as well
 
-- After the `Indexer` processes the data it then writes it into repositories called `indexes`
+- After the `Indexer` processes the data it then writes it to **disk** into small repositories called `indexes`
 - Some examples of `indexes` on Disk include:
 	- `main`
 	- `_internal` (these are meant for Splunks own internal logs)
 	- Custom indexes
+- These `indexes` are stored into repositories called `Buckets` which holds the files with the indexed data 
