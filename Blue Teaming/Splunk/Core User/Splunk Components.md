@@ -111,7 +111,7 @@
 ![[Pasted image 20250616110613.png]]
 ### License Manager
 
-Splunk Licensening provides the following:
+Splunk Licensing provides the following:
 
 | License Type                         | Description                                              |
 | ------------------------------------ | -------------------------------------------------------- |
