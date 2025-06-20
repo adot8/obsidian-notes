@@ -6,11 +6,9 @@ export AGENT="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTM
 
 ```powershell
 alias curl="curl -A '$AGENT'"
-
 alias wget="wget -U '$AGENT'"
-
 alias nmap="nmap --script-args=\"http.useragent='$AGENT'\""
-
 alias wpscan="wpscan --ua '$AGENT'"
+alias ffuf="ffuf -H 'User-agent: $AGENT'"
 ```
 
