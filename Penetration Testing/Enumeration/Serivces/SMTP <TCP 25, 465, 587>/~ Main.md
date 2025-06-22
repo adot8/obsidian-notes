@@ -1,6 +1,6 @@
 ```bash
 nmap -p25 -sV --script smtp-open-relay 10.10.110.35
-nmap -p25 -sV --script smtp-enum-users 10.10.110.35
+nmap -p25 -sV --script smtp-enum-users 192.168.110.51
 
 telnet $ip 25
 VRFY root
@@ -15,7 +15,7 @@ use auxiliary/scanner/smtp/smtp_enum
 ```
 
 ```bash
-swaks --to bob@adot8.com --from maildmz@relia.com --header 'Subject: Bad email!' --body "I've attached the problematic mail." --server 192.168.166.189 --attach @config.Library-ms --auth-user 'john@adot8.com' --auth-password 'abc123'
+swaks --to blake@painters.htb --from riley@painters.htb --header 'Subject: Bad email!' --body "I've attached the problematic mail." --server 192.168.110.51 --attach @resume.pdf --auth-user 'riley@painters.htb' --auth-password 'P@ssw0rd'
 ```
 
 Real Life

