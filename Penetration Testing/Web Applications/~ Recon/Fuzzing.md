@@ -14,7 +14,7 @@ ffuf  -w ~/opt/web-extensions.txt -u http://adot8.com/indexFUZZ
 
 ffuf -w ~/opt/directory-list-2.3-medium.txt -u http://adot8.com/FUZZ
 ```
-## ## Parameters and Values
+## Parameters and Values
 ```shell
 ffuf -w opt/burp-parameter-names.txt -u http://academy.htb:46804/admin.php FUZZ=1 -fs x
 
