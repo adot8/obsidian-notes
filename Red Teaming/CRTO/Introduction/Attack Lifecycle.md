@@ -22,3 +22,6 @@ Other vendors attempted to come up with their own versions.  One example is Man
 - **Move Laterally** - use credentials obtained from phase 4 to compromise additional systems.
 - **Maintain Presence** - maintain highly privileged access to domains and systems.
 - **Complete Mission** - accomplish the operational objective.
+
+![[Pasted image 20250623102902.png]]
+
