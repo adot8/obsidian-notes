@@ -13,3 +13,52 @@ These listeners can also be split into two types.
 - ### Peer-to-Peer
     
     A P2P Beacon does not communicate with the team server directly, but has its traffic routed through another Beacon instead.  Multiple P2P Beacons can be chained together, but they will ultimately be linked to an egress Beacon for the traffic to reach the team server.  SMB and TCP are the P2P listeners.
+
+## HTTP listener
+
+The HTTP listener directs Beacon to communicate with the team server via HTTP GET and/or POST requests.  By default it will use GETs to fetch tasks from the team server and POSTs to send the results back.  The team server starts a built-in web server to serve the requests.
+
+![[Pasted image 20250626115325.png]]
+#### HTTP hosts
+
+These are the hosts that Beacon will send its HTTP requests to, which may be provided as IP address or domain names.  You may use IPs or domains that resolve directly back to the team server; or IP/domains that resolve to a redirector.  A redirector is an intermediatory host that sits between Beacon and a team server, and proxies traffic between the two.  This course won't cover redirectors extensively, though popular software choices to act redirectors include iptables, socat, Apache, and NGINX.
+
+#### Host rotation strategy
+
+If more than one HTTP host is provided, the rotation strategy tells Beacon how it should use each one.  These are useful for pushing back against frequency analysis techniques for finding systematic C2 traffic and providing resiliency in cases where one or more HTTP hosts are blocked.  The options are **round-robin**, **random**, **failover**, and **rotate**.
+
+- #### Round robin
+    
+    Beacon simply loops through the list top-to-bottom.  Each host is used for one request before moving to the next.
+    
+- #### Random
+    
+    Beacon randomly selects a different host for each request.
+    
+- #### Failover
+    
+    Comes in several flavours:  **failover-x** and **failover-m/h/d**.  This directs Beacon to use the same host until the selected failover condition has been met - either the number of consecutive failed attempts, x; or continuous failures over the given time period in minutes, hours, or days.  Beacon will then move onto the next host until no more remain.
+    
+- #### Rotate
+    
+    This strategy comes in a single flavour: **rotate-m/h/d**.  Similar to round-robin but each host is only used for the given time period before moving onto the next host in the list.
+
+#### Host rotation strategy
+
+If more than one HTTP host is provided, the rotation strategy tells Beacon how it should use each one.  These are useful for pushing back against frequency analysis techniques for finding systematic C2 traffic and providing resiliency in cases where one or more HTTP hosts are blocked.  The options are **round-robin**, **random**, **failover**, and **rotate**.
+
+- #### Round robin
+    
+    Beacon simply loops through the list top-to-bottom.  Each host is used for one request before moving to the next.
+    
+- #### Random
+    
+    Beacon randomly selects a different host for each request.
+    
+- #### Failover
+    
+    Comes in several flavours:  **failover-x** and **failover-m/h/d**.  This directs Beacon to use the same host until the selected failover condition has been met - either the number of consecutive failed attempts, x; or continuous failures over the given time period in minutes, hours, or days.  Beacon will then move onto the next host until no more remain.
+    
+- #### Rotate
+    
+    This strategy comes in a single flavour: **rotate-m/h/d**.  Similar to round-robin but each host is only used for the given time period before moving onto the next host in the list.
