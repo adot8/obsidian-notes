@@ -55,3 +55,27 @@ When first started, a Cobalt Strike team server will generate a new unique publi
 To keep the stagers as small as possible, they must omit steps that we may consider these days as 'good practice'. For instance, the full stageless payloads avoid the use of RWX (read, write, execute) memory because it stands out as anomalous in most Windows processes. Instead, they allocate memory as RW first, and then flips it to RX prior to execution. Payload stagers don't do this because it requires an additional API call, which requires more code. Stagers are often built in hand-optimised assembly, so every byte that can be saved, is.
 
 To give an idea on size difference - today, a Beacon stager is ~890 bytes and a full Beacon stage is ~307200 bytes.  That's ~345 times larger.
+
+### Generating payloads
+
+Beacon payloads can be generated from the Payloads menu.
+
+#### HTML application
+
+This option generates a payload in `.hta` format, which is a combination of HTML and VBScript.  This is a scripting language support by Internet Explorer, so became a popular payload format for phishing attacks.  The dialog prompts you to select a listener and the method of execution.
+
+![[Pasted image 20250630094324.png]]
+
+The options are:
+
+- ##### Executable
+    Drop an exe stager to disk and run it.
+    
+- ##### PowerShell
+    Uses powershell.exe to run a stager in memory.
+    
+- ##### VBA
+    Uses a VBA macro to run a stager in memory.  The macro is executed by using VBScript to instantiate an instance of _Excel.Application_ and creating a workbook instance. Requires Microsoft Office to be installed on the target.
+    
+This HTA always delivers an x86 Beacon payload.
+
