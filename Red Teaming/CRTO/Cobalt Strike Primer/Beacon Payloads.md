@@ -7,3 +7,23 @@ Windows DLLs are usually loaded from disk, typically from `%windir%\system32`, b
 The following illustrates an over-simplified PE structure.
 
 ![[Pasted image 20250626155754.png]]
+
+Beacon's DLL exports a function called **ReflectiveLoader**, which when called, walks back over its own image, maps a new copy of itself into memory, and calls its entry point.  Because the DLL is exported as shellcode, another small shellcode stub is written over the DOS Header.  This shellcode is responsible for jumping code execution to the exported ReflectiveLoader.
+
+![[Pasted image 20250630091526.png]]
+
+When payloads are generated from Cobalt Strike, the relevant information from the listener configuration are patched into the reflective Beacon DLL, which is then converted into position independent code (PIC), or 'shellcode'.  That shellcode is subsequently embedded into each of the payload templates (or 'artifacts') that Cobalt Strike is able to produce - such as the `.exe`, `.dll`, and `.ps1`.  The payloads themselves use process injection techniques to load and execute the shellcode.  In pseudo-code, that may look something like this:
+
+```c
+// ReflectiveLoader + Beacon as PIC
+unsigned char shellcode[1024] = "<shellcode>";
+
+// Allocate new memory for shellcode
+void* ptr = VirtualAlloc(0, 1024, MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE);
+
+// Copy shellcode into new memory region
+memcpy(ptr, shellcode, 1024);
+
+// Create a new thread to execute the ReflectiveLoader
+CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)ptr, 0, 0, NULL);
+```
