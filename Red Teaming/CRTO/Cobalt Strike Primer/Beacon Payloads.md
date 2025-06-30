@@ -61,7 +61,6 @@ To give an idea on size difference - today, a Beacon stager is ~890 bytes and a 
 Beacon payloads can be generated from the Payloads menu.
 
 #### HTML application
-
 This option generates a payload in `.hta` format, which is a combination of HTML and VBScript.  This is a scripting language support by Internet Explorer, so became a popular payload format for phishing attacks.  The dialog prompts you to select a listener and the method of execution.
 
 ![[Pasted image 20250630094324.png]]
@@ -79,3 +78,58 @@ The options are:
     
 This HTA always delivers an x86 Beacon payload.
 
+#### MS Office macro
+This option will produce a VBA macro that you can paste into an Office document - another popular phishing payload format.
+
+![[Pasted image 20250630094522.png]]
+
+This macro always delivers an x86 Beacon payload.
+
+#### Stager payload generator
+These payload generators produce source code files for a variety of languages, equivalent to Metasploit's `msfvenom` utility.  These are useful when you want a byte array that you can drop into your own shellcode runners.
+
+![[Pasted image 20250630094609.png]]
+
+For example, outputting a stager in C produces the following:
+```c
+/* length: 888 bytes */
+unsigned char buf[] = "\xfc\x48\x83\xe4[...snip...]\x12\x1d\x9b\x09";
+```
+
+> Stager payloads do not allow you to specify any additional configuration details, such as guardrails.
+
+#### Stageless payload generator
+The stageless payload generator is practically identical to the stager payload generator, but offers more options.
+![[Pasted image 20250630094725.png]]
+##### Exit Function
+
+This setting controls the API that gets calls when Beacon's `exit` command is executed.  **Process** calls [ExitProcess](https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-exitprocess), which will terminate the whole process that Beacon is running in; whilst **Thread** calls [ExitThread](https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-exitthread), which only terminate the thread running Beacon.  ExitProcess (xprocess) and ExitThread (xthread) payloads both have their uses. 
+> If Beacon is injected into a process that is already running on a target system, use xthread.  If injected into a process executed by yourself, then use xprocess.
+
+##### System Call
+This tells Beacon to use system calls instead of regular Win32 APIs for its internal operation.  The two options are:
+
+- **Direct** uses the Nt* version of the function.
+- **Indirect** jumps to the appropriate instruction within the Nt* version of the function.
+
+#### Windows stager/stageless payload
+These options are similar to the stager/stageless payload generators, but instead of outputting raw source files, they provide pre-built executables.  The output options are:
+
+- ##### Windows EXE
+    
+    A standard Windows executable.
+    
+- ##### Windows Service EXE
+    
+    A Windows executable specifically designed to interact with the Service Control Manager.
+    
+- ##### Windows DLL
+    
+    A DLL that contains several exports that can be called via utilities such as `rundll32` and `regsvr32`.
+    
+
+These payloads can also be signed using a code-signing certificate.
+
+### Windows Stageless Generate All Payloads
+This option will generate all possible stageless payload variants for every available listener in both x86 and x64 architectures.
+![[Pasted image 20250630095040.png]]
