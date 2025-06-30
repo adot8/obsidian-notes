@@ -62,3 +62,86 @@ If more than one HTTP host is provided, the rotation strategy tells Beacon how i
 - #### Rotate
     
     This strategy comes in a single flavour: **rotate-m/h/d**.  Similar to round-robin but each host is only used for the given time period before moving onto the next host in the list.
+
+#### Max retry strategy
+
+This configures Beacon's self destruct strategy in cases where all HTTP hosts become lost or blocked (i.e. we completely lose our ability to communicate with it).
+
+- #### None
+    
+    Beacon will not exit and will continue to run indefinitely unless terminated by other means.
+    
+- #### Exit
+    
+    The syntax of this configuration appears confusing, but goes **exit-[max_attempts]-[increase_attempts]-[duration][m/h/d]**, where:
+    
+    - **max_attempts** is the number of consecutive failed attempts before Beacon will exit.
+        
+    - **increase_attempts** is the number of consecutive failed attempts before Beacon increases its sleep time.
+        
+    - **duration** is the number of hours, minutes, or days to set the new sleep time to.
+        
+    
+    For example, **exit-50-25-1h** tells Beacon to increase its sleep time to 1 hour after 25 failed attempts, and then to exit if it reaches 50 failed attempts.
+    
+
+#### HTTP host (stager)
+
+This host is only used by stager payloads.  Even if you have multiple HTTP hosts configured, a stager payload can only use a single host to fetch the full payload stage.  You can use the same IP/domain as an existing HTTP host entry or use a different host entirely, as long as it resolves back to your team server.
+
+#### Profile
+
+Malleable C2 profiles can be configured with multiple traffic variants, which can be selected from this dropdown.  You will not see anything other than default unless you have loaded a profile that has multiple variants configured in it.
+
+#### HTTP port (C2)
+
+This is the HTTP port Beacon will attempt to connect to the team server on.  Unless you want to use a non-standard port, you will in most cases keep this in-line with a port appropriate for the protocol.  For example, 80 or 8080 for HTTP.
+
+#### HTTP port (bind)
+
+This is the port that the team server will bind its built-in web server to.  If no option is specified, it will use the same port as above.  You would only want to set this to a different port to perform port bending - i.e, using a redirector that will listen on the C2 port, but redirect the traffic to your team server on a different port.  This is useful for running multiple HTTP listeners on the same team server, but keeping all of your Beacons talking out on port 80.
+
+#### HTTP host header
+
+Setting a host header here will propagate it into the Beacon payload without having to explicitly set it within a Malleable C2 profile.   This makes it more convenient to leverage domain fronting without hardcoding the domain in any of your profiles.
+
+#### HTTP proxy
+
+By default, Beacon will attempt to use the internet proxy configuration of the system it is running on.  However, you can hardcode HTTP or SOCKS proxy information for the Beacon to use instead if required.  This configuration is not applied to payload stagers.
+
+#### Guardrails
+
+Guardrails prevents stageless Beacon payloads from running unless the specified criteria has been met.  This is useful in cases where your payloads are copied or forwarded outside of the target environment.  Two possible scenarios include a phishing email being forwarded from a victim to an external party; or a blue teamer trying to analyse the payload in a sandbox.   The available options are: the IP address of the host; the username of the account; the name of the host; and the name of the domain the host is joined to.
+
+## DNS listener
+
+The DNS listener directs Beacon to communicate with a team server via DNS requests - specifically A, AAAA, or TXT record lookups.  The team server starts a built-in DNS server to serve the requests.
+
+![[Pasted image 20250626154133.png]]
+
+For the DNS Beacon to work, you must add the necessary DNS records to make your team server authoritative for one or more subdomains.  In most cases, a party like your domain registrar will be authoritative for your domain TLD.
+
+The DNS Beacon checks into the team server by performing an A record lookup for a domain setup in the DNS listener.  Unlike other Beacons, such as the HTTP Beacon, the DNS Beacon does not transmit its full metadata straight away.  This causes new DNS Beacons to initially appear as 'empty' rows with no information.  The metadata is not sent until the Beacon is tasked with a job. There is a simple `checkin` command which does nothing other than to transmit the Beacon's metadata.
+
+### DNS resolver
+
+By default, a DNS Beacon will use whatever DNS resolver the computer it's running on is configured with.  You can overwrite this with a custom DNS resolver by entering its IP or hostname in this field.
+
+## SMB Listeners
+
+The SMB listener is the first example of a listener that does not bind or listen on the team server VM - it only serves as a template for payload generation.
+
+![[Pasted image 20250626154640.png]]
+
+When executed, an SMB Beacon payload will create a SMB named pipe using the **pipename** specified in the listener configuration.  It then requires another Beacon to connect to that named pipe and relay traffic between the SMB Beacon and the team server.  This is done via the Windows SMB protocol on port 445.
+
+Cobalt Strike uses **msagent_##** by default, where **##** are random hex values.   However, you may use any pipe name you wish, as long as it does not clash with an existing name on the host.  You may also created multiple SMB listeners with different pipe names.
+## TCP Listeners
+
+Like the SMB listener, the TCP listener does not direct the team server to listen on any TCP ports.  It provides configuration information when generating TCP Beacon payloads.
+
+![[Pasted image 20250626154858.png]]
+
+When executed, a TCP Beacon payload will bind and listen on the C2 port specified in the listener configuration.  It then requires another Beacon to connect to that port and relay traffic between the TCP Beacon and the team server.  If **Bind to localhost only** is not checked, the Beacon will bind to **0.0.0.0**.  If it is checked, it will bind to **127.0.0.1**.
+
+A TCP listener that binds to 0.0.0.0 could be used for lateral movement; and a listener that binds to 127.0.0.1 could be used for privilege escalation.  You may create multiple TCP listeners with different port numbers and bind configurations.
