@@ -1,0 +1,1 @@
+Boot or Logon Autostart Execution is a collection of techniques [[T1547](https://attack.mitre.org/techniques/T1547/)] where an adversary configures the computer to automatically execute a payload during startup, or when a user logs in.
