@@ -74,7 +74,7 @@ beacon> mv dns_x64.exe timeout.exe
 
 As demonstrated above, when a program is run from a script or command line using a relative path, Windows must search the PATH environment variable to find it.  This can lead to hijacking opportunities if the PATH contains directories that proceed System32 and other core directories, that are also writable by standard users.
 
-The note hints that cmd.exe cannot be executed in this case, which is because the underlying APIs used to run processes can follow different search orders (of which the PATH variable is just a small part).  Path interception by search order hijacking [[T1574.008](https://attack.mitre.org/techniques/T1574/008/)] occurs when an attacker can hijack this search order.
+The note hints that cmd.exe cannot be executed in this case, which is because the underlying APIs used to run processes can follow different search orders (of which the PATH variable is just a small part).  Path interception by search order hijacking [T1574.008](https://attack.mitre.org/techniques/T1574/008/) occurs when an attacker can hijack this search order.
 
 The behaviour of the calling application depends on which API and parameters are used to execute the target program.  The [WinExec](https://learn.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-winexec) API follows a similar search order to that of DLLs, which is:
 
