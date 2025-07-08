@@ -1,4 +1,6 @@
 
+> This technique can be used from a medium-integrity context.
+
 Whilst many web-based applications can be configured for single sign-on, and therefore authenticate users automatically, some may still require plaintext credentials.  Users commonly allow their browsers to save their credentials so they don't have to type them in every time.
 
 Browsers will typically encrypt these credentials using the [Windows Data Protection API](https://learn.microsoft.com/en-us/windows/win32/api/dpapi/) (DPAPI) and store them in a local database.  Adversaries may be able to read and decrypt this database to obtain the original plaintext passwords [T1555.003](https://attack.mitre.org/techniques/T1555/003/).
@@ -15,4 +17,3 @@ beacon> execute-assembly C:\Tools\SharpDPAPI\SharpChrome\bin\Release\SharpChrome
 
 ![[Pasted image 20250708092330.png]]
 
-> This technique can be used from a medium-integrity context.

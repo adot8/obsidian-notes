@@ -1,3 +1,6 @@
+
+> This technique can be used from a medium-integrity context.
+
 The Windows Credential Manager stores other credentials that the user has asked Windows to save, such as those for Remote Desktop connections.  An adversary may decrypt these credentials to recover the plaintext credentials [T1555.004](https://attack.mitre.org/techniques/T1555/004/)
 
 The native `vaultcmd` utility will show the presence of any saved credentials.
@@ -59,3 +62,5 @@ Folder       : C:\Users\pchilds\AppData\Local\Microsoft\Credentials\
     UserName         : LON-WS-1\Administrator
     Credential       : Passw0rd!
 ```
+
+The `credentials` command will search through the saved credentials blobs for the current user, and attempts to decrypt them.  With no further arguments, it will try to use cached keys (which may be present if the user has recently accessed the credential).  If no cached keys are present, the `/rpc` argument can be used which leverages the Microsoft BackupKey Remote Protocol (MS-BKRP) to ask the domain controller to decrypt the AES key for us.  This works because the DCs keep a copy of the user's master DPAPI key for emergencies.
