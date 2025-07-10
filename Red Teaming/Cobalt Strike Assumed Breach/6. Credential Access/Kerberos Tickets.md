@@ -36,7 +36,7 @@ Most detection strategies are geared towards looking at unusual or anomalous tic
 
 ## Kerberoasting
 
-Kerberoasting is a technique [[T1558.003](https://attack.mitre.org/techniques/T1558/003/)] for obtaining the plaintext password of the service account associated with an SPN.  An adversary can send TGS-REQs for one or more SPNs and get TGS-REPs in return.  These contain valid service tickets that are partially encrypted using the service's secret.  These encrypted parts can be carved out and brute-forced office to recover the service accounts plaintext password.
+Kerberoasting is a technique [T1558.003](https://attack.mitre.org/techniques/T1558/003/) for obtaining the plaintext password of the service account associated with an SPN.  An adversary can send TGS-REQs for one or more SPNs and get TGS-REPs in return.  These contain valid service tickets that are partially encrypted using the service's secret.  These encrypted parts can be carved out and brute-forced office to recover the service accounts plaintext password.
 
 This attack isn't viable against services that run in the context of a computer account because these passwords are automatically set (128-characters long), and rotated by Active Directory every 30 days.  It relies on domain accounts that have been setup by humans, have weak passwords, and maybe even configured to never expire.
 
@@ -78,6 +78,9 @@ beacon> execute-assembly C:\Tools\ADSearch\ADSearch\bin\Release\ADSearch.exe -s 
 beacon> execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe kerberoast /spn:MSSQLSvc/lon-sql-1.contoso.com:1433 /simple /nowrap
 ```
 
+```powershell
+execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe kerberoast /spn:
+```
 ## Extracting Tickets
 
 If an adversary gains elevated access to a computer, they can extract Kerberos tickets that are currently cached in memory.  Rubeus' `triage` command will enumerate every logon session present and their associated tickets.  If multiple logon session exist (i.e. multiple users are logged onto the same computer), TGTs and/or service tickets for those users can be extracted and re-used by the adversary.
