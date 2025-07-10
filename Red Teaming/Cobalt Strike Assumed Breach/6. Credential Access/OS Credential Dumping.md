@@ -127,3 +127,5 @@ TargetUser: NT AUTHORITY\SYSTEM
 ```
 
 > The **GrantedAccess** mask of `0x1010` is consistent with `PROCESS_QUERY_LIMITED_INFORMATION | PROCESS_VM_READ`, which are the minimum privileges required for reading memory.
+
+### Security Account Manager
