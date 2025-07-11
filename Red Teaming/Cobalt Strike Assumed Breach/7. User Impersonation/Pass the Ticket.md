@@ -34,3 +34,18 @@ beacon> execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe asktgt /u
   Base64(key)              :  7ImgleIR6fnHZCxJW7MJUCabAjxvIsMS7Z55VRPaEHU=
   ASREP (key)              :  05579261E29FB01F23B007A89596353E605AE307AFCD1AD3234FA12F94EA696
 ```
+
+## Injecting TGTs
+
+Beacon has a `kerberos_ticket_use` command, which applies the given TGT to the current session.  The ticket must exist as a .kirbi file on the computer running the Cobalt Strike client.  If you have a base64 encoded ticket from Rubeus, you can write it to disk using PowerShell.
+
+```powershell
+$ticket = "doIFo[...snip...]kNPTQ=="
+[IO.File]::WriteAllBytes("C:\Users\Attacker\Desktop\rsteel.kirbi", [Convert]::FromBase64String($ticket))
+```
+
+If you pass a TGT into a logon session that already has one, then you'll overwrite the existing ticket.  For example, if your Beacon is running in the context of pchilds and you inject a TGT for rsteel into the current session, pchilds' TGT will be replaced with rsteel's.  We want to avoid clobbering tickets as much as possible because, although we want to leverage the ticket, we don't want to impact the real user's access to services in the domain.
+
+The optimal strategy is to create a new logon session that we can impersonate.  This lets us use the Kerberos ticket, without affecting a user's existing logon session.  Before doing so, this `klist` output shows our current LUID is **0x11f831e**.  It contains a TGT and LDAP service ticket for pchilds.
+
+![[Pasted image 20250710224809.png]]
