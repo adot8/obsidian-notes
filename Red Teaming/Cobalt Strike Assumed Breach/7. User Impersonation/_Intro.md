@@ -12,3 +12,16 @@ When a user successfully authenticates to a system, the relevant authentication 
 - The logon time.
 - The logon server (i.e. domain controller) used.
 - The DNS domain name & User Principal Name (UPN).
+
+When the logon session has been created, the authentication package passes information back to the Local Security Authority (LSA) which it uses to create an access token for the user.
+
+### Access Tokens
+An access token contains security information associated with a logon session (i.e. the user).  It holds information including:
+
+- A unique Token ID.
+- The ID of the parent logon session (labelled Authentication ID).
+- The token type (_primary_ or _impersonation_).
+- The user's SID.
+- The SIDs of any domain groups the user is a member of.
+- A list of privileges (i.e. user right assignments) the user has.
+- The token's integrity level (e.g. Low, Medium, High, System).
