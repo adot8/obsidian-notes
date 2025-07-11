@@ -1,0 +1,4 @@
+
+_Pass the Ticket_ (or PtT), is a technique [T1550.003](https://attack.mitre.org/techniques/T1550/003/) that allows an adversary to leverage stolen, forged, or requested Kerberos tickets for user impersonation.  As with PtH, this can be implemented in different ways.  Tools like Impacket implement the Kerberos protocol for remote authentication, and tools like Rubeus inject tickets into the credential cache of a given logon session.
+
+PtT is superior to PtH in a few important aspects.  Kerberos authentication is not anomalous, nor is it restricted as with NTLM; and passing tickets into a logon session can be done with native Windows APIs, so it does not rely on patching LSASS memory.  This makes it more stealthy, and isn't prevented by PPL.
