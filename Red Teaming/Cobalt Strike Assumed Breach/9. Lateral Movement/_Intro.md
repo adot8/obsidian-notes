@@ -1,0 +1,3 @@
+_Lateral Movement_ is a tactic [[TA0008](https://attack.mitre.org/tactics/TA0008/)] where the adversary attempts to gain access to other computers on the network.  Techniques typically rely on legitimate remote management protocols using administrative credentials.  Lateral movement is typically achieved by uploading a payload to a target, and then executing it remotely.
+
+Cobalt Strike provides two base primitives for executing commands on a target.
