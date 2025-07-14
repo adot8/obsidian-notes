@@ -21,5 +21,13 @@ ldapsearch "(&(objectClass=user)(servicePrincipalName=*)(!(userAccountControl:1.
 AS-REP Roastable Users
 ```
 ldapsearch "(&(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304))" --attributes samAccountName,userAccountControl,objectsid,ntsecuritydescriptor
+```
 
+---
+
+Bofhound
+```powershell
+scp -r attacker@10.0.0.5:/opt/cobaltstrike/logs .
+
+bofhound -i logs/
 ```
