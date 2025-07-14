@@ -51,6 +51,13 @@ download \\contoso.com\SysVol\contoso.com\Policies\{2583E34A-BBCE-4061-9972-E2AD
 -  Open the file in Notepad (or VSCode).
     
     1. Note the SID of the domain group.
+
+![[Pasted image 20250714100312.png]]
+
+> S-1-5-21-3926355307-1661546229-813047887-1107 is a member of S-1-5-32-544
+
+
+
 -  Add the custom edges in BloodHound.
 
 ```Cypher
