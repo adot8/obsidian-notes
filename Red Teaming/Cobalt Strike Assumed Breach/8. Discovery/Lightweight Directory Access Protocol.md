@@ -103,3 +103,5 @@ Objects can also be excluded by using a 'not' criteria (represented by `!`).  
 ```powershell
 beacon> ldapsearch (&(samAccountType=805306368)(adminCount=1)(!(name=krbtgt)))
 ```
+
+Notice how the filter criteria, `&`, `|`, and `!`, always appear at the beginning of the grouping, i.e. `(&(samAccountType=805306368)(adminCount=1))` rather than `((samAccountType=805306368)&(adminCount=1))`.
