@@ -45,3 +45,5 @@
 -  Terminate the spawned process.
     
     1. kill [PID]
+
+### Constrained Delegation
