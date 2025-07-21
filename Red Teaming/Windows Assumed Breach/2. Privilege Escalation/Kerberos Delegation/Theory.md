@@ -15,7 +15,7 @@ There are two types of Kerberos Delegation:
 Allows delegation to any service to any resource on the domain as a
 user.
 
-When unconstrained delegation is enabled, the DC places user's TGTinside TGS. On the first hop, the TGT is extracted from TGS and stored inLSASS. This way the server can reuse the user's TGT to access any other resource as the user
+When unconstrained delegation is enabled, the DC places user's TGT inside TGS. On the first hop, the TGT is extracted from TGS and stored in LSASS. This way the server can reuse the user's TGT to access any other resource as the user
 
 ![[Pasted image 20250514201409.png]]
 
@@ -53,7 +53,7 @@ Protocol Transition is used when a user authenticates to a web service without u
 > 
 > **KDC**: I see you got the `TRUSTED_TO_AUTHENTICATE_FOR_DELEGATION` attribute type shit and Joe not blocked for delegation or nothin... Heres a forwardable ticket (`S4U2Self`) for Joes account type shit
 > 
-> **Web server (websvc):** Aight bet bet, lemme through this forwardable TGT back at you and get a mf TGS for `CIFS/dcorp-mssql.dollarcorp.moneycorp.local`
+> **Web server (websvc):** Aight bet bet, lemme throw this forwardable TGT back at you and get a mf TGS for `CIFS/dcorp-mssql.dollarcorp.moneycorp.local`
 > 
 > **KDC:** Shiiiii... lemme check if dat service (`CIFS/dcorp-mssql.dollarcorp.moneycorp.local`) be in yo `msDS-AllowedToDelegateTo` list websvc.... YOU GOOD KING YOU GOOD
 > **KDC**: *Returns a TGS to the webserver for `dcorp-mssql`*
