@@ -28,6 +28,24 @@ The KDC will verify that the msDS-AllowedToDelegateTo attribute of the computer 
 
 This is S4U2proxy.
 
-## Protocol transition
+## Protocol transition (S4U2self)
 
 Protocol transition is disabled unless the `TRUSTED_TO_AUTH_FOR_DELEGATION` flag on the UserAccountControl attribute of the computer object is explicitly set.  You can grab the current value and compare it to the documented [property flags](https://learn.microsoft.com/en-us/troubleshoot/windows-server/active-directory/useraccountcontrol-manipulate-account-properties).  The default UAC value for a computer is 4096 (`WORKSTATION_TRUST_ACCOUNT`).  If this value comes back any different then you know some additional flags are set.
+
+```powershell
+beacon> ldapsearch (&(samAccountType=805306369)(samaccountname=lon-ws-1$)) --attributes userAccountControl
+
+userAccountControl: 16781312
+```
+
+You can check if a particular flag is set by performing a bitwise AND with current UAC value and the value of a flag.  The decimal value for TRUSTED_TO_AUTH_FOR_DELEGATION is 16777216, so we would do `[System.Convert]::ToBoolean(16781312 -band 16777216)` in PowerShell, which returns `True`.  If a flag is not set, it would obviously return `False`.
+
+```powershell
+[System.Convert]::ToBoolean(16781312 -band 16777216)
+```
+
+In these scenarios, users will likely authenticate to the front-end service using a protocol other then Kerberos, such as NTLM.  Because of this, the front-end server does not have access to the user's service ticket as described when 'Kerberos only' is in use.
+
+Instead, the server will send a TGS-REQ containing the user's username and sets the SPN to be the computer's own SamAccountName (e.g. _pchilds@lon-ws-1$_); and the KDC returns the service ticket in a TGS-REP.
+
+This is S4U2self.  The service ticket that gets returned can then be used in a S4U2proxy request as above.
