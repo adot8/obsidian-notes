@@ -20,6 +20,8 @@ NdrClientCall2x64
 [-]RpcRemoteFindFirstPrinterChangeNotificationEx status: 6
 ```
 
+> You may need to run it a few times.
+
 > The remote authentication trigger should be run as a standard domain user in a medium-integrity context.
 
 Rubeus will then capture the TGT of the targeted computer account.

