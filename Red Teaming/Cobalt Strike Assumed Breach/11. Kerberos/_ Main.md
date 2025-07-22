@@ -43,7 +43,7 @@ ldapsearch (&(samAccountType=805306369)(samaccountname=LON-WKSTN-1$)) --attribut
 
 We want true
 ```powershell
-[Convert]::ToBoolean(16781312 -band 16777216)
+[Convert]::ToBoolean(4096 -band 16777216)
 ```
 
 Within SYSTEM level beacon on Constrained Delegation host, dump TGT for the computer account
