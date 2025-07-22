@@ -190,3 +190,5 @@
 -  Use the ticket to list the C$ share on _lon-dc-1_.
     
     1. ls \\lon-dc-1\c$
+
+### Resource-Based Constrained Delegation
