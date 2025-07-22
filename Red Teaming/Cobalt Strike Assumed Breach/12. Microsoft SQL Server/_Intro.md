@@ -51,3 +51,94 @@ SQL Server Connection Info:
 
 ZServerName;LON-DB-1;InstanceName;MSSQLSERVER;IsClustered;No;Version;16.0.1000.6;tcp;1433;;
 ```
+
+If a user does not have at least the [_public_ role](https://learn.microsoft.com/en-us/sql/relational-databases/security/authentication-access/server-level-roles), then no further interaction is viable.  With the public role, we can collect a bit more information such as the SQL server process's PID.
+
+```powershell
+beacon> sql-info lon-db-1
+
+[*] Connecting to lon-db-1:1433
+[+] Successfully connected to database
+[*] Extracting SQL server information
+ |--> ComputerName            : lon-db-1
+ |--> DomainName              : CONTOSO
+ |--> ServicePid              : 3364
+ |--> ServiceName             : MSSQLSERVER
+ |--> ServiceAccount          : CONTOSO\mssql_svc
+ |--> AuthenticationMode      : Windows and SQL Server Authentication
+ |--> ForcedEncryption        : 0
+ |--> Clustered               : No
+ |--> SqlServerVersionNumber  : 16.0.1000.6
+ |--> SqlServerMajorVersion   : 2022
+ |--> SqlServerEdition        : Standard Edition (64-bit)
+ |--> SqlServerServicePack    : RTM
+ |--> OsArchitecture          : X64
+ |--> OsMachineType           : ServerNT
+ |--> OsVersion               : Windows Server 2022 Standard
+ |--> OsVersionNumber         : 2022
+ |--> CurrentLogin            : CONTOSO\rsteel
+ |--> IsSysAdmin              : True
+ |--> ActiveSessions          : 1
+
+[*] Disconnecting from server
+```
+
+You can query for information about the current user's rights on the SQL instance, which is useful for seeing all the roles and permissions that you have available.  Roles such as _serveradmin_, _securityadmin_, and _sysadmin_ are of particular interest.
+
+```powershell
+beacon> sql-whoami lon-db-1
+
+[*] Connecting to lon-db-1:1433
+[+] Successfully connected to database
+[*] Determining user permissions on lon-db-1
+[*] Logged in as CONTOSO\rsteel
+[*] Mapped to the user dbo
+[*] Gathering roles...
+ |--> User is a member of the public role
+ |--> User is a member of the db_owner role
+ |--> User is a member of the db_accessadmin role
+ |--> User is a member of the db_securityadmin role
+ |--> User is a member of the db_ddladmin role
+ |--> User is a member of the db_backupoperator role
+ |--> User is a member of the db_datareader role
+ |--> User is a member of the db_datawriter role
+ |--> User is NOT a member of the db_denydatareader role
+ |--> User is NOT a member of the db_denydatawriter role
+ |--> User is a member of the sysadmin role
+ |--> User is a member of the setupadmin role
+ |--> User is a member of the serveradmin role
+ |--> User is a member of the securityadmin role
+ |--> User is a member of the processadmin role
+ |--> User is a member of the diskadmin role
+ |--> User is a member of the dbcreator role
+ |--> User is a member of the bulkadmin role
+
+[*] Disconnecting from server
+```
+
+### Querying
+The public role will also grant permission to query the database instance, which is useful for data-hunting.
+
+```powershell
+beacon> sql-query lon-db-1 "SELECT @@SERVERNAME"
+
+[*] Connecting to lon-db-1:1433
+[+] Successfully connected to database
+[*] Executing custom query on lon-db-1
+
+ | 
+---
+lon-db-1 | 
+
+[*] Disconnecting from server
+```
+
+SQL-BOF provides specific commands to list databases, tables, and rows of interest.
+
+- `sql-databases` - list the available databases.
+    
+- `sql-tables` - list the tables in a given database.
+    
+- `sql-columns` - list the columns in a given table.
+    
+- `sql-search` - search for columns in the given database that contain a keyword.
