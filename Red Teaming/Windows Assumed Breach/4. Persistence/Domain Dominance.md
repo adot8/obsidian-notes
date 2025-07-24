@@ -1,5 +1,4 @@
 
-
 Domain Admin is **not** the goal
 
 Once we have DA privileges new avenues of persistence, escalation to EA and
