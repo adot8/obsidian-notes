@@ -22,3 +22,24 @@ The client then uses this inter-realm TGT to send another TGS-REQ, this time dir
 The foreign KDC will decrypt the inter-realm TGT using its copy of the inter-realm key and returns the service ticket in a TGS-REP.  A high-level summary of this flow is as follows:
 
 ![[Pasted image 20250724160507.png]]
+
+## Trust accounts
+
+After a trust has been created and the inter-realm key shared, the ticket-granting service of the trusting realm is registered as a principal with the trusted realm's KDC.  They are typically registered using the flat name (i.e. NetBIOS name) of the opposing realm.  In this example, a principal called `PARTNER$` will be registered in the **CN=Users** container in _contoso.com._
+
+You won't see them in tools like ADUC, but they can be found by querying for accounts with a samAccountType of `SAM_TRUST_ACCOUNT`.
+
+```powershell
+beacon> ldapsearch (samAccountType=805306370) --attributes samAccountName
+
+Binding to 10.10.120.1
+
+[*] Distinguished name: DC=contoso,DC=com
+[*] targeting DC: \\lon-dc-1.contoso.com
+[*] Filter: (samAccountType=805306370)
+[*] Scope of search value: 3
+[*] Returning specific attribute(s): samAccountName
+
+--------------------
+sAMAccountName: PARTNER$
+```
