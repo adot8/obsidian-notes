@@ -1,4 +1,10 @@
 
+| Value | Trust Direction                 |
+| ----- | ------------------------------- |
+| 0     | `TRUST_DIRECTION_DISABLED`      |
+| 1     | `TRUST_DIRECTION_INBOUND`       |
+| 2     | `TRUST_DIRECTION_OUTBOUND`      |
+| 3     | `TRUST_DIRECTION_BIDIRECTIONAL` |
 
 | Value | Trust Direction                 |
 | ----- | ------------------------------- |
