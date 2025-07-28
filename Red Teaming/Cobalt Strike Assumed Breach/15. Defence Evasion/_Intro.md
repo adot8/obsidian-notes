@@ -1,0 +1,3 @@
+_Defence Evasion_ is a tactic [[TA0005](https://attack.mitre.org/tactics/TA0005/)] where adversaries attempt to avoid detection during their operation.  This is not something they do at just the start or end of an engagement, but should be incorporated throughout.  The various chapters of this course provide OPSEC tips for different techniques and procedures based on decisions the operator can make (e.g. RC4 vs AES Kerberos tickets).  However, these are generic indicators regardless of the toolset being used.
+
+The goal of this chapter is to focus specifically on Beacon, its default indicators, and how operators can avoid getting easily tagged by anti-virus vendors.
