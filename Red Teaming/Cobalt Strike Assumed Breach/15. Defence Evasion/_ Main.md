@@ -145,6 +145,13 @@ sudo /usr/bin/docker restart cobaltstrike-cs-1
 Build new payloads:
 - Go to **Payloads > Windows Stageless Generate All Payloads**
 
+Test PowerShell payload against
+
+```powershell
+C:\Tools\ThreatCheck\ThreatCheck\bin\Debug\ThreatCheck.exe -f .\template.x64.ps1 -e amsi
+```
+
+
 Host a 64-bit PowerShell payload.
 1. Go to **Site Management > Host File**
 2. File: _C:\Payloads\http_x64.ps1_
