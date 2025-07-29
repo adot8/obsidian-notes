@@ -173,3 +173,59 @@ This instructs the post-ex reflective loader used with the `powerpick`, `psinje
 > `amsi_disable` **DOES NOT** apply to the `powershell` command - use `powerpick` or `psinject` instead.
 
 ### Post-ex DLL obfuscation
+
+Changing the spawnto and enabling an AMSI bypass for your post-ex fork and run commands is by no means a silver bullet, as there is still plenty of opportunity for an anti-virus to inspect the post-ex capability after it has been injected.  These are usually found by memory scans that are triggered when the new thread is created in the remote process.
+
+There are a few options that we can add to Malleable C2 to help obfuscate the post-ex DLL to lower the chance that a memory scanner will spot it as malicious.
+
+```powershell
+post-ex {
+   set obfuscate "true";
+   set cleanup "true";
+   set smartinject "true";
+}
+```
+
+- `post-ex.obfuscate` is similar to the `stage.obfuscate` and `stage.userwx` options available for Beacon.  It scrambles the content of the post-ex DLLs and settles the post-ex capability into memory in a more OPSEC-safe way.  Some long-running post-ex DLLs will also mask and unmask their string table when this option is set.
+    
+- `post-ex.cleanup` frees the post-ex reflective loader from memory after the post-ex DLL is loaded.  This is the same as `stage.cleanup` for Beacon, which is an option that is enabled by default since 4.11.
+    
+- `post-ex.smartinject` instructs Beacon to pass key function pointers to the post-ex DLL, which allows it to bootstrap itself without resolving them again.
+    
+
+There are also `transform` options which allows you to replace strings in the post-ex DLLs.  `strrepex` allows you to replace strings in a specific DLL and `strrep` allows you to replace strings in any/all post-ex DLLs.  For example, we could replace a string in the post-ex DLL responsible for execute-assembly; and replace a generic string in every post-ex DLL.
+
+```powershell
+post-ex {
+   ...
+
+   transform-x64 {
+      strrep "ReflectiveLoader" "NetlogonMain";
+      strrepex "ExecuteAssembly" "Invoke_3 on EntryPoint failed." "Assembly threw an exception";
+   }
+}
+```
+
+The valid post-ex names are:
+
+- ExecuteAssembly
+    
+- Mimikatz
+    
+- PowerPick
+    
+- PortScanner
+    
+- BrowserPivot
+    
+- Hashdump
+    
+- NetView
+    
+- Keylogger
+    
+- Screenshot
+    
+- SSHAgent
+
+> Public resource like [Elastic's YARA repository](https://github.com/elastic/protections-artifacts/blob/main/yara/rules/Windows_Trojan_CobaltStrike.yar) is a great resource for finding candidates to change.
