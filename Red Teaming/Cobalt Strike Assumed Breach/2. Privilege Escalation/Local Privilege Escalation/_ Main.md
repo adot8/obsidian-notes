@@ -2,14 +2,18 @@
 
 #### Vulnerable Services
 
+Enumerate available services
 ```powershell
 sc_enum
 ```
 
 > When abusing services, the dedicated svc.exe payloads must be used.
 
+Query service and view permissions on file path
 ```powershell
+sc_qc BadWindowsService
 
+cacls "C:\Program Files\Bad Windows Service"
 ```
 
 
