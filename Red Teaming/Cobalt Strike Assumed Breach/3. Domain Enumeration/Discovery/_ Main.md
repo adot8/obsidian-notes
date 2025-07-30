@@ -23,6 +23,15 @@ AS-REP Roastable Users
 ldapsearch "(&(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304))" --attributes samAccountName,userAccountControl,objectsid,ntsecuritydescriptor
 ```
 
+Constrained Delegation (`msDS-AllowedToDelegateTo` not set to null)
+```powershell
+ldapsearch (&(samAccountType=805306369)(msDS-AllowedToDelegateTo=*)) --attributes samAccountName,msDS-AllowedToDelegateTo
+```
+
+Unconstrained Delegation
+```powershell
+ldapsearch (&(samAccountType=805306369)(userAccountControl:1.2.840.113556.1.4.803:=524288)) --attributes samaccountname
+```
 ---
 
 Bofhound
