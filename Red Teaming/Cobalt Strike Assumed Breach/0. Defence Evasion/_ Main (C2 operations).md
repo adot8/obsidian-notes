@@ -111,8 +111,11 @@ post-ex {
       strrep "ReflectiveLoader" "NetlogonMain";
       strrepex "ExecuteAssembly" "Invoke_3 on EntryPoint failed." "Assembly threw an exception";
       strrepex "PowerPick" "PowerShellRunner" "PowerShellEngine";
-
-      # add any other transforms that you want
+	  
+    
+	  # Mimikatz
+      # Pipe name replacement
+      strrep "\\\\.\\pipe\\mimikatz" "\\\\.\\pipe\\rpcnet"
   }
 }
 
