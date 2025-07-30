@@ -107,6 +107,8 @@ post-ex {
   set obfuscate "true";
   set cleanup "true";
 
+  set pipename "dotnet-diagnostic-#####, ########-####-####-####-############";
+
   transform-x64 {
       strrep "ReflectiveLoader" "NetlogonMain";
       strrepex "ExecuteAssembly" "Invoke_3 on EntryPoint failed." "Assembly threw an exception";
