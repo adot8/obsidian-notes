@@ -1,0 +1,4 @@
+
+```powershell
+sc_enum
+```
