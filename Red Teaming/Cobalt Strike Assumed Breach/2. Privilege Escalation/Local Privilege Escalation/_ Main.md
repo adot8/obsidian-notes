@@ -79,8 +79,6 @@ sc_config BadWindowsService "C:\Program Files\Bad Windows Service\Service Execut
 rm  C:\Windows\Tasks\dns_x64.svc.exe
 ```
 
-
-
 #### UAC Bypass
 
 > Right-click the Beacon, select **Access > One-liner** and select the tcp-local listener.
