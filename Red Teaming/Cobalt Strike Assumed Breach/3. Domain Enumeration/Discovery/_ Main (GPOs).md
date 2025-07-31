@@ -41,7 +41,7 @@ Match (n:GPO) return n
 ```powershell
 ls \\contoso.com\SysVol\contoso.com\Policies\{2583E34A-BBCE-4061-9972-E2ADAB399BB4}\Machine\Microsoft\Windows NT\SecEdit\
 
-download \\contoso.com\SysVol\contoso.com\Policies\{2583E34A-BBCE-4061-9972-E2ADAB399BB4}\Machine\Microsoft\Windows NT\SecEdit\GptTmpl.inf
+download \\dublin.contoso.com\SysVol\dublin.contoso.com\Policies\{BC922AEC-8191-4B0D-8592-8C483703D7FD}\Machine\Microsoft\Windows NT\SecEdit\GptTmpl.inf
 ```
 
 - Sync the file to your Attacker Desktop.
@@ -56,7 +56,9 @@ download \\contoso.com\SysVol\contoso.com\Policies\{2583E34A-BBCE-4061-9972-E2AD
 
 > S-1-5-21-3926355307-1661546229-813047887-1107 is a member of S-1-5-32-544
 
-
+```powershell
+ldapsearch (objectSid=S-1-5-21-2958544638-1589230383-838459903-1605)
+```
 
 -  Add the custom edges in BloodHound.
 
@@ -65,8 +67,8 @@ MATCH (x:Computer{objectid:'S-1-5-21-2958544638-1589230383-838459903-3101'}) MAT
 ```
 
 ```Cypher
-MATCH (x:Computer{objectid:'S-1-5-21-2958544638-1589230383-838459903-3105'})
-MATCH (y:Group{objectid:'S-1-5-21-2958544638-1589230383-838459903-3103'})
+MATCH (x:Computer{objectid:'S-1-5-21-2958544638-1589230383-838459903-2601'})
+MATCH (y:Group{objectid:'S-1-5-21-2958544638-1589230383-838459903-1605'})
 MERGE (y)-[:AdminTo]->(x)
 ```
 

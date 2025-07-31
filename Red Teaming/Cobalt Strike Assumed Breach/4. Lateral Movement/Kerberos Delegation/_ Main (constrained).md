@@ -7,7 +7,7 @@ ldapsearch (&(samAccountType=805306369)(msDS-AllowedToDelegateTo=*)) --attribute
 
 Check the UAC value to see if protocol transitioning is possible 
 ```powershell
-ldapsearch (&(samAccountType=805306369)(samaccountname=LON-WS-1$)) --attributes userAccountControl
+ldapsearch (&(samAccountType=805306369)(samaccountname=DUB-WEB-1$)) --attributes userAccountControl
 ```
 
 We want true

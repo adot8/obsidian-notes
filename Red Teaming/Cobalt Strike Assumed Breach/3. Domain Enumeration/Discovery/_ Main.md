@@ -1,6 +1,6 @@
 
 Domain, users, groups, OUs, and GPOs.
-```
+```powershell
 ldapsearch (|(objectClass=domain)(objectClass=organizationalUnit)(objectClass=groupPolicyContainer)) *,ntsecuritydescriptor
 
 ldapsearch (|(samAccountType=805306368)(samAccountType=805306369)(samAccountType=268435456)) --attributes *,ntsecuritydescriptor
