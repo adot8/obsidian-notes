@@ -121,16 +121,14 @@ post-ex {
       strrep "mimikatz.log" "diagdata.log";
       strrep "mimikatz_x64.compressed" "binmod64.pack";
       strrep "mimikatz_dpapi_cache.ndr" "vault_cache.ndr";
-      strrepex "ERROR kuhl_m_dpapi_chrome" "INFO dpapi_module";
-      strrepex "ERROR kuhl_m_lsadump_getUsersAndSamKey" "WARN lsa_getusers_samkey";
-      strrepex "ERROR kuhl_m_lsadump_getComputerAndSyskey" "INFO lsa_getcomputer_syskey";
-      strrepex "ERROR kuhl_m_lsadump_lsa_getHandle" "WARN lsa_gethandle";
-      strrepex "ERROR kuhl_m_lsadump_enumdomains_users" "WARN enum_domains_users";
-      strrep "ERROR mimikatz_doLocal" "INFO module_doLocal";
+      strrepex "Mimikatz" "ERROR kuhl_m_dpapi_chrome" "INFO dpapi_module";
+      strrepex "Mimikatz" "ERROR kuhl_m_lsadump_getUsersAndSamKey" "WARN lsa_getusers_samkey";
+      strrepex "Mimikatz" "ERROR kuhl_m_lsadump_getComputerAndSyskey" "INFO lsa_getcomputer_syskey";
+      strrepex "Mimikatz" "ERROR kuhl_m_lsadump_lsa_getHandle" "WARN lsa_gethandle";
+      strrepex "Mimikatz" "ERROR kuhl_m_lsadump_enumdomains_users" "WARN enum_domains_users";
+      strrepex "Mimikatz" "ERROR mimikatz_doLocal" "INFO module_doLocal";
   }
 }
-
-
 ```
 
 Add the following process-inject block:
