@@ -79,7 +79,7 @@ python3 /mnt/c/Tools/PackMyPayload/PackMyPayload.py -H deals.xlsx,deals.js /mnt/
 ![[Pasted image 20250702212802.png]]
 
 ```
-iexplore www.bleepincomputer.com
+iexplore http://www.bleepincomputer.com:80/deals
 ```
 
 ```powershell
