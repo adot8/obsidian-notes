@@ -1,8 +1,8 @@
 ##### Windows service
 ```powershell
 cd C:\Windows\System32\
-upload C:\Payloads\beacon_x64.svc.exe
-mv beacon_x64.svc.exe debug_svc.exe
+upload C:\Payloads\http_x64.svc.exe
+mv http_x64.svc.exe debug_svc.exe
 ```
 
 ```powershell

