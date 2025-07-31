@@ -61,12 +61,12 @@ download \\contoso.com\SysVol\contoso.com\Policies\{2583E34A-BBCE-4061-9972-E2AD
 -  Add the custom edges in BloodHound.
 
 ```Cypher
-MATCH (x:Computer{objectid:'S-1-5-21-3926355307-1661546229-813047887-2101'}) MATCH (y:Group{objectid:'S-1-5-21-3926355307-1661546229-813047887-1106'}) MERGE (y)-[:AdminTo]->(x)
+MATCH (x:Computer{objectid:'S-1-5-21-2958544638-1589230383-838459903-3101'}) MATCH (y:Group{objectid:'S-1-5-21-2958544638-1589230383-838459903-3103'}) MERGE (y)-[:AdminTo]->(x)
 ```
 
 ```Cypher
-MATCH (x:Computer{objectid:'S-1-5-21-3926355307-1661546229-813047887-2102'})
-MATCH (y:Group{objectid:'S-1-5-21-3926355307-1661546229-813047887-1106'})
+MATCH (x:Computer{objectid:'S-1-5-21-2958544638-1589230383-838459903-3105'})
+MATCH (y:Group{objectid:'S-1-5-21-2958544638-1589230383-838459903-3103'})
 MERGE (y)-[:AdminTo]->(x)
 ```
 

@@ -40,3 +40,8 @@ scp -r attacker@10.0.0.5:/opt/cobaltstrike/logs .
 
 bofhound -i logs/
 ```
+
+Search single SID
+```powershell
+ldapsearch (objectSid=S-1-5-21-2958544638-1589230383-838459903-3105)
+```
