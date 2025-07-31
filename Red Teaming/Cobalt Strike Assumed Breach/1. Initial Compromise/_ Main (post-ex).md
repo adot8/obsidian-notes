@@ -14,7 +14,7 @@ powerpick command
 ```
 
 
-#### SMB 
+#### SMB W32TIME_ALT (LDAP)
 
 ```powershell
 spawnto x64 C:\Windows\System32\svchost.exe
