@@ -90,7 +90,7 @@ runasadmin uac-cmstplua [ONE-LINER]
 
 Connect to beacon
 ```powershell
-connect localhost 1337
+connect localhost 2383
 ```
 
 More can be found here
