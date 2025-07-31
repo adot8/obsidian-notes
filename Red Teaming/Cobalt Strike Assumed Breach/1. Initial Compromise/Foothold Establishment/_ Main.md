@@ -16,7 +16,7 @@
 
 6. Serialise the DLL using G2JS.
 ```powershell
-C:\Tools\GadgetToJScript\GadgetToJScript\bin\Release\GadgetToJScript.exe -a .\source\repos\MyDropper\bin\Release\MyDropper.dll -w js -b -o C:\Payloads\deals\deals
+C:\Tools\GadgetToJScript\GadgetToJScript\bin\Release\GadgetToJScript.exe -a .\source\repos\RTODropper\bin\Release\RTODropper.dll -w js -b -o C:\Payloads\deals\deals
 ```
 
 #### Decoy, Trigger, Container
