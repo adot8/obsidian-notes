@@ -14,8 +14,9 @@ powerpick command
 ```
 
 
-#### SMB W32TIME_ALT (LDAP)
+#### TCP-Local (enum)
 
+Find svchost.exe  process and inject TCP shell code into it via GUI
 ```powershell
 spawnto x64 C:\Windows\System32\svchost.exe
 ```

