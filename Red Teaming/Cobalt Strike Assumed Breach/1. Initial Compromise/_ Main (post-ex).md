@@ -3,8 +3,13 @@
 
 For any outbound connection commands find an msedge or chrome ppid change the spawnto to msedge.exe or chrome.exe
 
+Find msedge process and inject shell code into it via GUI
+
 ```powershell
-ppid 6648
 spawnto x64 "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
 powerpick command
+```
+
+```powershell
+execute-assembly C:\Tools\Seatbelt\Seatbelt\bin\Release\Seatbelt.exe AntiVirus
 ```
