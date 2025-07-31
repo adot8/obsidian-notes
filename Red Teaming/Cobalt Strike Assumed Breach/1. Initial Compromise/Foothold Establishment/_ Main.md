@@ -55,7 +55,7 @@ $lnk.Save()
 
 3. In a wsl shell use PackMyPayload to  pack the files into an `iso`.
 
-> Hide the decoy and payload. Only show trigger
+> Hide the decoy and payload. Only show trigg‌er
 
 ```bash
 python3 /mnt/c/Tools/PackMyPayload/PackMyPayload.py -H deals.xlsx,deals.js /mnt/c/Payloads/deals/ /mnt/c/Payloads/deals/deals.iso
