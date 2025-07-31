@@ -10,8 +10,7 @@ Get-ChildItem 'HKLM:Software\Policies\Microsoft\Windows\SrpV2\Exe'
 
 Local enumeration via AppLocker cmdlet
 ```powershell
-$policy = Get-AppLockerPolicy -Effective
-$policy.RuleCollections
+$policy = Get-AppLockerPolicy -Effective; $policy.RuleCollections
 ```
 
 GPO enumeration
