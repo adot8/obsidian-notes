@@ -1,4 +1,4 @@
-The Windows Task Scheduler is able to perform routine tasks based on pre-defined triggers, including:
+**,The** Windows Task Scheduler is able to perform routine tasks based on pre-defined triggers, including:
 
 - At a specific time on a daily, weekly, or monthly schedule.
     
