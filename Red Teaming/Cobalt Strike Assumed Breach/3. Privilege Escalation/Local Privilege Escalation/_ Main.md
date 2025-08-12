@@ -1,5 +1,10 @@
 
+### Link
 
+```powershell
+link [host] [smb pipe]
+link [host] [port]
+```
 #### Unquoted Service Path
 
 Enumerate available services
