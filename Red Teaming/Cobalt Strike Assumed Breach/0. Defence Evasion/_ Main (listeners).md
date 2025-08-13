@@ -12,6 +12,7 @@
 1.  Name: smb
 2.  Payload: Beacon SMB
 3.  Pipename: W32TIME_ALT-1337
+4. dotnet-diagnostic
 
 ## TCP
 
