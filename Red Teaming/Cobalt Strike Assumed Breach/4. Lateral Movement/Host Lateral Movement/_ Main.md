@@ -17,3 +17,6 @@ jump psexec64 lon-ws-1 smb
 
 ---
 
+```powershell
+link smb 127.0.0.1 dotnet-diagnostic-1337
+```
