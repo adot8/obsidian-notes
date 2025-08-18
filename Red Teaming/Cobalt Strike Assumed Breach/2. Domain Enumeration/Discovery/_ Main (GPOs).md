@@ -54,7 +54,7 @@ download \\dublin.contoso.com\SysVol\dublin.contoso.com\Policies\{BC922AEC-8191-
 
 ![[Pasted image 20250714100312.png]]
 
-> S-1-5-21-3926355307-1661546229-813047887-1107 is a member of S-1-5-32-544
+> S-1-5-21-3926355307-1661546229-813047887-1106 is a member of S-1-5-32-544
 
 ```powershell
 ldapsearch (objectSid=S-1-5-21-2958544638-1589230383-838459903-1605)
@@ -63,7 +63,7 @@ ldapsearch (objectSid=S-1-5-21-2958544638-1589230383-838459903-1605)
 -  Add the custom edges in BloodHound.
 
 ```Cypher
-MATCH (x:Computer{objectid:'S-1-5-21-2958544638-1589230383-838459903-3101'}) MATCH (y:Group{objectid:'S-1-5-21-2958544638-1589230383-838459903-3103'}) MERGE (y)-[:AdminTo]->(x)
+MATCH (x:Computer{objectid:'S-1-5-21-2958544638-1589230383-838459903-3105'}) MATCH (y:Group{objectid:'S-1-5-21-2958544638-1589230383-838459903-3103'}) MERGE (y)-[:AdminTo]->(x)
 ```
 
 ```Cypher

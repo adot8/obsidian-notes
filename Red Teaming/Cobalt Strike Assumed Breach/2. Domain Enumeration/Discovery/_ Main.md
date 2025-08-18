@@ -1,4 +1,11 @@
 
+Set PPID to svchost - med-integ
+```powershell
+ppid 6424 
+spawnto x64 C:\Windows\System32\svchost.exe
+```
+
+
 Domain, users, groups, OUs, and GPOs.
 ```powershell
 ldapsearch (|(objectClass=domain)(objectClass=organizationalUnit)(objectClass=groupPolicyContainer)) *,ntsecuritydescriptor
