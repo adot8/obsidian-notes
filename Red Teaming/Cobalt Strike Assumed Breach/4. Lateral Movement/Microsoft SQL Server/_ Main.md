@@ -61,7 +61,7 @@ sql-disableclr lon-db-1
 
 Enumerate SQL Links
 ```powershell
-sql-links lon-db-1
+sql-links DUB-SQL-1
 ```
 
 Verify privileges on linked DB

