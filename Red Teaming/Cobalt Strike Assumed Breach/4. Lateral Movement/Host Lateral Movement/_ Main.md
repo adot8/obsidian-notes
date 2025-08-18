@@ -14,6 +14,8 @@ Jump via psexec64
 ```powershell
 jump psexec64 DUB-WEB-1 smb
 
+jump psexec64 DUB-WKSTN-1 smb
+
 jump winrm64 DUB-WEB-1 smb
 ```
 
