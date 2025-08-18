@@ -30,7 +30,7 @@
 
 ## DNS
 
-1.  Name: tcp-local
+1.  Name: dns
 2.  Payload: Beacon DNS
 3.  DNS Hosts: cdn.bleepincomputer.com
 4. DNS Host (Stager): cdn.bleepincomputer.com
