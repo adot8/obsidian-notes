@@ -13,6 +13,11 @@ ldapsearch (|(objectClass=domain)(objectClass=organizationalUnit)(objectClass=gr
 ldapsearch (|(samAccountType=805306368)(samAccountType=805306369)(samAccountType=268435456)) --attributes *,ntsecuritydescriptor
 ```
 
+Trusts
+```powershell
+ldapsearch (objectClass=trustedDomain) --attributes trustPartner,trustDirection,trustAttributes,flatName
+```
+
 ADCS + ESC1–ESC8
 ```powershell
 ldapsearch (|(objectClass=pKIEnrollmentService)(objectClass=pKICertificateTemplate)(objectClass=msPKI-Enterprise-Oid)) *,ntsecuritydescriptor
@@ -50,5 +55,5 @@ bofhound -i logs/
 
 Search single SID
 ```powershell
-ldapsearch (objectSid=S-1-5-21-2958544638-1589230383-838459903-3105)
+ldapsearch (objectSid=S-1-5-21-2958544638-1589230383-838459903-1601)
 ```
