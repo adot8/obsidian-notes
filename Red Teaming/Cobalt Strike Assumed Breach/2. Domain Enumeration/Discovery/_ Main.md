@@ -57,3 +57,7 @@ Search single SID
 ```powershell
 ldapsearch (objectSid=S-1-5-21-2958544638-1589230383-838459903-1601)
 ```
+
+```powershell
+--dn DC=contoso,DC=enclave
+```
