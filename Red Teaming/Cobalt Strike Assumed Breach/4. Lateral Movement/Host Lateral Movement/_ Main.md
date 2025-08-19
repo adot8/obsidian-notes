@@ -16,7 +16,7 @@ jump psexec64 DUB-WEB-1 smb
 
 jump winrm64 DUB-WEB-1 smb
 
-jump scshell64 DUB-SQL-1 smb
+jump psexec64 DUB-SQL-1 smb
 ```
 
 ---
