@@ -1,4 +1,4 @@
-
+    
 ##### DCSync
 
 Obtain krbtgt hash and machine account hash
