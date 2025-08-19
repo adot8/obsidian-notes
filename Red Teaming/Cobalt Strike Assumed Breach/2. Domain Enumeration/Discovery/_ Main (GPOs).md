@@ -39,9 +39,9 @@ Match (n:GPO) return n
 ![[Pasted image 20250714094204.png]]
 
 ```powershell
-ls \\contoso.com\SysVol\contoso.com\Policies\{2583E34A-BBCE-4061-9972-E2ADAB399BB4}\Machine\Microsoft\Windows NT\SecEdit\
+ls \\contoso.enclave\SysVol\contoso.enclave\Policies\{034D0B5C-FB95-45D9-AB23-AFE530815043}\Machine\Microsoft\Windows NT\SecEdit\
 
-download \\dublin.contoso.com\SysVol\dublin.contoso.com\Policies\{BC922AEC-8191-4B0D-8592-8C483703D7FD}\Machine\Microsoft\Windows NT\SecEdit\GptTmpl.inf
+download \\contoso.enclave\SysVol\contoso.enclave\Policies\{034D0B5C-FB95-45D9-AB23-AFE530815043}\Machine\Microsoft\Windows NT\SecEdit\GptTmpl.inf
 ```
 
 - Sync the file to your Attacker Desktop.

@@ -5,6 +5,9 @@ ppid 6424
 spawnto x64 C:\Windows\System32\svchost.exe
 ```
 
+```powershell
+--dn DC=contoso,DC=enclave
+```
 
 Domain, users, groups, OUs, and GPOs.
 ```powershell
@@ -55,9 +58,5 @@ bofhound -i logs/
 
 Search single SID
 ```powershell
-ldapsearch (objectSid=S-1-5-21-2958544638-1589230383-838459903-1601)
-```
-
-```powershell
---dn DC=contoso,DC=enclave
+ldapsearch (objectSid=S-1-5-21-1330904164-3792538338-293942156-2101)
 ```

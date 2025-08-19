@@ -33,7 +33,7 @@ Enumerate interesting SID
 ```powershell
 ldapsearch (objectSid=[SID])
 
-ldapsearch (objectSid=S-1-5-21-3926355307-1661546229-813047887-6102)
+ldapsearch (objectSid=S-1-5-21-1076548718-1118529210-2193484809-2601)
 ```
 
 Perform DCSync to obtain inter-realm key.
