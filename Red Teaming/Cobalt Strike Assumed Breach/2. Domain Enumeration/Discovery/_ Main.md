@@ -58,5 +58,5 @@ bofhound -i logs/
 
 Search single SID
 ```powershell
-ldapsearch (objectSid=S-1-5-21-1330904164-3792538338-293942156-2101)
+ldapsearch (objectSid=S-1-5-21-1076548718-1118529210-2193484809-3601)
 ```
