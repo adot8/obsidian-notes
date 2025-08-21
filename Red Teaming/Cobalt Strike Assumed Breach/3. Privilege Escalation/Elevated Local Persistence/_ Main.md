@@ -2,7 +2,7 @@
 ```powershell
 cd C:\Windows\System32\
 upload C:\Payloads\smb_x64.svc.exe
-mv http_x64.svc.exe debug_svc.exe
+mv smb_x64.svc.exe debug_svc.exe
 ```
 
 ```powershell
