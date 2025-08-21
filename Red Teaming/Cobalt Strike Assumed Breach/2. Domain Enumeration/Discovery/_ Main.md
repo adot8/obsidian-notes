@@ -58,5 +58,7 @@ bofhound -i logs/
 
 Search single SID
 ```powershell
-ldapsearch (objectSid=S-1-5-21-1076548718-1118529210-2193484809-3601)
+ldapsearch (objectSid=S-1-5-21-1076548718-1118529210-2193484809-2601)
+
+ldapsearch (objectSid=S-1-5-21-1076548718-1118529210-2193484809-2601) --dn DC=contoso,DC=enclave
 ```
