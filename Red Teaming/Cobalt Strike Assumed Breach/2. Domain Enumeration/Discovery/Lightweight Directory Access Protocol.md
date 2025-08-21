@@ -151,7 +151,7 @@ sAMAccountName: LON-DC-1$
 The LDAP_MATCHING_RULE_IN_CHAIN OID provides a method of querying the ancestry of an object, which becomes useful when needing to unroll groups of groups.  Consider a scenario where you query a domain group and find that another domain group is a member; you query that group and find two more groups as members.  Depending on the depth, querying each one manually can quickly get out of hand.  Not only is it laborious, it's prone to error and generates unnecessary LDAP traffic.
 
 ```powershell
-beacon> ldapsearch "(memberof:1.2.840.113556.1.4.1941:=CN=Domain Admins,CN=Users,DC=contoso,DC=com)" --attributes samaccountname
+beacon> ldapsearch "(memberof:1.2.840.113556.1.4.1941:=CN=Domain Admins,CN=Users,DC=contoso,DC=enclave)" --attributes samaccountname
 
 --------------------
 sAMAccountName: Administrator
