@@ -1,9 +1,5 @@
 
 ```
-
-```
-
-```
 kerbeus s4u /impersonateuser:Administrator /domain:painters.htb /service:cifs/dc.painters.htb /altservice:cifs /ticket:
 ```
 ##### Constrained Delegation
