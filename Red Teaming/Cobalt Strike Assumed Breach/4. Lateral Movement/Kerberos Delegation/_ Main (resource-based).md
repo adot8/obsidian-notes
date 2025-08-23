@@ -21,6 +21,21 @@ Get-DomainComputer -Server 'lon-dc-1' -Credential $Cred | Get-DomainObjectAcl -S
 Get-DomainComputer -Credential $Cred | Get-DomainObjectAcl | ? { $_.ObjectAceType -eq '3f78c3e5-f79a-46bd-a0b8-9d18116ddc79' -and $_.ActiveDirectoryRights -eq 'WriteProperty' } | select ObjectDN,SecurityIdentifier
 ```
 
+> OR
+ 
+```powershell
+execute-assembly C:\Tools\ADSearch\ADSearch\bin\Release\ADSearch.exe --search "(&(objectCategory=computer)(msDS-AllowedToActOnBehalfOfOtherIdentity=*))" --attributes dnshostname,samaccountname,msDS-AllowedToActOnBehalfOfOtherIdentity --json
+
+execute-assembly C:\Tools\ADSearch\ADSearch\bin\Release\ADSearch.exe --search "(&(objectCategory=user)(msDS-AllowedToActOnBehalfOfOtherIdentity=*))" --attributes dnshostname,samaccountname,msDS-AllowedToActOnBehalfOfOtherIdentity --json
+```
+
+ > OR
+
+```powershell
+ldapsearch "(&(objectClass=computer)(msDS-AllowedToActOnBehalfOfOtherIdentity=*))" --attributes samAccountName,dnshostname,msDS-AllowedToActOnBehalfOfOtherIdentity,objectsid,ntsecuritydescriptor
+
+```
+
 Resolve the SID to a domain group/user.
 ```powershell
 Get-ADGroup -Filter 'objectsid -eq "SID"' -Server 'lon-dc-1' -Credential $Cred
