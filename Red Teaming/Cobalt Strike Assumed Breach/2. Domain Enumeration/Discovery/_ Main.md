@@ -47,6 +47,12 @@ Unconstrained Delegation
 ```powershell
 ldapsearch (&(samAccountType=805306369)(userAccountControl:1.2.840.113556.1.4.803:=524288)) --attributes samaccountname
 ```
+
+```powershell
+ldapsearch "(&(objectClass=computer)(msDS-AllowedToActOnBehalfOfOtherIdentity=*))" --attributes samAccountName,dnshostname,msDS-AllowedToActOnBehalfOfOtherIdentity,objectsid,ntsecuritydescriptor
+
+ldapsearch "(msDS-AllowedToActOnBehalfOfOtherIdentity=*)" --attributes samAccountName,servicePrincipalName,msDS-AllowedToActOnBehalfOfOtherIdentity,objectsid,ntsecuritydescriptor
+```
 ---
 
 Bofhound
@@ -60,5 +66,5 @@ Search single SID
 ```powershell
 ldapsearch (objectSid=S-1-5-21-1076548718-1118529210-2193484809-2601)
 
-ldapsearch (objectSid=S-1-5-21-1076548718-1118529210-2193484809-2601) --dn DC=contoso,DC=enclave
+ldapsearch "(&(objectClass=computer)(msDS-AllowedToActOnBehalfOfOtherIdentity=*))" --attributes samAccountName,dnshostname,msDS-AllowedToActOnBehalfOfOtherIdentity,objectsid,ntsecuritydescriptor --dn DC=contoso,DC=enclave
 ```
