@@ -18,7 +18,7 @@ jump psexec64 DUB-WKSTN-2 smb
 
 jump winrm64 DUB-WEB-1 smb
 
-jump psexec64 DUB-SQL-1 smb
+jump scshell64 dub-sql-1.dublin.contoso.com smb
 
 jump psexec64 enc-fs-1.contoso.enclave smb
 ```
