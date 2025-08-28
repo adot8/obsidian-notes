@@ -142,6 +142,23 @@ process-inject {
       CreateThread;
   }
 }
+
+process-inject {
+  # Keep allocations modest and non-RWX to reduce memory heuristics
+  set min_alloc "16384";
+  set startrwx "false";
+  set userwx "false";
+  set obfuscate "true";
+
+  # Prioritize early-bird APC into a process you start suspended
+  execute {
+    NtQueueApcThread-s;   # queue APC to a thread in a process you created suspended, then resume
+    NtQueueApcThread;     # fallback APC if -s path isn’t possible
+    SetThreadContext;     # last resort; noisier than APC, but still avoids CreateRemoteThread
+    # (Intentionally omit CreateThread / RtlCreateUserThread / CreateRemoteThread)
+  }
+}
+
 ```
 
 Save changes and restart the Team Server
