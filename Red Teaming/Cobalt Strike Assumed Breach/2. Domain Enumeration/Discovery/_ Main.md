@@ -48,6 +48,7 @@ Unconstrained Delegation
 ldapsearch (&(samAccountType=805306369)(userAccountControl:1.2.840.113556.1.4.803:=524288)) --attributes samaccountname
 ```
 
+Role-based Constrained Delegation
 ```powershell
 ldapsearch "(&(objectClass=computer)(msDS-AllowedToActOnBehalfOfOtherIdentity=*))" --attributes samAccountName,dnshostname,msDS-AllowedToActOnBehalfOfOtherIdentity,objectsid,ntsecuritydescriptor
 
