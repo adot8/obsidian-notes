@@ -27,7 +27,7 @@ ldapsearch (|(samAccountType=805306368)(samAccountType=805306369)(samAccountType
 Match (n:GPO) return n
 
 MATCH (n:GPO)
-WHERE n.domain = "CONTOSO.COM"
+WHERE n.domain = "CONTOSO.ENCLAVE"
 RETURN n
 
 ```

@@ -53,7 +53,6 @@ Role-based Constrained Delegation
 ldapsearch "(&(objectClass=computer)(msDS-AllowedToActOnBehalfOfOtherIdentity=*))" --attributes samAccountName,dnshostname,msDS-AllowedToActOnBehalfOfOtherIdentity,objectsid,ntsecuritydescriptor
 
 ldapsearch "(msDS-AllowedToActOnBehalfOfOtherIdentity=*)" --attributes samAccountName,servicePrincipalName,msDS-AllowedToActOnBehalfOfOtherIdentity,objectsid,ntsecuritydescriptor
-
 ```
 ---
 
@@ -69,4 +68,50 @@ Search single SID
 ldapsearch (objectSid=S-1-5-21-1330904164-3792538338-293942156-2103)
 
 ldapsearch (objectSid=S-1-5-21-1076548718-1118529210-2193484809-2601) --dn DC=contoso,DC=enclave
+```
+
+
+---
+
+Across trusts
+
+Domain, users, groups, OUs, and GPOs.
+```powershell
+ldapsearch (|(objectClass=domain)(objectClass=organizationalUnit)(objectClass=groupPolicyContainer)) --dn DC=contoso,DC=enclave --hostname contoso.enclave
+
+ldapsearch (samAccountType=805306369) --attributes samAccountName --dn DC=contoso,DC=enclave --hostname contoso.enclave
+```
+
+Trusts
+```powershell
+ldapsearch (objectClass=trustedDomain) --attributes trustPartner,trustDirection,trustAttributes,flatName --dn DC=contoso,DC=enclave --hostname contoso.enclave
+```
+
+Kerberoastable Users
+```powershell
+ldapsearch "(&(objectClass=user)(servicePrincipalName=*)(!(userAccountControl:1.2.840.113556.1.4.803:=1048576)))" --attributes samAccountName,servicePrincipalName,objectsid,ntsecuritydescriptor --dn DC=contoso,DC=enclave --hostname contoso.enclave
+```
+
+AS-REP Roastable Users
+```powershell 
+ldapsearch "(&(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304))" --attributes samAccountName,userAccountControl,objectsid,ntsecuritydescriptor --dn DC=contoso,DC=enclave --hostname contoso.enclave
+
+```
+
+Constrained Delegation (`msDS-AllowedToDelegateTo` not set to null)
+```powershell
+ldapsearch (&(samAccountType=805306369)(msDS-AllowedToDelegateTo=*)) --attributes samAccountName,msDS-AllowedToDelegateTo --dn DC=contoso,DC=enclave --hostname contoso.enclave
+
+```
+
+Unconstrained Delegation
+```powershell
+ldapsearch (&(samAccountType=805306369)(userAccountControl:1.2.840.113556.1.4.803:=524288)) --attributes samaccountname --dn DC=contoso,DC=enclave --hostname contoso.enclave
+```
+
+Role-based Constrained Delegation
+```powershell
+ldapsearch "(&(objectClass=computer)(msDS-AllowedToActOnBehalfOfOtherIdentity=*))" --attributes samAccountName,dnshostname,msDS-AllowedToActOnBehalfOfOtherIdentity,objectsid,ntsecuritydescriptor --dn DC=contoso,DC=enclave --hostname contoso.enclave
+
+ldapsearch "(msDS-AllowedToActOnBehalfOfOtherIdentity=*)" --attributes samAccountName,servicePrincipalName,msDS-AllowedToActOnBehalfOfOtherIdentity,objectsid,ntsecuritydescriptor --dn DC=contoso,DC=enclave --hostname contoso.enclave
 ```
