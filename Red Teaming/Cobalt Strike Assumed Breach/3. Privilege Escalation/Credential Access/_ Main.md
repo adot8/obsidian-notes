@@ -14,6 +14,7 @@ execute-assembly C:\Tools\SharpDPAPI\SharpChrome\bin\Release\SharpChrome.exe log
 Windows Credential Manager
 ```powershell
 run vaultcmd /listcreds:"Windows Credentials" /all
+
 execute-assembly C:\Tools\Seatbelt\Seatbelt\bin\Release\Seatbelt.exe WindowsVault
 ```
 
