@@ -3,12 +3,12 @@ All of the [lateral movement](https://www.zeropointsecurity.co.uk/path-player?co
 
 All of the examples in this chapter demonstrated obtaining a CIFS service ticket which grants access to the SMB service and list the C$ drive of the target.  This is generally okay as a means of demonstrating an 'attack' worked but has limited utility.  The aim of this page is simply to provide some guidance on what service tickets are required to access services that are useful for lateral movement or data access.
 
-|   |   |   |
-|---|---|---|
-|**Name**|**Description**|**Ticket(s)**|
-|SMB|Access the remote filesystem.  View, list, upload, & delete files.|CIFS|
-|PsExec|Run a binary via the Service Control Manager.|CIFS|
-|WinRM|Windows Remote Management.|HTTP|
-|WMI|Execute applications on the remote target, e.g. process call create.|RPCSS  <br>HOST  <br>RestrictedKrbHost|
-|RDP|Remote Desktop Protocol.|TERMSRV  <br>HOST|
-|MSSQL|MS SQL Databases.|MSSQLSvc|
+|          |                                                                      |                                        |
+| -------- | -------------------------------------------------------------------- | -------------------------------------- |
+| **Name** | **Description**                                                      | **Ticket(s)**                          |
+| SMB      | Access the remote filesystem.  View, list, upload, & delete files.   | CIFS                                   |
+| PsExec   | Run a binary via the Service Control Manager.                        | CIFS                                   |
+| WinRM    | Windows Remote Management.                                           | HTTP                                   |
+| WMI      | Execute applications on the remote target, e.g. process call create. | RPCSS  <br>HOST  <br>RestrictedKrbHost |
+| RDP      | Remote Desktop Protocol.                                             | TERMSRV  <br>HOST                      |
+| MSSQL    | MS SQL Databases.                                                    | MSSQLSvc                               |

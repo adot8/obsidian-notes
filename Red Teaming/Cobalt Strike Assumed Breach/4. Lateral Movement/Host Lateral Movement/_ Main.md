@@ -25,7 +25,7 @@ jump psexec64 enc-fs-1.contoso.enclave smb
 
 ---
 
-Manual
+Manual (rpcss ticket required)
 ```powershell
 cd \\enc-jmp-1.contoso.enclave\ADMIN$
 
