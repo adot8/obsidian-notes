@@ -25,6 +25,11 @@ ldapsearch (|(samAccountType=805306368)(samAccountType=805306369)(samAccountType
 
 ```Cypher
 Match (n:GPO) return n
+
+MATCH (n:GPO)
+WHERE n.domain = "CONTOSO.ENCLAVE"
+RETURN n
+
 ```
 
 - Select the 'Workstation Admins' GPO.
@@ -39,9 +44,9 @@ Match (n:GPO) return n
 ![[Pasted image 20250714094204.png]]
 
 ```powershell
-ls \\contoso.enclave\SysVol\contoso.enclave\Policies\{034D0B5C-FB95-45D9-AB23-AFE530815043}\Machine\Microsoft\Windows NT\SecEdit\
+ls \\contoso.enclave\SysVol\contoso.enclave\Policies\{0FF094F9-69ED-476D-8DCB-1820DE60A666}\Machine\Microsoft\Windows NT\SecEdit\
 
-download \\contoso.enclave\SysVol\contoso.enclave\Policies\{034D0B5C-FB95-45D9-AB23-AFE530815043}\Machine\Microsoft\Windows NT\SecEdit\GptTmpl.inf
+download \\contoso.enclave\SysVol\contoso.enclave\Policies\{0FF094F9-69ED-476D-8DCB-1820DE60A666}\Machine\Microsoft\Windows NT\SecEdit\GptTmpl.inf
 ```
 
 - Sync the file to your Attacker Desktop.
@@ -63,12 +68,12 @@ ldapsearch (objectSid=S-1-5-21-2958544638-1589230383-838459903-1605)
 -  Add the custom edges in BloodHound.
 
 ```Cypher
-MATCH (x:Computer{objectid:'S-1-5-21-2958544638-1589230383-838459903-3105'}) MATCH (y:Group{objectid:'S-1-5-21-2958544638-1589230383-838459903-3103'}) MERGE (y)-[:AdminTo]->(x)
+MATCH (x:Computer{objectid:'S-1-5-21-1330904164-3792538338-293942156-2101'}) MATCH (y:Group{objectid:'S-1-5-21-1330904164-3792538338-293942156-2103'}) MERGE (y)-[:AdminTo]->(x)
 ```
 
 ```Cypher
 MATCH (x:Computer{objectid:'S-1-5-21-2958544638-1589230383-838459903-2601'})
-MATCH (y:Group{objectid:'S-1-5-21-2958544638-1589230383-838459903-1605'})
+MATCH (y:Group{objectid:'S-1-5-21-1330904164-3792538338-293942156-2103'})
 MERGE (y)-[:AdminTo]->(x)
 ```
 
