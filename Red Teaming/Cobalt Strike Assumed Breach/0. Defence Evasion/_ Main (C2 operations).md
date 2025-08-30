@@ -23,9 +23,7 @@ Save the changes (**File > Save**) and close the folder (**File > Close Folder**
 
 Run **build.sh** to build the new artifacts.
 ```bash
-cd /mnt/c/Tools/cobaltstrike/arsenal-kit/kits/artifact
-
-./build.sh mailslot VirtualAlloc 351363 0 false false none /mnt/c/Tools/cobaltstrike/custom-artifacts
+cd /mnt/c/Tools/cobaltstrike/arsenal-kit/kits/artifact && ./build.sh mailslot VirtualAlloc 351363 0 false false none /mnt/c/Tools/cobaltstrike/custom-artifacts
 ```
 
 >The stage size tends to vary between CS releases as features get added or removed from Beacon.  Always run build.sh without arguments first to see what the minimum stage sizes are.
@@ -38,9 +36,7 @@ Import the `artifact.cna` file into the Cobalt Strike script manager - `C:\Tools
 
 Open the resource folder in the arsenal-kit and build new resources
 ```bash
-cd /mnt/c/Tools/cobaltstrike/arsenal-kit/kits/resource
-
-./build.sh /mnt/c/Tools/cobaltstrike/custom-resources
+cd /mnt/c/Tools/cobaltstrike/arsenal-kit/kits/resource &&./build.sh /mnt/c/Tools/cobaltstrike/custom-resources
 ```
 
 Open up the custom-resources folder in VS code
@@ -144,20 +140,20 @@ process-inject {
 }
 
 process-inject {
-  # Keep allocations modest and non-RWX to reduce memory heuristics
+  set allocator "NtMapViewOfSection";
   set min_alloc "16384";
   set startrwx "false";
   set userwx "false";
-  set obfuscate "true";
 
-  # Prioritize early-bird APC into a process you start suspended
   execute {
-    NtQueueApcThread-s;   # queue APC to a thread in a process you created suspended, then resume
-    NtQueueApcThread;     # fallback APC if -s path isn’t possible
-    SetThreadContext;     # last resort; noisier than APC, but still avoids CreateRemoteThread
-    # (Intentionally omit CreateThread / RtlCreateUserThread / CreateRemoteThread)
+    NtQueueApcThread-s;
+    NtQueueApcThread;
+    SetThreadContext;
+    # intentionally removed CreateRemoteThread / RtlCreateUserThread
   }
 }
+
+
 
 ```
 
