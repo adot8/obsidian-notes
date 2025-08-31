@@ -40,7 +40,9 @@ ldapsearch "(&(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194
 
 Constrained Delegation (`msDS-AllowedToDelegateTo` not set to null)
 ```powershell
-ldapsearch (&(samAccountType=805306369)(msDS-AllowedToDelegateTo=*)) --attributes samAccountName,msDS-AllowedToDelegateTo
+ldapsearch (&(samAccountType=805306369)(msDS-AllowedToDelegateTo=*)) --
+
+attributes samAccountName,msDS-AllowedToDelegateTo
 ```
 
 Unconstrained Delegation
@@ -119,4 +121,11 @@ Role-based Constrained Delegation
 ldapsearch "(&(objectClass=computer)(msDS-AllowedToActOnBehalfOfOtherIdentity=*))" --attributes samAccountName,dnshostname,msDS-AllowedToActOnBehalfOfOtherIdentity,objectsid,ntsecuritydescriptor --dn DC=contoso,DC=enclave --hostname contoso.enclave
 
 ldapsearch "(msDS-AllowedToActOnBehalfOfOtherIdentity=*)" --attributes samAccountName,servicePrincipalName,msDS-AllowedToActOnBehalfOfOtherIdentity,objectsid,ntsecuritydescriptor --dn DC=contoso,DC=enclave --hostname contoso.enclave
+```
+
+ADCS + ESC1–ESC8
+```powershell
+ldapsearch (|(objectClass=pKIEnrollmentService)(objectClass=pKICertificateTemplate)(objectClass=msPKI-Enterprise-Oid)) *,ntsecuritydescriptor --dn DC=contoso,DC=enclave --hostname contoso.enclave
+ 
+ldapsearch (objectClass=pKICertificateTemplate) --attributes cn,msPKI-Enrollment-Flag,msPKI-Template-Schema-Version,msPKI-Certificate-Name-Flag,msPKI-RA-Signature,msPKI-Application-Policies,msPKI-Subject-Name-Flag,ntSecurityDescriptor --dn DC=contoso,DC=enclave --hostname contoso.enclave
 ```
