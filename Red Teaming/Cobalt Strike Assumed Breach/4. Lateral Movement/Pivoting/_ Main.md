@@ -8,8 +8,8 @@ Add-Content -Path C:\Windows\System32\drivers\etc\hosts -Value '10.10.124.1 enc-
 
 ```powershell
 10.10.120.1 lon-dc-1 lon-dc-1.contoso.com
-10.10.124.50 enc-dc-1 enc-dc-1.contoso.enclave
-10.10.124.1 enc-jmp-1 enc-jmp-1.contoso.enclave
+10.10.124.1 enc-dc-1 enc-dc-1.contoso.enclave
+10.10.124.50 enc-jmp-1 enc-jmp-1.contoso.enclave
 10.10.124.10 enc-fs-1 enc-fs-1.contoso.enclave
 ```
 
