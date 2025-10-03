@@ -3,15 +3,15 @@
 ```shell
 ffuf -w ~/opt/wordlists/subdomains-top1million-110000.txt -u https://FUZZ.adot8.com
 
-ffuf -H 'Host: FUZZ.painters.htb' -w ~/opt/wordlists/subdomains_custom.txt:FUZZ -u http://painters.htb
+ffuf -H 'Host: FUZZ.editor.htb' -w ~/opt/wordlists/subdomains_custom.txt:FUZZ -u http://editor.htb
 ```
 ### Directory Fuzzing
 ```shell
-ffuf  -w ~/opt/wordlists/web-extensions.txt -u http://painters.htb/indexFUZZ
+ffuf  -w ~/opt/wordlists/web-extensions.txt -u http://editor.htb/indexFUZZ
 
-ffuf -w ~/opt/wordlists/directory-list-2.3-medium.txt -u http://painters.htb/FUZZ -e .php, .phps -t 200
+ffuf -w ~/opt/wordlists/directory-list-2.3-medium.txt -u http://editor.htb/FUZZ -e .php, .phps -t 200
 
-ffuf -w ~/opt/wordlists/raft-medium-directories.txt -u http://painters.htb/FUZZ -e .php,.phps
+ffuf -w ~/opt/wordlists/raft-medium-directories.txt -u http://editor.htb/FUZZ -e .php,.phps
 ```
 
 While waiting for results perform on all pages:
