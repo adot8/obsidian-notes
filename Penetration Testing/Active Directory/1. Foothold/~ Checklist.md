@@ -1,4 +1,8 @@
 ```bash
+echo $ip domain | sudo tee -a /etc/hosts
+```
+
+```bash
 fping -asgq 192.168.2.0/23 | tee /dev/tty | grep -oP '\d+\.\d+\.\d+\.\d+' > hosts.txt
 
 nmap -v -A -iL hosts.txt -oA host_enum.out
@@ -30,6 +34,7 @@ netexec smb <IP> -u '' -p '' -M zerologon
 ```bash
 rpcclient -U '' -N <IP>
 rpcclient -U "username%passwd" <IP>  
+enumdomusers
 querydispinfo 
 queryuser joe 
 querygroup 0x44f       
