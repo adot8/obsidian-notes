@@ -58,6 +58,9 @@ logrotate -v
 
 ps aux | grep tmux
 
+ls -l /var/log/squid
+cat /var/log/squid/access.log.1
+
 dpkg -l
 ```
 1. Snoop on processes using pspy - some cron jobs may be running in the background
