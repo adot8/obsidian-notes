@@ -7,5 +7,5 @@
 | HTB Certified Active Directory Pentesting Expert (HTB CAPE) | HackTheBox          | TBD          |
 | Malware Development Course                                  | Maldev Academy      | On going     |
 | Certified Azure Red Team Professional (CARTP)               | Altered Security    | TBD          |
-|                                                             |                     |              |
+
 
